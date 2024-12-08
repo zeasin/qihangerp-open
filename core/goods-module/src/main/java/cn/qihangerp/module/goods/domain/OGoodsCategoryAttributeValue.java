@@ -1,6 +1,9 @@
 package cn.qihangerp.module.goods.domain;
 
 import java.io.Serializable;
+
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
 import lombok.Data;
 
 /**
@@ -12,12 +15,13 @@ public class OGoodsCategoryAttributeValue implements Serializable {
     /**
      * 主键，属性值id
      */
+    @TableId(type = IdType.AUTO)
     private Integer id;
 
     /**
      * 属性id
      */
-    private Integer categoryAttributeId;
+    private Long categoryAttributeId;
 
     /**
      * 属性值文本

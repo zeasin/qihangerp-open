@@ -9,5 +9,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
 * @createDate 2024-09-07 16:11:56
 */
 public interface OGoodsCategoryService extends IService<OGoodsCategory> {
-
+    void addCategory(OGoodsCategory category);
 }

@@ -41,9 +41,8 @@ public class GoodsCategoryController  extends BaseController {
     public AjaxResult add(@RequestBody OGoodsCategory category)
     {
         category.setCreateBy(getUsername());
-        category.setCreateTime(new Date());
-        category.setIsdelete(0);
-        return toAjax(categoryService.save(category));
+        categoryService.addCategory(category);
+        return toAjax(1);
     }
 
     @PutMapping
