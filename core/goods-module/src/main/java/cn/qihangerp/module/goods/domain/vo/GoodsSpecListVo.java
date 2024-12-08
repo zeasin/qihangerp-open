@@ -4,10 +4,11 @@ package cn.qihangerp.module.goods.domain.vo;
 import lombok.Data;
 
 import java.math.BigDecimal;
+
 @Data
 public class GoodsSpecListVo {
 
-    private String skuId;
+    private Long skuId;
 //    private Long goodsId;
 
     /** 商品名称 */
@@ -23,5 +24,6 @@ public class GoodsSpecListVo {
     private String sizeValue;
     private String styleValue;
     private BigDecimal retailPrice;
+    private BigDecimal purPrice;
 
 }

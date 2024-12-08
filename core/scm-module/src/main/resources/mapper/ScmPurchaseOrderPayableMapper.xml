@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.qihangerp.module.scm.mapper.ScmPurchaseOrderPayableMapper">
+
+    <resultMap id="BaseResultMap" type="cn.qihangerp.module.scm.domain.ScmPurchaseOrderPayable">
+            <id property="id" column="id" jdbcType="BIGINT"/>
+            <result property="supplierId" column="supplier_id" jdbcType="BIGINT"/>
+            <result property="supplierName" column="supplier_name" jdbcType="VARCHAR"/>
+            <result property="amount" column="amount" jdbcType="DECIMAL"/>
+            <result property="date" column="date" jdbcType="DATE"/>
+            <result property="invoiceNo" column="invoice_no" jdbcType="VARCHAR"/>
+            <result property="purchaseOrderNum" column="purchase_order_num" jdbcType="VARCHAR"/>
+            <result property="purchaseDesc" column="purchase_desc" jdbcType="VARCHAR"/>
+            <result property="remark" column="remark" jdbcType="VARCHAR"/>
+            <result property="status" column="status" jdbcType="INTEGER"/>
+            <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+            <result property="createBy" column="create_by" jdbcType="VARCHAR"/>
+            <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+            <result property="updateBy" column="update_by" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,supplier_id,supplier_name,
+        amount,date,invoice_no,
+        purchase_order_num,purchase_desc,remark,
+        status,create_time,create_by,
+        update_time,update_by
+    </sql>
+</mapper>

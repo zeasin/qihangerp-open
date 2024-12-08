@@ -123,6 +123,11 @@
         </dependency>
         <dependency>
             <groupId>cn.qihangerp.module</groupId>
+            <artifactId>scm-module</artifactId>
+            <version>1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>cn.qihangerp.module</groupId>
             <artifactId>open-api-module</artifactId>
             <version>1.0</version>
         </dependency>

@@ -47,7 +47,7 @@
             <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
     </resultMap>
     <resultMap type="cn.qihangerp.module.goods.domain.vo.GoodsSpecListVo" id="GoodsSpecListVoResult">
-        <result property="skuId"    column="id"    />
+        <result property="skuId"    column="sku_id"    />
         <result property="goodsName"    column="goods_name"    />
         <result property="skuName"    column="sku_name"    />
         <result property="outerErpSkuId"    column="outer_erp_sku_id"    />
@@ -57,6 +57,7 @@
         <result property="sizeValue"    column="size_value"    />
         <result property="styleValue"    column="style_value"    />
         <result property="retailPrice"    column="retail_price"    />
+        <result property="purPrice"    column="pur_price"    />
     </resultMap>
 
     <sql id="Base_Column_List">
@@ -76,8 +77,9 @@
     </sql>
 
     <select id="searchGoodsSpec" parameterType="String" resultMap="GoodsSpecListVoResult">
-        SELECT g.`name`,spec.id as skuId,spec.outer_erp_goods_id,spec.outer_erp_sku_id,spec.`sku_name`,spec.sku_code,spec.color_value,spec.color_image,spec.size_value,spec.style_value,
-               spec.retail_price,spec.goods_name
+        SELECT g.`name`,spec.id as sku_id,spec.outer_erp_goods_id,spec.outer_erp_sku_id,spec.`sku_name`,
+               spec.sku_code,spec.color_value,spec.color_image,spec.size_value,spec.style_value,
+               spec.retail_price,spec.pur_price,spec.goods_name
         FROM `o_goods_sku` as spec
         LEFT JOIN o_goods as g on g.id = spec.goods_id
         <where>
