@@ -3,7 +3,7 @@
     <el-form ref="form" :model="form" :rules="rules" label-width="108px">
 
         <el-form-item label="商品分类" prop="categoryId">
-          <treeselect :options="dataList" placeholder="请选择上级菜单" v-model="form.categoryId" style="width:220px"/>
+          <treeselect :options="dataList" placeholder="请选择上级菜单" v-model="form.categoryId" style="width:220px" @select="categoryChange" />
         </el-form-item>
         <el-form-item label="供应商" prop="supplierId">
           <!-- <el-input v-model="form.supplierId" placeholder="请输入供应商id" /> -->
@@ -233,7 +233,7 @@ import {
   codeToText,
 } from "element-china-area-data";
 import {listSupplier} from "@/api/goods/supplier";
-
+import {listCategoryAttribute} from "@/api/goods/categoryAttribute";
 export default {
   name: "OrderCreate",
   components: { Treeselect },
@@ -296,17 +296,63 @@ export default {
     listSupplier({pageNum: 1, pageSize: 100}).then(resp=>{
       this.supplierList = resp.rows
     })
-    listCategoryAttributeValue({categoryAttributeId:114}).then(resp=>{
-      this.colorList = resp.rows
-    })
-    listCategoryAttributeValue({categoryAttributeId:115}).then(resp=>{
-      this.sizeList = resp.rows
-    })
-    listCategoryAttributeValue({categoryAttributeId:116}).then(resp=>{
-      this.styleList = resp.rows
-    })
+    // listCategoryAttributeValue({categoryAttributeId:114}).then(resp=>{
+    //   this.colorList = resp.rows
+    // })
+    // listCategoryAttributeValue({categoryAttributeId:115}).then(resp=>{
+    //   this.sizeList = resp.rows
+    // })
+    // listCategoryAttributeValue({categoryAttributeId:116}).then(resp=>{
+    //   this.styleList = resp.rows
+    // })
   },
   methods: {
+    categoryChange(node, instanceId){
+      console.log("====分类边哈11111====",node,instanceId)
+      console.log("====分类边哈====",this.form.categoryId)
+      if(node){
+        this.form.categoryId = node.id
+        console.log("====分类边哈2====",this.form.categoryId)
+        let topCategoryId = 0;
+        if(node.parentId===0) topCategoryId=node.id;
+        else topCategoryId = node.parentId
+        console.log("====分类边哈22222====",topCategoryId)
+        this.colorList = []
+        this.sizeList = []
+        this.styleList=[]
+        listCategoryAttribute({categoryId:topCategoryId}).then(response => {
+          this.categoryAttributeList = response.rows;
+          if(response.rows){
+            // 获取分类属性
+            response.rows.forEach(x=>{
+              listCategoryAttributeValue({categoryAttributeId:x.id}).then(resp=>{
+
+                if(x.code==='color'){
+                  this.colorList = resp.rows
+                }else if(x.code==='size'){
+                  this.sizeList = resp.rows
+                }else if(x.code==='style'){
+                  this.styleList = resp.rows
+                }
+
+              })
+            })
+          }
+        });
+
+
+        // 获取分类属性
+        // listCategoryAttributeValue({categoryAttributeId:114}).then(resp=>{
+        //   this.colorList = resp.rows
+        // })
+        // listCategoryAttributeValue({categoryAttributeId:115}).then(resp=>{
+        //   this.sizeList = resp.rows
+        // })
+        // listCategoryAttributeValue({categoryAttributeId:116}).then(resp=>{
+        //   this.styleList = resp.rows
+        // })
+      }
+    },
     getRowDate(row){
 
     },
@@ -401,6 +447,7 @@ export default {
         if (list[i].parentId === parentId) {
           let node = {
             id: list[i].id,
+            parentId:list[i].parentId,
             label: list[i].name,
             children: this.buildTree(list, list[i].id)
           };
