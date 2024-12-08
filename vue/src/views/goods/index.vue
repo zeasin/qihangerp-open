@@ -176,13 +176,13 @@
       </el-table-column>
       <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
         <template slot-scope="scope">
-<!--          <el-button-->
-<!--            size="mini"-->
-<!--            type="text"-->
-<!--            icon="el-icon-edit"-->
-<!--            @click="handleUpdate(scope.row)"-->
-<!--            v-hasPermi="['goods:goods:edit']"-->
-<!--          >修改</el-button>-->
+          <el-button
+            size="mini"
+            type="text"
+            icon="el-icon-edit"
+            @click="handleUpdate(scope.row)"
+            v-hasPermi="['goods:goods:edit']"
+          >修改基本资料</el-button>
           <el-button
             size="mini"
             type="text"
@@ -237,7 +237,116 @@
         </el-table-column>
       </el-table>
     </el-dialog>
-
+    <!-- 添加或修改商品管理对话框 -->
+    <el-dialog :title="title" :visible.sync="open" width="500px" append-to-body>
+      <el-form ref="form" :model="form" :rules="rules" label-width="80px">
+        <el-form-item label="商品名称" prop="name">
+          <el-input v-model="form.name" placeholder="请输入商品名称" />
+        </el-form-item>
+        <el-form-item label="商品图片地址" prop="image">
+          <image-upload v-model="form.image"/>
+        </el-form-item>
+        <el-form-item label="商品编号" prop="number">
+          <el-input v-model="form.goodsNum" placeholder="请输入商品编号" />
+        </el-form-item>
+        <!--        <el-form-item label="单位名称" prop="unitName">-->
+        <!--          <el-input v-model="form.unitName" placeholder="请输入单位名称" />-->
+        <!--        </el-form-item>-->
+        <el-form-item label="商品分类" prop="categoryId">
+          <!--          <el-input v-model="form.categoryId" placeholder="请输入商品分类ID" />-->
+          <treeselect :options="categoryTree" placeholder="请选择上级菜单" v-model="form.categoryId" style="width: 230px;"/>
+        </el-form-item>
+        <!--        <el-form-item label="条码" prop="barCode">-->
+        <!--          <el-input v-model="form.barCode" placeholder="请输入条码" />-->
+        <!--        </el-form-item>-->
+        <el-form-item label="备注" prop="remark">
+          <el-input v-model="form.remark" type="textarea" placeholder="请输入内容" />
+        </el-form-item>
+        <!--        <el-form-item label="衣长/裙长/裤长" prop="length">-->
+        <!--          <el-input v-model="form.length" placeholder="请输入衣长/裙长/裤长" />-->
+        <!--        </el-form-item>-->
+        <!--        <el-form-item label="高度/袖长" prop="height">-->
+        <!--          <el-input v-model="form.height" placeholder="请输入高度/袖长" />-->
+        <!--        </el-form-item>-->
+        <!--        <el-form-item label="宽度/胸阔(围)" prop="width">-->
+        <!--          <el-input v-model="form.width" placeholder="请输入宽度/胸阔(围)" />-->
+        <!--        </el-form-item>-->
+        <!--        <el-form-item label="肩阔" prop="width1">-->
+        <!--          <el-input v-model="form.width1" placeholder="请输入肩阔" />-->
+        <!--        </el-form-item>-->
+        <!--        <el-form-item label="腰阔" prop="width2">-->
+        <!--          <el-input v-model="form.width2" placeholder="请输入腰阔" />-->
+        <!--        </el-form-item>-->
+        <!--        <el-form-item label="臀阔" prop="width3">-->
+        <!--          <el-input v-model="form.width3" placeholder="请输入臀阔" />-->
+        <!--        </el-form-item>-->
+        <!--        <el-form-item label="重量" prop="weight">-->
+        <!--          <el-input v-model="form.weight" placeholder="请输入重量" />-->
+        <!--        </el-form-item>-->
+        <!--        <el-form-item label="0启用   1禁用" prop="disable">-->
+        <!--          <el-input v-model="form.disable" placeholder="请输入0启用   1禁用" />-->
+        <!--        </el-form-item>-->
+        <!--        <el-form-item label="保质期" prop="period">-->
+        <!--          <el-input v-model="form.period" placeholder="请输入保质期" />-->
+        <!--        </el-form-item>-->
+        <el-form-item label="预计采购价格" prop="purPrice">
+          <el-input v-model="form.purPrice" placeholder="请输入预计采购价格" />
+        </el-form-item>
+        <el-form-item label="建议批发价" prop="wholePrice">
+          <el-input v-model="form.wholePrice" placeholder="请输入建议批发价" />
+        </el-form-item>
+        <el-form-item label="建议零售价" prop="retailPrice">
+          <el-input v-model="form.retailPrice" placeholder="请输入建议零售价" />
+        </el-form-item>
+        <!--        <el-form-item label="单位成本" prop="unitCost">-->
+        <!--          <el-input v-model="form.unitCost" placeholder="请输入单位成本" />-->
+        <!--        </el-form-item>-->
+        <el-form-item label="供应商" prop="supplierId">
+          <!--          <el-input v-model="form.supplierId" placeholder="请输入供应商id" />-->
+          <el-select v-model="form.supplierId" filterable  placeholder="请选择供应商名称">
+            <el-option v-for="item in supplierList" :key="item.id" :label="item.name" :value="item.id">
+            </el-option>
+          </el-select>
+        </el-form-item>
+        <el-form-item label="状态" prop="status">
+          <el-select v-model="form.status"   placeholder="状态">
+            <el-option label="销售中" :value="1"></el-option>
+            <el-option label="已下架" :value="2"></el-option>
+          </el-select>
+        </el-form-item>
+        <!--        <el-form-item label="品牌" prop="brandId">-->
+        <!--          <el-input v-model="form.brandId" placeholder="请输入品牌id" />-->
+        <!--        </el-form-item>-->
+        <!--        <el-form-item label="属性1：季节" prop="attr1">-->
+        <!--          <el-input v-model="form.attr1" placeholder="请输入属性1：季节" />-->
+        <!--        </el-form-item>-->
+        <!--        <el-form-item label="属性2：分类" prop="attr2">-->
+        <!--          <el-input v-model="form.attr2" placeholder="请输入属性2：分类" />-->
+        <!--        </el-form-item>-->
+        <!--        <el-form-item label="属性3：风格" prop="attr3">-->
+        <!--          <el-input v-model="form.attr3" placeholder="请输入属性3：风格" />-->
+        <!--        </el-form-item>-->
+        <!--        <el-form-item label="属性4：年份" prop="attr4">-->
+        <!--          <el-input v-model="form.attr4" placeholder="请输入属性4：年份" />-->
+        <!--        </el-form-item>-->
+        <!--        <el-form-item label="属性5：面料" prop="attr5">-->
+        <!--          <el-input v-model="form.attr5" placeholder="请输入属性5：面料" />-->
+        <!--        </el-form-item>-->
+        <!--        <el-form-item label="外链url" prop="linkUrl">-->
+        <!--          <el-input v-model="form.linkUrl" type="textarea" placeholder="请输入内容" />-->
+        <!--        </el-form-item>-->
+        <!--        <el-form-item label="最低库存" prop="lowQty">-->
+        <!--          <el-input v-model="form.lowQty" placeholder="请输入最低库存" />-->
+        <!--        </el-form-item>-->
+        <!--        <el-form-item label="最高库存" prop="highQty">-->
+        <!--          <el-input v-model="form.highQty" placeholder="请输入最高库存" />-->
+        <!--        </el-form-item>-->
+      </el-form>
+      <div slot="footer" class="dialog-footer">
+        <el-button type="primary" @click="submitForm">确 定</el-button>
+        <el-button @click="cancel">取 消</el-button>
+      </div>
+    </el-dialog>
   </div>
 </template>
 
@@ -443,6 +552,17 @@ export default {
       this.skuOpen = true;
 
     },
+    /** 修改按钮操作 */
+    handleUpdate(row) {
+      this.reset();
+      const id = row.id || this.ids
+      getGoods(id).then(response => {
+        this.form = response.data;
+        this.form.disable = response.data.disable+''
+        this.open = true;
+        this.title = "修改商品基本信息";
+      });
+    },
     /** 删除按钮操作 */
     handleDelete(row) {
       const ids = row.id || this.ids;
@@ -452,6 +572,20 @@ export default {
         this.getList();
         this.$modal.msgSuccess("删除成功");
       }).catch(() => {});
+    },
+    /** 提交按钮 */
+    submitForm() {
+      this.$refs["form"].validate(valid => {
+        if (valid) {
+          if (this.form.id != null) {
+            updateGoods(this.form).then(response => {
+              this.$modal.msgSuccess("修改成功");
+              this.open = false;
+              this.getList();
+            });
+          }
+        }
+      });
     },
     /** 导出按钮操作 */
     handleExport() {

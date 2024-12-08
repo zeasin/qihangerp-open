@@ -124,6 +124,12 @@ public class GoodsController extends BaseController
     {
         return toAjax(goodsService.updateGoods(goods));
     }
+
+    /**
+     * 修改商品基本资料
+     * @param sku
+     * @return
+     */
     @PutMapping("/sku")
     public AjaxResult editSku(@RequestBody OGoodsSku sku)
     {

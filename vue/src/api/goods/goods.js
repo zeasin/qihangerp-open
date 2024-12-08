@@ -21,7 +21,7 @@ export function searchSku(query) {
 // 查询商品管理详细
 export function getGoods(id) {
   return request({
-    url: '/goods/goods/' + id,
+    url: '/api/oms-api/goods/' + id,
     method: 'get'
   })
 }
@@ -38,7 +38,7 @@ export function addGoods(data) {
 // 修改商品管理
 export function updateGoods(data) {
   return request({
-    url: '/goods/goods',
+    url: '/api/oms-api/goods',
     method: 'put',
     data: data
   })
