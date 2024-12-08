@@ -947,8 +947,8 @@ public class ORefundServiceImpl extends ServiceImpl<ORefundMapper, ORefund>
         afterSale.setImg(refund.getGoodsImage());
         afterSale.setSkuInfo(refund.getGoodsSku());
         afterSale.setSkuCode(refund.getSkuNum());
-        afterSale.setOGoodsId(oGoodsSkus.isEmpty()?"0":oGoodsSkus.get(0).getGoodsId());
-        afterSale.setOGoodsSkuId(oGoodsSkus.isEmpty()?"0":oGoodsSkus.get(0).getId());
+        afterSale.setOGoodsId(oGoodsSkus.isEmpty()?"0":oGoodsSkus.get(0).getGoodsId().toString());
+        afterSale.setOGoodsSkuId(oGoodsSkus.isEmpty()?"0":oGoodsSkus.get(0).getId().toString());
         afterSale.setHasGoodsSend(processingBo.getHasGoodsSend());
         afterSale.setSendLogisticsCode(processingBo.getSendLogisticsCode());
         afterSale.setReturnLogisticsCode(processingBo.getReturnLogisticsCode());

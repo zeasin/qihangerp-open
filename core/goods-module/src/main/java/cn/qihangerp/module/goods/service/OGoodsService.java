@@ -52,6 +52,6 @@ public interface OGoodsService extends IService<OGoods> {
     public int deleteGoodsByIds(Long[] ids);
 
     int insertGoodsSku(OGoodsSku goodsSku);
-    int saveGoodsSku(GoodsSkuAddBo addBo);
-    int batchSaveGoodsSku(List<GoodsSkuAddBo> list);
+//    int saveGoodsSku(GoodsSkuAddBo addBo);
+//    int batchSaveGoodsSku(List<GoodsSkuAddBo> list);
 }

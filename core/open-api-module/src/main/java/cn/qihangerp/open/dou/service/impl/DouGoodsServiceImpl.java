@@ -77,8 +77,8 @@ public class DouGoodsServiceImpl extends ServiceImpl<DouGoodsMapper, DouGoods>
                 if(StringUtils.isNotEmpty(item.getCode())) {
                     List<OGoodsSku> oGoodsSkus = goodsSkuMapper.selectList(new LambdaQueryWrapper<OGoodsSku>().eq(OGoodsSku::getSkuCode, item.getCode()));
                     if(oGoodsSkus!=null && !oGoodsSkus.isEmpty()){
-                        item.setOGoodsId(oGoodsSkus.get(0).getGoodsId());
-                        item.setOGoodsSkuId(oGoodsSkus.get(0).getId());
+                        item.setOGoodsId(oGoodsSkus.get(0).getGoodsId().toString());
+                        item.setOGoodsSkuId(oGoodsSkus.get(0).getId().toString());
                     }
                 }
                 skuMapper.insert(item);

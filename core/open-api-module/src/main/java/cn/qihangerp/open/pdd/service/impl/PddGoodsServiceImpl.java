@@ -75,8 +75,8 @@ public class PddGoodsServiceImpl extends ServiceImpl<PddGoodsMapper, PddGoods>
                 if(StringUtils.isNotEmpty(item.getOuterId())) {
                     List<OGoodsSku> oGoodsSkus = goodsSkuMapper.selectList(new LambdaQueryWrapper<OGoodsSku>().eq(OGoodsSku::getSkuCode, item.getOuterId()));
                     if(oGoodsSkus!=null && !oGoodsSkus.isEmpty()){
-                        item.setOGoodsId(oGoodsSkus.get(0).getGoodsId());
-                        item.setOGoodsSkuId(oGoodsSkus.get(0).getId());
+                        item.setOGoodsId(oGoodsSkus.get(0).getGoodsId().toString());
+                        item.setOGoodsSkuId(oGoodsSkus.get(0).getId().toString());
                     }
                 }
                 skuMapper.insert(item);

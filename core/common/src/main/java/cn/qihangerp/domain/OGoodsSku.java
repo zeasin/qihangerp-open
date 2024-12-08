@@ -2,6 +2,8 @@ package cn.qihangerp.domain;
 
 //import com.baomidou.mybatisplus.annotation.IdType;
 //import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -16,9 +18,9 @@ public class OGoodsSku implements Serializable {
     /**
      * 主键id
      */
-//    @TableId(value = "id", type= IdType.AUTO)
-    private String id;
-    private String goodsId;
+    @TableId(value = "id", type= IdType.AUTO)
+    private Long id;
+    private Long goodsId;
 
     /**
      * 商品id

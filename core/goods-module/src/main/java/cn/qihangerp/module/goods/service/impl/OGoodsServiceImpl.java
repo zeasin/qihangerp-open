@@ -138,7 +138,7 @@ public class OGoodsServiceImpl extends ServiceImpl<OGoodsMapper, OGoods>
         // 2、添加规格表erp_goods_spec
         for (GoodsAddSkuBo skuBo:bo.getSpecList()) {
             OGoodsSku spec = new OGoodsSku();
-            spec.setGoodsId(goodsId.toString());
+            spec.setGoodsId(goodsId);
             spec.setOuterErpGoodsId(bo.getOuterErpGoodsId());
             spec.setOuterErpSkuId(skuBo.getOuterErpSkuId());
             spec.setGoodsName(bo.getName());
@@ -172,7 +172,7 @@ public class OGoodsServiceImpl extends ServiceImpl<OGoodsMapper, OGoods>
 
             // 添加商品库存表
             OGoodsInventory inventory = new OGoodsInventory();
-            inventory.setSkuId(Long.parseLong(spec.getId()));
+            inventory.setSkuId(spec.getId());
             inventory.setGoodsId(goodsId);
             inventory.setGoodsNum(bo.getNumber());
             inventory.setSkuCode(skuBo.getSpecNum());
@@ -260,66 +260,66 @@ public class OGoodsServiceImpl extends ServiceImpl<OGoodsMapper, OGoods>
             if (StringUtils.hasText(goodsSku.getOuterErpGoodsId())) {
                 List<OGoods> oGoods = goodsMapper.selectList(new LambdaQueryWrapper<OGoods>().eq(OGoods::getOuterErpGoodsId, goodsSku.getOuterErpGoodsId()));
                 if (oGoods != null && oGoods.size() > 0) {
-                    goodsSku.setGoodsId(oGoods.get(0).getId().toString());
+                    goodsSku.setGoodsId(oGoods.get(0).getId());
                 } else {
-                    goodsSku.setGoodsId("0");
+                    goodsSku.setGoodsId(0L);
                 }
             } else {
-                goodsSku.setGoodsId("0");
+                goodsSku.setGoodsId(0L);
             }
             return skuMapper.insert(goodsSku);
         }
         return -1;
     }
 
-    @Override
-    public int saveGoodsSku(GoodsSkuAddBo addBo) {
-        // 是否存在
-        List<OGoodsSku> oGoodsSkus = skuMapper.selectList(new LambdaQueryWrapper<OGoodsSku>().eq(OGoodsSku::getOuterErpSkuId, addBo.getErpSkuId()));
-        if(oGoodsSkus==null || oGoodsSkus.size() ==0) {
-            //不存在，新增
-            OGoodsSku insert = new OGoodsSku();
-            insert.setGoodsId("0");
-            insert.setOuterErpGoodsId("0");
-            insert.setOuterErpSkuId(addBo.getErpSkuId());
-            insert.setSkuName(addBo.getProductSpec());
-            insert.setSkuCode(addBo.getErpSkuCode());
-            insert.setGoodsName(addBo.getErpSkuName());
-            insert.setRetailPrice(addBo.getSalePrice());
-            insert.setColorValue(addBo.getProductColor());
-            insert.setColorImage(addBo.getProductPicture1());
-            insert.setSizeValue(addBo.getMaterialKind());
-            insert.setVolume(addBo.getProductVolume());
-            insert.setStatus(addBo.getProductIsUse());
-            skuMapper.insert(insert);
-        }else{
-            // 存在，修改
-            OGoodsSku update = new OGoodsSku();
-            update.setId(oGoodsSkus.get(0).getId());
-            update.setOuterErpSkuId(addBo.getErpSkuId());
-            update.setSkuName(addBo.getProductSpec());
-            update.setSkuCode(addBo.getErpSkuCode());
-            update.setGoodsName(addBo.getErpSkuName());
-            update.setRetailPrice(addBo.getSalePrice());
-            update.setColorValue(addBo.getProductColor());
-            update.setColorImage(addBo.getProductPicture1());
-            update.setSizeValue(addBo.getMaterialKind());
-            update.setVolume(addBo.getProductVolume());
-            update.setStatus(addBo.getProductIsUse());
-            skuMapper.updateById(update);
-        }
-        return 1;
-    }
-
-    @Override
-    public int batchSaveGoodsSku(List<GoodsSkuAddBo> list) {
-        for (var bo:list) {
-            if(StringUtils.hasText(bo.getErpSkuId()) && StringUtils.hasText(bo.getErpSkuCode()) ){
-                this.saveGoodsSku(bo);
-            }
-        }
-        return 1;
-    }
+//    @Override
+//    public int saveGoodsSku(GoodsSkuAddBo addBo) {
+//        // 是否存在
+//        List<OGoodsSku> oGoodsSkus = skuMapper.selectList(new LambdaQueryWrapper<OGoodsSku>().eq(OGoodsSku::getOuterErpSkuId, addBo.getErpSkuId()));
+//        if(oGoodsSkus==null || oGoodsSkus.size() ==0) {
+//            //不存在，新增
+//            OGoodsSku insert = new OGoodsSku();
+//            insert.setGoodsId(addBo.getGoodsk);
+//            insert.setOuterErpGoodsId("0");
+//            insert.setOuterErpSkuId(addBo.getErpSkuId());
+//            insert.setSkuName(addBo.getProductSpec());
+//            insert.setSkuCode(addBo.getErpSkuCode());
+//            insert.setGoodsName(addBo.getErpSkuName());
+//            insert.setRetailPrice(addBo.getSalePrice());
+//            insert.setColorValue(addBo.getProductColor());
+//            insert.setColorImage(addBo.getProductPicture1());
+//            insert.setSizeValue(addBo.getMaterialKind());
+//            insert.setVolume(addBo.getProductVolume());
+//            insert.setStatus(addBo.getProductIsUse());
+//            skuMapper.insert(insert);
+//        }else{
+//            // 存在，修改
+//            OGoodsSku update = new OGoodsSku();
+//            update.setId(oGoodsSkus.get(0).getId());
+//            update.setOuterErpSkuId(addBo.getErpSkuId());
+//            update.setSkuName(addBo.getProductSpec());
+//            update.setSkuCode(addBo.getErpSkuCode());
+//            update.setGoodsName(addBo.getErpSkuName());
+//            update.setRetailPrice(addBo.getSalePrice());
+//            update.setColorValue(addBo.getProductColor());
+//            update.setColorImage(addBo.getProductPicture1());
+//            update.setSizeValue(addBo.getMaterialKind());
+//            update.setVolume(addBo.getProductVolume());
+//            update.setStatus(addBo.getProductIsUse());
+//            skuMapper.updateById(update);
+//        }
+//        return 1;
+//    }
+//
+//    @Override
+//    public int batchSaveGoodsSku(List<GoodsSkuAddBo> list) {
+//        for (var bo:list) {
+//            if(StringUtils.hasText(bo.getErpSkuId()) && StringUtils.hasText(bo.getErpSkuCode()) ){
+//                this.saveGoodsSku(bo);
+//            }
+//        }
+//        return 1;
+//    }
 }
 
 

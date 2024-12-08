@@ -68,8 +68,8 @@ public class OfflineGoodsSkuServiceImpl extends ServiceImpl<OfflineGoodsSkuMappe
 //        List<OfflineGoodsSku> oGoodsSkus = skuMapper.selectList(new LambdaQueryWrapper<OfflineGoodsSku>()
 //                .eq(OfflineGoodsSku::getSkuCode, goodsSku.getSkuCode()));
 
-        goodsSku.setOGoodsId(oGoodsSkus1.get(0).getGoodsId());
-        goodsSku.setOGoodsSkuId(oGoodsSkus1.get(0).getId());
+        goodsSku.setOGoodsId(oGoodsSkus1.get(0).getGoodsId().toString());
+        goodsSku.setOGoodsSkuId(oGoodsSkus1.get(0).getId().toString());
         goodsSku.setGoodsName(oGoodsSkus1.get(0).getGoodsName());
         goodsSku.setSkuName(oGoodsSkus1.get(0).getSkuName());
         goodsSku.setColorId(oGoodsSkus1.get(0).getColorId());
