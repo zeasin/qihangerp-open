@@ -10,7 +10,7 @@
 <!--        />-->
 <!--      </el-form-item>-->
       <el-form-item label="平台" prop="type">
-        <el-select v-model="queryParams.type" placeholder="请选择平台" clearable @change="handleQuery">
+        <el-select v-model="queryParams.type" placeholder="请选择平台" @change="handleQuery">
           <el-option
             v-for="item in typeList"
             :key="item.id"
@@ -51,7 +51,7 @@
 
     <el-table v-loading="loading" :data="dataList" >
 <!--      <el-table-column type="selection" width="55" align="center" />-->
-      <el-table-column label="id" align="center" prop="logisticsId" />
+      <el-table-column label="id" align="center" prop="id" />
       <el-table-column label="快递公司" align="center" prop="name" />
        <el-table-column label="编码" align="center" prop="code" />
        <el-table-column label="备注" align="center" prop="remark" />
@@ -245,51 +245,65 @@ export default {
       this.handleQuery();
     },
     handlePull() {
-      console.log('=====拉取快递公司=====',this.$route.query.id)
-      if(this.$route.query.id === '1') {
-        pullLogisticsTao({}).then(response => {
-          console.log('拉取TAO接口返回=====', response)
-          if (response.code === 1401) {
-            MessageBox.confirm('Token已过期，需要重新授权', '系统提示', {
-              confirmButtonText: '重新授权',
-              cancelButtonText: '取消',
-              type: 'warning'
-            }).then(() => {
-              isRelogin.show = false;
-              // store.dispatch('LogOut').then(() => {
-              location.href = response.data.tokenRequestUrl + '?shopId=' + this.queryParams.shopId
-              // })
-            }).catch(() => {
-              isRelogin.show = false;
-            });
+      if(this.queryParams.type) {
+        console.log('=====拉取快递公司=====', this.queryParams.type)
+        if (this.queryParams.type === 100) {
+          pullLogisticsTao({}).then(response => {
+            console.log('拉取TAO接口返回=====', response)
+            if (response.code === 1401) {
+              MessageBox.confirm('Token已过期，需要重新授权', '系统提示', {
+                confirmButtonText: '重新授权',
+                cancelButtonText: '取消',
+                type: 'warning'
+              }).then(() => {
+                isRelogin.show = false;
+                // store.dispatch('LogOut').then(() => {
+                location.href = response.data.tokenRequestUrl + '?shopId=' + this.queryParams.shopId
+                // })
+              }).catch(() => {
+                isRelogin.show = false;
+              });
 
-            // return Promise.reject('无效的会话，或者会话已过期，请重新登录。')
-          } else
-            this.$modal.msgSuccess(JSON.stringify(response));
-        })
-      } else if(this.$route.query.id === '2'){
-        console.log('=====aaaaa=====')
-        //jd
-        pullLogisticsJd({shopId:this.$route.query.shopId}).then(response => {
-          console.log('拉取JD接口返回=====', response)
-          if (response.code === 1401) {
-            MessageBox.confirm('Token已过期，需要重新授权', '系统提示', {
-              confirmButtonText: '重新授权',
-              cancelButtonText: '取消',
-              type: 'warning'
-            }).then(() => {
-              isRelogin.show = false;
-              // store.dispatch('LogOut').then(() => {
-              location.href = response.data.tokenRequestUrl + '?shopId=' + this.queryParams.shopId
-              // })
-            }).catch(() => {
-              isRelogin.show = false;
-            });
+              // return Promise.reject('无效的会话，或者会话已过期，请重新登录。')
+            } else{
+              this.$modal.msgSuccess(JSON.stringify(response));
+              this.getList()
+            }
 
-            // return Promise.reject('无效的会话，或者会话已过期，请重新登录。')
-          } else
-            this.$modal.msgSuccess(JSON.stringify(response));
-        })
+          })
+        } else if (this.queryParams.type === 200 || this.queryParams.type===280) {
+          console.log('=====aaaaa=====')
+          //jd
+          pullLogisticsJd({shopId: this.$route.query.shopId}).then(response => {
+            console.log('拉取JD接口返回=====', response)
+            if (response.code === 1401) {
+              MessageBox.confirm('Token已过期，需要重新授权', '系统提示', {
+                confirmButtonText: '重新授权',
+                cancelButtonText: '取消',
+                type: 'warning'
+              }).then(() => {
+                isRelogin.show = false;
+                // store.dispatch('LogOut').then(() => {
+                location.href = response.data.tokenRequestUrl + '?shopId=' + this.queryParams.shopId
+                // })
+              }).catch(() => {
+                isRelogin.show = false;
+              });
+
+              // return Promise.reject('无效的会话，或者会话已过期，请重新登录。')
+            } else{
+              this.$modal.msgSuccess(JSON.stringify(response));
+              this.getList()
+            }
+
+          })
+        }else if(this.queryParams.type=999){
+          this.$modal.msgSuccess("线下渠道请手动添加");
+        }else{
+          this.$modal.msgSuccess("还未实现");
+        }
+      }else{
+        this.$modal.msgWarning("请先选择平台");
       }
 
       // this.$modal.msgSuccess("请先配置API");
