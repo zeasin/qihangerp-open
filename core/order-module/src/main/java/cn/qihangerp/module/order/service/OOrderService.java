@@ -45,5 +45,5 @@ public interface OOrderService extends IService<OOrder> {
 //    int insertErpOrder(OrderCreateBo bo,String createBy);
 
     List<SalesDailyVo> salesDaily();
-
+    SalesDailyVo getTodaySalesDaily();
 }

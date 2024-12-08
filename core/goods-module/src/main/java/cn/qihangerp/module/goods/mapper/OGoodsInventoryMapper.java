@@ -10,7 +10,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 * @Entity cn.qihangerp.module.goods.domain.OGoodsInventory
 */
 public interface OGoodsInventoryMapper extends BaseMapper<OGoodsInventory> {
-
+    long getAllInventoryQuantity();
 }
 
 

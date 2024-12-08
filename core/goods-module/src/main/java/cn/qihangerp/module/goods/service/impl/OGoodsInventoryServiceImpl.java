@@ -35,6 +35,11 @@ public class OGoodsInventoryServiceImpl extends ServiceImpl<OGoodsInventoryMappe
 
         return PageResult.build(pages);
     }
+
+    @Override
+    public long getAllInventoryQuantity() {
+        return mapper.getAllInventoryQuantity();
+    }
 }
 
 

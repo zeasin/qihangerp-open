@@ -1450,6 +1450,10 @@ public class OOrderServiceImpl extends ServiceImpl<OOrderMapper, OOrder>
     public List<SalesDailyVo> salesDaily() {
         return orderMapper.salesDaily();
     }
+    @Override
+    public SalesDailyVo getTodaySalesDaily() {
+        return orderMapper.getTodaySalesDaily();
+    }
 
 //    /**
 //     * 新增订单

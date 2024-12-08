@@ -20,6 +20,7 @@ public interface OOrderMapper extends BaseMapper<OOrder> {
     List<OrderDiscountVo> getJdOrderDiscount(String orderId);
 
     List<SalesDailyVo> salesDaily();
+    SalesDailyVo getTodaySalesDaily();
 }
 
 

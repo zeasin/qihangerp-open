@@ -24,4 +24,7 @@
         is_delete,create_time,create_by,
         update_time,update_by
     </sql>
+    <select id="getAllInventoryQuantity" resultType="Long">
+        SELECT SUM(quantity) as count FROM o_goods_inventory where is_delete=0
+    </select>
 </mapper>

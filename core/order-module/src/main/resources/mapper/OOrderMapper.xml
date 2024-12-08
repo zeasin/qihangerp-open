@@ -88,6 +88,16 @@
             LIMIT 30
     </select>
 
+    <select id="getTodaySalesDaily" resultType="cn.qihangerp.module.order.domain.vo.SalesDailyVo">
+        SELECT
 
+            COUNT(*) AS count,
+            SUM(payment) AS amount
+
+        FROM
+            o_order
+
+        WHERE DATE(`order_time`) = CURDATE();
+    </select>
 
 </mapper>

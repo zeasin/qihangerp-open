@@ -1,6 +1,7 @@
 package cn.qihangerp.app.oms.controller;
 
 import cn.qihangerp.common.AjaxResult;
+import cn.qihangerp.module.goods.service.OGoodsInventoryService;
 import cn.qihangerp.module.order.domain.vo.SalesDailyVo;
 import cn.qihangerp.module.order.domain.vo.SalesTopSkuVo;
 import cn.qihangerp.module.order.service.OOrderItemService;
@@ -23,14 +24,19 @@ public class ReportController extends BaseController {
     private final OOrderService orderService;
     private final OOrderItemService orderItemService;
     private final OShopService shopService;
+    private final OGoodsInventoryService inventoryService;
     @GetMapping("/todayDaily")
     public AjaxResult todayDaily()
     {
         Long shopCount = shopService.list().stream().count();
         Map<String,Double> result = new HashMap<>();
-        result.put("inventory",1002.00);
-        result.put("salesVolume",50332.00);
-        result.put("orderCount",502.00);
+        // 今日销售
+        SalesDailyVo todaySalesDaily = orderService.getTodaySalesDaily();
+        // 查询库存
+        Long allInventoryQuantity = inventoryService.getAllInventoryQuantity();
+        result.put("inventory",allInventoryQuantity.doubleValue());
+        result.put("salesVolume",todaySalesDaily.getAmount());
+        result.put("orderCount",todaySalesDaily.getCount().doubleValue());
         result.put("shopCount",shopCount.doubleValue());
 
         return AjaxResult.success(result);
