@@ -48,6 +48,7 @@ public class OGoodsServiceImpl extends ServiceImpl<OGoodsMapper, OGoods>
     @Override
     public PageResult<OGoodsSku> querySkuPageList(OGoodsSku bo, PageQuery pageQuery) {
         LambdaQueryWrapper<OGoodsSku> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.eq(bo.getStatus()!=null, OGoodsSku::getStatus,bo.getStatus());
         queryWrapper.eq(bo.getOuterErpSkuId()!=null,OGoodsSku::getOuterErpSkuId,bo.getOuterErpSkuId());
         queryWrapper.eq(bo.getOuterErpGoodsId()!=null,OGoodsSku::getOuterErpGoodsId,bo.getOuterErpGoodsId());
         queryWrapper.eq(StringUtils.hasText(bo.getSkuCode()),OGoodsSku::getSkuCode,bo.getSkuCode());
@@ -59,6 +60,7 @@ public class OGoodsServiceImpl extends ServiceImpl<OGoodsMapper, OGoods>
     @Override
     public PageResult<OGoods> queryPageList(OGoods bo, PageQuery pageQuery) {
         LambdaQueryWrapper<OGoods> queryWrapper = new LambdaQueryWrapper<OGoods>();
+        queryWrapper.eq(bo.getStatus()!=null, OGoods::getStatus,bo.getStatus());
         queryWrapper.eq(bo.getCategoryId()!=null,OGoods::getCategoryId,bo.getCategoryId());
         queryWrapper.eq(bo.getSupplierId()!=null,OGoods::getSupplierId,bo.getSupplierId());
         queryWrapper.eq(StringUtils.hasText(bo.getGoodsNum()),OGoods::getGoodsNum,bo.getGoodsNum());

@@ -18,6 +18,12 @@
           @keyup.enter.native="handleQuery"
         />
       </el-form-item>
+      <el-form-item label="状态" prop="disable">
+        <el-select v-model="queryParams.status" filterable  placeholder="状态">
+          <el-option label="销售中" value="1"></el-option>
+          <el-option label="已下架" value="2"></el-option>
+        </el-select>
+      </el-form-item>
       <el-form-item>
         <el-button type="primary" icon="el-icon-search" size="mini" @click="handleQuery">搜索</el-button>
         <el-button icon="el-icon-refresh" size="mini" @click="resetQuery">重置</el-button>
@@ -53,8 +59,8 @@
 
     <el-table v-loading="loading" :data="goodsSpecList" @selection-change="handleSelectionChange">
 <!--      <el-table-column type="selection" width="55" align="center" />-->
-      <el-table-column label="ID" align="center" prop="id" />
-      <el-table-column label="外部ERP Sku ID" align="center" prop="outerErpSkuId" />
+      <el-table-column label="SkuId" align="center" prop="id" />
+      <el-table-column label="外部ErpSkuId" align="center" prop="outerErpSkuId" />
       <el-table-column label="商品名" align="center" prop="goodsName" />
       <el-table-column label="Sku名" align="center" prop="skuName" />
       <el-table-column label="Sku编码" align="center" prop="skuCode" />
@@ -66,10 +72,10 @@
       </el-table-column>
       <el-table-column label="规格2" align="center" prop="sizeValue" />
       <el-table-column label="规格3" align="center" prop="styleValue" />
-      <el-table-column label="建议零售价" align="center" prop="retailPrice" />
+      <el-table-column label="建议零售价" align="center" prop="retailPrice" :formatter="amountFormatter"/>
       <el-table-column label="状态" align="center" prop="status" >
         <template slot-scope="scope">
-          <el-tag size="small" v-if="scope.row.status===1">上架中</el-tag>
+          <el-tag size="small" v-if="scope.row.status===1">销售中</el-tag>
           <el-tag size="small" v-if="scope.row.status===2">已下架</el-tag>
         </template>
       </el-table-column>
@@ -98,9 +104,9 @@
     <!-- 添加或修改商品规格库存管理对话框 -->
     <el-dialog :title="title" :visible.sync="open" width="600px" append-to-body>
       <el-form ref="form" :model="form" :rules="rules" label-width="120px">
-        <el-form-item label="商品名" prop="goodsName">
-          <el-input v-model="form.goodsName" placeholder="请输入商品名" />
-        </el-form-item>
+<!--        <el-form-item label="商品名" prop="goodsName">-->
+<!--          <el-input v-model="form.goodsName" placeholder="请输入商品名" />-->
+<!--        </el-form-item>-->
         <el-form-item label="SKU名" prop="skuName">
           <el-input v-model="form.skuName" placeholder="请输入SKU名" />
         </el-form-item>
@@ -116,20 +122,26 @@
           <el-input type="number" v-model.number="form.retailPrice" placeholder="售价" />
         </el-form-item>
 
-        <el-form-item label="规格1" prop="colorValue">
-          <el-input v-model="form.colorValue" placeholder="请输入规格1" />
-        </el-form-item>
-        <el-form-item label="规格2" prop="sizeValue">
-          <el-input v-model="form.sizeValue" placeholder="请输入规格2" />
-        </el-form-item>
-        <el-form-item label="规格3" prop="styleValue">
-          <el-input v-model="form.styleValue" placeholder="请输入规格3" />
-        </el-form-item>
+<!--        <el-form-item label="规格1" prop="colorValue">-->
+<!--          <el-input v-model="form.colorValue" placeholder="请输入规格1" />-->
+<!--        </el-form-item>-->
+<!--        <el-form-item label="规格2" prop="sizeValue">-->
+<!--          <el-input v-model="form.sizeValue" placeholder="请输入规格2" />-->
+<!--        </el-form-item>-->
+<!--        <el-form-item label="规格3" prop="styleValue">-->
+<!--          <el-input v-model="form.styleValue" placeholder="请输入规格3" />-->
+<!--        </el-form-item>-->
         <el-form-item label="ERP商品ID" prop="outerErpGoodsId">
           <el-input type="number" v-model.number="form.outerErpGoodsId" placeholder="请输入ERP商品ID" />
         </el-form-item>
         <el-form-item label="ERP商品SkuID" prop="outerErpSkuId">
           <el-input type="number" v-model.number="form.outerErpSkuId" placeholder="请输入ERP商品SkuID" />
+        </el-form-item>
+        <el-form-item label="状态" prop="status">
+          <el-select v-model="form.status" filterable  placeholder="状态">
+            <el-option label="销售中" :value="1"></el-option>
+            <el-option label="已下架" :value="2"></el-option>
+          </el-select>
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
@@ -207,6 +219,9 @@ export default {
     this.getList();
   },
   methods: {
+    amountFormatter(row, column, cellValue, index) {
+      return '￥' + parseFloat(cellValue).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
+    },
     /** 查询商品规格库存管理列表 */
     getList() {
       this.loading = true;

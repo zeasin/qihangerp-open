@@ -33,14 +33,20 @@
           </el-option>
         </el-select>
       </el-form-item>
-      <el-form-item label="条码" prop="barCode">
-        <el-input
-          v-model="queryParams.barCode"
-          placeholder="请输入条码"
-          clearable
-          @keyup.enter.native="handleQuery"
-        />
+      <el-form-item label="状态" prop="disable">
+        <el-select v-model="queryParams.status" filterable  placeholder="状态">
+          <el-option label="销售中" value="1"></el-option>
+          <el-option label="已下架" value="2"></el-option>
+        </el-select>
       </el-form-item>
+<!--      <el-form-item label="条码" prop="barCode">-->
+<!--        <el-input-->
+<!--          v-model="queryParams.barCode"-->
+<!--          placeholder="请输入条码"-->
+<!--          clearable-->
+<!--          @keyup.enter.native="handleQuery"-->
+<!--        />-->
+<!--      </el-form-item>-->
 
       <!-- <el-form-item label="状态" prop="disable">
         <el-input
@@ -72,16 +78,16 @@
           v-hasPermi="['goods:goods:add']"
         >添加商品</el-button>
       </el-col>
-      <el-col :span="1.5">
-        <el-button
-          type="success"
-          plain
-          icon="el-icon-edit"
-          size="mini"
-          @click="handleImport"
-          v-hasPermi="['goods:goods:edit']"
-        >推送到线下渠道店铺</el-button>
-      </el-col>
+<!--      <el-col :span="1.5">-->
+<!--        <el-button-->
+<!--          type="success"-->
+<!--          plain-->
+<!--          icon="el-icon-edit"-->
+<!--          size="mini"-->
+<!--          @click="handleImport"-->
+<!--          v-hasPermi="['goods:goods:edit']"-->
+<!--        >推送到线下渠道店铺</el-button>-->
+<!--      </el-col>-->
       <!--
       <el-col :span="1.5">
         <el-button
