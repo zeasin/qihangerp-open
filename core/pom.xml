@@ -23,6 +23,7 @@
         <module>order-module</module>
         <module>open-api-module</module>
         <module>scm-module</module>
+        <module>wms-module</module>
     </modules>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

@@ -3,7 +3,7 @@ import request from '@/utils/request'
 // 查询出库单列表
 export function listStockOut(query) {
   return request({
-    url: '/wms-api/stockOut/list',
+    url: '/erp-api/stockOut/list',
     method: 'get',
     params: query
   })

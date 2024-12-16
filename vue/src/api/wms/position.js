@@ -3,7 +3,7 @@ import request from '@/utils/request'
 // 查询仓库货架列表
 export function listPosition(query) {
   return request({
-    url: '/wms-api/warehouse/position/list',
+    url: '/erp-api/warehouse/position/list',
     method: 'get',
     params: query
   })
@@ -12,7 +12,7 @@ export function listPosition(query) {
 // 查询仓库货架详细
 export function getLocation(id) {
   return request({
-    url: '/wms-api/warehouse/position/' + id,
+    url: '/erp-api/warehouse/position/' + id,
     method: 'get'
   })
 }
@@ -20,7 +20,7 @@ export function getLocation(id) {
 // 新增仓库货架
 export function addLocation(data) {
   return request({
-    url: '/wms-api/warehouse/position',
+    url: '/erp-api/warehouse/position',
     method: 'post',
     data: data
   })
@@ -29,7 +29,7 @@ export function addLocation(data) {
 // 修改仓库货架
 export function updateLocation(data) {
   return request({
-    url: '/wms-api/warehouse/position',
+    url: '/erp-api/warehouse/position',
     method: 'put',
     data: data
   })
@@ -38,7 +38,7 @@ export function updateLocation(data) {
 // 删除仓库货架
 export function delLocation(id) {
   return request({
-    url: '/wms-api/warehouse/position/' + id,
+    url: '/erp-api/warehouse/position/' + id,
     method: 'delete'
   })
 }
