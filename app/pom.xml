@@ -116,11 +116,8 @@
             <artifactId>goods-module</artifactId>
             <version>1.0</version>
         </dependency>
-        <dependency>
-            <groupId>cn.qihangerp.module</groupId>
-            <artifactId>order-module</artifactId>
-            <version>1.0</version>
-        </dependency>
+
+
         <dependency>
             <groupId>cn.qihangerp.module</groupId>
             <artifactId>scm-module</artifactId>
