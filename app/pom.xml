@@ -105,7 +105,8 @@
 <!--            <groupId>cn.qihangerp.core</groupId>-->
 <!--            <artifactId>security</artifactId>-->
 <!--            <version>1.0</version>-->
-<!--        </dependency>-->
+<!--
+      </dependency>-->
         <dependency>
             <groupId>cn.qihangerp.module</groupId>
             <artifactId>common-module</artifactId>
