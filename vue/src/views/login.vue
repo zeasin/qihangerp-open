@@ -110,7 +110,7 @@
     </div>
     <!--  底部  -->
     <div class="el-login-footer">
-      <span>Copyright © 2023-2024 qihangerp.cn All Rights Reserved.</span>
+      <span>Copyright © 2023-2025 qihangerp.cn All Rights Reserved.</span>
     </div>
   </div>
 </template>

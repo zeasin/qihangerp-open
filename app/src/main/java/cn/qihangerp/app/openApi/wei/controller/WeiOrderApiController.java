@@ -8,6 +8,7 @@ import cn.qihangerp.common.AjaxResult;
 import cn.qihangerp.common.ResultVoEnum;
 import cn.qihangerp.common.enums.HttpStatus;
 
+import cn.qihangerp.open.wei.WeiOrderApiHelper;
 import cn.qihangerp.sdk.common.ApiResultVo;
 import cn.qihangerp.sdk.wei.OrderApiHelper;
 import cn.qihangerp.open.wei.domain.OmsWeiOrder;
@@ -55,14 +56,16 @@ public class WeiOrderApiController extends BaseController {
 //        String appSecret = checkResult.getData().getAppSecret();
         LocalDateTime  endTime = LocalDateTime.now();
         LocalDateTime startTime = endTime.minusHours(1);
-        ApiResultVo<Order> apiResultVo = OrderApiHelper.pullOrderList(startTime, endTime, accessToken);
+        cn.qihangerp.open.common.ApiResultVo<cn.qihangerp.open.wei.model.Order> orderApiResultVo = WeiOrderApiHelper.pullOrderList(startTime, endTime, accessToken);
+
+//        ApiResultVo<Order> apiResultVo = OrderApiHelper.pullOrderList(startTime, endTime, accessToken);
         int insertSuccess = 0;//新增成功的订单
         int totalError = 0;
         int hasExistOrder = 0;//已存在的订单数
-        if(apiResultVo.getCode() == 0){
-            if(apiResultVo.getList()!=null) {
+        if(orderApiResultVo.getCode() == 0){
+            if(orderApiResultVo.getList()!=null) {
                 // 拉取到了数据 拉取详情
-                for (var orderInfo : apiResultVo.getList()) {
+                for (var orderInfo : orderApiResultVo.getList()) {
 
                     OmsWeiOrder order = new OmsWeiOrder();
                     order.setOrderId(orderInfo.getOrder_id());
@@ -79,7 +82,7 @@ public class WeiOrderApiController extends BaseController {
                     order.setFreight(orderInfo.getOrder_detail().getPrice_info().getInteger("freight"));
                     order.setDiscountedPrice(orderInfo.getOrder_detail().getPrice_info().getInteger("discounted_price"));
 
-                    OrderDetailDeliverInfoAddress addressInfo = orderInfo.getOrder_detail().getDelivery_info().getAddress_info();
+                    var addressInfo = orderInfo.getOrder_detail().getDelivery_info().getAddress_info();
                     order.setUserName(addressInfo.getUser_name());
                     order.setPostalCode(addressInfo.getPostal_code());
                     order.setProvinceName(addressInfo.getProvince_name());

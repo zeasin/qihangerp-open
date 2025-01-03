@@ -118,7 +118,11 @@
             <version>1.0</version>
         </dependency>
 
-
+        <dependency>
+            <groupId>cn.qihangerp.module</groupId>
+            <artifactId>order-module</artifactId>
+            <version>1.0</version>
+        </dependency>
         <dependency>
             <groupId>cn.qihangerp.module</groupId>
             <artifactId>scm-module</artifactId>
@@ -174,6 +178,13 @@
             <version>1.0</version>
             <scope>system</scope>
             <systemPath>${project.basedir}/libs/open-api-sdk-1.0.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>cn.qihangerp.open</groupId>
+            <artifactId>open-sdk</artifactId>
+            <version>1.0</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/libs/open-sdk-1.0.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>com.squareup.okhttp3</groupId>
