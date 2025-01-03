@@ -44,6 +44,7 @@
     <el-row :gutter="10" class="mb8">
       <el-col :span="1.5">
         <el-button
+          :loading="pullLoading"
           type="success"
           plain
           icon="el-icon-download"
@@ -144,6 +145,7 @@ export default {
       showSearch: true,
       // 总条数
       total: 0,
+      pullLoading: false,
       // 商品管理表格数据
       goodsList: [],
       shopList: [],

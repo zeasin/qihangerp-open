@@ -1,6 +1,9 @@
 package cn.qihangerp.open.wei.domain;
 
 import java.io.Serializable;
+import java.util.List;
+
+import com.baomidou.mybatisplus.annotation.TableField;
 import lombok.Data;
 
 /**
@@ -17,7 +20,7 @@ public class OmsWeiGoods implements Serializable {
     /**
      * 店铺id
      */
-    private Integer shopId;
+    private Long shopId;
 
     /**
      * 平台商品id
@@ -87,7 +90,10 @@ public class OmsWeiGoods implements Serializable {
     /**
      * 商品草稿最近一次修改时间
      */
-    private Integer editTime;
+    private String editTime;
+
+    @TableField(exist = false)
+    private List<OmsWeiGoodsSku> skus;
 
     private static final long serialVersionUID = 1L;
 }
