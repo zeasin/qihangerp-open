@@ -9,10 +9,10 @@ import cn.qihangerp.common.enums.EnumShopType;
 import cn.qihangerp.common.mq.MqMessage;
 import cn.qihangerp.common.mq.MqType;
 import cn.qihangerp.common.mq.MqUtils;
-import cn.qihangerp.open.dou.domain.DouRefund;
-import cn.qihangerp.open.dou.domain.bo.DouOrderPushBo;
-import cn.qihangerp.open.dou.domain.bo.DouRefundBo;
-import cn.qihangerp.open.dou.service.DouRefundService;
+import cn.qihangerp.module.open.dou.domain.DouRefund;
+import cn.qihangerp.module.open.dou.domain.bo.DouOrderPushBo;
+import cn.qihangerp.module.open.dou.domain.bo.DouRefundBo;
+import cn.qihangerp.module.open.dou.service.DouRefundService;
 
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;

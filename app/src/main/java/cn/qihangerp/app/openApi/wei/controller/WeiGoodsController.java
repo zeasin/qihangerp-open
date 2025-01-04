@@ -9,8 +9,8 @@ import cn.qihangerp.common.TableDataInfo;
 import cn.qihangerp.domain.OGoodsSku;
 import cn.qihangerp.domain.bo.LinkErpGoodsSkuBo;
 import cn.qihangerp.module.service.OGoodsSkuService;
-import cn.qihangerp.open.wei.domain.OmsWeiGoodsSku;
-import cn.qihangerp.open.wei.service.OmsWeiGoodsSkuService;
+import cn.qihangerp.module.open.wei.domain.OmsWeiGoodsSku;
+import cn.qihangerp.module.open.wei.service.OmsWeiGoodsSkuService;
 
 import lombok.AllArgsConstructor;
 import org.apache.commons.lang3.StringUtils;

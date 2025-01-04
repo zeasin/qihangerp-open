@@ -11,11 +11,11 @@ import cn.qihangerp.common.enums.HttpStatus;
 import cn.qihangerp.open.wei.WeiOrderApiHelper;
 import cn.qihangerp.sdk.common.ApiResultVo;
 import cn.qihangerp.sdk.wei.OrderApiHelper;
-import cn.qihangerp.open.wei.domain.OmsWeiOrder;
-import cn.qihangerp.open.wei.domain.OmsWeiOrderItem;
+import cn.qihangerp.module.open.wei.domain.OmsWeiOrder;
+import cn.qihangerp.module.open.wei.domain.OmsWeiOrderItem;
 import cn.qihangerp.sdk.wei.model.Order;
 import cn.qihangerp.sdk.wei.model.OrderDetailDeliverInfoAddress;
-import cn.qihangerp.open.wei.service.OmsWeiOrderService;
+import cn.qihangerp.module.open.wei.service.OmsWeiOrderService;
 
 import com.alibaba.fastjson2.JSONObject;
 import lombok.AllArgsConstructor;

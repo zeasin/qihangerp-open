@@ -9,9 +9,9 @@ import cn.qihangerp.common.enums.EnumShopType;
 import cn.qihangerp.common.mq.MqMessage;
 import cn.qihangerp.common.mq.MqType;
 import cn.qihangerp.common.mq.MqUtils;
-import cn.qihangerp.open.wei.domain.OmsWeiOrder;
-import cn.qihangerp.open.wei.domain.bo.WeiOrderPushBo;
-import cn.qihangerp.open.wei.service.OmsWeiOrderService;
+import cn.qihangerp.module.open.wei.domain.OmsWeiOrder;
+import cn.qihangerp.module.open.wei.domain.bo.WeiOrderPushBo;
+import cn.qihangerp.module.open.wei.service.OmsWeiOrderService;
 
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;

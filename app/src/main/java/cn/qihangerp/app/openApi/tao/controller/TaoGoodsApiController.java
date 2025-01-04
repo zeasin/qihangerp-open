@@ -14,10 +14,10 @@ import cn.qihangerp.module.service.OShopPullLogsService;
 
 import cn.qihangerp.sdk.common.ApiResultVo;
 import cn.qihangerp.sdk.tao.GoodsApiHelper;
-import cn.qihangerp.open.tao.domain.TaoGoods;
-import cn.qihangerp.open.tao.domain.TaoGoodsSku;
+import cn.qihangerp.module.open.tao.domain.TaoGoods;
+import cn.qihangerp.module.open.tao.domain.TaoGoodsSku;
 import cn.qihangerp.sdk.tao.response.TaoGoodsResponse;
-import cn.qihangerp.open.tao.service.TaoGoodsService;
+import cn.qihangerp.module.open.tao.service.TaoGoodsService;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

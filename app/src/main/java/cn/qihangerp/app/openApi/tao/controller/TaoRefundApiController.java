@@ -16,9 +16,9 @@ import cn.qihangerp.module.service.OShopPullLogsService;
 
 import cn.qihangerp.sdk.common.ApiResultVo;
 import cn.qihangerp.sdk.tao.RefundApiHelper;
-import cn.qihangerp.open.tao.domain.TaoRefund;
+import cn.qihangerp.module.open.tao.domain.TaoRefund;
 import cn.qihangerp.sdk.tao.response.TaoRefundResponse;
-import cn.qihangerp.open.tao.service.TaoRefundService;
+import cn.qihangerp.module.open.tao.service.TaoRefundService;
 import com.taobao.api.ApiException;
 import lombok.AllArgsConstructor;
 import org.slf4j.Logger;

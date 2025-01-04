@@ -9,12 +9,12 @@ import cn.qihangerp.common.TableDataInfo;
 import cn.qihangerp.domain.OGoodsSku;
 import cn.qihangerp.domain.bo.LinkErpGoodsSkuBo;
 import cn.qihangerp.module.service.OGoodsSkuService;
-import cn.qihangerp.open.tao.domain.TaoGoods;
-import cn.qihangerp.open.tao.domain.TaoGoodsSku;
-import cn.qihangerp.open.tao.domain.bo.TaoGoodsBo;
-import cn.qihangerp.open.tao.domain.vo.TaoGoodsSkuListVo;
-import cn.qihangerp.open.tao.service.TaoGoodsService;
-import cn.qihangerp.open.tao.service.TaoGoodsSkuService;
+import cn.qihangerp.module.open.tao.domain.TaoGoods;
+import cn.qihangerp.module.open.tao.domain.TaoGoodsSku;
+import cn.qihangerp.module.open.tao.domain.bo.TaoGoodsBo;
+import cn.qihangerp.module.open.tao.domain.vo.TaoGoodsSkuListVo;
+import cn.qihangerp.module.open.tao.service.TaoGoodsService;
+import cn.qihangerp.module.open.tao.service.TaoGoodsSkuService;
 
 import lombok.AllArgsConstructor;
 import org.apache.commons.lang3.StringUtils;

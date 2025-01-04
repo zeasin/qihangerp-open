@@ -16,10 +16,10 @@ import cn.qihangerp.module.service.OShopPullLogsService;
 
 import cn.qihangerp.sdk.common.ApiResultVo;
 import cn.qihangerp.sdk.tao.OrderApiHelper;
-import cn.qihangerp.open.tao.domain.TaoOrder;
-import cn.qihangerp.open.tao.domain.TaoOrderItem;
+import cn.qihangerp.module.open.tao.domain.TaoOrder;
+import cn.qihangerp.module.open.tao.domain.TaoOrderItem;
 import cn.qihangerp.sdk.tao.response.TaoOrderResponse;
-import cn.qihangerp.open.tao.service.TaoOrderService;
+import cn.qihangerp.module.open.tao.service.TaoOrderService;
 import com.taobao.api.ApiException;
 import lombok.AllArgsConstructor;
 import org.slf4j.Logger;

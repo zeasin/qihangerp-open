@@ -1,8 +1,8 @@
 package cn.qihangerp.app.openApi.pdd.controller.feign;
 
 import cn.qihangerp.common.AjaxResult;
-import cn.qihangerp.open.pdd.domain.PddOrder;
-import cn.qihangerp.open.pdd.service.PddOrderService;
+import cn.qihangerp.module.open.pdd.domain.PddOrder;
+import cn.qihangerp.module.open.pdd.service.PddOrderService;
 
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;

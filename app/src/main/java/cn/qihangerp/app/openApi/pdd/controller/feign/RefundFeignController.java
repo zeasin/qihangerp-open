@@ -1,8 +1,8 @@
 package cn.qihangerp.app.openApi.pdd.controller.feign;
 
 import cn.qihangerp.common.AjaxResult;
-import cn.qihangerp.open.pdd.domain.PddRefund;
-import cn.qihangerp.open.pdd.service.PddRefundService;
+import cn.qihangerp.module.open.pdd.domain.PddRefund;
+import cn.qihangerp.module.open.pdd.service.PddRefundService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

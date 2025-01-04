@@ -1,8 +1,8 @@
 package cn.qihangerp.app.openApi.wei.controller.feign;
 
 import cn.qihangerp.common.AjaxResult;
-import cn.qihangerp.open.wei.domain.OmsWeiRefund;
-import cn.qihangerp.open.wei.service.OmsWeiRefundService;
+import cn.qihangerp.module.open.wei.domain.OmsWeiRefund;
+import cn.qihangerp.module.open.wei.service.OmsWeiRefundService;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;

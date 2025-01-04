@@ -1,10 +1,10 @@
 package cn.qihangerp.app.openApi.jd.controller.feign;
 
 import cn.qihangerp.common.AjaxResult;
-import cn.qihangerp.open.jd.domain.JdOrder;
-import cn.qihangerp.open.jd.domain.JdVcOrder;
-import cn.qihangerp.open.jd.service.JdOrderService;
-import cn.qihangerp.open.jd.service.JdVcOrderService;
+import cn.qihangerp.module.open.jd.domain.JdOrder;
+import cn.qihangerp.module.open.jd.domain.JdVcOrder;
+import cn.qihangerp.module.open.jd.service.JdOrderService;
+import cn.qihangerp.module.open.jd.service.JdVcOrderService;
 
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;

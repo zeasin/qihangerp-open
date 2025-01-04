@@ -2,9 +2,9 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="cn.qihangerp.open.jd.mapper.JdGoodsMapper">
+<mapper namespace="cn.qihangerp.module.open.jd.mapper.JdGoodsMapper">
 
-    <resultMap id="BaseResultMap" type="cn.qihangerp.open.jd.domain.JdGoods">
+    <resultMap id="BaseResultMap" type="cn.qihangerp.module.open.jd.domain.JdGoods">
             <id property="id" column="id" jdbcType="BIGINT"/>
             <result property="wareId" column="ware_id" jdbcType="VARCHAR"/>
             <result property="title" column="title" jdbcType="VARCHAR"/>

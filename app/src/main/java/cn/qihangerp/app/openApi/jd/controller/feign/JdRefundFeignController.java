@@ -1,10 +1,10 @@
 package cn.qihangerp.app.openApi.jd.controller.feign;
 
 import cn.qihangerp.common.AjaxResult;
-import cn.qihangerp.open.jd.domain.JdRefund;
-import cn.qihangerp.open.jd.domain.JdVcRefund;
-import cn.qihangerp.open.jd.service.JdRefundService;
-import cn.qihangerp.open.jd.service.JdVcRefundService;
+import cn.qihangerp.module.open.jd.domain.JdRefund;
+import cn.qihangerp.module.open.jd.domain.JdVcRefund;
+import cn.qihangerp.module.open.jd.service.JdRefundService;
+import cn.qihangerp.module.open.jd.service.JdVcRefundService;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
