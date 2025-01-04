@@ -29,12 +29,13 @@
       <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
         <template slot-scope="scope">
           <el-button
+            v-if="scope.row.id !== 500 && scope.row.id !== 999"
             size="mini"
             type="text"
             icon="el-icon-edit"
             @click="handleUpdate(scope.row)"
             v-hasPermi="['shop:shop:edit']"
-          >修改</el-button>
+          >设置参数</el-button>
 
 <!--          <el-button-->
 <!--            size="mini"-->

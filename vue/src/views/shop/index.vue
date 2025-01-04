@@ -111,7 +111,7 @@
           >删除</el-button>
           </el-row>
                       <el-button
-                        v-if="scope.row.type!==999"
+                        v-if="scope.row.type===100 || scope.row.type===200 || scope.row.type===280 || scope.row.type===300"
                         type="success"
                         plain
                         icon="el-icon-refresh"

@@ -7,23 +7,19 @@ import cn.qihangerp.app.security.common.BaseController;
 import cn.qihangerp.common.AjaxResult;
 import cn.qihangerp.common.ResultVoEnum;
 import cn.qihangerp.common.enums.HttpStatus;
-
+import cn.qihangerp.open.common.ApiResultVo;
 import cn.qihangerp.open.wei.WeiOrderApiHelper;
-import cn.qihangerp.sdk.common.ApiResultVo;
-import cn.qihangerp.sdk.wei.OrderApiHelper;
 import cn.qihangerp.module.open.wei.domain.OmsWeiOrder;
 import cn.qihangerp.module.open.wei.domain.OmsWeiOrderItem;
-import cn.qihangerp.sdk.wei.model.Order;
-import cn.qihangerp.sdk.wei.model.OrderDetailDeliverInfoAddress;
 import cn.qihangerp.module.open.wei.service.OmsWeiOrderService;
-
+import cn.qihangerp.open.wei.model.Order;
+import cn.qihangerp.open.wei.model.OrderDetailDeliverInfoAddress;
 import com.alibaba.fastjson2.JSONObject;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -56,7 +52,7 @@ public class WeiOrderApiController extends BaseController {
 //        String appSecret = checkResult.getData().getAppSecret();
         LocalDateTime  endTime = LocalDateTime.now();
         LocalDateTime startTime = endTime.minusHours(1);
-        cn.qihangerp.open.common.ApiResultVo<cn.qihangerp.open.wei.model.Order> orderApiResultVo = WeiOrderApiHelper.pullOrderList(startTime, endTime, accessToken);
+        ApiResultVo<Order> orderApiResultVo = WeiOrderApiHelper.pullOrderList(startTime, endTime, accessToken, null, null);
 
 //        ApiResultVo<Order> apiResultVo = OrderApiHelper.pullOrderList(startTime, endTime, accessToken);
         int insertSuccess = 0;//新增成功的订单
@@ -172,7 +168,7 @@ public class WeiOrderApiController extends BaseController {
             return AjaxResult.error(checkResult.getCode(), checkResult.getMsg(), checkResult.getData());
         }
         String accessToken = checkResult.getData().getAccessToken();
-        ApiResultVo<Order> apiResultVo = OrderApiHelper.pullOrderDetail(params.getOrderId(), accessToken);
+        ApiResultVo<Order> apiResultVo = WeiOrderApiHelper.pullOrderDetail(params.getOrderId(), accessToken);
         if(apiResultVo.getCode() == 0) {
             if (apiResultVo.getData() != null) {
 
