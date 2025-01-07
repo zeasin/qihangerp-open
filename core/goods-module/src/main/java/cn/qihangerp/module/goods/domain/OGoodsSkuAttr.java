@@ -21,7 +21,7 @@ public class OGoodsSkuAttr implements Serializable {
     /**
      * 
      */
-    private Long goodsId;
+    private String goodsId;
 
     /**
      * 

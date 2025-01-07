@@ -21,7 +21,7 @@ public class OGoods implements Serializable {
      * 主键id
      */
     @TableId(value = "id", type= IdType.AUTO)
-    private Long id;
+    private String id;
 
     /**
      * 商品名称

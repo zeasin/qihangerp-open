@@ -13,12 +13,12 @@ public class OGoodsInventory implements Serializable {
     /**
      * 主键ID
      */
-    private Long id;
+    private String id;
 
     /**
      * 商品id
      */
-    private Long goodsId;
+    private String goodsId;
 
     /**
      * 商品编码
@@ -28,7 +28,7 @@ public class OGoodsInventory implements Serializable {
     /**
      * 商品规格id
      */
-    private Long skuId;
+    private String skuId;
 
     /**
      * 规格编码（唯一）

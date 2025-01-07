@@ -134,11 +134,11 @@ public class OGoodsServiceImpl extends ServiceImpl<OGoodsMapper, OGoods>
 
         // 1、添加主表o_goods
         goodsMapper.insert(goods);
-        Long goodsId = goods.getId();
+
         // 2、添加规格表erp_goods_spec
         for (GoodsAddSkuBo skuBo:bo.getSpecList()) {
             OGoodsSku spec = new OGoodsSku();
-            spec.setGoodsId(goodsId);
+            spec.setGoodsId(goods.getId());
             spec.setOuterErpGoodsId(bo.getOuterErpGoodsId());
             spec.setOuterErpSkuId(skuBo.getOuterErpSkuId());
             spec.setGoodsName(bo.getName());
@@ -173,7 +173,7 @@ public class OGoodsServiceImpl extends ServiceImpl<OGoodsMapper, OGoods>
             // 添加商品库存表
             OGoodsInventory inventory = new OGoodsInventory();
             inventory.setSkuId(spec.getId());
-            inventory.setGoodsId(goodsId);
+            inventory.setGoodsId(goods.getId());
             inventory.setGoodsNum(bo.getNumber());
             inventory.setSkuCode(skuBo.getSpecNum());
             inventory.setQuantity(0L);
@@ -221,7 +221,7 @@ public class OGoodsServiceImpl extends ServiceImpl<OGoodsMapper, OGoods>
 
         }
 //        TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-        return ResultVo.success(goodsId);
+        return ResultVo.success(Long.parseLong(goods.getId()));
     }
 
     @Override
@@ -262,10 +262,10 @@ public class OGoodsServiceImpl extends ServiceImpl<OGoodsMapper, OGoods>
                 if (oGoods != null && oGoods.size() > 0) {
                     goodsSku.setGoodsId(oGoods.get(0).getId());
                 } else {
-                    goodsSku.setGoodsId(0L);
+                    goodsSku.setGoodsId("0");
                 }
             } else {
-                goodsSku.setGoodsId(0L);
+                goodsSku.setGoodsId("0");
             }
             return skuMapper.insert(goodsSku);
         }

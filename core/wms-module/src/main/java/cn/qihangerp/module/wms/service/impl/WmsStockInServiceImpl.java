@@ -101,11 +101,11 @@ public class WmsStockInServiceImpl extends ServiceImpl<WmsStockInMapper, WmsStoc
             inItem.setSourceNo(insert.getSourceNo());
             inItem.setSourceId(0L);
             inItem.setSourceItemId(0L);
-            inItem.setGoodsId(Long.parseLong(item.getGoodsId()));
+            inItem.setGoodsId(item.getGoodsId());
             inItem.setGoodsName(item.getGoodsName());
             inItem.setGoodsImage(item.getGoodsImg());
             inItem.setSkuName(item.getSkuName());
-            inItem.setSkuId(Long.parseLong(item.getSkuId()));
+            inItem.setSkuId(item.getSkuId());
             inItem.setSkuCode(item.getSkuCode());
             inItem.setQuantity(item.getQuantity());
             inItem.setInQuantity(0);
