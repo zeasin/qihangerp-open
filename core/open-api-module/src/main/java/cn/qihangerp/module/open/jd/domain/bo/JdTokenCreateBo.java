@@ -4,7 +4,7 @@ import lombok.Data;
 
 @Data
 public class JdTokenCreateBo {
-    private Integer shopId;
+    private Long shopId;
     private Integer shopType;
     private String code;
 }
