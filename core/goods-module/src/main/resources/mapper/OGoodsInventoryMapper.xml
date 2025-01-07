@@ -25,6 +25,6 @@
         update_time,update_by
     </sql>
     <select id="getAllInventoryQuantity" resultType="Long">
-        SELECT SUM(quantity) as count FROM o_goods_inventory where is_delete=0
+        SELECT IFNULL(SUM(quantity),0) as count FROM o_goods_inventory where is_delete=0
     </select>
 </mapper>
