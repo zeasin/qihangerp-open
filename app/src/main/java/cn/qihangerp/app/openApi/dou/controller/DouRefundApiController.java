@@ -1,5 +1,6 @@
 package cn.qihangerp.app.openApi.dou.controller;
 
+import cn.qihangerp.app.openApi.PullRequest;
 import cn.qihangerp.app.openApi.dou.DouApiCommon;
 import cn.qihangerp.common.AjaxResult;
 import cn.qihangerp.common.ResultVoEnum;
@@ -12,13 +13,14 @@ import cn.qihangerp.domain.OShopPullLasttime;
 import cn.qihangerp.domain.OShopPullLogs;
 import cn.qihangerp.module.service.OShopPullLasttimeService;
 import cn.qihangerp.module.service.OShopPullLogsService;
-
-import cn.qihangerp.sdk.common.ApiResultVo;
-import cn.qihangerp.sdk.dou.PullRequest;
-import cn.qihangerp.sdk.dou.RefundApiHelper;
 import cn.qihangerp.module.open.dou.domain.DouRefund;
-import cn.qihangerp.sdk.dou.response.DouRefundResponse;
 import cn.qihangerp.module.open.dou.service.DouRefundService;
+import cn.qihangerp.open.common.ApiResultVo;
+import cn.qihangerp.open.dou.DouRefundApiHelper;
+import cn.qihangerp.open.dou.DouTokenApiHelper;
+import cn.qihangerp.open.dou.model.Token;
+import cn.qihangerp.open.dou.model.after.AfterSale;
+import com.alibaba.fastjson2.JSONObject;
 import lombok.AllArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,6 +29,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
+import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
@@ -68,7 +71,7 @@ public class DouRefundApiController {
         String appKey = checkResult.getData().getAppKey();
         String appSecret = checkResult.getData().getAppSecret();
         Long douShopId = checkResult.getData().getSellerId();
-
+        String accessToken = checkResult.getData().getAccessToken();
 
         // 取当前时间30分钟前
 //        LocalDateTime endTime = LocalDateTime.now();
@@ -96,8 +99,22 @@ public class DouRefundApiController {
 //            }
         }
         String pullParams = "{startTime:"+startTime+",endTime:"+endTime+"}";
+        ApiResultVo<Token> token = DouTokenApiHelper.getToken(appKey, appSecret,checkResult.getData().getSellerId());
+        if(token.getCode()==0) {
+            accessToken = token.getData().getAccessToken();
+        }else{
+            return AjaxResult.error(token.getMsg());
+        }
+        String startTimeStr = startTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+        String endTimeStr = endTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+        Long startTimestamp = startTime.toEpochSecond(ZoneOffset.ofHours(8));
+        Long endTimestamp = endTime.toEpochSecond(ZoneOffset.ofHours(8));
+
         //获取
-        ApiResultVo<DouRefundResponse> resultVo = RefundApiHelper.pullRefundList(appKey,appSecret,douShopId,startTime, endTime);
+//        ApiResultVo<DouRefundResponse> resultVo = RefundApiHelper.pullRefundList(appKey,appSecret,douShopId,startTime, endTime);
+        ApiResultVo<AfterSale> resultVo = DouRefundApiHelper.pullAfterSaleList(startTimestamp, endTimestamp, 0, 50, appKey, appSecret, accessToken);
+
+        if (resultVo.getCode() != 0) return AjaxResult.error(resultVo.getCode(), resultVo.getMsg());
 
         if(resultVo.getCode() !=0 ){
             OShopPullLogs logs = new OShopPullLogs();
@@ -119,11 +136,26 @@ public class DouRefundApiController {
         int hasExistOrder = 0;//已存在的订单数
 
         //循环插入订单数据到数据库
-        for (var refund : resultVo.getList()) {
-            DouRefund douRefund = new DouRefund();
-            BeanUtils.copyProperties(refund,douRefund);
+        for (var item : resultVo.getList()) {
+            DouRefund refund = new DouRefund();
+            BeanUtils.copyProperties(item.getAftersaleInfo(), refund);
+            refund.setOrderLogistics(JSONObject.toJSONString(item.getAftersaleInfo().getOrderLogistics()));
+            refund.setAftersaleTags(JSONObject.toJSONString(item.getAftersaleInfo().getAftersaleTags()));
+            refund.setAutoAuditBits(JSONObject.toJSONString(item.getAftersaleInfo().getAutoAuditBits()));
+            refund.setTextPart(JSONObject.toJSONString(item.getTextPart()));
+            refund.setRelatedOrderInfo(JSONObject.toJSONString(item.getOrderInfo().getRelatedOrderInfo()));
+            refund.setOrderSkuOrderId(item.getOrderInfo().getRelatedOrderInfo().get(0).getSkuOrderId());
+            refund.setOrderStatus(item.getOrderInfo().getRelatedOrderInfo().get(0).getOrderStatus());
+            refund.setOrderPayAmount(item.getOrderInfo().getRelatedOrderInfo().get(0).getPayAmount());
+            refund.setOrderPostAmount(item.getOrderInfo().getRelatedOrderInfo().get(0).getPostAmount());
+            refund.setOrderItemNum(item.getOrderInfo().getRelatedOrderInfo().get(0).getItemNum());
+            refund.setOrderProductId(item.getOrderInfo().getRelatedOrderInfo().get(0).getProductId()+"");
+            refund.setOrderProductName(item.getOrderInfo().getRelatedOrderInfo().get(0).getProductName());
+            refund.setOrderProductImage(item.getOrderInfo().getRelatedOrderInfo().get(0).getProductImage());
+            refund.setOrderShopSkuCode(item.getOrderInfo().getRelatedOrderInfo().get(0).getShopSkuCode());
+            refund.setOrderSkuSpec(JSONObject.toJSONString(item.getOrderInfo().getRelatedOrderInfo().get(0).getSkuSpec()));
             //插入订单数据
-            var result = refundService.saveRefund(req.getShopId(), douRefund);
+            var result = refundService.saveRefund(req.getShopId(), refund);
             if (result.getCode() == ResultVoEnum.DataExist.getIndex()) {
                 //已经存在
                 log.info("/**************主动更新dou退款：开始更新数据库：" + refund.getAftersaleId() + "存在、更新************开始通知****/");

@@ -1,5 +1,6 @@
 package cn.qihangerp.app.openApi.dou.controller;
 
+import cn.qihangerp.app.openApi.PullRequest;
 import cn.qihangerp.app.openApi.dou.DouApiCommon;
 import cn.qihangerp.common.AjaxResult;
 import cn.qihangerp.common.enums.EnumShopType;
@@ -8,14 +9,12 @@ import cn.qihangerp.domain.OShopPullLasttime;
 import cn.qihangerp.domain.OShopPullLogs;
 import cn.qihangerp.module.service.OShopPullLasttimeService;
 import cn.qihangerp.module.service.OShopPullLogsService;
-
-import cn.qihangerp.sdk.common.ApiResultVo;
-import cn.qihangerp.sdk.dou.GoodsApiHelper;
-import cn.qihangerp.sdk.dou.PullRequest;
 import cn.qihangerp.module.open.dou.domain.DouGoods;
 import cn.qihangerp.module.open.dou.domain.DouGoodsSku;
-import cn.qihangerp.sdk.dou.response.DouGoodsResponse;
 import cn.qihangerp.module.open.dou.service.DouGoodsService;
+import cn.qihangerp.open.common.ApiResultVo;
+import cn.qihangerp.open.dou.DouGoodsApiHelper;
+import cn.qihangerp.open.dou.model.GoodsListResultVo;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.BeanUtils;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -77,8 +76,8 @@ public class DouGoodsApiController {
         String pullParams = "{startTime:"+startTime+",endTime:"+endTime+"}";
 
 
-        ApiResultVo<DouGoodsResponse> resultVo = GoodsApiHelper.pullGoodsList(appKey, appSecret, douShopId,startTime,endTime);
-
+//        ApiResultVo<DouGoodsResponse> resultVo = GoodsApiHelper.pullGoodsList(appKey, appSecret, douShopId,startTime,endTime);
+        ApiResultVo<GoodsListResultVo> resultVo = DouGoodsApiHelper.getGoodsList(appKey, appSecret, accessToken, 1, 10);
         if(resultVo.getCode() !=0 ){
             OShopPullLogs logs = new OShopPullLogs();
             logs.setShopId(params.getShopId());
@@ -94,17 +93,23 @@ public class DouGoodsApiController {
         }
 
         int successTotal = 0;
-        for (var goods: resultVo.getList()){
+        for (var goods: resultVo.getData().getGoodsList()){
             DouGoods douGoods = new DouGoods();
             BeanUtils.copyProperties(goods,douGoods);
+
+            // TODO:转换goods
+            douGoods.setShopId(params.getShopId());
+            douGoods.setPullTime(new Date());
             List<DouGoodsSku> skuList = new ArrayList<>();
-            if(goods.getSkuList()!=null && goods.getSkuList().size()>0) {
-                for (var s: goods.getSkuList()) {
-                    DouGoodsSku sku = new DouGoodsSku();
-                    BeanUtils.copyProperties(s,sku);
-                    skuList.add(sku);
-                }
+            for (var s : goods.getSkuList()) {
+                DouGoodsSku sku = new DouGoodsSku();
+                BeanUtils.copyProperties(s, sku);
+                sku.setShopId(params.getShopId());
+                sku.setName(douGoods.getName());
+                sku.setImg(douGoods.getImg());
+                skuList.add(sku);
             }
+
             douGoods.setSkuList(skuList);
             goodsService.saveGoods(params.getShopId(),douGoods);
             successTotal++;

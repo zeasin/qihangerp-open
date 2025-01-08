@@ -8,7 +8,6 @@ import cn.qihangerp.common.enums.HttpStatus;
 import cn.qihangerp.domain.OShopPlatform;
 import cn.qihangerp.module.service.OShopPlatformService;
 import cn.qihangerp.module.service.OShopService;
-import com.taobao.api.ApiException;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
@@ -23,9 +22,9 @@ public class TaoApiCommon {
      *
      * @param shopId
      * @return
-     * @throws ApiException
+     * @throws
      */
-    public ResultVo<ShopApiParams> checkBefore(Long shopId) throws ApiException {
+    public ResultVo<ShopApiParams> checkBefore(Long shopId)  {
         var shop = shopService.selectShopById(shopId);
         if (shop == null) {
 //            return new ApiResult<>(EnumResultVo.ParamsError.getIndex(), "参数错误，没有找到店铺");

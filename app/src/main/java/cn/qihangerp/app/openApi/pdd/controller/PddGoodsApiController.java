@@ -1,5 +1,6 @@
 package cn.qihangerp.app.openApi.pdd.controller;
 
+import cn.qihangerp.app.openApi.PullRequest;
 import cn.qihangerp.app.openApi.pdd.ApiCommon;
 import cn.qihangerp.common.AjaxResult;
 import cn.qihangerp.common.enums.EnumShopType;
@@ -8,21 +9,18 @@ import cn.qihangerp.domain.OShopPullLasttime;
 import cn.qihangerp.domain.OShopPullLogs;
 import cn.qihangerp.module.service.OShopPullLasttimeService;
 import cn.qihangerp.module.service.OShopPullLogsService;
-
-import cn.qihangerp.sdk.common.ApiResultVo;
-import cn.qihangerp.sdk.pdd.GoodsApiHelper;
-import cn.qihangerp.sdk.pdd.PullRequest;
 import cn.qihangerp.module.open.pdd.domain.PddGoods;
 import cn.qihangerp.module.open.pdd.domain.PddGoodsSku;
-import cn.qihangerp.sdk.pdd.response.PddGoodsResponse;
 import cn.qihangerp.module.open.pdd.service.PddGoodsService;
+import cn.qihangerp.open.common.ApiResultVo;
+import cn.qihangerp.open.pdd.PddGoodsApiHelper;
+import cn.qihangerp.open.pdd.model.GoodsResultVo;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.BeanUtils;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
@@ -74,8 +72,10 @@ public class PddGoodsApiController {
 //        String pullParams = "{PageNo:1,PageSize:50,startTime:"+startTime+",endTime:"+endTime+"}";
         String pullParams = "{startTime:"+startTime+",endTime:"+endTime+"}";
 
+        ApiResultVo<GoodsResultVo> resultVo = PddGoodsApiHelper.pullGoodsList(appKey, appSecret, accessToken, 1, 20);
+        if(resultVo.getCode() == 10019) return AjaxResult.error(HttpStatus.UNAUTHORIZED1,"Token已过期");
 
-        ApiResultVo<PddGoodsResponse> resultVo = GoodsApiHelper.pullGoodsList(appKey, appSecret,accessToken,startTime,endTime);
+//        ApiResultVo<PddGoodsResponse> resultVo = GoodsApiHelper.pullGoodsList(appKey, appSecret,accessToken,startTime,endTime);
         if(resultVo.getCode() !=0 ){
             OShopPullLogs logs = new OShopPullLogs();
             logs.setShopId(params.getShopId());
@@ -91,18 +91,28 @@ public class PddGoodsApiController {
         }
 
         int successTotal = 0;
-        for (var goods: resultVo.getList()){
+        if (resultVo.getData().getGoodsList() == null) return AjaxResult.error(1200,"数据获取失败");
+
+        for (var g : resultVo.getData().getGoodsList()) {
             PddGoods pddGoods = new PddGoods();
-            BeanUtils.copyProperties(goods,pddGoods);
+            BeanUtils.copyProperties(g, pddGoods);
+            // TODO:转换goods
+            pddGoods.setShopId(params.getShopId());
+            pddGoods.setCreateTime(new Date());
             List<PddGoodsSku> skuList = new ArrayList<>();
-            if(goods.getSkuList()!=null && goods.getSkuList().size()>0) {
-                for(var sku: goods.getSkuList()) {
-                    PddGoodsSku skuSku = new PddGoodsSku();
-                    BeanUtils.copyProperties(sku,skuSku);
-                    skuList.add(skuSku);
-                }
+            for (var s : g.getSkuList()) {
+                PddGoodsSku sku = new PddGoodsSku();
+                BeanUtils.copyProperties(s, sku);
+                sku.setShopId(params.getShopId());
+                sku.setGoodsId(g.getGoodsId());
+                sku.setGoodsName(g.getGoodsName());
+                sku.setThumbUrl(g.getThumbUrl());
+
+                sku.setCreateTime(new Date());
+                skuList.add(sku);
             }
             pddGoods.setSkuList(skuList);
+
             goodsService.saveGoods(params.getShopId(),pddGoods);
             successTotal++;
         }

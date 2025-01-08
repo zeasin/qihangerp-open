@@ -46,7 +46,7 @@ public class HttpStatus
      * 参数列表错误（缺少，格式不匹配）
      */
     public static final int BAD_REQUEST = 400;
-
+    public static final int UNAUTHORIZED1 = 1401;
     /**
      * 未授权
      */

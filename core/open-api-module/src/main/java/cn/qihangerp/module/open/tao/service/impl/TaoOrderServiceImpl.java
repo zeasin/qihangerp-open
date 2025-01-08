@@ -102,7 +102,7 @@ public class TaoOrderServiceImpl extends ServiceImpl<TaoOrderMapper, TaoOrder>
 
     @Transactional
     @Override
-    public ResultVo<Integer> saveOrder(Long shopId, TaoOrder order) {
+    public ResultVo<Long> saveOrder(Long shopId, TaoOrder order) {
         if(order == null ) return ResultVo.error(ResultVoEnum.SystemException);
         try {
 
@@ -168,7 +168,7 @@ public class TaoOrderServiceImpl extends ServiceImpl<TaoOrderMapper, TaoOrder>
                         itemMapper.insert(item);
                     }
                 }
-                return ResultVo.error(ResultVoEnum.DataExist, "订单已经存在，更新成功");
+                return ResultVo.error(ResultVoEnum.DataExist.getIndex(), "订单已经存在，更新成功",Long.parseLong(update.getId()));
             } else {
                 // 不存在，新增
                 order.setShopId(shopId);
@@ -184,7 +184,7 @@ public class TaoOrderServiceImpl extends ServiceImpl<TaoOrderMapper, TaoOrder>
                         promotionDetailsMapper.insert(p);
                     }
                 }
-                return ResultVo.success();
+                return ResultVo.success(Long.parseLong(order.getId()));
             }
         } catch (Exception e) {
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();

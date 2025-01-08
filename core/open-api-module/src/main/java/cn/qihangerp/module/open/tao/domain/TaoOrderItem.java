@@ -141,7 +141,7 @@ public class TaoOrderItem implements Serializable {
     /**
      * 交易商品对应的类目ID
      */
-    private Long cid;
+    private Integer cid;
 
     /**
      * 	是否超卖
@@ -151,7 +151,7 @@ public class TaoOrderItem implements Serializable {
     /**
      * 子订单的交易结束时间说明：子订单有单独的结束时间，与主订单的结束时间可能有所不同，在有退款发起的时候或者是主订单分阶段付款的时候，子订单的结束时间会早于主订单的结束时间，所以开放这个字段便于订单结束状态的判断
      */
-    private Date endTime;
+    private String endTime;
 
     /**
      * 子订单来源,如jhs(聚划算)、taobao(淘宝)、wap(无线)
@@ -591,14 +591,14 @@ PAY_PENDING(国际信用卡支付付款确认中)
     /**
      * 交易商品对应的类目ID
      */
-    public Long getCid() {
+    public Integer getCid() {
         return cid;
     }
 
     /**
      * 交易商品对应的类目ID
      */
-    public void setCid(Long cid) {
+    public void setCid(Integer cid) {
         this.cid = cid;
     }
 
@@ -619,14 +619,14 @@ PAY_PENDING(国际信用卡支付付款确认中)
     /**
      * 子订单的交易结束时间说明：子订单有单独的结束时间，与主订单的结束时间可能有所不同，在有退款发起的时候或者是主订单分阶段付款的时候，子订单的结束时间会早于主订单的结束时间，所以开放这个字段便于订单结束状态的判断
      */
-    public Date getEndTime() {
+    public String getEndTime() {
         return endTime;
     }
 
     /**
      * 子订单的交易结束时间说明：子订单有单独的结束时间，与主订单的结束时间可能有所不同，在有退款发起的时候或者是主订单分阶段付款的时候，子订单的结束时间会早于主订单的结束时间，所以开放这个字段便于订单结束状态的判断
      */
-    public void setEndTime(Date endTime) {
+    public void setEndTime(String endTime) {
         this.endTime = endTime;
     }
 

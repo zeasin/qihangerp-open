@@ -7,18 +7,18 @@ import cn.qihangerp.common.ResultVoEnum;
 import cn.qihangerp.common.api.ShopApiParams;
 import cn.qihangerp.common.enums.EnumShopType;
 import cn.qihangerp.common.enums.HttpStatus;
+import cn.qihangerp.common.utils.StringUtils;
 import cn.qihangerp.domain.OShopPullLasttime;
 import cn.qihangerp.domain.OShopPullLogs;
 import cn.qihangerp.module.service.OShopPullLasttimeService;
 import cn.qihangerp.module.service.OShopPullLogsService;
-
-import cn.qihangerp.sdk.common.ApiResultVo;
-import cn.qihangerp.sdk.tao.GoodsApiHelper;
 import cn.qihangerp.module.open.tao.domain.TaoGoods;
 import cn.qihangerp.module.open.tao.domain.TaoGoodsSku;
-import cn.qihangerp.sdk.tao.response.TaoGoodsResponse;
 import cn.qihangerp.module.open.tao.service.TaoGoodsService;
-
+import cn.qihangerp.open.common.ApiResultVo;
+import cn.qihangerp.open.common.DateUtil;
+import cn.qihangerp.open.tao.TaoGoodsApiHelper;
+import cn.qihangerp.open.tao.response.TaoGoodsResponse;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
@@ -89,50 +89,56 @@ public class TaoGoodsApiController  {
         Long pageSize = 100L;
 
 //        ApiResult<TaoGoods> listApiResult = GoodsApiHelper.pullGoods(pageIndex, pageSize, url, appKey, appSecret, sessionKey);
-        ApiResultVo<TaoGoodsResponse> listApiResult = GoodsApiHelper.pullGoods(pageIndex, pageSize, url, appKey, appSecret, sessionKey,startTime,endTime);
+        try {
+            ApiResultVo<TaoGoodsResponse> listApiResult = TaoGoodsApiHelper.pullGoodsList(appKey, appSecret, sessionKey);
+//            ApiResultVo<TaoGoodsResponse> listApiResult = GoodsApiHelper.pullGoods(pageIndex, pageSize, url, appKey, appSecret, sessionKey, startTime, endTime);
 
-        int insertSuccess = 0;//新增成功的订单
-        int totalError = 0;
-        int hasExistOrder = 0;//已存在的订单数
+            int insertSuccess = 0;//新增成功的订单
+            int totalError = 0;
+            int hasExistOrder = 0;//已存在的订单数
 
-        for (var goods:listApiResult.getList()) {
-            TaoGoods taoGoods = new TaoGoods();
-            BeanUtils.copyProperties(goods,taoGoods);
-            List<TaoGoodsSku> skuList = new ArrayList<>();
-            if(goods.getSkus()!=null && goods.getSkus().size()>0) {
-                for(var sku:goods.getSkus()) {
-                    TaoGoodsSku taoGoodsSku = new TaoGoodsSku();
-                    BeanUtils.copyProperties(sku,taoGoodsSku);
-                    skuList.add(taoGoodsSku);
-                }
-            }
-            taoGoods.setSkus(skuList);
-            int result = goodsService.saveAndUpdateGoods(req.getShopId(), taoGoods);
-            if (result == ResultVoEnum.DataExist.getIndex()) {
-                //已经存在
-                hasExistOrder++;
-            } else if (result == ResultVoEnum.SUCCESS.getIndex()) {
-                insertSuccess++;
-            }else {
-                totalError++;
-            }
-        }
-        //计算总页数
-        int totalPage = (listApiResult.getTotalRecords() % pageSize == 0) ? listApiResult.getTotalRecords() / pageSize.intValue() : (listApiResult.getTotalRecords() / pageSize.intValue()) + 1;
-        pageIndex++;
-
-        while (pageIndex <= totalPage) {
-
-            ApiResultVo<TaoGoodsResponse> result1 = GoodsApiHelper.pullGoods(pageIndex, pageIndex, url, appKey, appSecret, sessionKey,startTime,endTime);
-            //循环插入订单数据到数据库
-            for (var goods:listApiResult.getList()) {
+            for (var g : listApiResult.getList()) {
                 TaoGoods taoGoods = new TaoGoods();
-                BeanUtils.copyProperties(goods,taoGoods);
+                BeanUtils.copyProperties(g, taoGoods);
+                // TODO:转换goods
+                taoGoods.setNumIid(g.getNum_iid());
+                taoGoods.setTitle(g.getTitle());
+                taoGoods.setType(g.getType());
+                taoGoods.setCid(g.getCid());
+                taoGoods.setPicUrl(g.getPic_url());
+                taoGoods.setNum(g.getNum());
+                taoGoods.setValidThru(g.getValid_thru());
+                taoGoods.setHasDiscount(g.isHas_discount() + "");
+                taoGoods.setHasInvoice(g.isHas_invoice() + "");
+                taoGoods.setHasWarranty(g.isHas_warranty() + "");
+                taoGoods.setHasShowcase(g.isHas_showcase() + "");
+                taoGoods.setModified(DateUtil.stringtoDate(g.getModified()));
+                taoGoods.setDelistTime(StringUtils.isEmpty(g.getDelist_time()) ? null : DateUtil.stringtoDate(g.getDelist_time()));
+                taoGoods.setPostageId(g.getPostage_id());
+                taoGoods.setOuterId(g.getOuter_id());
+                taoGoods.setListTime(StringUtils.isEmpty(g.getList_time()) ? null : DateUtil.stringtoDate(g.getList_time()));
+                taoGoods.setPrice(g.getPrice());
+                taoGoods.setSoldQuantity(g.getSold_quantity());
+                taoGoods.setShopId(req.getShopId());
                 List<TaoGoodsSku> skuList = new ArrayList<>();
-                if(goods.getSkus()!=null && goods.getSkus().size()>0) {
-                    for(var sku:goods.getSkus()) {
+                if (g.getSkuList() != null && g.getSkuList().size() > 0) {
+                    for (var s : g.getSkuList()) {
                         TaoGoodsSku taoGoodsSku = new TaoGoodsSku();
-                        BeanUtils.copyProperties(sku,taoGoodsSku);
+                        BeanUtils.copyProperties(s, taoGoodsSku);
+//                        taoGoodsSku.setShopId(req.getShopId());
+                        taoGoodsSku.setNumIid(s.getNum_iid());
+                        taoGoodsSku.setIid(s.getIid());
+                        taoGoodsSku.setSkuId(s.getSku_id());
+                        taoGoodsSku.setProperties(s.getProperties());
+                        taoGoodsSku.setPropertiesName(s.getProperties_name());
+                        taoGoodsSku.setQuantity(s.getQuantity());
+                        taoGoodsSku.setSkuSpecId(s.getSku_spec_id() + "");
+                        taoGoodsSku.setPrice(StringUtils.isEmpty(s.getPrice()) ? null : Double.parseDouble(s.getPrice()));
+                        taoGoodsSku.setOuterId(s.getOuter_id());
+                        taoGoodsSku.setCreated(StringUtils.isEmpty(s.getCreated()) ? null : s.getCreated());
+                        taoGoodsSku.setModified(StringUtils.isEmpty(s.getModified()) ? null : s.getModified());
+                        taoGoodsSku.setStatus(s.getStatus());
+                        taoGoodsSku.setCreateTime(new Date());
                         skuList.add(taoGoodsSku);
                     }
                 }
@@ -143,46 +149,49 @@ public class TaoGoodsApiController  {
                     hasExistOrder++;
                 } else if (result == ResultVoEnum.SUCCESS.getIndex()) {
                     insertSuccess++;
-                }else {
+                } else {
                     totalError++;
                 }
             }
-            pageIndex++;
-        }
-        OShopPullLogs logs = new OShopPullLogs();
-        logs.setShopId(req.getShopId());
-        logs.setShopType(EnumShopType.TAO.getIndex());
-        logs.setPullType("GOODS");
-        logs.setPullWay("主动拉取");
-        logs.setPullParams("{PageNo:1,PageSize:100}");
-        logs.setPullResult("{successTotal:"+listApiResult.getTotalRecords()+"}");
-        logs.setPullTime(currDateTime);
-        logs.setDuration(System.currentTimeMillis() - startTimeMillis);
-        pullLogsService.save(logs);
-        if(totalError == 0) {
-            if (lasttime == null) {
-                // 新增
-                OShopPullLasttime insertLasttime = new OShopPullLasttime();
-                insertLasttime.setShopId(req.getShopId());
-                insertLasttime.setCreateTime(new Date());
-                insertLasttime.setLasttime(endTime == null ? LocalDateTime.now() : endTime);
-                insertLasttime.setPullType("GOODS");
-                pullLasttimeService.save(insertLasttime);
 
-            } else {
-                // 修改
-                OShopPullLasttime updateLasttime = new OShopPullLasttime();
-                updateLasttime.setId(lasttime.getId());
-                updateLasttime.setUpdateTime(new Date());
-                updateLasttime.setLasttime(endTime == null ? LocalDateTime.now() : endTime);
-                pullLasttimeService.updateById(updateLasttime);
+            OShopPullLogs logs = new OShopPullLogs();
+            logs.setShopId(req.getShopId());
+            logs.setShopType(EnumShopType.TAO.getIndex());
+            logs.setPullType("GOODS");
+            logs.setPullWay("主动拉取");
+            logs.setPullParams("{PageNo:1,PageSize:100}");
+            logs.setPullResult("{successTotal:" + listApiResult.getTotalRecords() + "}");
+            logs.setPullTime(currDateTime);
+            logs.setDuration(System.currentTimeMillis() - startTimeMillis);
+            pullLogsService.save(logs);
+            if (totalError == 0) {
+                if (lasttime == null) {
+                    // 新增
+                    OShopPullLasttime insertLasttime = new OShopPullLasttime();
+                    insertLasttime.setShopId(req.getShopId());
+                    insertLasttime.setCreateTime(new Date());
+                    insertLasttime.setLasttime(endTime == null ? LocalDateTime.now() : endTime);
+                    insertLasttime.setPullType("GOODS");
+                    pullLasttimeService.save(insertLasttime);
+
+                } else {
+                    // 修改
+                    OShopPullLasttime updateLasttime = new OShopPullLasttime();
+                    updateLasttime.setId(lasttime.getId());
+                    updateLasttime.setUpdateTime(new Date());
+                    updateLasttime.setLasttime(endTime == null ? LocalDateTime.now() : endTime);
+                    pullLasttimeService.updateById(updateLasttime);
+                }
             }
-        }
 
-        String msg = "成功，总共找到：" + listApiResult.getTotalRecords() + "条商品数据，新增：" + insertSuccess + "条，添加错误：" + totalError + "条，更新：" + hasExistOrder + "条";
-        log.info(msg);
+            String msg = "成功，总共找到：" + listApiResult.getTotalRecords() + "条商品数据，新增：" + insertSuccess + "条，添加错误：" + totalError + "条，更新：" + hasExistOrder + "条";
+            log.info(msg);
 //        return new ApiResult<>(EnumResultVo.SUCCESS.getIndex(), msg);
-        return AjaxResult.success(msg);
+            return AjaxResult.success(msg);
+        }catch (Exception e){
+            e.printStackTrace();
+            return AjaxResult.error("调用接口异常");
+        }
     }
 
 }

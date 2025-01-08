@@ -62,23 +62,23 @@ public class DouRefund implements Serializable {
     /**
      * 订单状态
      */
-    private Long orderStatus;
+    private Integer orderStatus;
 
     /**
      * 付款金额
      */
-    private Long orderPayAmount;
+    private Integer orderPayAmount;
 
     /**
      * 
 付运费金额
      */
-    private Long orderPostAmount;
+    private Integer orderPostAmount;
 
     /**
      * 购买数量
      */
-    private Long orderItemNum;
+    private Integer orderItemNum;
 
     /**
      * 商品名

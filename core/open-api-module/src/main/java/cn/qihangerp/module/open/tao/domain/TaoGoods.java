@@ -106,7 +106,7 @@ public class TaoGoods implements Serializable {
     /**
      * 宝贝所属的运费模板ID，如果没有返回则说明没有使用运费模板
      */
-    private Integer postageId;
+    private Long postageId;
 
     /**
      * 商家外部编码(可与商家外部系统对接)。需要授权才能获取。
@@ -441,14 +441,14 @@ public class TaoGoods implements Serializable {
     /**
      * 宝贝所属的运费模板ID，如果没有返回则说明没有使用运费模板
      */
-    public Integer getPostageId() {
+    public Long getPostageId() {
         return postageId;
     }
 
     /**
      * 宝贝所属的运费模板ID，如果没有返回则说明没有使用运费模板
      */
-    public void setPostageId(Integer postageId) {
+    public void setPostageId(Long postageId) {
         this.postageId = postageId;
     }
 

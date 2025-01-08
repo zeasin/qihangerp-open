@@ -1,5 +1,6 @@
 package cn.qihangerp.app.openApi.pdd.controller;
 
+import cn.qihangerp.app.openApi.PullRequest;
 import cn.qihangerp.app.openApi.pdd.ApiCommon;
 import cn.qihangerp.common.AjaxResult;
 import cn.qihangerp.common.ResultVoEnum;
@@ -12,19 +13,16 @@ import cn.qihangerp.domain.OShopPullLasttime;
 import cn.qihangerp.domain.OShopPullLogs;
 import cn.qihangerp.module.service.OShopPullLasttimeService;
 import cn.qihangerp.module.service.OShopPullLogsService;
-
-import cn.qihangerp.sdk.common.ApiResultVo;
-import cn.qihangerp.sdk.pdd.PullRequest;
-import cn.qihangerp.sdk.pdd.RefundApiHelper;
 import cn.qihangerp.module.open.pdd.domain.PddRefund;
-import cn.qihangerp.sdk.pdd.response.PddRefundResponse;
 import cn.qihangerp.module.open.pdd.service.PddRefundService;
+import cn.qihangerp.open.common.ApiResultVo;
+import cn.qihangerp.open.pdd.PddRefundApiHelper;
+import cn.qihangerp.open.pdd.model.AfterSale;
 import lombok.AllArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.web.bind.annotation.*;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
@@ -84,8 +82,10 @@ public class PddRefundApiController {
             }
         }
         String pullParams = "{startTime:"+startTime+",endTime:"+endTime+"}";
+
+        ApiResultVo<AfterSale> upResult = PddRefundApiHelper.pullRefundList(appKey, appSecret, accessToken, 1716160072, 1716242872, 1, 20);
         //获取
-        ApiResultVo<PddRefundResponse> upResult = RefundApiHelper.pullRefundList(appKey, appSecret, accessToken,startTime, endTime);
+//        ApiResultVo<PddRefundResponse> upResult = RefundApiHelper.pullRefundList(appKey, appSecret, accessToken,startTime, endTime);
 
 
         if(upResult.getCode() !=0 ){
@@ -115,11 +115,11 @@ public class PddRefundApiController {
             if (result.getCode() == ResultVoEnum.DataExist.getIndex()) {
                 //已经存在
                 log.info("/**************主动更新pdd退款：开始更新数据库：" + refund.getId() + "存在、更新************开始通知****/");
-                mqUtils.sendApiMessage(MqMessage.build(EnumShopType.PDD, MqType.REFUND_MESSAGE,refund.getId().toString()));
+                mqUtils.sendApiMessage(MqMessage.build(EnumShopType.PDD, MqType.REFUND_MESSAGE,refund.getId()+""));
                 hasExistOrder++;
             } else if (result.getCode() == ResultVoEnum.SUCCESS.getIndex()) {
                 log.info("/**************主动更新pdd退款：开始更新数据库：" + refund.getId() + "不存在、新增************开始通知****/");
-                mqUtils.sendApiMessage(MqMessage.build(EnumShopType.PDD,MqType.REFUND_MESSAGE,refund.getId().toString()));
+                mqUtils.sendApiMessage(MqMessage.build(EnumShopType.PDD,MqType.REFUND_MESSAGE,refund.getId()+""));
                 insertSuccess++;
             } else {
                 log.info("/**************主动更新pdd退款：开始更新数据库：" + refund.getId() + "报错****************/");

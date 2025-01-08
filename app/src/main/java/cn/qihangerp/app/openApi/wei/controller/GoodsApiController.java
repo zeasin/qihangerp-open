@@ -11,8 +11,6 @@ import cn.qihangerp.module.open.wei.domain.OmsWeiGoods;
 import cn.qihangerp.module.open.wei.domain.OmsWeiGoodsSku;
 import cn.qihangerp.open.wei.model.Product;
 import cn.qihangerp.module.open.wei.service.OmsWeiGoodsService;
-import cn.qihangerp.sdk.wei.bo.GoodsListApiBo;
-import cn.qihangerp.sdk.wei.service.GoodsApiService;
 import com.alibaba.fastjson2.JSONObject;
 import lombok.AllArgsConstructor;
 import org.apache.commons.lang3.StringUtils;

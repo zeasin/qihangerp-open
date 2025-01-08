@@ -1,5 +1,6 @@
 package cn.qihangerp.app.openApi.dou.controller;
 
+import cn.qihangerp.app.openApi.PullRequest;
 import cn.qihangerp.app.openApi.dou.DouApiCommon;
 import cn.qihangerp.common.AjaxResult;
 import cn.qihangerp.common.ResultVoEnum;
@@ -12,23 +13,24 @@ import cn.qihangerp.domain.OShopPullLasttime;
 import cn.qihangerp.domain.OShopPullLogs;
 import cn.qihangerp.module.service.OShopPullLasttimeService;
 import cn.qihangerp.module.service.OShopPullLogsService;
-
-import cn.qihangerp.sdk.common.ApiResultVo;
-import cn.qihangerp.sdk.dou.OrderApiHelper;
-import cn.qihangerp.sdk.dou.PullRequest;
 import cn.qihangerp.module.open.dou.domain.DouOrder;
 import cn.qihangerp.module.open.dou.domain.DouOrderItem;
-import cn.qihangerp.sdk.dou.response.DouOrderResponse;
 import cn.qihangerp.module.open.dou.service.DouOrderService;
+import cn.qihangerp.open.common.ApiResultVo;
+import cn.qihangerp.open.dou.DouOrderApiHelper;
+import cn.qihangerp.open.dou.DouTokenApiHelper;
+import cn.qihangerp.open.dou.model.Token;
+import cn.qihangerp.open.dou.model.order.Order;
+import com.alibaba.fastjson2.JSONObject;
 import lombok.AllArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
-
 import java.time.Duration;
 import java.time.LocalDateTime;
+import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
@@ -72,7 +74,7 @@ public class DouOrderApiController {
         String appKey = checkResult.getData().getAppKey();
         String appSecret = checkResult.getData().getAppSecret();
         Long douShopId = checkResult.getData().getSellerId();
-
+        String accessToken = checkResult.getData().getAccessToken();
         // 获取最后更新时间
         LocalDateTime startTime = null;
         LocalDateTime  endTime = null;
@@ -95,10 +97,22 @@ public class DouOrderApiController {
 //                endTime = LocalDateTime.now();
 //            }
         }
-        String pullParams = "{startTime:"+startTime+",endTime:"+endTime+"}";
-        //第一次获取
-        ApiResultVo<DouOrderResponse> resultVo = OrderApiHelper.pullOrderList(appKey,appSecret,douShopId,startTime, endTime);
+        String startTimeStr = startTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+        String endTimeStr = endTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+        Long startTimestamp = startTime.toEpochSecond(ZoneOffset.ofHours(8));
+        Long endTimestamp = endTime.toEpochSecond(ZoneOffset.ofHours(8));
 
+        String pullParams = "{startTime:"+startTime+",endTime:"+endTime+"}";
+        ApiResultVo<Token> token = DouTokenApiHelper.getToken(appKey, appSecret,checkResult.getData().getSellerId());
+
+        if(token.getCode()==0) {
+            accessToken = token.getData().getAccessToken();
+        }else{
+            return AjaxResult.error(token.getMsg());
+        }
+        //第一次获取
+//        ApiResultVo<DouOrderResponse> resultVo = OrderApiHelper.pullOrderList(appKey,appSecret,douShopId,startTime, endTime);
+        ApiResultVo<Order> resultVo = DouOrderApiHelper.pullOrderList(startTimestamp, endTimestamp, 0, 20, appKey, appSecret, accessToken);
         if(resultVo.getCode() !=0 ){
             OShopPullLogs logs = new OShopPullLogs();
             logs.setShopId(req.getShopId());
@@ -119,31 +133,47 @@ public class DouOrderApiController {
         int hasExistOrder = 0;//已存在的订单数
 
         //循环插入订单数据到数据库
-        for (var order : resultVo.getList()) {
+        for (var gitem : resultVo.getList()) {
             DouOrder douOrder = new DouOrder();
-            BeanUtils.copyProperties(order,douOrder);
+            BeanUtils.copyProperties(gitem, douOrder);
+            douOrder.setOrderPhaseList(JSONObject.toJSONString(gitem.getOrderPhaseList()));
+            douOrder.setEncryptPostAddress(gitem.getPostAddr().getEncryptDetail());
+            douOrder.setProvinceName(gitem.getPostAddr().getProvince().getName());
+            douOrder.setProvinceId(gitem.getPostAddr().getProvince().getId());
+            douOrder.setCityName(gitem.getPostAddr().getCity().getName());
+            douOrder.setCityId(gitem.getPostAddr().getCity().getId());
+            douOrder.setTownName(gitem.getPostAddr().getTown().getName());
+            douOrder.setTownId(gitem.getPostAddr().getTown().getId());
+            douOrder.setStreetName(gitem.getPostAddr().getStreet().getName());
+            douOrder.setStreetId(gitem.getPostAddr().getStreet().getId());
+            douOrder.setMaskPostAddress(gitem.getMaskPostAddr().getDetail());
+            douOrder.setLogisticsInfo(JSONObject.toJSONString(gitem.getLogisticsInfo()));
             List<DouOrderItem> items = new ArrayList<>();
-            if(order.getItems()!=null && order.getItems().size()>0){
-                for (var item : order.getItems()) {
-                    DouOrderItem douOrderItem = new DouOrderItem();
-                    BeanUtils.copyProperties(item,douOrderItem);
-                    items.add(douOrderItem);
+            if (gitem.getSkuOrderList() != null) {
+                for (var i : gitem.getSkuOrderList()) {
+                    DouOrderItem item = new DouOrderItem();
+                    BeanUtils.copyProperties(i, item);
+                    item.setAfterSaleStatus(i.getAfterSaleInfo().getAfterSaleStatus());
+                    item.setAfterSaleType(i.getAfterSaleInfo().getAfterSaleType());
+                    item.setRefundStatus(i.getAfterSaleInfo().getRefundStatus());
+                    item.setSpec(JSONObject.toJSONString(i.getSpec()));
+                    items.add(item);
                 }
+                douOrder.setItems(items);
             }
-            douOrder.setItems(items);
             //插入订单数据
             var result = orderService.saveOrder(req.getShopId(), douOrder);
             if (result.getCode() == ResultVoEnum.DataExist.getIndex()) {
                 //已经存在
-                log.info("/**************主动更新dou订单：开始更新数据库：" + order.getOrderId() + "存在、更新************开始通知****/");
-                mqUtils.sendApiMessage(MqMessage.build(EnumShopType.DOU, MqType.ORDER_MESSAGE,order.getOrderId()));
+                log.info("/**************主动更新dou订单：开始更新数据库：" + douOrder.getOrderId() + "存在、更新************开始通知****/");
+                mqUtils.sendApiMessage(MqMessage.build(EnumShopType.DOU, MqType.ORDER_MESSAGE,douOrder.getOrderId()));
                 hasExistOrder++;
             } else if (result.getCode() == ResultVoEnum.SUCCESS.getIndex()) {
-                log.info("/**************主动更新dou订单：开始更新数据库：" + order.getOrderId() + "不存在、新增************开始通知****/");
-                mqUtils.sendApiMessage(MqMessage.build(EnumShopType.DOU,MqType.ORDER_MESSAGE,order.getOrderId()));
+                log.info("/**************主动更新dou订单：开始更新数据库：" + douOrder.getOrderId() + "不存在、新增************开始通知****/");
+                mqUtils.sendApiMessage(MqMessage.build(EnumShopType.DOU,MqType.ORDER_MESSAGE,douOrder.getOrderId()));
                 insertSuccess++;
             } else {
-                log.info("/**************主动更新dou订单：开始更新数据库：" + order.getOrderId() + "报错****************/");
+                log.info("/**************主动更新dou订单：开始更新数据库：" + douOrder.getOrderId() + "报错****************/");
                 totalError++;
             }
         }
@@ -192,52 +222,52 @@ public class DouOrderApiController {
      * @return
      * @throws
      */
-    @RequestMapping("/pull_order_detail")
-    @ResponseBody
-    public AjaxResult getOrderPullDetail(@RequestBody PullRequest req)  {
-        log.info("/**************主动更新dou订单by number****************/");
-        if (req.getShopId() == null || req.getShopId() <= 0) {
-            return AjaxResult.error(HttpStatus.PARAMS_ERROR, "参数错误，没有店铺Id");
-        }
-        if (!StringUtils.hasText(req.getOrderId())) {
-            return AjaxResult.error(HttpStatus.PARAMS_ERROR, "参数错误，缺少orderId");
-        }
-
-        var checkResult = douApiCommon.checkBefore(req.getShopId());
-        if (checkResult.getCode() != HttpStatus.SUCCESS) {
-            return AjaxResult.error(checkResult.getCode(), checkResult.getMsg(), checkResult.getData());
-        }
-
-        String appKey = checkResult.getData().getAppKey();
-        String appSecret = checkResult.getData().getAppSecret();
-        Long douShopId = checkResult.getData().getSellerId();
-
-        ApiResultVo<DouOrderResponse> resultVo = OrderApiHelper.pullOrderDetail( appKey, appSecret, douShopId,req.getOrderId());
-        if (resultVo.getCode() == ResultVoEnum.SUCCESS.getIndex() && resultVo.getData()!=null) {
-            DouOrder douOrder = new DouOrder();
-            BeanUtils.copyProperties(resultVo.getData(),douOrder);
-            List<DouOrderItem> items = new ArrayList<>();
-            if(resultVo.getData().getItems()!=null && resultVo.getData().getItems().size()>0){
-                for (var item : resultVo.getData().getItems()) {
-                    DouOrderItem douOrderItem = new DouOrderItem();
-                    BeanUtils.copyProperties(item,douOrderItem);
-                    items.add(douOrderItem);
-                }
-            }
-            douOrder.setItems(items);
-
-            var result = orderService.saveOrder(req.getShopId(), douOrder);
-            if (result.getCode() == ResultVoEnum.DataExist.getIndex()) {
-                //已经存在
-                log.info("/**************主动更新dou订单：开始更新数据库：" + resultVo.getData().getId() + "存在、更新****************/");
-                mqUtils.sendApiMessage(MqMessage.build(EnumShopType.DOU, MqType.ORDER_MESSAGE,resultVo.getData().getOrderId()));
-            } else if (result.getCode() == ResultVoEnum.SUCCESS.getIndex()) {
-                log.info("/**************主动更新dou订单：开始更新数据库：" + resultVo.getData().getId() + "不存在、新增****************/");
-                mqUtils.sendApiMessage(MqMessage.build(EnumShopType.DOU,MqType.ORDER_MESSAGE,resultVo.getData().getOrderId()));
-            }
-            return AjaxResult.success();
-        } else {
-            return AjaxResult.error(resultVo.getCode(), resultVo.getMsg());
-        }
-    }
+//    @RequestMapping("/pull_order_detail")
+//    @ResponseBody
+//    public AjaxResult getOrderPullDetail(@RequestBody PullRequest req)  {
+//        log.info("/**************主动更新dou订单by number****************/");
+//        if (req.getShopId() == null || req.getShopId() <= 0) {
+//            return AjaxResult.error(HttpStatus.PARAMS_ERROR, "参数错误，没有店铺Id");
+//        }
+//        if (req.getOrderId()==null) {
+//            return AjaxResult.error(HttpStatus.PARAMS_ERROR, "参数错误，缺少orderId");
+//        }
+//
+//        var checkResult = douApiCommon.checkBefore(req.getShopId());
+//        if (checkResult.getCode() != HttpStatus.SUCCESS) {
+//            return AjaxResult.error(checkResult.getCode(), checkResult.getMsg(), checkResult.getData());
+//        }
+//
+//        String appKey = checkResult.getData().getAppKey();
+//        String appSecret = checkResult.getData().getAppSecret();
+//        Long douShopId = checkResult.getData().getSellerId();
+//
+//        ApiResultVo<DouOrderResponse> resultVo = OrderApiHelper.pullOrderDetail( appKey, appSecret, douShopId,req.getOrderId());
+//        if (resultVo.getCode() == ResultVoEnum.SUCCESS.getIndex() && resultVo.getData()!=null) {
+//            DouOrder douOrder = new DouOrder();
+//            BeanUtils.copyProperties(resultVo.getData(),douOrder);
+//            List<DouOrderItem> items = new ArrayList<>();
+//            if(resultVo.getData().getItems()!=null && resultVo.getData().getItems().size()>0){
+//                for (var item : resultVo.getData().getItems()) {
+//                    DouOrderItem douOrderItem = new DouOrderItem();
+//                    BeanUtils.copyProperties(item,douOrderItem);
+//                    items.add(douOrderItem);
+//                }
+//            }
+//            douOrder.setItems(items);
+//
+//            var result = orderService.saveOrder(req.getShopId(), douOrder);
+//            if (result.getCode() == ResultVoEnum.DataExist.getIndex()) {
+//                //已经存在
+//                log.info("/**************主动更新dou订单：开始更新数据库：" + resultVo.getData().getId() + "存在、更新****************/");
+//                mqUtils.sendApiMessage(MqMessage.build(EnumShopType.DOU, MqType.ORDER_MESSAGE,resultVo.getData().getOrderId()));
+//            } else if (result.getCode() == ResultVoEnum.SUCCESS.getIndex()) {
+//                log.info("/**************主动更新dou订单：开始更新数据库：" + resultVo.getData().getId() + "不存在、新增****************/");
+//                mqUtils.sendApiMessage(MqMessage.build(EnumShopType.DOU,MqType.ORDER_MESSAGE,resultVo.getData().getOrderId()));
+//            }
+//            return AjaxResult.success();
+//        } else {
+//            return AjaxResult.error(resultVo.getCode(), resultVo.getMsg());
+//        }
+//    }
 }

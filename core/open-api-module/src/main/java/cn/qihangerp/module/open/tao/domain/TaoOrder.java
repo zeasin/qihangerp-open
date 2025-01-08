@@ -169,17 +169,17 @@ public class TaoOrder implements Serializable {
     /**
      * 交易创建时间。格式:yyyy-MM-dd HH:mm:ss
      */
-    private Date created;
+    private String created;
 
     /**
      * 交易修改时间(用户对订单的任何修改都会更新此字段)。格式:yyyy-MM-dd HH:mm:ss
      */
-    private Date modified;
+    private String modified;
 
     /**
      * 付款时间。格式:yyyy-MM-dd HH:mm:ss。订单的付款时间即为物流订单的创建时间。
      */
-    private Date payTime;
+    private String payTime;
 
     /**
      * 卖家发货时间。格式:yyyy-MM-dd HH:mm:ss

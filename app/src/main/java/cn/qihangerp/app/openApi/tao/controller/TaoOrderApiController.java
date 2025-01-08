@@ -1,5 +1,6 @@
 package cn.qihangerp.app.openApi.tao.controller;
 
+import cn.qihangerp.app.openApi.tao.OrderAssembleHelper;
 import cn.qihangerp.app.openApi.tao.TaoApiCommon;
 import cn.qihangerp.app.openApi.tao.TaoRequest;
 import cn.qihangerp.common.AjaxResult;
@@ -13,14 +14,13 @@ import cn.qihangerp.domain.OShopPullLasttime;
 import cn.qihangerp.domain.OShopPullLogs;
 import cn.qihangerp.module.service.OShopPullLasttimeService;
 import cn.qihangerp.module.service.OShopPullLogsService;
-
-import cn.qihangerp.sdk.common.ApiResultVo;
-import cn.qihangerp.sdk.tao.OrderApiHelper;
 import cn.qihangerp.module.open.tao.domain.TaoOrder;
 import cn.qihangerp.module.open.tao.domain.TaoOrderItem;
-import cn.qihangerp.sdk.tao.response.TaoOrderResponse;
 import cn.qihangerp.module.open.tao.service.TaoOrderService;
-import com.taobao.api.ApiException;
+import cn.qihangerp.open.common.ApiResultVo;
+import cn.qihangerp.open.tao.TaoOrderApiHelper;
+import cn.qihangerp.open.tao.response.TaoOrderDetailResponse;
+import cn.qihangerp.open.tao.response.TaoOrderListResponse;
 import lombok.AllArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -52,11 +52,11 @@ public class TaoOrderApiController {
      * 增量更新订单
      * @param req
      * @return
-     * @throws ApiException
+     * @throws
      */
     @PostMapping("/pull_order_tao")
     @ResponseBody
-    public AjaxResult pullIncrementOrder(@RequestBody TaoRequest req) throws ApiException {
+    public AjaxResult pullIncrementOrder(@RequestBody TaoRequest req)  {
         log.info("/**************增量拉取tao订单****************/");
         if (req.getShopId() == null || req.getShopId() <= 0) {
             return AjaxResult.error(HttpStatus.PARAMS_ERROR, "参数错误，没有店铺Id");
@@ -103,8 +103,9 @@ public class TaoOrderApiController {
         }
 
         //第一次获取
-        ApiResultVo<TaoOrderResponse> upResult = OrderApiHelper.pullIncrementOrder(startTime,endTime,pageIndex, pageSize, url, appKey, appSecret, sessionKey);
+//        ApiResultVo<TaoOrderResponse> upResult = OrderApiHelper.pullIncrementOrder(startTime,endTime,pageIndex, pageSize, url, appKey, appSecret, sessionKey);
 
+        ApiResultVo<TaoOrderListResponse> upResult = TaoOrderApiHelper.pullTradeList(startTime,endTime,appKey, appSecret, sessionKey);
         if (upResult.getCode() !=  ResultVoEnum.SUCCESS.getIndex()) {
             log.info("/**************主动更新tao订单：第一次获取结果失败：" + upResult.getMsg() + "****************/");
             if(upResult.getCode() == HttpStatus.UNAUTHORIZED){
@@ -120,17 +121,7 @@ public class TaoOrderApiController {
 
         //循环插入订单数据到数据库
         for (var order : upResult.getList()) {
-            TaoOrder taoOrder = new TaoOrder();
-            BeanUtils.copyProperties(order,taoOrder);
-            List<TaoOrderItem> orderItems = new ArrayList<>();
-            if(order.getItems()!=null && order.getItems().size()>0){
-                for (var item : order.getItems()) {
-                    TaoOrderItem orderItem = new TaoOrderItem();
-                    BeanUtils.copyProperties(item,orderItem);
-                    orderItems.add(orderItem);
-                }
-            }
-            taoOrder.setItems(orderItems);
+            TaoOrder taoOrder = OrderAssembleHelper.assembleOrder(order);
             //插入订单数据
             var result = orderService.saveOrder(req.getShopId(), taoOrder);
             if (result.getCode() == ResultVoEnum.DataExist.getIndex()) {
@@ -189,11 +180,11 @@ public class TaoOrderApiController {
      *
      * @param taoRequest
      * @return
-     * @throws ApiException
+     * @throws
      */
     @RequestMapping("/pull_order_detail")
     @ResponseBody
-    public AjaxResult getOrderPullDetail(@RequestBody TaoRequest taoRequest) throws ApiException {
+    public AjaxResult getOrderPullDetail(@RequestBody TaoRequest taoRequest)  {
         log.info("/**************主动更新tao订单by number****************/");
         if (taoRequest.getShopId() == null || taoRequest.getShopId() <= 0) {
             return AjaxResult.error(HttpStatus.PARAMS_ERROR, "参数错误，没有店铺Id");
@@ -212,26 +203,28 @@ public class TaoOrderApiController {
         String appSecret = checkResult.getData().getAppSecret();
 
 
-        ApiResultVo<TaoOrderResponse> resultVo = OrderApiHelper.pullOrderDetail(taoRequest.getOrderId(), url, appKey, appSecret, sessionKey);
+//        ApiResultVo<TaoOrderResponse> resultVo = OrderApiHelper.pullOrderDetail(taoRequest.getOrderId(), url, appKey, appSecret, sessionKey);
+        ApiResultVo<TaoOrderDetailResponse> resultVo = TaoOrderApiHelper.pullOrderDetail(taoRequest.getOrderId(), appKey, appSecret, sessionKey);
+
         if (resultVo.getCode() == ResultVoEnum.SUCCESS.getIndex()) {
             TaoOrder taoOrder = new TaoOrder();
             BeanUtils.copyProperties(resultVo.getData(),taoOrder);
-            List<TaoOrderItem> orderItems = new ArrayList<>();
-            if(resultVo.getData().getItems()!=null && resultVo.getData().getItems().size()>0){
-                for (var item : resultVo.getData().getItems()) {
-                    TaoOrderItem orderItem = new TaoOrderItem();
-                    BeanUtils.copyProperties(item,orderItem);
-                    orderItems.add(orderItem);
-                }
-            }
-            taoOrder.setItems(orderItems);
+//            List<TaoOrderItem> orderItems = new ArrayList<>();
+//            if(resultVo.getData().getItems()!=null && resultVo.getData().getItems().size()>0){
+//                for (var item : resultVo.getData().getItems()) {
+//                    TaoOrderItem orderItem = new TaoOrderItem();
+//                    BeanUtils.copyProperties(item,orderItem);
+//                    orderItems.add(orderItem);
+//                }
+//            }
+//            taoOrder.setItems(orderItems);
             var result = orderService.saveOrder(taoRequest.getShopId(), taoOrder);
             if (result.getCode() == ResultVoEnum.DataExist.getIndex()) {
                 //已经存在
-                log.info("/**************主动更新tao订单：开始更新数据库：" + resultVo.getData().getId() + "存在、更新****************/");
+                log.info("/**************主动更新tao订单：开始更新数据库：" + result.getData() + "存在、更新****************/");
                 mqUtils.sendApiMessage(MqMessage.build(EnumShopType.TAO, MqType.ORDER_MESSAGE,resultVo.getData().getTid()));
             } else if (result.getCode() == ResultVoEnum.SUCCESS.getIndex()) {
-                log.info("/**************主动更新tao订单：开始更新数据库：" + resultVo.getData().getId() + "不存在、新增****************/");
+                log.info("/**************主动更新tao订单：开始更新数据库：" + resultVo.getData() + "不存在、新增****************/");
                 mqUtils.sendApiMessage(MqMessage.build(EnumShopType.TAO,MqType.ORDER_MESSAGE,resultVo.getData().getTid()));
             }
 //            var result = orderService.updateOrder(resultVo.getData());

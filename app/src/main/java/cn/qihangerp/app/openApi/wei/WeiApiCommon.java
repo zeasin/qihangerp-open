@@ -7,9 +7,9 @@ import cn.qihangerp.common.enums.EnumShopType;
 import cn.qihangerp.common.enums.HttpStatus;
 import cn.qihangerp.domain.OShop;
 import cn.qihangerp.module.service.OShopService;
-import cn.qihangerp.sdk.common.ApiResultVo;
-import cn.qihangerp.sdk.wei.Token;
-import cn.qihangerp.sdk.wei.TokenApiHelper;
+import cn.qihangerp.open.common.ApiResultVo;
+import cn.qihangerp.open.wei.WeiTokenApiHelper;
+import cn.qihangerp.open.wei.response.WeiTokenResponse;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
@@ -52,7 +52,7 @@ public class WeiApiCommon {
 
 
         if (!StringUtils.hasText(params.getAccessToken())) {
-            ApiResultVo<Token> token1 = TokenApiHelper.getToken(params.getAppKey(), params.getAppSecret());
+            ApiResultVo<WeiTokenResponse> token1 = WeiTokenApiHelper.getToken(params.getAppKey(), params.getAppSecret());
             if(token1.getCode()==0){
                 params.setAccessToken(token1.getData().getAccess_token());
                 shopService.updateSessionKey(shopId, params.getAccessToken());
@@ -62,13 +62,14 @@ public class WeiApiCommon {
             }
         }else {
             // 调用 店铺基本信息接口 验证Token
-            ApiResultVo<Token> tokenApiResultVo = TokenApiHelper.checkToken(params.getAppKey(), params.getAppSecret(), params.getAccessToken());
+            ApiResultVo<WeiTokenResponse> tokenApiResultVo = WeiTokenApiHelper.checkToken(params.getAppKey(), params.getAppSecret(), params.getAccessToken());
             if(tokenApiResultVo.getCode()==0){
 //                params.setAccessToken(tokenApiResultVo.getData().getAccess_token());
 //                skuService.updateShopSessionByShopId(shopId, params.getAccessToken());
                 return ResultVo.success(params);
             }else {
-                ApiResultVo<Token> token2 = TokenApiHelper.getToken(params.getAppKey(), params.getAppSecret());
+//                ApiResultVo<Token> token2 = TokenApiHelper.getToken(params.getAppKey(), params.getAppSecret());
+                ApiResultVo<WeiTokenResponse> token2 = WeiTokenApiHelper.getToken(params.getAppKey(), params.getAppSecret());
                 if (token2.getCode() == 0) {
                     params.setAccessToken(token2.getData().getAccess_token());
                     shopService.updateSessionKey(shopId, params.getAccessToken());

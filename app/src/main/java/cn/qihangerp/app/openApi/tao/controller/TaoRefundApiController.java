@@ -13,13 +13,11 @@ import cn.qihangerp.domain.OShopPullLasttime;
 import cn.qihangerp.domain.OShopPullLogs;
 import cn.qihangerp.module.service.OShopPullLasttimeService;
 import cn.qihangerp.module.service.OShopPullLogsService;
-
-import cn.qihangerp.sdk.common.ApiResultVo;
-import cn.qihangerp.sdk.tao.RefundApiHelper;
+import cn.qihangerp.open.common.ApiResultVo;
+import cn.qihangerp.open.tao.TaoRefundApiHelper;
 import cn.qihangerp.module.open.tao.domain.TaoRefund;
-import cn.qihangerp.sdk.tao.response.TaoRefundResponse;
 import cn.qihangerp.module.open.tao.service.TaoRefundService;
-import com.taobao.api.ApiException;
+import cn.qihangerp.open.tao.response.TaoRefundResponse;
 import lombok.AllArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -47,11 +45,11 @@ public class TaoRefundApiController {
      * 更新退货订单
      *
      * @return
-     * @throws ApiException
+     * @throws
      */
     @RequestMapping("/pull_refund")
     @ResponseBody
-    public AjaxResult refundOrderPull(@RequestBody TaoRequest taoRequest) throws ApiException {
+    public AjaxResult refundOrderPull(@RequestBody TaoRequest taoRequest)  {
         log.info("/**************主动更新tao退货订单****************/");
         if (taoRequest.getShopId() == null || taoRequest.getShopId() <= 0) {
 //            return new ApiResult<>(EnumResultVo.ParamsError.getIndex(), "参数错误，没有店铺Id");
@@ -99,8 +97,8 @@ public class TaoRefundApiController {
 //        Long pageIndex = 1l;
 
         //第一次获取
-        ApiResultVo<TaoRefundResponse> upResult = RefundApiHelper.pullRefund(startTime,endTime, url, appKey, appSecret, sessionKey);
-
+//        ApiResultVo<TaoRefundResponse> upResult = RefundApiHelper.pullRefund(startTime,endTime, url, appKey, appSecret, sessionKey);
+        ApiResultVo<TaoRefundResponse> upResult = TaoRefundApiHelper.pullRefund(startTime, endTime, appKey, appSecret, sessionKey);
         if (upResult.getCode() != 0) {
             log.info("/**************主动更新tao退货订单：第一次获取结果失败：" + upResult.getMsg() + "****************/");
 //            return new ApiResult<>(EnumResultVo.SystemException.getIndex(), upResult.getMsg());
@@ -116,6 +114,8 @@ public class TaoRefundApiController {
         for (var refund : upResult.getList()) {
             TaoRefund taoRefund = new TaoRefund();
             BeanUtils.copyProperties(refund,taoRefund);
+            taoRefund.setShopId(taoRequest.getShopId());
+            taoRefund.setDesc1(refund.getDesc());
             //插入订单数据
             var result = refundService.saveAndUpdateRefund(shopId, taoRefund);
             if (result == ResultVoEnum.DataExist.getIndex()) {
@@ -169,7 +169,7 @@ public class TaoRefundApiController {
 
     @RequestMapping("/pull_refund_detail")
     @ResponseBody
-    public AjaxResult refundDetailPull(@RequestBody TaoRequest taoRequest) throws ApiException {
+    public AjaxResult refundDetailPull(@RequestBody TaoRequest taoRequest)  {
         log.info("/**************主动更新tao退货订单****************/");
         if (taoRequest.getShopId() == null || taoRequest.getShopId() <= 0) {
             return AjaxResult.error(HttpStatus.PARAMS_ERROR, "参数错误，没有店铺Id");
@@ -193,7 +193,7 @@ public class TaoRefundApiController {
         String appSecret = checkResult.getData().getAppSecret();
 
         //获取
-        ApiResultVo<TaoRefundResponse> upResult = RefundApiHelper.pullRefundDetail(taoRequest.getRefundId(), url, appKey, appSecret, sessionKey);
+        ApiResultVo<TaoRefundResponse> upResult = TaoRefundApiHelper.pullRefundDetail(taoRequest.getRefundId(), appKey, appSecret, sessionKey);
 
         if (upResult.getCode() != 0) {
             log.info("/**************主动更新tao退货订单：第一次获取结果失败：" + upResult.getMsg() + "****************/");

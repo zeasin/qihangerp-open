@@ -40,17 +40,17 @@ public class DouOrderItem implements Serializable {
     /**
      * 售后状态；6-售后申请；27-拒绝售后申请；12-售后成功；7-售后退货中；11-售后已发货；29-售后退货拒绝；13-【换货返回：换货售后换货商家发货】，【补寄返回：补寄待用户收货】； 14-【换货返回：（换货）售后换货用户收货】，【补寄返回：（补寄）用户已收货】 ；28-售后失败；51-订单取消成功；53-逆向交易已完成；
      */
-    private Long afterSaleStatus;
+    private Integer afterSaleStatus;
 
     /**
      * 售后类型 ；0-退货退款;1-已发货仅退款;2-未发货仅退款;3-换货;4-系统取消;5-用户取消;6-价保;7-补寄;
      */
-    private Long afterSaleType;
+    private Integer afterSaleType;
 
     /**
      * 退款状态:1-待退款；3-退款成功； 4-退款失败；当买家发起售后后又主动取消售后，此时after_sale_status=28并且refund_status=1的状态不变，不会流转至4状态；
      */
-    private Long refundStatus;
+    private Integer refundStatus;
 
     /**
      * 作者（达人）承担金额（单位：分），订单参与活动和优惠中作者（达人）承担部分的总金额

@@ -26,6 +26,6 @@ public interface TaoOrderService extends IService<TaoOrder> {
      * @param order
      * @return
      */
-    ResultVo<Integer> saveOrder(Long shopId, TaoOrder order);
+    ResultVo<Long> saveOrder(Long shopId, TaoOrder order);
     ResultVo<Integer> updateOrder(TaoOrder order);
 }

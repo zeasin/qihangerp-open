@@ -51,7 +51,7 @@ public class TaoGoodsSku implements Serializable {
     /**
      * 属于这个sku的商品的数量，
      */
-    private Long quantity;
+    private Integer quantity;
 
     /**
      * specId

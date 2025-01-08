@@ -7,9 +7,9 @@ import cn.qihangerp.common.enums.EnumShopType;
 import cn.qihangerp.domain.OShopPlatform;
 import cn.qihangerp.module.service.OShopPlatformService;
 import cn.qihangerp.module.service.OShopService;
-
-import com.pdd.pop.sdk.http.PopAccessTokenClient;
-import com.pdd.pop.sdk.http.token.AccessTokenResponse;
+import cn.qihangerp.open.common.ApiResultVo;
+import cn.qihangerp.open.pdd.PddTokenApiHelper;
+import cn.qihangerp.open.pdd.model.Token;
 import lombok.AllArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -49,26 +49,12 @@ public class PddOAuthController {
         OShopPlatform platform = platformService.selectById(EnumShopType.PDD.getIndex());
         String appKey = platform.getAppKey();
         String appSercet = platform.getAppSecret();
-
-        PopAccessTokenClient accessTokenClient = new PopAccessTokenClient(appKey, appSercet);
-
-        // 生成AccessToken
-        try {
-
-            AccessTokenResponse response = accessTokenClient.generate(bo.getCode());
-            if(response.getErrorResponse()!=null){
-                log.info("/***************获取拼多多授权token错误："+response.getErrorResponse().getErrorMsg()+"**************/");
-            }else{
-                //保存accessToken
-                shopService.updateSessionKey(bo.getShopId(),response.getAccessToken());
-
-            }
-        } catch (Exception e) {
-
-            e.printStackTrace();
-
-        }
-        return AjaxResult.success("SUCCESS");
+        ApiResultVo<Token> token = PddTokenApiHelper.getToken(appKey, appSercet, bo.getCode());
+        if(token.getCode()==0){
+            shopService.updateSessionKey(shop.getId(),token.getData().getAccess_token());
+            return AjaxResult.success("SUCCESS");
+        }else
+            return AjaxResult.error(token.getMsg());
     }
 
 //    /**
