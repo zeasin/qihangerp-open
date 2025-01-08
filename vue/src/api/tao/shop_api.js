@@ -31,3 +31,11 @@ export function getTaoOAuthUrl(query) {
     params: query
   })
 }
+
+export function saveSessionKey(data) {
+  return request({
+    url: '/api/open-api/tao/saveSessionKey',
+    method: 'post',
+    data: data
+  })
+}

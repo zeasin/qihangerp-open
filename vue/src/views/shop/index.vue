@@ -167,14 +167,20 @@
     </el-dialog>
 
     <el-dialog :title="title" :visible.sync="authOpen" width="500px" append-to-body>
-      <el-form ref="tokenForm" :model="tokenForm"  :rules="rules" label-width="80px">
+      <el-form ref="tokenForm" :model="tokenForm"  :rules="rules" label-width="120px">
         <el-descriptions >
-        <el-descriptions-item label="授权URL："> {{ tokenForm.url }}</el-descriptions-item>
+        <el-descriptions-item label="授权URL"> {{ tokenForm.url }}</el-descriptions-item>
+        </el-descriptions>
+        <el-descriptions v-if="tokenForm.shopType === 100">
+          <el-descriptions-item label="请设置淘宝开放平台回调URL"> http://127.0.0.1:8088/api/open-api/tao/code_callback</el-descriptions-item>
         </el-descriptions>
         <div slot="footer" class="dialog-footer">
           请手动复制上面的URL到浏览器中访问
         </div>
-        <el-form-item label="code" prop="code">
+        <el-form-item label="top_session" prop="code" v-if="tokenForm.shopType===100">
+          <el-input type="textarea" v-model="tokenForm.code" placeholder="请复制淘宝授权后跳转页面的top_session参数值到这里" />
+        </el-form-item>
+        <el-form-item label="code" prop="code" v-if="tokenForm.shopType!==100">
           <el-input type="textarea" v-model="tokenForm.code" placeholder="请把授权后的code复制到这里" />
         </el-form-item>
       </el-form>
@@ -193,7 +199,7 @@
 <script>
 import { listShop,listPlatform, getShop, delShop, addShop, updateShop } from "@/api/shop/shop";
 import {getJdOAuthUrl, getJdToken} from "@/api/jd/shop";
-import {getTaoOAuthUrl} from "@/api/tao/shop_api";
+import {getTaoOAuthUrl,saveSessionKey} from "@/api/tao/shop_api";
 import {getOAuthUrl,getPddToken} from "@/api/pdd/shopApi";
 
 export default {
@@ -235,7 +241,8 @@ export default {
       // 获取token表单
       tokenForm:{
         shopId: null,
-        shopType: null
+        shopType: null,
+        code:null
       },
       // 表单校验
       rules: {
@@ -369,7 +376,13 @@ export default {
       this.$refs["tokenForm"].validate(valid => {
         if (valid) {
           console.log("=====更新token=====",this.tokenForm)
-          if(this.tokenForm.shopType === 200 || this.tokenForm.shopType === 280){
+          if(this.tokenForm.shopType === 100){
+            saveSessionKey(this.tokenForm).then(resp=>{
+              this.authOpen = false
+              this.$modal.msgSuccess("SessionKey保存成功");
+              this.getList()
+            });
+          } else if(this.tokenForm.shopType === 200 || this.tokenForm.shopType === 280){
             getJdToken(this.tokenForm).then(response => {
               this.authOpen = false
               this.$modal.msgSuccess("授权成功");

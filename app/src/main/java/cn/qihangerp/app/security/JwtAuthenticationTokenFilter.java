@@ -48,6 +48,7 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
 //        log.info("token: " + token); || request.getRequestURI().equals("/getInfo") || request.getRequestURI().equals("/logout")
         if (request.getRequestURI().equals("/login")
                 || request.getRequestURI().contains("/login")
+                || request.getRequestURI().contains("/tao/code_callback")
                 || request.getRequestURI().contains("/captchaImage")
                 || request.getRequestURI().equals("/order/get_detail")
                 || request.getRequestURI().equals("/refund/get_detail")
