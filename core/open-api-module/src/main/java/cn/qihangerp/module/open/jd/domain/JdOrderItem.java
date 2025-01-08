@@ -16,9 +16,9 @@ public class JdOrderItem implements Serializable {
     private Long id;
 
     /**
-     * 外键id（jd_order表id）
+     *
      */
-    private Long orderId;
+    private String orderId;
 
     /**
      * 京东内部SKU的ID
@@ -113,16 +113,16 @@ public class JdOrderItem implements Serializable {
     }
 
     /**
-     * 外键id（jd_order表id）
+     *
      */
-    public Long getOrderId() {
+    public String getOrderId() {
         return orderId;
     }
 
     /**
      * 外键id（jd_order表id）
      */
-    public void setOrderId(Long orderId) {
+    public void setOrderId(String orderId) {
         this.orderId = orderId;
     }
 

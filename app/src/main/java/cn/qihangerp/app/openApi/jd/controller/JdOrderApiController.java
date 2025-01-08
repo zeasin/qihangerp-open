@@ -1,6 +1,7 @@
 package cn.qihangerp.app.openApi.jd.controller;
 
 import cn.qihangerp.app.openApi.jd.JdApiCommon;
+import cn.qihangerp.app.openApi.PullRequest;
 import cn.qihangerp.common.AjaxResult;
 import cn.qihangerp.common.ResultVoEnum;
 import cn.qihangerp.common.enums.EnumShopType;
@@ -13,14 +14,13 @@ import cn.qihangerp.domain.OShopPullLasttime;
 import cn.qihangerp.domain.OShopPullLogs;
 import cn.qihangerp.module.service.OShopPullLasttimeService;
 import cn.qihangerp.module.service.OShopPullLogsService;
-
-import cn.qihangerp.sdk.common.ApiResultVo;
-import cn.qihangerp.sdk.jd.OrderApiHelper;
-import cn.qihangerp.sdk.jd.PullRequest;
 import cn.qihangerp.module.open.jd.domain.JdOrder;
 import cn.qihangerp.module.open.jd.domain.JdOrderItem;
-import cn.qihangerp.sdk.jd.response.JdOrderResponse;
 import cn.qihangerp.module.open.jd.service.JdOrderService;
+import cn.qihangerp.open.common.ApiResultVo;
+import cn.qihangerp.open.jd.JdOrderApiHelper;
+import cn.qihangerp.open.jd.response.JdOrderDetailResponse;
+import cn.qihangerp.open.jd.response.JdOrderListResponse;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.BeanUtils;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -88,19 +88,31 @@ public class JdOrderApiController {
         }
 
         //第一次获取
-        ApiResultVo<JdOrderResponse> upResult = OrderApiHelper.pullOrder(startTime,endTime,serverUrl,appKey,appSecret,accessToken);
+        ApiResultVo<JdOrderListResponse> upResult = JdOrderApiHelper.pullOrder(startTime,endTime,appKey,appSecret,accessToken);
+        if(upResult.getCode() !=0) return AjaxResult.error(1500,upResult.getMsg());
         int insertSuccess = 0;//新增成功的订单
         int totalError = 0;
         int hasExistOrder = 0;//已存在的订单数
         //循环插入订单数据到数据库
-        for (var order : upResult.getList()) {
+        for (var orderInfo : upResult.getList()) {
             JdOrder jdOrder = new JdOrder();
-            BeanUtils.copyProperties(order,jdOrder);
+            BeanUtils.copyProperties(orderInfo,jdOrder);
+            jdOrder.setFullname(orderInfo.getConsigneeInfo().getFullname());
+            jdOrder.setFullAddress(orderInfo.getConsigneeInfo().getFullAddress());
+            jdOrder.setTelephone(orderInfo.getConsigneeInfo().getTelephone());
+            jdOrder.setMobile(orderInfo.getConsigneeInfo().getMobile());
+            jdOrder.setProvince(orderInfo.getConsigneeInfo().getProvince());
+            jdOrder.setProvinceId(orderInfo.getConsigneeInfo().getProvinceId());
+            jdOrder.setCity(orderInfo.getConsigneeInfo().getCity());
+            jdOrder.setCityId(orderInfo.getConsigneeInfo().getCityId());
+            jdOrder.setTown(orderInfo.getConsigneeInfo().getTown());
+            jdOrder.setTownId(orderInfo.getConsigneeInfo().getTownId());
             List<JdOrderItem> jdOrderItemList = new ArrayList<>();
-            if(order.getItems()!=null && order.getItems().size()>0){
-                for (var item:order.getItems()){
+            if(orderInfo.getItemInfoList()!=null && orderInfo.getItemInfoList().size()>0){
+                for (var item:orderInfo.getItemInfoList()){
                     JdOrderItem jdOrderItem = new JdOrderItem();
                     BeanUtils.copyProperties(item,jdOrderItem);
+                    jdOrderItem.setOrderId(orderInfo.getOrderId());
                     jdOrderItemList.add(jdOrderItem);
                 }
             }
@@ -110,10 +122,10 @@ public class JdOrderApiController {
             if (result.getCode() == ResultVoEnum.DataExist.getIndex()) {
                 //已经存在
                 hasExistOrder++;
-                mqUtils.sendApiMessage(MqMessage.build(EnumShopType.JD,MqType.ORDER_MESSAGE,order.getOrderId()));
+                mqUtils.sendApiMessage(MqMessage.build(EnumShopType.JD,MqType.ORDER_MESSAGE,orderInfo.getOrderId()));
             } else if (result.getCode() == ResultVoEnum.SUCCESS.getIndex()) {
                 insertSuccess++;
-                mqUtils.sendApiMessage(MqMessage.build(EnumShopType.JD,MqType.ORDER_MESSAGE,order.getOrderId()));
+                mqUtils.sendApiMessage(MqMessage.build(EnumShopType.JD,MqType.ORDER_MESSAGE,orderInfo.getOrderId()));
             } else {
                 totalError++;
             }
@@ -166,7 +178,7 @@ public class JdOrderApiController {
         if (params.getShopId() == null || params.getShopId() <= 0) {
             return AjaxResult.error(HttpStatus.PARAMS_ERROR, "参数错误，没有店铺Id");
         }
-        if (StringUtils.isEmpty(params.getOrderId())) {
+        if (params.getOrderId() == null) {
             return AjaxResult.error(HttpStatus.PARAMS_ERROR, "参数错误，缺少orderId");
         }
         Date currDateTime = new Date();
@@ -180,13 +192,13 @@ public class JdOrderApiController {
         String serverUrl = checkResult.getData().getServerUrl();
         String appKey = checkResult.getData().getAppKey();
         String appSecret = checkResult.getData().getAppSecret();
-        ApiResultVo<JdOrderResponse> upResult = OrderApiHelper.pullOrderDetail(Long.parseLong(params.getOrderId()),serverUrl,appKey,appSecret,accessToken);
+        ApiResultVo<JdOrderDetailResponse> upResult = JdOrderApiHelper.pullOrderDetail(params.getOrderId(),appKey,appSecret,accessToken);
         if(upResult.getCode() == ResultVoEnum.SUCCESS.getIndex()){
             JdOrder jdOrder = new JdOrder();
             BeanUtils.copyProperties(jdOrder,upResult.getData());
             List<JdOrderItem> jdOrderItemList = new ArrayList<>();
-            if(upResult.getData().getItems()!=null && upResult.getData().getItems().size()>0){
-                for (var item:upResult.getData().getItems()){
+            if(upResult.getData().getItemInfoList()!=null && upResult.getData().getItemInfoList().size()>0){
+                for (var item:upResult.getData().getItemInfoList()){
                     JdOrderItem jdOrderItem = new JdOrderItem();
                     BeanUtils.copyProperties(item,jdOrderItem);
                     jdOrderItemList.add(jdOrderItem);

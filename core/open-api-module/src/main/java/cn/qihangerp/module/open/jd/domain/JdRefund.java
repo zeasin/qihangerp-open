@@ -47,7 +47,7 @@ public class JdRefund implements Serializable {
     /**
      * 申请时间
      */
-    private Date applyTime;
+    private String applyTime;
 
     /**
      * 退款金额(单位分)

@@ -1,7 +1,7 @@
 package cn.qihangerp.app.openApi.wei.controller;
 
 
-import cn.qihangerp.app.openApi.wei.PullRequest;
+import cn.qihangerp.app.openApi.PullRequest;
 import cn.qihangerp.app.openApi.wei.WeiApiCommon;
 import cn.qihangerp.app.security.common.BaseController;
 import cn.qihangerp.common.AjaxResult;

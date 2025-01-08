@@ -148,18 +148,6 @@
         </dependency>
 
         <dependency>
-            <groupId>cn.qihangerp.sdk</groupId>
-            <artifactId>jd-sdk</artifactId>
-            <version>1.0</version>
-            <scope>system</scope>
-            <systemPath>${project.basedir}/libs/jd-1.0.jar</systemPath>
-        </dependency>
-        <dependency>
-            <groupId>org.codehaus.jackson</groupId>
-            <artifactId>jackson-mapper-asl</artifactId>
-            <version>1.9.13</version> <!-- jd-sdk依赖 -->
-        </dependency>
-        <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-webflux</artifactId>
             <version>6.0.14</version>

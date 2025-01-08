@@ -1,13 +1,11 @@
 package cn.qihangerp.app.openApi.wei.controller;
 
-import cn.qihangerp.app.openApi.wei.PullRequest;
+import cn.qihangerp.app.openApi.PullRequest;
 import cn.qihangerp.app.openApi.wei.WeiApiCommon;
 import cn.qihangerp.common.AjaxResult;
 import cn.qihangerp.common.ResultVoEnum;
 import cn.qihangerp.common.enums.HttpStatus;
 import cn.qihangerp.open.common.ApiResultVo;
-import cn.qihangerp.open.common.RemoteUtil;
-import cn.qihangerp.open.wei.WeiGoodsApiHelper;
 import cn.qihangerp.open.wei.WeiGoodsApiService;
 import cn.qihangerp.module.open.wei.domain.OmsWeiGoods;
 import cn.qihangerp.module.open.wei.domain.OmsWeiGoodsSku;

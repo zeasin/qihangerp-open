@@ -1,12 +1,11 @@
 package cn.qihangerp.app.openApi.wei.controller;
 
-import cn.qihangerp.app.openApi.wei.PullRequest;
+import cn.qihangerp.app.openApi.PullRequest;
 import cn.qihangerp.app.openApi.wei.WeiApiCommon;
 import cn.qihangerp.app.security.common.BaseController;
 import cn.qihangerp.common.AjaxResult;
 import cn.qihangerp.common.ResultVoEnum;
 import cn.qihangerp.common.enums.HttpStatus;
-import cn.qihangerp.common.mq.MqMessage;
 import cn.qihangerp.module.open.wei.domain.OmsWeiRefund;
 import cn.qihangerp.module.open.wei.service.OmsWeiRefundService;
 import cn.qihangerp.open.common.ApiResultVo;

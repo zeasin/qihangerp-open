@@ -344,7 +344,10 @@ export default {
             });
 
             // return Promise.reject('无效的会话，或者会话已过期，请重新登录。')
-          }else{
+          }else if(response.code === 1402){
+            this.$modal.msgError(JSON.stringify(response));
+            this.pullLoading = false
+          }else {
             this.$modal.msgSuccess(JSON.stringify(response));
             this.pullLoading = false
             this.getList()

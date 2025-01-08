@@ -1,5 +1,6 @@
 package cn.qihangerp.app.openApi.jd.controller;
 
+import cn.qihangerp.app.openApi.PullRequest;
 import cn.qihangerp.app.openApi.jd.JdApiCommon;
 import cn.qihangerp.common.AjaxResult;
 import cn.qihangerp.common.enums.EnumShopType;
@@ -8,15 +9,12 @@ import cn.qihangerp.domain.OShopPullLasttime;
 import cn.qihangerp.domain.OShopPullLogs;
 import cn.qihangerp.module.service.OShopPullLasttimeService;
 import cn.qihangerp.module.service.OShopPullLogsService;
-
-import cn.qihangerp.sdk.common.ApiResultVo;
-import cn.qihangerp.sdk.jd.GoodsApiHelper;
-import cn.qihangerp.sdk.jd.PullRequest;
 import cn.qihangerp.module.open.jd.domain.JdGoods;
 import cn.qihangerp.module.open.jd.domain.JdGoodsSku;
-import cn.qihangerp.sdk.jd.response.JdGoodsResponse;
-import cn.qihangerp.sdk.jd.response.JdGoodsSkuResponse;
 import cn.qihangerp.module.open.jd.service.JdGoodsService;
+import cn.qihangerp.open.common.ApiResultVo;
+import cn.qihangerp.open.jd.JdGoodsApiHelper;
+import cn.qihangerp.open.jd.response.JdGoodsSkuListResponse;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.BeanUtils;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -37,71 +35,7 @@ public class JdGoodsApiController {
     private final JdGoodsService goodsService;
     private final OShopPullLogsService pullLogsService;
     private final OShopPullLasttimeService pullLasttimeService;
-    /**
-     * 拉取商品列表（包含sku）
-     * @param params
-     * @return
-     * @throws Exception
-     */
-    @RequestMapping(value = "/pull_goods_old", method = RequestMethod.POST)
-    public AjaxResult pullGoodsList(@RequestBody PullRequest params) throws Exception {
-        if (params.getShopId() == null || params.getShopId() <= 0) {
-            return AjaxResult.error(HttpStatus.PARAMS_ERROR, "参数错误，没有店铺Id");
-        }
-        Date currDateTime = new Date();
-        long startTime = System.currentTimeMillis();
-        var checkResult = jdApiCommon.checkBefore(params.getShopId());
-        if (checkResult.getCode() != HttpStatus.SUCCESS) {
-            return AjaxResult.error(checkResult.getCode(), checkResult.getMsg(), checkResult.getData());
-        }
-        String accessToken = checkResult.getData().getAccessToken();
-        String serverUrl = checkResult.getData().getServerUrl();
-        String appKey = checkResult.getData().getAppKey();
-        String appSecret = checkResult.getData().getAppSecret();
 
-        ApiResultVo<JdGoodsResponse> resultVo = GoodsApiHelper.pullGoodsAndSkuList(serverUrl, appKey, appSecret, accessToken);
-        if(resultVo.getCode() !=0 ){
-            OShopPullLogs logs = new OShopPullLogs();
-            logs.setShopId(params.getShopId());
-            logs.setShopType(EnumShopType.JD.getIndex());
-            logs.setPullType("GOODS");
-            logs.setPullWay("主动拉取");
-            logs.setPullParams("{WareStatusValue:8,PageNo:1,PageSize:100}");
-            logs.setPullResult(resultVo.getMsg());
-            logs.setPullTime(currDateTime);
-            logs.setDuration(System.currentTimeMillis() - startTime);
-            pullLogsService.save(logs);
-            return AjaxResult.error("接口拉取错误："+resultVo.getMsg());
-        }
-        int successTotal = 0;
-        for (var goods: resultVo.getList()){
-            JdGoods jdGoods = new JdGoods();
-            BeanUtils.copyProperties(goods,jdGoods);
-            List<JdGoodsSku>  jdGoodsSkus= new ArrayList<>();
-            if(goods.getSkuList()!=null && goods.getSkuList().size()>0){
-                for(var sku: goods.getSkuList()){
-                    JdGoodsSku jdGoodsSku = new JdGoodsSku();
-                    BeanUtils.copyProperties(sku,jdGoodsSku);
-                    jdGoodsSkus.add(jdGoodsSku);
-                }
-            }
-            jdGoods.setSkuList(jdGoodsSkus);
-            goodsService.saveGoods(params.getShopId(),jdGoods);
-            successTotal++;
-        }
-        OShopPullLogs logs = new OShopPullLogs();
-        logs.setShopId(params.getShopId());
-        logs.setShopType(EnumShopType.JD.getIndex());
-        logs.setPullType("GOODS");
-        logs.setPullWay("主动拉取");
-        logs.setPullParams("{WareStatusValue:8,PageNo:1,PageSize:100}");
-        logs.setPullResult("{successTotal:"+successTotal+"}");
-        logs.setPullTime(currDateTime);
-        logs.setDuration(System.currentTimeMillis() - startTime);
-        pullLogsService.save(logs);
-        return AjaxResult.success("接口拉取成功，总数据："+successTotal);
-
-    }
 
 
     /**
@@ -140,7 +74,7 @@ public class JdGoodsApiController {
         String pullParams = "{startTime:"+startTime+",endTime:"+endTime+"}";
 
 
-        ApiResultVo<JdGoodsSkuResponse> resultVo = GoodsApiHelper.pullGoodsSkuList(serverUrl, appKey, appSecret, accessToken,startTime,endTime);
+        ApiResultVo<JdGoodsSkuListResponse> resultVo = JdGoodsApiHelper.pullGoodsSkuList(appKey, appSecret, accessToken);
         if(resultVo.getCode() !=0 ){
             OShopPullLogs logs = new OShopPullLogs();
             logs.setShopId(params.getShopId());
