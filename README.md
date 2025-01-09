@@ -247,11 +247,14 @@ location /prod-api/ {
 
 <img src="docs/star.jpg" width="300px" />
 
-### 6.2 加入知识星球一起交流
+### 6.2 一起交流
 
 💖 欢迎加入知识星期获得作者帮助和朋友们一起交流！
 
-<img src="docs/知识星球.jpg" width="300px" />
++ 交流QQ群：60235114
+
++ 知识星期
+   <img src="docs/知识星球.jpg" width="300px" />
 
 
 ### 6.3 捐助作者
