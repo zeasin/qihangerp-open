@@ -254,6 +254,7 @@ location /prod-api/ {
 + 交流QQ群：60235114
 
 + 知识星期
+
    <img src="docs/知识星球.jpg" width="300px" />
 
 
