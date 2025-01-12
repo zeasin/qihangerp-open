@@ -61,21 +61,14 @@ public class ImageUploadController {
             Response response = uploadManager.put(file.getInputStream(), key, upToken, null, null);
             //解析上传成功的结果
             var res = JSONObject.parseObject(response.bodyString());
-//            ApiResult<UploadImageResult> result = new ApiResult<>();
-//            result.setCode(0);
-            UploadImageResult uploadImageResult = new UploadImageResult();
-            uploadImageResult.setUrl(qiniu_img_domain + res.getString("key"));
+
             String url = qiniu_img_domain + res.getString("key");
             AjaxResult ajax = AjaxResult.success();
             ajax.put("url", url);
             ajax.put("fileName", fileName);
             ajax.put("newFileName", FileUtils.getName(fileName));
             ajax.put("originalFilename", file.getOriginalFilename());
-
-//            result.setData(uploadImageResult);
-//            return result;
-                return ajax;
-
+            return ajax;
         } catch (QiniuException ex) {
             Response r = ex.response;
 
