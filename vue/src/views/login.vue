@@ -145,7 +145,7 @@ export default {
       },
       loading: false,
       // 验证码开关
-      captchaEnabled: true,
+      captchaEnabled: false,
       // 注册开关
       register: false,
       redirect: undefined,
@@ -280,7 +280,7 @@ export default {
     },
     getCode() {
       getCodeImg().then(res => {
-        this.captchaEnabled = res.captchaEnabled === undefined ? true : res.captchaEnabled;
+        this.captchaEnabled = res.captchaEnabled === undefined ? false : res.captchaEnabled;
         if (this.captchaEnabled) {
           this.codeUrl = "data:image/gif;base64," + res.img;
           this.loginForm.uuid = res.uuid;
