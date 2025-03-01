@@ -10,8 +10,7 @@ spring:
   data:
     # redis 配置
     redis:
-#      host: 127.0.0.1
-      host: ${REDIS_HOST}
+      host: 127.0.0.1
       port: 6379
       database: 0
       # 密码
@@ -30,7 +29,7 @@ spring:
           max-wait: -1ms
   datasource:
     driverClassName: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://${MYSQL_HOST}:3306/qihang-oms?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8
+    url: jdbc:mysql://localhost:3306/qihang-oms?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8
     username: root
     password: Andy_123
 

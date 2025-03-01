@@ -95,7 +95,7 @@
 </template>
 
 <script>
-import { searchSku } from "@/api/wms/goodsSku";
+import { searchSku } from "@/api/goods/goods";
 import {stockInCreate} from "@/api/wms/stockIn";
 
 export default {
