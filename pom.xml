@@ -11,7 +11,8 @@
   <url>http://maven.apache.org</url>
   <modules>
     <module>core</module>
-    <module>app</module>
+    <module>api</module>
+      <module>module</module>
 
   </modules>
 

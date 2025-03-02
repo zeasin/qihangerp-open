@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.qihangerp.module.scm.mapper.ScmPurchaseOrderCostMapper">
+
+    <resultMap id="BaseResultMap" type="cn.qihangerp.module.scm.domain.ScmPurchaseOrderCost">
+            <id property="id" column="id" jdbcType="BIGINT"/>
+            <result property="supplierId" column="supplier_id" jdbcType="BIGINT"/>
+            <result property="orderId" column="order_id" jdbcType="BIGINT"/>
+            <result property="orderAmount" column="order_amount" jdbcType="DECIMAL"/>
+            <result property="orderDate" column="order_date" jdbcType="DATE"/>
+            <result property="orderNum" column="order_num" jdbcType="VARCHAR"/>
+            <result property="orderSpecUnit" column="order_spec_unit" jdbcType="INTEGER"/>
+            <result property="orderGoodsUnit" column="order_goods_unit" jdbcType="INTEGER"/>
+            <result property="orderSpecUnitTotal" column="order_spec_unit_total" jdbcType="INTEGER"/>
+            <result property="actualAmount" column="actual_amount" jdbcType="DECIMAL"/>
+            <result property="freight" column="freight" jdbcType="DECIMAL"/>
+            <result property="confirmUser" column="confirm_user" jdbcType="VARCHAR"/>
+            <result property="confirmTime" column="confirm_time" jdbcType="TIMESTAMP"/>
+            <result property="createBy" column="create_by" jdbcType="VARCHAR"/>
+            <result property="payAmount" column="pay_amount" jdbcType="DECIMAL"/>
+            <result property="payTime" column="pay_time" jdbcType="TIMESTAMP"/>
+            <result property="payCount" column="pay_count" jdbcType="INTEGER"/>
+            <result property="remark" column="remark" jdbcType="VARCHAR"/>
+            <result property="status" column="status" jdbcType="INTEGER"/>
+            <result property="updateBy" column="update_by" jdbcType="VARCHAR"/>
+            <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,supplier_id,order_id,
+        order_amount,order_date,order_num,
+        order_spec_unit,order_goods_unit,order_spec_unit_total,
+        actual_amount,freight,confirm_user,
+        confirm_time,create_by,pay_amount,
+        pay_time,pay_count,remark,
+        status,update_by,update_time
+    </sql>
+</mapper>

@@ -17,13 +17,6 @@
     <modules>
         <module>security</module>
         <module>common</module>
-        <module>sys-module</module>
-        <module>goods-module</module>
-        <module>common-module</module>
-        <module>order-module</module>
-        <module>open-api-module</module>
-        <module>scm-module</module>
-        <module>wms-module</module>
     </modules>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

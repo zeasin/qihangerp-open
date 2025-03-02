@@ -81,7 +81,7 @@
         </dependency>
         <dependency>
             <groupId>cn.qihangerp.module</groupId>
-            <artifactId>sys-module</artifactId>
+            <artifactId>sys</artifactId>
             <version>1.0</version>
             <scope>compile</scope>
         </dependency>
