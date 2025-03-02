@@ -5,10 +5,10 @@ import cn.qihangerp.common.AjaxResult;
 import cn.qihangerp.common.PageQuery;
 import cn.qihangerp.common.ResultVo;
 import cn.qihangerp.common.TableDataInfo;
-import cn.qihangerp.module.wms.domain.WmsStockIn;
-import cn.qihangerp.module.wms.request.StockInCreateRequest;
-import cn.qihangerp.module.wms.request.StockInRequest;
-import cn.qihangerp.module.wms.service.WmsStockInService;
+import cn.qihangerp.module.stock.domain.WmsStockIn;
+import cn.qihangerp.module.stock.request.StockInCreateRequest;
+import cn.qihangerp.module.stock.request.StockInRequest;
+import cn.qihangerp.module.stock.service.WmsStockInService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
