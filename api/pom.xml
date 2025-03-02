@@ -124,14 +124,14 @@
             <artifactId>order</artifactId>
             <version>1.0</version>
         </dependency>
+<!--        <dependency>-->
+<!--            <groupId>cn.qihangerp.module</groupId>-->
+<!--            <artifactId>scm</artifactId>-->
+<!--            <version>1.0</version>-->
+<!--        </dependency>-->
         <dependency>
             <groupId>cn.qihangerp.module</groupId>
-            <artifactId>scm</artifactId>
-            <version>1.0</version>
-        </dependency>
-        <dependency>
-            <groupId>cn.qihangerp.module</groupId>
-            <artifactId>wms</artifactId>
+            <artifactId>stock</artifactId>
             <version>1.0</version>
         </dependency>
         <dependency>

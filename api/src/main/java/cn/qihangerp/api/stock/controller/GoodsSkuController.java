@@ -1,4 +1,4 @@
-package cn.qihangerp.api.erp.controller;//package cn.qihangerp.app.erp.controller;
+package cn.qihangerp.api.stock.controller;//package cn.qihangerp.app.erp.controller;
 //
 //import cn.qihangerp.app.security.common.BaseController;
 //import cn.qihangerp.common.TableDataInfo;

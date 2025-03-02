@@ -8,7 +8,7 @@
     </parent>
 
     <groupId>cn.qihangerp.module</groupId>
-    <artifactId>wms</artifactId>
+    <artifactId>stock</artifactId>
     <packaging>jar</packaging>
 
     <name>wms</name>
