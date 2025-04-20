@@ -117,7 +117,34 @@ public class DateUtils extends org.apache.commons.lang3.time.DateUtils
             return 0;
         }
     }
+    /**
+     * 把符合日期格式的字符串转换为日期类型
+     */
+    public static Date stringtoDate(String dateStr, String format) {
+        Date d = null;
+        SimpleDateFormat formater = new SimpleDateFormat(format);
+        try {
+            formater.setLenient(false);
+            d = formater.parse(dateStr);
+        } catch (Exception e) {
+            // log.error(e);
+            d = null;
+        }
+        return d;
+    }
 
+    public static Date stringtoDate(String dateStr) {
+        Date d = null;
+        SimpleDateFormat formater = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        try {
+            formater.setLenient(false);
+            d = formater.parse(dateStr);
+        } catch (Exception e) {
+            // log.error(e);
+            d = null;
+        }
+        return d;
+    }
     /**
      * 日期路径 即年/月/日 如2018/08/08
      */
