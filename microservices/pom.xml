@@ -17,6 +17,7 @@
     <url>http://maven.apache.org</url>
     <modules>
         <module>goods-api</module>
+        <module>order-api</module>
     </modules>
 
     <properties>

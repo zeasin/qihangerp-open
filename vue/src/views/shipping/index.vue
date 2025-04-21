@@ -209,7 +209,7 @@
 <script>
 import {listLogistics, listLogisticsStatus, listShop} from "@/api/shop/shop";
 import {MessageBox} from "element-ui";
-import {handShip, listShipping, searchOrderConsignee, searchOrderItemByReceiverMobile} from "@/api/api/shipping";
+import {handShip, listShipping, searchOrderConsignee, searchOrderItemByReceiverMobile} from "@/api/order/shipping";
 
 
 export default {

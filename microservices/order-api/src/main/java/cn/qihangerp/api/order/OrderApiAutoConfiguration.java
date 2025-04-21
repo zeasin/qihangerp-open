@@ -1,4 +1,4 @@
-package cn.qihangerp.api.goods;
+package cn.qihangerp.api.order;
 
 //import org.mybatis.spring.boot.autoconfigure.MybatisAutoConfiguration;
 import org.springframework.context.annotation.ComponentScan;
@@ -12,7 +12,7 @@ import org.springframework.context.annotation.FilterType;
 //@EnableAutoConfiguration
 @Configuration
 //@EnableAutoConfiguration(exclude = MybatisAutoConfiguration.class)
-@ComponentScan(basePackages = "cn.qihangerp.api.goods",
-        excludeFilters = @ComponentScan.Filter(type = FilterType.ASSIGNABLE_TYPE, value = AutoConfiguration.class))
-public class AutoConfiguration {
+@ComponentScan(basePackages = "cn.qihangerp.api.order",
+        excludeFilters = @ComponentScan.Filter(type = FilterType.ASSIGNABLE_TYPE, value = OrderApiAutoConfiguration.class))
+public class OrderApiAutoConfiguration {
 }

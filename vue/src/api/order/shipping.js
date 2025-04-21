@@ -3,7 +3,7 @@ import request from '@/utils/request'
 // 查询
 export function listShipping(query) {
   return request({
-    url: '/api/oms-api/shipping/list',
+    url: '/shipping/list',
     method: 'get',
     params: query
   })

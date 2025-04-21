@@ -3,7 +3,7 @@ import request from '@/utils/request'
 // 备货清单
 export function listShipStockup(query) {
   return request({
-    url: '/api/oms-api/ship/stock_up_list',
+    url: '/ship/stock_up_list',
     method: 'get',
     params: query
   })
