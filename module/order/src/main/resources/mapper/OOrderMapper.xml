@@ -63,12 +63,12 @@
         create_by,update_time,update_by
     </sql>
     <select id="getTaoOrderDiscount" parameterType="String" resultMap="DiscountResultMap">
-        select promotion_name as name,discount_fee as discount_amount,promotion_desc as description from tao_order_promotion
+        select promotion_name as name,discount_fee as discount_amount,promotion_desc as description from oms_tao_order_promotion
         where id = #{tid}
     </select>
 
     <select id="getJdOrderDiscount" parameterType="String" resultMap="DiscountResultMap">
-        select coupon_type as name,coupon_price as discount_amount from jd_order_coupon
+        select coupon_type as name,coupon_price as discount_amount from oms_jd_order_coupon
         where order_id = #{orderId}
     </select>
     <select id="salesDaily" resultType="cn.qihangerp.module.order.domain.vo.SalesDailyVo">
