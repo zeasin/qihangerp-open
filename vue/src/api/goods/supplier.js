@@ -3,7 +3,7 @@ import request from '@/utils/request'
 // 查询供应商管理列表
 export function listSupplier(query) {
   return request({
-    url: '/api/oms-api/supplier/list',
+    url: '/supplier/list',
     method: 'get',
     params: query
   })
@@ -12,7 +12,7 @@ export function listSupplier(query) {
 // 查询供应商管理详细
 export function getSupplier(id) {
   return request({
-    url: '/api/oms-api/supplier/' + id,
+    url: '/supplier/' + id,
     method: 'get'
   })
 }
@@ -20,7 +20,7 @@ export function getSupplier(id) {
 // 新增供应商管理
 export function addSupplier(data) {
   return request({
-    url: '/api/oms-api/supplier',
+    url: '/supplier',
     method: 'post',
     data: data
   })
@@ -29,7 +29,7 @@ export function addSupplier(data) {
 // 修改供应商管理
 export function updateSupplier(data) {
   return request({
-    url: '/api/oms-api/supplier',
+    url: '/supplier',
     method: 'put',
     data: data
   })
@@ -38,7 +38,7 @@ export function updateSupplier(data) {
 // 删除供应商管理
 export function delSupplier(id) {
   return request({
-    url: '/api/oms-api/supplier/' + id,
+    url: '/supplier/' + id,
     method: 'delete'
   })
 }

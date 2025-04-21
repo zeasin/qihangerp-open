@@ -1,6 +1,5 @@
 package cn.qihangerp.api.openApi.jd.controller;
 
-import cn.qihangerp.api.security.common.BaseController;
 import cn.qihangerp.common.AjaxResult;
 import cn.qihangerp.common.PageQuery;
 import cn.qihangerp.common.PageResult;
@@ -15,6 +14,7 @@ import cn.qihangerp.module.open.jd.domain.bo.JdOrderPushBo;
 import cn.qihangerp.module.open.jd.service.JdOrderService;
 import cn.qihangerp.module.open.jd.service.JdRefundService;
 
+import cn.qihangerp.security.common.BaseController;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 

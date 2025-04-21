@@ -1,4 +1,4 @@
-package cn.qihangerp.domain;
+package cn.qihangerp.module.goods.domain;
 
 //import com.baomidou.mybatisplus.annotation.IdType;
 //import com.baomidou.mybatisplus.annotation.TableId;

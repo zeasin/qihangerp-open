@@ -8,8 +8,7 @@ import cn.qihangerp.common.TableDataInfo;
 import cn.qihangerp.module.order.domain.bo.RefundProcessingBo;
 import cn.qihangerp.module.order.domain.bo.RefundSearchBo;
 import cn.qihangerp.module.order.service.ORefundService;
-
-import cn.qihangerp.api.security.common.BaseController;
+import cn.qihangerp.security.common.BaseController;
 import lombok.AllArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;

@@ -1,12 +1,11 @@
 package cn.qihangerp.api.sys.controller;
 
-
 import cn.qihangerp.common.AjaxResult;
 import cn.qihangerp.common.constant.UserConstants;
 import cn.qihangerp.common.utils.StringUtils;
 import cn.qihangerp.module.domain.SysDept;
 import cn.qihangerp.module.service.ISysDeptService;
-import cn.qihangerp.api.security.common.BaseController;
+import cn.qihangerp.security.common.BaseController;
 import org.apache.commons.lang3.ArrayUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;

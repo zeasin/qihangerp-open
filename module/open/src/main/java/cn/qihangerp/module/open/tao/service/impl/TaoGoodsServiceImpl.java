@@ -1,6 +1,6 @@
 package cn.qihangerp.module.open.tao.service.impl;
 
-import cn.qihangerp.module.mapper.OGoodsSkuMapper;
+import cn.qihangerp.module.goods.mapper.OGoodsSkuMapper;
 import cn.qihangerp.module.open.tao.domain.bo.TaoGoodsBo;
 import cn.qihangerp.module.open.tao.mapper.TaoGoodsMapper;
 import cn.qihangerp.module.open.tao.mapper.TaoGoodsSkuMapper;
@@ -14,7 +14,7 @@ import cn.qihangerp.common.ResultVoEnum;
 import cn.qihangerp.common.utils.StringUtils;
 import cn.qihangerp.common.PageQuery;
 import cn.qihangerp.common.PageResult;
-import cn.qihangerp.domain.OGoodsSku;
+import cn.qihangerp.module.goods.domain.OGoodsSku;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;

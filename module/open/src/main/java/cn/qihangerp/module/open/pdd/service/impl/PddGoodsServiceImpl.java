@@ -1,6 +1,6 @@
 package cn.qihangerp.module.open.pdd.service.impl;
 
-import cn.qihangerp.module.mapper.OGoodsSkuMapper;
+import cn.qihangerp.module.goods.mapper.OGoodsSkuMapper;
 import cn.qihangerp.module.open.pdd.domain.PddGoods;
 import cn.qihangerp.module.open.pdd.domain.PddGoodsSku;
 import cn.qihangerp.module.open.pdd.domain.bo.PddGoodsBo;
@@ -14,7 +14,7 @@ import cn.qihangerp.common.PageQuery;
 import cn.qihangerp.common.PageResult;
 import cn.qihangerp.common.ResultVo;
 import cn.qihangerp.common.utils.StringUtils;
-import cn.qihangerp.domain.OGoodsSku;
+import cn.qihangerp.module.goods.domain.OGoodsSku;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;

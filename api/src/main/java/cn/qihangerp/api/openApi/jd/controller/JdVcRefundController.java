@@ -1,6 +1,6 @@
 package cn.qihangerp.api.openApi.jd.controller;
 
-import cn.qihangerp.api.security.common.BaseController;
+import cn.qihangerp.security.common.BaseController;
 import cn.qihangerp.common.AjaxResult;
 import cn.qihangerp.common.PageQuery;
 import cn.qihangerp.common.PageResult;

@@ -1,14 +1,12 @@
 package cn.qihangerp.api.openApi.tao.controller;
 
-
-import cn.qihangerp.api.security.common.BaseController;
 import cn.qihangerp.common.AjaxResult;
 import cn.qihangerp.common.PageQuery;
 import cn.qihangerp.common.PageResult;
 import cn.qihangerp.common.TableDataInfo;
-import cn.qihangerp.domain.OGoodsSku;
+import cn.qihangerp.module.goods.domain.OGoodsSku;
 import cn.qihangerp.domain.bo.LinkErpGoodsSkuBo;
-import cn.qihangerp.module.service.OGoodsSkuService;
+import cn.qihangerp.module.goods.service.OGoodsSkuService;
 import cn.qihangerp.module.open.tao.domain.TaoGoods;
 import cn.qihangerp.module.open.tao.domain.TaoGoodsSku;
 import cn.qihangerp.module.open.tao.domain.bo.TaoGoodsBo;
@@ -16,6 +14,7 @@ import cn.qihangerp.module.open.tao.domain.vo.TaoGoodsSkuListVo;
 import cn.qihangerp.module.open.tao.service.TaoGoodsService;
 import cn.qihangerp.module.open.tao.service.TaoGoodsSkuService;
 
+import cn.qihangerp.security.common.BaseController;
 import lombok.AllArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.bind.annotation.*;

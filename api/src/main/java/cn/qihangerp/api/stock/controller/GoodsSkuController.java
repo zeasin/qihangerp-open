@@ -2,8 +2,8 @@ package cn.qihangerp.api.stock.controller;//package cn.qihangerp.app.erp.control
 //
 //import cn.qihangerp.app.security.common.BaseController;
 //import cn.qihangerp.common.TableDataInfo;
-//import cn.qihangerp.domain.OGoodsSku;
-//import cn.qihangerp.module.service.OGoodsSkuService;
+//import cn.qihangerp.module.goods.domain.OGoodsSku;
+//import cn.qihangerp.module.goods.service.OGoodsSkuService;
 //import lombok.AllArgsConstructor;
 //import org.springframework.web.bind.annotation.GetMapping;
 //import org.springframework.web.bind.annotation.RequestMapping;

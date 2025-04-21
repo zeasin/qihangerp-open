@@ -12,8 +12,8 @@
   <modules>
     <module>core</module>
     <module>api</module>
-      <module>module</module>
-
+    <module>module</module>
+    <module>microservices</module>
   </modules>
 
   <properties>

@@ -7,7 +7,7 @@ import cn.qihangerp.module.order.domain.bo.ShipStockUpBo;
 import cn.qihangerp.module.order.domain.bo.ShipStockUpCompleteBo;
 import cn.qihangerp.module.order.service.OShipStockUpService;
 import cn.qihangerp.module.order.service.OShipWaybillService;
-import cn.qihangerp.api.security.common.BaseController;
+import cn.qihangerp.security.common.BaseController;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 

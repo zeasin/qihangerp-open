@@ -8,7 +8,7 @@ import cn.qihangerp.domain.OLogisticsCompany;
 import cn.qihangerp.domain.OShop;
 import cn.qihangerp.module.service.OLogisticsCompanyService;
 import cn.qihangerp.module.service.OShopService;
-import cn.qihangerp.api.security.common.BaseController;
+import cn.qihangerp.security.common.BaseController;
 import lombok.AllArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;

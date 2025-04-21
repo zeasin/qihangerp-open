@@ -66,6 +66,9 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.GET, "/images/preview/**").permitAll()
                         .requestMatchers(HttpMethod.GET, "/system/config/**").permitAll()
                         .requestMatchers(HttpMethod.GET, "/captchaImage").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/api/sys-api/captchaImage").permitAll()
+
+                        .requestMatchers(HttpMethod.GET, "/api/sys-api/system/config/**").permitAll()
                         .requestMatchers(HttpMethod.GET, "/api/sys-api/system/config/**").permitAll()
                         // 允许直接访问授权登录接口
                         .requestMatchers(HttpMethod.POST, "/login").permitAll()

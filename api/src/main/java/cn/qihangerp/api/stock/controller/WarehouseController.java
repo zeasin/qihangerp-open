@@ -1,12 +1,12 @@
 package cn.qihangerp.api.stock.controller;
 
-import cn.qihangerp.api.security.common.BaseController;
 import cn.qihangerp.common.AjaxResult;
 import cn.qihangerp.common.TableDataInfo;
 import cn.qihangerp.module.stock.domain.WmsWarehouse;
 import cn.qihangerp.module.stock.domain.WmsWarehousePosition;
 import cn.qihangerp.module.stock.service.WmsWarehousePositionService;
 import cn.qihangerp.module.stock.service.WmsWarehouseService;
+import cn.qihangerp.security.common.BaseController;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import lombok.AllArgsConstructor;
 import org.springframework.util.StringUtils;

@@ -1,6 +1,6 @@
 package cn.qihangerp.module.open.jd.service.impl;
 
-import cn.qihangerp.module.mapper.OGoodsSkuMapper;
+import cn.qihangerp.module.goods.mapper.OGoodsSkuMapper;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -10,7 +10,7 @@ import cn.qihangerp.common.ResultVo;
 import cn.qihangerp.common.utils.StringUtils;
 import cn.qihangerp.module.open.jd.domain.JdGoods;
 import cn.qihangerp.module.open.jd.domain.JdGoodsSku;
-import cn.qihangerp.domain.OGoodsSku;
+import cn.qihangerp.module.goods.domain.OGoodsSku;
 import cn.qihangerp.module.open.jd.domain.bo.JdGoodsBo;
 import cn.qihangerp.module.open.jd.mapper.JdGoodsSkuMapper;
 

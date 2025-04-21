@@ -1,10 +1,12 @@
-package cn.qihangerp.module.service.impl;
+package cn.qihangerp.module.goods.service.impl;
 
-import cn.qihangerp.module.mapper.OGoodsSkuMapper;
-import cn.qihangerp.module.service.OGoodsSkuService;
+import cn.qihangerp.module.goods.domain.OGoodsSku;
+import cn.qihangerp.module.goods.mapper.OGoodsSkuMapper;
+
+import cn.qihangerp.module.goods.service.OGoodsSkuService;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import cn.qihangerp.domain.OGoodsSku;
+
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;

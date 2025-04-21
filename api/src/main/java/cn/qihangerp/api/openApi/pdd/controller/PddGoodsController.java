@@ -1,14 +1,12 @@
 package cn.qihangerp.api.openApi.pdd.controller;
 
-
-import cn.qihangerp.api.security.common.BaseController;
 import cn.qihangerp.common.AjaxResult;
 import cn.qihangerp.common.PageQuery;
 import cn.qihangerp.common.PageResult;
 import cn.qihangerp.common.TableDataInfo;
-import cn.qihangerp.domain.OGoodsSku;
+import cn.qihangerp.module.goods.domain.OGoodsSku;
 import cn.qihangerp.domain.bo.LinkErpGoodsSkuBo;
-import cn.qihangerp.module.service.OGoodsSkuService;
+import cn.qihangerp.module.goods.service.OGoodsSkuService;
 import cn.qihangerp.module.open.pdd.domain.PddGoods;
 import cn.qihangerp.module.open.pdd.domain.PddGoodsSku;
 import cn.qihangerp.module.open.pdd.domain.bo.PddGoodsBo;
@@ -16,6 +14,7 @@ import cn.qihangerp.module.open.pdd.domain.vo.PddGoodsSkuListVo;
 import cn.qihangerp.module.open.pdd.service.PddGoodsService;
 import cn.qihangerp.module.open.pdd.service.PddGoodsSkuService;
 
+import cn.qihangerp.security.common.BaseController;
 import lombok.AllArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.bind.annotation.*;

@@ -1,6 +1,5 @@
 package cn.qihangerp.api.openApi.pdd.controller;
 
-import cn.qihangerp.api.security.common.BaseController;
 import cn.qihangerp.common.AjaxResult;
 import cn.qihangerp.common.PageQuery;
 import cn.qihangerp.common.PageResult;
@@ -13,7 +12,7 @@ import cn.qihangerp.module.open.pdd.domain.PddOrder;
 import cn.qihangerp.module.open.pdd.domain.bo.PddOrderBo;
 import cn.qihangerp.module.open.pdd.domain.bo.PddOrderPushBo;
 import cn.qihangerp.module.open.pdd.service.PddOrderService;
-
+import cn.qihangerp.security.common.BaseController;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 

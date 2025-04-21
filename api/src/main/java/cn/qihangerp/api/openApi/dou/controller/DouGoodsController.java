@@ -1,13 +1,12 @@
 package cn.qihangerp.api.openApi.dou.controller;
 
-import cn.qihangerp.api.security.common.BaseController;
 import cn.qihangerp.common.AjaxResult;
 import cn.qihangerp.common.PageQuery;
 import cn.qihangerp.common.PageResult;
 import cn.qihangerp.common.TableDataInfo;
-import cn.qihangerp.domain.OGoodsSku;
+import cn.qihangerp.module.goods.domain.OGoodsSku;
 import cn.qihangerp.domain.bo.LinkErpGoodsSkuBo;
-import cn.qihangerp.module.service.OGoodsSkuService;
+import cn.qihangerp.module.goods.service.OGoodsSkuService;
 import cn.qihangerp.module.open.dou.domain.DouGoods;
 import cn.qihangerp.module.open.dou.domain.DouGoodsSku;
 import cn.qihangerp.module.open.dou.domain.bo.DouGoodsBo;
@@ -15,6 +14,7 @@ import cn.qihangerp.module.open.dou.domain.vo.DouGoodsSkuListVo;
 import cn.qihangerp.module.open.dou.service.DouGoodsService;
 import cn.qihangerp.module.open.dou.service.DouGoodsSkuService;
 
+import cn.qihangerp.security.common.BaseController;
 import lombok.AllArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.bind.annotation.*;

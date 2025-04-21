@@ -2,7 +2,6 @@ package cn.qihangerp.api.openApi.wei.controller;
 
 import cn.qihangerp.api.openApi.PullRequest;
 import cn.qihangerp.api.openApi.wei.WeiApiCommon;
-import cn.qihangerp.api.security.common.BaseController;
 import cn.qihangerp.common.AjaxResult;
 import cn.qihangerp.common.ResultVoEnum;
 import cn.qihangerp.common.enums.HttpStatus;
@@ -11,6 +10,7 @@ import cn.qihangerp.module.open.wei.service.OmsWeiRefundService;
 import cn.qihangerp.open.common.ApiResultVo;
 import cn.qihangerp.open.wei.WeiRefundApiHelper;
 import cn.qihangerp.open.wei.model.AfterSaleOrder;
+import cn.qihangerp.security.common.BaseController;
 import com.alibaba.fastjson2.JSONObject;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.RequestBody;

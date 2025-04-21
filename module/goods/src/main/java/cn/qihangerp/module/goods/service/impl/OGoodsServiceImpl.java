@@ -1,13 +1,12 @@
 package cn.qihangerp.module.goods.service.impl;
 
 import cn.qihangerp.module.goods.domain.OGoodsInventory;
-import cn.qihangerp.module.goods.domain.bo.GoodsSkuAddBo;
 import cn.qihangerp.module.goods.domain.vo.GoodsSpecListVo;
 import cn.qihangerp.module.goods.mapper.OGoodsInventoryMapper;
 import cn.qihangerp.module.goods.mapper.OGoodsMapper;
 import cn.qihangerp.module.goods.mapper.OGoodsSkuAttrMapper;
 
-import cn.qihangerp.module.mapper.OGoodsSkuMapper;
+import cn.qihangerp.module.goods.mapper.OGoodsSkuMapper;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -16,7 +15,7 @@ import cn.qihangerp.common.PageResult;
 import cn.qihangerp.common.ResultVo;
 
 import cn.qihangerp.module.goods.domain.OGoods;
-import cn.qihangerp.domain.OGoodsSku;
+import cn.qihangerp.module.goods.domain.OGoodsSku;
 import cn.qihangerp.module.goods.domain.OGoodsSkuAttr;
 import cn.qihangerp.module.goods.domain.bo.GoodsAddBo;
 import cn.qihangerp.module.goods.domain.bo.GoodsAddSkuBo;

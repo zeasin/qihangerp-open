@@ -1,6 +1,5 @@
 package cn.qihangerp.module.goods.domain;
 
-import cn.qihangerp.domain.OGoodsSku;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;

@@ -1,12 +1,11 @@
 package cn.qihangerp.api.oms.controller;
 
-
 import cn.qihangerp.common.PageQuery;
 import cn.qihangerp.common.TableDataInfo;
 import cn.qihangerp.module.order.domain.bo.OrderItemListBo;
 import cn.qihangerp.module.order.service.OOrderItemService;
 import cn.qihangerp.module.order.service.OOrderService;
-import cn.qihangerp.api.security.common.BaseController;
+import cn.qihangerp.security.common.BaseController;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

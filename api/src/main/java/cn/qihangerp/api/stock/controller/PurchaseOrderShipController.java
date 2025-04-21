@@ -1,7 +1,7 @@
 //package cn.qihangerp.api.erp.controller;
 //
 //
-//import cn.qihangerp.api.security.common.BaseController;
+//import cn.qihangerp.security.common.BaseController;
 //import cn.qihangerp.common.AjaxResult;
 //import cn.qihangerp.common.PageQuery;
 //import cn.qihangerp.common.TableDataInfo;

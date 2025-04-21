@@ -6,7 +6,7 @@ import cn.qihangerp.common.ResultVo;
 import cn.qihangerp.common.TableDataInfo;
 import cn.qihangerp.module.order.domain.OfflineGoodsSku;
 import cn.qihangerp.module.order.service.OfflineGoodsSkuService;
-import cn.qihangerp.api.security.common.BaseController;
+import cn.qihangerp.security.common.BaseController;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 

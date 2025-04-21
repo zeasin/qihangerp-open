@@ -3,7 +3,7 @@ package cn.qihangerp.api.oms.controller;
 import cn.qihangerp.common.AjaxResult;
 import cn.qihangerp.domain.OLogisticsCompany;
 import cn.qihangerp.module.service.OLogisticsCompanyService;
-import cn.qihangerp.api.security.common.BaseController;
+import cn.qihangerp.security.common.BaseController;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 

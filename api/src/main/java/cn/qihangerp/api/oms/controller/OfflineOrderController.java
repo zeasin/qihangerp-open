@@ -11,7 +11,7 @@ import cn.qihangerp.module.order.domain.bo.OfflineOrderCreateBo;
 import cn.qihangerp.module.order.domain.bo.OfflineOrderPushBo;
 import cn.qihangerp.module.order.service.OfflineOrderService;
 import cn.qihangerp.request.OrderSearchRequest;
-import cn.qihangerp.api.security.common.BaseController;
+import cn.qihangerp.security.common.BaseController;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 

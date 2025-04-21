@@ -9,7 +9,7 @@ import cn.qihangerp.module.order.domain.OfflineOrder;
 import cn.qihangerp.module.order.domain.bo.OfflineOrderShipBo;
 import cn.qihangerp.module.order.domain.bo.OrderShipSendBo;
 import cn.qihangerp.module.order.service.OfflineOrderService;
-import cn.qihangerp.api.security.common.BaseController;
+import cn.qihangerp.security.common.BaseController;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import lombok.AllArgsConstructor;
 import org.springframework.util.StringUtils;

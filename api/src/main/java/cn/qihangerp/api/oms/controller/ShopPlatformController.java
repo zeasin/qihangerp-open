@@ -5,7 +5,7 @@ import cn.qihangerp.common.TableDataInfo;
 import cn.qihangerp.domain.OShopPlatform;
 import cn.qihangerp.module.service.OShopPlatformService;
 import cn.qihangerp.module.service.OShopService;
-import cn.qihangerp.api.security.common.BaseController;
+import cn.qihangerp.security.common.BaseController;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import lombok.AllArgsConstructor;
 import org.springframework.util.StringUtils;

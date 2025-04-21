@@ -1,7 +1,7 @@
 package cn.qihangerp.module.open.dou.service.impl;
 
 
-import cn.qihangerp.module.mapper.OGoodsSkuMapper;
+import cn.qihangerp.module.goods.mapper.OGoodsSkuMapper;
 import cn.qihangerp.module.open.dou.domain.DouGoods;
 import cn.qihangerp.module.open.dou.domain.DouGoodsSku;
 import cn.qihangerp.module.open.dou.domain.bo.DouGoodsBo;
@@ -16,7 +16,7 @@ import cn.qihangerp.common.PageResult;
 import cn.qihangerp.common.ResultVo;
 import cn.qihangerp.common.utils.StringUtils;
 
-import cn.qihangerp.domain.OGoodsSku;
+import cn.qihangerp.module.goods.domain.OGoodsSku;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;

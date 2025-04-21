@@ -1,7 +1,7 @@
 //package cn.qihangerp.api.erp.controller;
 //
 //
-//import cn.qihangerp.api.security.common.BaseController;
+//import cn.qihangerp.security.common.BaseController;
 //import cn.qihangerp.common.TableDataInfo;
 //import cn.qihangerp.module.scm.domain.ScmLogistics;
 //import cn.qihangerp.module.scm.service.ScmLogisticsService;

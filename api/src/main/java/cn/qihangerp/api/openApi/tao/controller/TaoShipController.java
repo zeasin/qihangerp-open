@@ -1,9 +1,9 @@
 package cn.qihangerp.api.openApi.tao.controller;
 
-import cn.qihangerp.api.security.common.BaseController;
 import cn.qihangerp.common.AjaxResult;
 import cn.qihangerp.module.open.tao.domain.bo.TaoOrderShipBo;
 
+import cn.qihangerp.security.common.BaseController;
 import lombok.AllArgsConstructor;
 import lombok.extern.java.Log;
 import org.springframework.web.bind.annotation.*;
