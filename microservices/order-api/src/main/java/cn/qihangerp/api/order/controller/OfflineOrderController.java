@@ -1,4 +1,4 @@
-package cn.qihangerp.api.oms.controller;
+package cn.qihangerp.api.order.controller;
 
 import cn.qihangerp.common.AjaxResult;
 import cn.qihangerp.common.PageQuery;
@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.*;
 
 @AllArgsConstructor
 @RestController
-@RequestMapping("/api/oms-api/offline_order")
+@RequestMapping("/offline_order")
 public class OfflineOrderController extends BaseController {
     private final OfflineOrderService orderService;
     private final MqUtils mqUtils;

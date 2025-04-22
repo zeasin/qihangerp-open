@@ -1,4 +1,4 @@
-package cn.qihangerp.api.oms.controller;
+package cn.qihangerp.api.order.controller;
 
 import cn.qihangerp.common.AjaxResult;
 import cn.qihangerp.common.enums.EnumShopType;
@@ -20,7 +20,7 @@ import java.util.List;
 
 @AllArgsConstructor
 @RestController
-@RequestMapping("/api/oms-api/offline_ship")
+@RequestMapping("/offline_ship")
 public class OfflineShipController extends BaseController {
     private final OfflineOrderService orderService;
     private final MqUtils mqUtils;

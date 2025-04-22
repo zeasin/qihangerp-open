@@ -1,4 +1,4 @@
-package cn.qihangerp.api.oms.controller;
+package cn.qihangerp.api.order.controller;
 
 import cn.qihangerp.common.AjaxResult;
 import cn.qihangerp.common.PageQuery;
@@ -21,7 +21,7 @@ import java.util.List;
  */
 @AllArgsConstructor
 @RestController
-@RequestMapping("/api/oms-api/offline_goods")
+@RequestMapping("/offline_goods")
 public class OfflineGoodsController extends BaseController
 {
     private final OfflineGoodsSkuService skuService;

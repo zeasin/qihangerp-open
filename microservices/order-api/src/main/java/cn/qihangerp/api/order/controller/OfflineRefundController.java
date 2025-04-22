@@ -1,4 +1,4 @@
-package cn.qihangerp.api.oms.controller;
+package cn.qihangerp.api.order.controller;
 
 import cn.qihangerp.common.PageQuery;
 import cn.qihangerp.common.TableDataInfo;
@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @AllArgsConstructor
 @RestController
-@RequestMapping("/api/oms-api/offline_refund")
+@RequestMapping("/offline_refund")
 public class OfflineRefundController extends BaseController {
 
     private final OfflineRefundService refundService;
