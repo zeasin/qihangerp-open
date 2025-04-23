@@ -3,7 +3,7 @@ import request from '@/utils/request'
 // 查询拼多多订单列表
 export function listOrder(query) {
   return request({
-    url: '/api/open-api/pdd/order/list',
+    url: '/pdd/order/list',
     method: 'get',
     params: query
   })
@@ -12,7 +12,7 @@ export function listOrder(query) {
 // 查询拼多多订单详细
 export function getOrder(id) {
   return request({
-    url: '/api/open-api/pdd/order/' + id,
+    url: '/pdd/order/' + id,
     method: 'get'
   })
 }
@@ -21,7 +21,7 @@ export function getOrder(id) {
 
 export function pushOms(data) {
   return request({
-    url: '/api/open-api/pdd/order/push_oms',
+    url: '/pdd/order/push_oms',
     method: 'post',
     data: data
   })
@@ -30,7 +30,7 @@ export function pushOms(data) {
 // 接口拉取拼多多订单
 export function pullOrder(data) {
   return request({
-    url: '/api/open-api/pdd/order/pull_order',
+    url: '/pdd/order/pull_order',
     method: 'post',
     data: data
   })
@@ -38,7 +38,7 @@ export function pullOrder(data) {
 
 export function pullOrderDetail(data) {
   return request({
-    url: '/api/open-api/pdd/order/pull_order_detail',
+    url: '/pdd/order/pull_order_detail',
     method: 'post',
     data: data
   })

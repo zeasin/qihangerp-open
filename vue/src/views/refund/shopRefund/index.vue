@@ -4,7 +4,6 @@
       <el-tab-pane v-for="item in typeList" :label="item.name" :name="item.code" lazy>
         <refund-tao v-if="item.id === 100"></refund-tao>
         <refund-jd v-if="item.id === 200"></refund-jd>
-        <refund-jdvc v-if="item.id === 280"></refund-jdvc>
         <refund-pdd v-if="item.id === 300"></refund-pdd>
         <refund-dou v-if="item.id === 400"></refund-dou>
         <refund-wei v-if="item.id === 500"></refund-wei>
@@ -35,7 +34,7 @@
 <script>
 import RefundTao  from "@/views/tao/refund/index";
 import RefundJd  from "@/views/jd/refund/index";
-import RefundJdvc  from "@/views/jd/refund/index-vc";
+
 import RefundDou from "@/views/dou/refund/index.vue";
 import RefundPdd from "@/views/pdd/refund/index.vue";
 import RefundWei from "@/views/wei/refund/index.vue"
@@ -46,7 +45,7 @@ import {listPlatform} from "@/api/shop/shop";
 export default {
   name: "refund",
   components:{
-    RefundPdd, RefundDou, RefundTao,RefundJd,RefundJdvc,AfterSaleOffline,RefundWei},
+    RefundPdd, RefundDou, RefundTao,RefundJd,AfterSaleOffline,RefundWei},
   data() {
     return {
       activeName: '',

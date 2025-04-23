@@ -4,7 +4,6 @@
       <el-tab-pane v-for="item in typeList" :label="item.name" :name="item.code" lazy>
         <order-tao v-if="item.id === 100"></order-tao>
         <order-jd v-if="item.id === 200"></order-jd>
-        <order-jd-vc v-if="item.id === 280"></order-jd-vc>
         <order-pdd v-if="item.id === 300"></order-pdd>
         <order-dou v-if="item.id === 400"></order-dou>
         <order-wei v-if="item.id === 500"></order-wei>
@@ -34,7 +33,6 @@
 <script>
 import OrderTao  from "@/views/tao/order/index";
 import OrderJd  from "@/views/jd/order/index";
-import OrderJdVc  from "@/views/jd/order/index-vc.vue";
 import OrderDou  from "@/views/dou/order/index";
 import OrderPdd  from "@/views/pdd/order/index";
 import OrderWei  from "@/views/wei/order/index";
@@ -42,7 +40,7 @@ import OrderOffline  from "@/views/offline/order/index";
 import {listPlatform} from "@/api/shop/shop";
 export default {
   name: "Order",
-  components:{OrderTao,OrderJd,OrderDou,OrderPdd,OrderJdVc,OrderWei,OrderOffline},
+  components:{OrderTao,OrderJd,OrderDou,OrderPdd,OrderWei,OrderOffline},
   data() {
     return {
       activeName: '',

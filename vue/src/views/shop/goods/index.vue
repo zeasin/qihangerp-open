@@ -4,7 +4,6 @@
     <el-tab-pane v-for="item in typeList" :label="item.name"  :name="item.code" lazy>
       <goods-tao v-if="item.id === 100"></goods-tao>
       <goods-jd v-if="item.id === 200"></goods-jd>
-      <goods-jdvc v-if="item.id === 280"></goods-jdvc>
       <goods-pdd v-if="item.id === 300"></goods-pdd>
       <goods-dou v-if="item.id === 400"></goods-dou>
       <goods-wei v-if="item.id === 500"></goods-wei>
@@ -35,7 +34,6 @@
 <script>
 import GoodsTao  from "@/views/tao/goods/index";
 import GoodsJd  from "@/views/jd/goods/index";
-import GoodsJdvc  from "@/views/jd/goods/index-vc";
 import GoodsDou  from "@/views/dou/goods/index";
 import GoodsPdd  from "@/views/pdd/goods/index";
 import GoodsWei  from "@/views/wei/goods/index";
@@ -45,7 +43,7 @@ import {listPlatform} from "@/api/shop/shop";
 export default {
   name: "Goods",
   components:{
-    GoodsTao,GoodsJd,GoodsDou,GoodsPdd,GoodsJdvc,GoodsOffline,GoodsWei },
+    GoodsTao,GoodsJd,GoodsDou,GoodsPdd,GoodsOffline,GoodsWei },
   data() {
     return {
       activeName: '',

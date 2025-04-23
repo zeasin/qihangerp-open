@@ -3,7 +3,7 @@ import request from '@/utils/request'
 // 查询售后列表
 export function listRefund(query) {
   return request({
-    url: '/api/open-api/jd/after/list',
+    url: '/jd/after/list',
     method: 'get',
     params: query
   })
@@ -12,7 +12,7 @@ export function listRefund(query) {
 
 export function pullRefund(data) {
   return request({
-    url: '/api/open-api/jd/refund/pull_list',
+    url: '/jd/refund/pull_list',
     method: 'post',
     data: data
   })
@@ -20,7 +20,7 @@ export function pullRefund(data) {
 
 export function pushOms(data) {
   return request({
-    url: '/api/open-api/jd/after/push_oms',
+    url: '/jd/after/push_oms',
     method: 'post',
     data: data
   })
