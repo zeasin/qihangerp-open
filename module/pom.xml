@@ -17,7 +17,6 @@
     <modules>
         <module>shop</module>
         <module>goods</module>
-<!--        <module>open</module>-->
         <module>order</module>
         <module>sys</module>
 <!--        <module>scm</module>-->
