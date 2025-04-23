@@ -106,6 +106,31 @@
             <artifactId>order-api</artifactId>
             <version>1.0.6</version>
         </dependency>
+        <dependency>
+            <groupId>cn.qihangerp.services</groupId>
+            <artifactId>tao-api</artifactId>
+            <version>1.0.6</version>
+        </dependency>
+        <dependency>
+            <groupId>cn.qihangerp.services</groupId>
+            <artifactId>jd-api</artifactId>
+            <version>1.0.6</version>
+        </dependency>
+        <dependency>
+            <groupId>cn.qihangerp.services</groupId>
+            <artifactId>pdd-api</artifactId>
+            <version>1.0.6</version>
+        </dependency>
+        <dependency>
+            <groupId>cn.qihangerp.services</groupId>
+            <artifactId>dou-api</artifactId>
+            <version>1.0.6</version>
+        </dependency>
+        <dependency>
+            <groupId>cn.qihangerp.services</groupId>
+            <artifactId>wei-api</artifactId>
+            <version>1.0.6</version>
+        </dependency>
 
 
         <dependency>
@@ -145,28 +170,28 @@
             <artifactId>stock</artifactId>
             <version>1.0</version>
         </dependency>
-        <dependency>
-            <groupId>cn.qihangerp.module</groupId>
-            <artifactId>open</artifactId>
-            <version>1.0</version>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>cn.qihangerp.module</groupId>-->
+<!--            <artifactId>open</artifactId>-->
+<!--            <version>1.0</version>-->
+<!--        </dependency>-->
 
 
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-webflux</artifactId>
-            <version>6.0.14</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.springframework</groupId>
-                    <artifactId>spring-core</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>org.springframework</groupId>
-                    <artifactId>spring-web</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>org.springframework</groupId>-->
+<!--            <artifactId>spring-webflux</artifactId>-->
+<!--            <version>6.0.14</version>-->
+<!--            <exclusions>-->
+<!--                <exclusion>-->
+<!--                    <groupId>org.springframework</groupId>-->
+<!--                    <artifactId>spring-core</artifactId>-->
+<!--                </exclusion>-->
+<!--                <exclusion>-->
+<!--                    <groupId>org.springframework</groupId>-->
+<!--                    <artifactId>spring-web</artifactId>-->
+<!--                </exclusion>-->
+<!--            </exclusions>-->
+<!--        </dependency>-->
         <dependency>
             <groupId>com.qiniu</groupId>
             <artifactId>qiniu-java-sdk</artifactId>

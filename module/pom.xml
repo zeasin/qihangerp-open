@@ -17,11 +17,16 @@
     <modules>
         <module>shop</module>
         <module>goods</module>
-        <module>open</module>
+<!--        <module>open</module>-->
         <module>order</module>
         <module>sys</module>
 <!--        <module>scm</module>-->
         <module>stock</module>
+        <module>dou</module>
+        <module>jd</module>
+        <module>pdd</module>
+        <module>tao</module>
+        <module>wei</module>
     </modules>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
