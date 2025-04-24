@@ -75,7 +75,7 @@ public class JdOrderServiceImpl extends ServiceImpl<JdOrderMapper, JdOrder>
         pageQuery.setIsAsc("desc");
         Page<JdOrder> taoGoodsPage = mapper.selectPage(pageQuery.build(), queryWrapper);
         if(taoGoodsPage.getRecords()!=null){
-            for (var order:taoGoodsPage.getRecords()) {
+            for (JdOrder order:taoGoodsPage.getRecords()) {
                 order.setItems(itemMapper.selectList(new LambdaQueryWrapper<JdOrderItem>().eq(JdOrderItem::getOrderId,order.getId())));
             }
         }
@@ -112,7 +112,7 @@ public class JdOrderServiceImpl extends ServiceImpl<JdOrderMapper, JdOrder>
                 itemMapper.delete(new LambdaQueryWrapper<JdOrderItem>().eq(JdOrderItem::getOrderId,jdOrders.get(0).getId()));
 
                 // 添加item
-                for (var item : order.getItems()) {
+                for (JdOrderItem item : order.getItems()) {
                     List<JdGoodsSku> pddGoodsSku = goodsSkuMapper.selectList(new LambdaQueryWrapper<JdGoodsSku>().eq(JdGoodsSku::getSkuId, item.getSkuId()));
                     if (pddGoodsSku != null && !pddGoodsSku.isEmpty()) {
                         item.setoGoodsId(pddGoodsSku.get(0).getOGoodsId());
@@ -139,7 +139,7 @@ public class JdOrderServiceImpl extends ServiceImpl<JdOrderMapper, JdOrder>
 
                 // 添加优惠信息
                 if(order.getCoupons()!= null){
-                    for (var coupon:order.getCoupons()) {
+                    for (JdOrderCoupon coupon:order.getCoupons()) {
                         if(coupon.getOrderId()==null){
                             coupon.setOrderId(Long.parseLong(jdOrders.get(0).getOrderId()));
                         }
@@ -155,7 +155,7 @@ public class JdOrderServiceImpl extends ServiceImpl<JdOrderMapper, JdOrder>
                 order.setCreateTime(new Date());
                 mapper.insert(order);
                 // 添加item
-                for (var item : order.getItems()) {
+                for (JdOrderItem item : order.getItems()) {
                     List<JdGoodsSku> pddGoodsSku = goodsSkuMapper.selectList(new LambdaQueryWrapper<JdGoodsSku>().eq(JdGoodsSku::getSkuId, item.getSkuId()));
                     if (pddGoodsSku != null && !pddGoodsSku.isEmpty()) {
                         item.setoGoodsId(pddGoodsSku.get(0).getOGoodsId());
@@ -167,7 +167,7 @@ public class JdOrderServiceImpl extends ServiceImpl<JdOrderMapper, JdOrder>
 
                 // 添加优惠信息
                 if(order.getCoupons()!= null){
-                    for (var coupon:order.getCoupons()) {
+                    for (JdOrderCoupon coupon:order.getCoupons()) {
                         if(coupon.getOrderId()==null){
                             coupon.setOrderId(Long.parseLong(order.getOrderId()));
                         }

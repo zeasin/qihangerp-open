@@ -69,7 +69,7 @@ public class OShipmentServiceImpl extends ServiceImpl<OShipmentMapper, OShipment
         List<OShipmentItem> shippingItemList = new ArrayList<>();
         List<String> orderNums = new ArrayList<>();
         List<String> subOrderNums = new ArrayList<>();
-        for (var orderItemId:shipBo.getItemIds()) {
+        for (String orderItemId:shipBo.getItemIds()) {
             // 查询子订单是否存在
             OOrderItem oOrderItem = itemMapper.selectById(orderItemId);
             if(oOrderItem==null ) return ResultVo.error(ResultVoEnum.NotFound, orderItemId + "子订单未找到");
@@ -119,7 +119,7 @@ public class OShipmentServiceImpl extends ServiceImpl<OShipmentMapper, OShipment
         mapper.insert(shipping);
 
         // 添加发货子表
-        for (var item:shippingItemList) {
+        for (OShipmentItem item:shippingItemList) {
             item.setShippingId(shipping.getId());
             shippingItemMapper.insert(item);
         }
@@ -158,7 +158,7 @@ public class OShipmentServiceImpl extends ServiceImpl<OShipmentMapper, OShipment
                 // 查处item
                 List<OOrderItem> items = itemMapper.selectList(new LambdaQueryWrapper<OOrderItem>().eq(OOrderItem::getOrderId, oOrders.get(0).getId()));
                 if(items!=null&& items.size()>0){
-                    for (var item:items) {
+                    for (OOrderItem item:items) {
                         List<OShipStockUp> erpShipStockUps = shipStockUpMapper.selectList(new LambdaQueryWrapper<OShipStockUp>().eq(OShipStockUp::getSaleOrderItemId, item.getId()));
                         if(erpShipStockUps==null || erpShipStockUps.size()==0) {
                             OShipStockUp shipStockUp = new OShipStockUp();
@@ -225,7 +225,7 @@ public class OShipmentServiceImpl extends ServiceImpl<OShipmentMapper, OShipment
             List<String> orderNums = new ArrayList<>();
             List<String> subOrderNums = new ArrayList<>();
             List<OShipmentItem> shippingItemList = new ArrayList<>();
-            for (var oOrderItem:oOrderItems) {
+            for (OOrderItem oOrderItem:oOrderItems) {
 //                if (oOrderItem.getRefundStatus()!=1) {
 //                    return ResultVo.error(ResultVoEnum.StatusError, orderItemId + "子订单退款状态不允许发货");
 //                }
@@ -263,7 +263,7 @@ public class OShipmentServiceImpl extends ServiceImpl<OShipmentMapper, OShipment
             mapper.insert(shipping);
 
             // 添加发货子表
-            for (var item:shippingItemList) {
+            for (OShipmentItem item:shippingItemList) {
                 item.setShippingId(shipping.getId());
                 shippingItemMapper.insert(item);
             }

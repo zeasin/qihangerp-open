@@ -54,7 +54,7 @@ public class OmsWeiOrderServiceImpl extends ServiceImpl<OmsWeiOrderMapper, OmsWe
 
         Page<OmsWeiOrder> page = mapper.selectPage(pageQuery.build(), queryWrapper);
         if(page.getRecords()!=null){
-            for (var order:page.getRecords()) {
+            for (OmsWeiOrder order:page.getRecords()) {
                 order.setItems(itemMapper.selectList(new LambdaQueryWrapper<OmsWeiOrderItem>().eq(OmsWeiOrderItem::getOrderId,order.getOrderId())));
             }
         }
@@ -79,7 +79,7 @@ public class OmsWeiOrderServiceImpl extends ServiceImpl<OmsWeiOrderMapper, OmsWe
 
                 mapper.updateById(update);
                 // 更新item
-                for (var item : order.getItems()) {
+                for (OmsWeiOrderItem item : order.getItems()) {
                     List<OmsWeiOrderItem> taoOrderItems = itemMapper.selectList(
                             new LambdaQueryWrapper<OmsWeiOrderItem>().eq(OmsWeiOrderItem::getSkuId, item.getSkuId()).eq(OmsWeiOrderItem::getOrderId,order.getOrderId())
                     );
@@ -113,7 +113,7 @@ public class OmsWeiOrderServiceImpl extends ServiceImpl<OmsWeiOrderMapper, OmsWe
                 order.setShopId(shopId);
                 mapper.insert(order);
                 // 添加item
-                for (var item : order.getItems()) {
+                for (OmsWeiOrderItem item : order.getItems()) {
                     List<OmsWeiGoodsSku> skus = goodsSkuMapper.selectList(new LambdaQueryWrapper<OmsWeiGoodsSku>().eq(OmsWeiGoodsSku::getSkuId, item.getSkuId()));
                     if (skus != null && !skus.isEmpty()) {
                         item.setOGoodsId(skus.get(0).getOGoodsId());

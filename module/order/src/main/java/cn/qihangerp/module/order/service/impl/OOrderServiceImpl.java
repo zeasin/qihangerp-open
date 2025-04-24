@@ -1283,7 +1283,7 @@ public class OOrderServiceImpl extends ServiceImpl<OOrderMapper, OOrder>
     private void addOfflineOrderItem(String oOrderId,String originOrderNum,Integer orderStatus,Integer refundStatus){
         List<OfflineOrderItem> originOrderItems = offlineOrderItemMapper.selectList(new LambdaQueryWrapper<OfflineOrderItem>().eq(OfflineOrderItem::getOrderNum, originOrderNum));
         if(originOrderItems!=null && originOrderItems.size()>0) {
-            for (var item : originOrderItems) {
+            for (OfflineOrderItem item : originOrderItems) {
                 OOrderItem orderItem = new OOrderItem();
                 orderItem.setOrderId(oOrderId);
                 orderItem.setOrderNum(originOrderNum);
@@ -1382,7 +1382,7 @@ public class OOrderServiceImpl extends ServiceImpl<OOrderMapper, OOrder>
 
         // 查询子订单
         if(pages.getRecords()!=null){
-            for (var order:pages.getRecords()) {
+            for (OOrder order:pages.getRecords()) {
 //                order.setItemList(orderItemMapper.selectList(new LambdaQueryWrapper<OOrderItem>().eq(OOrderItem::getOrderId, order.getId())));
                 order.setItemVoList(orderItemMapper.selectOrderItemListByOrderId(Long.parseLong(order.getId())));
             }
@@ -1439,7 +1439,7 @@ public class OOrderServiceImpl extends ServiceImpl<OOrderMapper, OOrder>
         List<OOrder> oOrders = orderMapper.selectList(new LambdaQueryWrapper<OOrder>().eq(OOrder::getOrderStatus, 1).eq(OOrder::getReceiverMobile, receiverMobile));
         List<OOrderItem> orderItemList = new ArrayList<>();
         if(oOrders!=null){
-            for (var order:oOrders) {
+            for (OOrder order:oOrders) {
                 orderItemList.addAll(orderItemMapper.selectList(new LambdaQueryWrapper<OOrderItem>().eq(OOrderItem::getOrderId,order.getId())));
             }
         }

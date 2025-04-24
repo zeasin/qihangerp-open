@@ -71,7 +71,7 @@ public class JdVcOrderServiceImpl extends ServiceImpl<JdVcOrderMapper, JdVcOrder
         pageQuery.setIsAsc("desc");
         Page<JdVcOrder> taoGoodsPage = mapper.selectPage(pageQuery.build(), queryWrapper);
         if(taoGoodsPage.getRecords()!=null){
-            for (var order:taoGoodsPage.getRecords()) {
+            for (JdVcOrder order:taoGoodsPage.getRecords()) {
                 order.setItems(itemMapper.selectList(new LambdaQueryWrapper<JdVcOrderItem>().eq(JdVcOrderItem::getJdVcOrderId,order.getId())));
             }
         }
@@ -116,7 +116,7 @@ public class JdVcOrderServiceImpl extends ServiceImpl<JdVcOrderMapper, JdVcOrder
                 itemMapper.delete(new LambdaQueryWrapper<JdVcOrderItem>().eq(JdVcOrderItem::getJdVcOrderId,jdOrders.get(0).getId()));
 
                 // 添加item
-                for (var item : order.getItems()) {
+                for (JdVcOrderItem item : order.getItems()) {
                     List<JdVcGoods> pddGoodsSku = jdVcGoodsMapper.selectList(new LambdaQueryWrapper<JdVcGoods>().eq(JdVcGoods::getWareId, item.getSku()));
                     if (pddGoodsSku != null && !pddGoodsSku.isEmpty()) {
                         item.setOGoodsId(pddGoodsSku.get(0).getOGoodsId().toString());
@@ -133,7 +133,7 @@ public class JdVcOrderServiceImpl extends ServiceImpl<JdVcOrderMapper, JdVcOrder
                 order.setCreateTime(new Date());
                 mapper.insert(order);
                 // 添加item
-                for (var item : order.getItems()) {
+                for (JdVcOrderItem item : order.getItems()) {
                     List<JdVcGoods> pddGoodsSku = jdVcGoodsMapper.selectList(new LambdaQueryWrapper<JdVcGoods>().eq(JdVcGoods::getWareId, item.getSku()));
                     if (pddGoodsSku != null && !pddGoodsSku.isEmpty()) {
                         item.setOGoodsId(pddGoodsSku.get(0).getOGoodsId().toString());

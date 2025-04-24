@@ -77,7 +77,7 @@ public class DouOrderServiceImpl extends ServiceImpl<DouOrderMapper, DouOrder>
         pageQuery.setIsAsc("desc");
         Page<DouOrder> taoGoodsPage = mapper.selectPage(pageQuery.build(), queryWrapper);
         if(taoGoodsPage.getRecords()!=null){
-            for (var order:taoGoodsPage.getRecords()) {
+            for (DouOrder order:taoGoodsPage.getRecords()) {
                 order.setItems(itemMapper.selectList(new LambdaQueryWrapper<DouOrderItem>().eq(DouOrderItem::getParentOrderId,order.getOrderId())));
             }
         }
@@ -141,7 +141,7 @@ public class DouOrderServiceImpl extends ServiceImpl<DouOrderMapper, DouOrder>
                 mapper.updateById(update);
                 // 删除item
                 itemMapper.delete(new LambdaQueryWrapper<DouOrderItem>().eq(DouOrderItem::getParentOrderId,order.getOrderId()));
-                for (var item : order.getItems()) {
+                for (DouOrderItem item : order.getItems()) {
                     // 新增
                     DouGoodsSku goodsSku = goodsSkuMapper.selectById(item.getSkuId());
                     if (goodsSku != null) {
@@ -158,7 +158,7 @@ public class DouOrderServiceImpl extends ServiceImpl<DouOrderMapper, DouOrder>
                 order.setPullTime(new Date());
                 mapper.insert(order);
                 // 添加item
-                for (var item : order.getItems()) {
+                for (DouOrderItem item : order.getItems()) {
                     DouGoodsSku goodsSku = goodsSkuMapper.selectById(item.getSkuId());
                     if (goodsSku != null) {
                         item.setOGoodsId(goodsSku.getOGoodsId());

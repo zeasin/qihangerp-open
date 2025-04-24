@@ -72,7 +72,7 @@ public class PddOrderServiceImpl extends ServiceImpl<PddOrderMapper, PddOrder>
         pageQuery.setIsAsc("desc");
         Page<PddOrder> taoGoodsPage = mapper.selectPage(pageQuery.build(), queryWrapper);
         if(taoGoodsPage.getRecords()!=null){
-            for (var order:taoGoodsPage.getRecords()) {
+            for (PddOrder order:taoGoodsPage.getRecords()) {
                 order.setItems(itemMapper.selectList(new LambdaQueryWrapper<PddOrderItem>().eq(PddOrderItem::getOrderSn,order.getOrderSn())));
             }
         }
@@ -182,7 +182,7 @@ public class PddOrderServiceImpl extends ServiceImpl<PddOrderMapper, PddOrder>
                 itemMapper.delete(new LambdaQueryWrapper<PddOrderItem>().eq(PddOrderItem::getOrderSn,order.getOrderSn()));
 
                 // 添加item
-                for (var item : order.getItems()) {
+                for (PddOrderItem item : order.getItems()) {
                     List<PddGoodsSku> pddGoodsSku = goodsSkuMapper.selectList(new LambdaQueryWrapper<PddGoodsSku>().eq(PddGoodsSku::getSkuId, item.getSkuId()));
                     if (pddGoodsSku != null && !pddGoodsSku.isEmpty()) {
                         item.setOGoodsId(pddGoodsSku.get(0).getOGoodsId());
@@ -198,7 +198,7 @@ public class PddOrderServiceImpl extends ServiceImpl<PddOrderMapper, PddOrder>
                 order.setCreateTime(new Date());
                 mapper.insert(order);
                 // 添加item
-                for (var item : order.getItems()) {
+                for (PddOrderItem item : order.getItems()) {
                     List<PddGoodsSku> pddGoodsSku = goodsSkuMapper.selectList(new LambdaQueryWrapper<PddGoodsSku>().eq(PddGoodsSku::getSkuId, item.getSkuId()));
                     if (pddGoodsSku != null && !pddGoodsSku.isEmpty()) {
                         item.setOGoodsId(pddGoodsSku.get(0).getOGoodsId());

@@ -132,7 +132,7 @@ public class WmsStockInServiceImpl extends ServiceImpl<WmsStockInMapper, WmsStoc
         }
 
         List<StockInItem> waitList = new ArrayList<>();
-        for (var item : request.getItemList()) {
+        for (StockInItem item : request.getItemList()) {
             if (item.getIntoQuantity() == null || item.getPositionId() == null) {
                 waitList.add(item);
             }
@@ -140,7 +140,7 @@ public class WmsStockInServiceImpl extends ServiceImpl<WmsStockInMapper, WmsStoc
         if (waitList.size() == 0) return ResultVo.error(ResultVoEnum.ParamsError, "缺少入库明细数据");
 
         // 开始入库
-        for (var item:waitList) {
+        for (StockInItem item:waitList) {
             // 查询明细
             WmsStockInItem stockInItem = inItemService.getById(item.getId());
             if(stockInItem == null){

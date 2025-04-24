@@ -39,7 +39,7 @@ public class OmsWeiGoodsServiceImpl extends ServiceImpl<OmsWeiGoodsMapper, OmsWe
             skuMapper.delete(new LambdaQueryWrapper<OmsWeiGoodsSku>().eq(OmsWeiGoodsSku::getProductId,goods.getProductId()));
             // 重新插入sku
             if(goods.getSkus()!=null) {
-                for (var sku : goods.getSkus()) {
+                for (OmsWeiGoodsSku sku : goods.getSkus()) {
                     sku.setTitle(goods.getTitle());
                     sku.setShopId(shopId);
                     // 根据OuterId查找ERP系统中的skuid
@@ -62,7 +62,7 @@ public class OmsWeiGoodsServiceImpl extends ServiceImpl<OmsWeiGoodsMapper, OmsWe
             mapper.insert(goods);
             // 插入sku
             if(goods.getSkus()!=null) {
-                for (var sku : goods.getSkus()) {
+                for (OmsWeiGoodsSku sku : goods.getSkus()) {
                     sku.setShopId(shopId);
                     sku.setTitle(goods.getTitle());
 //                    sku.setWeiGoodsId(Long.parseLong(goods.getId()));

@@ -54,7 +54,7 @@ public class OOrderItemServiceImpl extends ServiceImpl<OOrderItemMapper, OOrderI
                 bo.setEndTime(bo.getEndTime()+" 23:59:59");
             }
         }
-        var pages = mapper.selectPageVo(pageQuery.build(), bo);
+        Page<OrderItemListVo> pages = mapper.selectPageVo(pageQuery.build(), bo);
         return PageResult.build(pages);
     }
 

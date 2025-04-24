@@ -67,7 +67,7 @@ public class DouGoodsServiceImpl extends ServiceImpl<DouGoodsMapper, DouGoods>
 
         // 添加sku
         if(goods.getSkuList()!=null && !goods.getSkuList().isEmpty()){
-            for (var item : goods.getSkuList()){
+            for (DouGoodsSku item : goods.getSkuList()){
                 item.setName(goods.getName());
                 item.setImg(goods.getImg());
                 item.setShopId(shopId);

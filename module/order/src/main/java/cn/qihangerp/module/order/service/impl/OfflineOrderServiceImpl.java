@@ -80,7 +80,7 @@ public class OfflineOrderServiceImpl extends ServiceImpl<OfflineOrderMapper, Off
 
         // 查询子订单
         if(pages.getRecords()!=null){
-            for (var order:pages.getRecords()) {
+            for (OfflineOrder order:pages.getRecords()) {
                 order.setItemList(orderItemMapper.selectList(new LambdaQueryWrapper<OfflineOrderItem>().eq(OfflineOrderItem::getOrderId, order.getId())));
             }
         }

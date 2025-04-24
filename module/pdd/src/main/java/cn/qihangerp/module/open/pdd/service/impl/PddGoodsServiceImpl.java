@@ -65,7 +65,7 @@ public class PddGoodsServiceImpl extends ServiceImpl<PddGoodsMapper, PddGoods>
 
         // 添加sku
         if(goods.getSkuList()!=null && !goods.getSkuList().isEmpty()){
-            for (var item : goods.getSkuList()){
+            for (PddGoodsSku item : goods.getSkuList()){
                 item.setGoodsId(goods.getGoodsId());
                 item.setGoodsName(goods.getGoodsName());
                 item.setThumbUrl(goods.getThumbUrl());

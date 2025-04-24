@@ -98,6 +98,11 @@
 
         <dependency>
             <groupId>cn.qihangerp.services</groupId>
+            <artifactId>sys-api</artifactId>
+            <version>1.0.6</version>
+        </dependency>
+        <dependency>
+            <groupId>cn.qihangerp.services</groupId>
             <artifactId>goods-api</artifactId>
             <version>1.0.6</version>
         </dependency>

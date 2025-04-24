@@ -65,7 +65,7 @@ public class JdGoodsServiceImpl extends ServiceImpl<JdGoodsMapper, JdGoods>
 
         // 添加sku
         if(goods.getSkuList()!=null && !goods.getSkuList().isEmpty()){
-            for (var item : goods.getSkuList()){
+            for (JdGoodsSku item : goods.getSkuList()){
 //                item.setGoodsId(goods.getId());
                 // 根据OuterId查找ERP系统中的skuid
                 if(StringUtils.isNotEmpty(item.getOuterId())) {

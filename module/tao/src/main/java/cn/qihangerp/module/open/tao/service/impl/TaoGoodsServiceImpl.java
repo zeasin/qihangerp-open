@@ -61,7 +61,7 @@ public class TaoGoodsServiceImpl extends ServiceImpl<TaoGoodsMapper, TaoGoods>
 
             // 重新插入sku
             if(goods.getSkus()!=null) {
-                for (var sku : goods.getSkus()) {
+                for (TaoGoodsSku sku : goods.getSkus()) {
                     sku.setTaoGoodsId(goods.getId());
                     // 根据OuterId查找ERP系统中的skuid
                     if(StringUtils.isNotEmpty(sku.getOuterId())) {
@@ -82,7 +82,7 @@ public class TaoGoodsServiceImpl extends ServiceImpl<TaoGoodsMapper, TaoGoods>
             mapper.insert(goods);
             // 插入sku
             if(goods.getSkus()!=null) {
-                for (var sku : goods.getSkus()) {
+                for (TaoGoodsSku sku : goods.getSkus()) {
                     sku.setTaoGoodsId(goods.getId());
                     // 根据OuterId查找ERP系统中的skuid
                     if(StringUtils.isNotEmpty(sku.getOuterId())) {

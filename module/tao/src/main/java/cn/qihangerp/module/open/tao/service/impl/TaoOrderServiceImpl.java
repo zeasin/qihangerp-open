@@ -75,7 +75,7 @@ public class TaoOrderServiceImpl extends ServiceImpl<TaoOrderMapper, TaoOrder>
         pageQuery.setIsAsc("desc");
         Page<TaoOrder> taoGoodsPage = mapper.selectPage(pageQuery.build(), queryWrapper);
         if(taoGoodsPage.getRecords()!=null){
-            for (var order:taoGoodsPage.getRecords()) {
+            for (TaoOrder order:taoGoodsPage.getRecords()) {
                 order.setItems(itemMapper.selectList(new LambdaQueryWrapper<TaoOrderItem>().eq(TaoOrderItem::getTid,order.getTid())));
             }
         }
@@ -128,7 +128,7 @@ public class TaoOrderServiceImpl extends ServiceImpl<TaoOrderMapper, TaoOrder>
                 update.setAvailableConfirmFee(order.getAvailableConfirmFee());
                 mapper.updateById(update);
                 // 更新item
-                for (var item : order.getItems()) {
+                for (TaoOrderItem item : order.getItems()) {
                     List<TaoOrderItem> taoOrderItems = itemMapper.selectList(new LambdaQueryWrapper<TaoOrderItem>().eq(TaoOrderItem::getOid, item.getOid()));
                     if (taoOrderItems != null && taoOrderItems.size() > 0) {
                         // 更新
@@ -174,12 +174,12 @@ public class TaoOrderServiceImpl extends ServiceImpl<TaoOrderMapper, TaoOrder>
                 order.setCreateTime(new Date());
                 mapper.insert(order);
                 // 添加item
-                for (var item : order.getItems()) {
+                for (TaoOrderItem item : order.getItems()) {
                     itemMapper.insert(item);
                 }
                 // 添加 优惠信息
                 if(order.getPromotions()!=null){
-                    for (var p:order.getPromotions()) {
+                    for (TaoOrderPromotion p:order.getPromotions()) {
                         promotionDetailsMapper.insert(p);
                     }
                 }
