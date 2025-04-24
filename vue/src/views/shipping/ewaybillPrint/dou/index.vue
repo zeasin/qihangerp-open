@@ -242,7 +242,7 @@ export default {
   },
   created() {
     this.openWs()
-    listShop({platform: 6}).then(response => {
+    listShop({type: 400}).then(response => {
       this.shopList = response.rows;
       if (this.shopList && this.shopList.length > 0) {
         this.queryParams.shopId = this.shopList[0].id
