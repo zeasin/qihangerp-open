@@ -12,7 +12,7 @@ export function listConfig(query) {
 // 查询参数详细
 export function getConfig(configId) {
   return request({
-    url: '/api/sys-api/system/config/getConfigValue/' + configId,
+    url: '/system/config/getConfigValue/' + configId,
     method: 'get'
   })
 }

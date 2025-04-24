@@ -25,7 +25,7 @@
 // * @author qihang
 // */
 //@RestController
-//@RequestMapping("/api/sys-api/system/user")
+//@RequestMapping("/system/user")
 //public class SysUserController extends BaseController
 //{
 //    @Autowired

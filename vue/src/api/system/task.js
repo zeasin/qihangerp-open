@@ -2,7 +2,7 @@ import request from '@/utils/request'
 
 export function listTask(query) {
   return request({
-    url: '/api/sys-api/system/task/list',
+    url: '/system/task/list',
     method: 'get',
     params: query
   })
@@ -10,14 +10,14 @@ export function listTask(query) {
 
 export function getTask(taskId) {
   return request({
-    url: '/api/sys-api/system/task/' + taskId,
+    url: '/system/task/' + taskId,
     method: 'get'
   })
 }
 
 export function getTaskLogs(taskId) {
   return request({
-    url: '/api/sys-api/system/task/logs/' + taskId,
+    url: '/system/task/logs/' + taskId,
     method: 'get'
   })
 }
@@ -26,7 +26,7 @@ export function getTaskLogs(taskId) {
 // 修改
 export function updateTask(data) {
   return request({
-    url: '/api/sys-api/system/task',
+    url: '/system/task',
     method: 'put',
     data: data
   })

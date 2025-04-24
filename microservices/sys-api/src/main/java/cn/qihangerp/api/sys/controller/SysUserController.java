@@ -1,26 +1,27 @@
 package cn.qihangerp.api.sys.controller;
 
-
 import cn.qihangerp.common.AjaxResult;
+import cn.qihangerp.common.TableDataInfo;
 import cn.qihangerp.common.utils.StringUtils;
+import cn.qihangerp.domain.SysRole;
 import cn.qihangerp.domain.SysUser;
+import cn.qihangerp.module.domain.SysDept;
+import cn.qihangerp.module.service.ISysDeptService;
+import cn.qihangerp.module.service.ISysRoleService;
 import cn.qihangerp.security.common.BaseController;
 import cn.qihangerp.security.common.SecurityUtils;
-
-
-import cn.qihangerp.common.TableDataInfo;
 import cn.qihangerp.service.ISysUserService;
-import org.apache.commons.lang3.ArrayUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * 用户信息
- * 
+ *
  * @author qihang
  */
 @RestController
@@ -30,11 +31,11 @@ public class SysUserController extends BaseController
     @Autowired
     private ISysUserService userService;
 
-//    @Autowired
-//    private ISysRoleService roleService;
+    @Autowired
+    private ISysRoleService roleService;
 //
-//    @Autowired
-//    private ISysDeptService deptService;
+    @Autowired
+    private ISysDeptService deptService;
 //
 //    @Autowired
 //    private ISysPostService postService;
@@ -62,19 +63,20 @@ public class SysUserController extends BaseController
     public AjaxResult getInfo(@PathVariable(value = "userId", required = false) Long userId)
     {
         userService.checkUserDataScope(userId);
-        SysUser sysUser = userService.selectUserById(userId);
         AjaxResult ajax = AjaxResult.success();
-        ajax.put(AjaxResult.DATA_TAG, sysUser);
-//        List<SysRole> roles = roleService.selectRoleAll();
-//        ajax.put("roles", SysUser.isAdmin(userId) ? roles : roles.stream().filter(r -> !r.isAdmin()).collect(Collectors.toList()));
+        List<SysRole> roles = roleService.selectRoleAll();
+        ajax.put("roles", SysUser.isAdmin(userId) ? roles : roles.stream().filter(r -> !r.isAdmin()).collect(Collectors.toList()));
 //        ajax.put("posts", postService.selectPostAll());
-//        if (StringUtils.isNotNull(userId))
-//        {
-//            SysUser sysUser = userService.selectUserById(userId);
-//            ajax.put(AjaxResult.DATA_TAG, sysUser);
+        if (StringUtils.isNotNull(userId))
+        {
+            SysUser sysUser = userService.selectUserById(userId);
+            List<SysRole> userRoles = roles.stream().filter(r -> r.getRoleId() == sysUser.getRoleId()).collect(Collectors.toList());
+
+            ajax.put(AjaxResult.DATA_TAG, sysUser);
 //            ajax.put("postIds", postService.selectPostListByUserId(userId));
 //            ajax.put("roleIds", sysUser.getRoles().stream().map(SysRole::getRoleId).collect(Collectors.toList()));
-//        }
+            ajax.put("roleIds", userRoles.stream().map(SysRole::getRoleId).collect(Collectors.toList()));
+        }
         return ajax;
     }
 
@@ -105,7 +107,6 @@ public class SysUserController extends BaseController
     /**
      * 修改用户
      */
-    @PreAuthorize("@ss.hasPermi('system:user:edit')")
     @PutMapping
     public AjaxResult edit(@Validated @RequestBody SysUser user)
     {
@@ -131,18 +132,10 @@ public class SysUserController extends BaseController
      * 删除用户
      */
     @PreAuthorize("@ss.hasPermi('system:user:remove')")
-
-    @DeleteMapping("/{userIds}")
-    public AjaxResult remove(@PathVariable Long[] userIds)
+    @DeleteMapping("/{userId}")
+    public AjaxResult remove(@PathVariable Long userId)
     {
-        if (ArrayUtils.contains(userIds, getUserId()))
-        {
-            return error("当前用户不能删除");
-        }
-        for (var userId:userIds){
-            userService.deleteUserById(userId);
-        }
-        return toAjax(userIds.length);
+        return toAjax(userService.deleteUserById(userId));
     }
 
     /**
@@ -172,41 +165,40 @@ public class SysUserController extends BaseController
         return toAjax(userService.updateUserStatus(user));
     }
 
-//    /**
-//     * 根据用户编号获取授权角色
-//     */
-//    @PreAuthorize("@ss.hasPermi('system:user:query')")
-//    @GetMapping("/authRole/{userId}")
-//    public AjaxResult authRole(@PathVariable("userId") Long userId)
-//    {
-//        AjaxResult ajax = AjaxResult.success();
-//        SysUser user = userService.selectUserById(userId);
-//        List<SysRole> roles = roleService.selectRolesByUserId(userId);
-//        ajax.put("user", user);
-//        ajax.put("roles", SysUser.isAdmin(userId) ? roles : roles.stream().filter(r -> !r.isAdmin()).collect(Collectors.toList()));
-//        return ajax;
-//    }
-//
-//    /**
-//     * 用户授权角色
-//     */
-//    @PreAuthorize("@ss.hasPermi('system:user:edit')")
-//    @Log(title = "用户管理", businessType = BusinessType.GRANT)
-//    @PutMapping("/authRole")
-//    public AjaxResult insertAuthRole(Long userId, Long[] roleIds)
-//    {
-//        userService.checkUserDataScope(userId);
-//        userService.insertUserAuth(userId, roleIds);
-//        return success();
-//    }
-//
-//    /**
-//     * 获取部门树列表
-//     */
-//    @PreAuthorize("@ss.hasPermi('system:user:list')")
-//    @GetMapping("/deptTree")
-//    public AjaxResult deptTree(SysDept dept)
-//    {
-//        return success(deptService.selectDeptTreeList(dept));
-//    }
+    /**
+     * 根据用户编号获取授权角色
+     */
+    @PreAuthorize("@ss.hasPermi('system:user:query')")
+    @GetMapping("/authRole/{userId}")
+    public AjaxResult authRole(@PathVariable("userId") Long userId)
+    {
+        AjaxResult ajax = AjaxResult.success();
+        SysUser user = userService.selectUserById(userId);
+        List<SysRole> roles = roleService.selectRolesByUserId(userId);
+        ajax.put("user", user);
+        ajax.put("roles", SysUser.isAdmin(userId) ? roles : roles.stream().filter(r -> !r.isAdmin()).collect(Collectors.toList()));
+        return ajax;
+    }
+
+    /**
+     * 用户授权角色
+     */
+    @PreAuthorize("@ss.hasPermi('system:user:edit')")
+    @PutMapping("/authRole")
+    public AjaxResult insertAuthRole(Long userId, Long[] roleIds)
+    {
+        userService.checkUserDataScope(userId);
+        userService.insertUserAuth(userId, roleIds);
+        return success();
+    }
+
+    /**
+     * 获取部门树列表
+     */
+    @PreAuthorize("@ss.hasPermi('system:user:list')")
+    @GetMapping("/deptTree")
+    public AjaxResult deptTree(SysDept dept)
+    {
+        return success(deptService.selectDeptTreeList(dept));
+    }
 }

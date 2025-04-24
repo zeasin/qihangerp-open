@@ -1,7 +1,5 @@
 package cn.qihangerp.api.sys.controller;
 
-
-
 import cn.qihangerp.common.AjaxResult;
 import cn.qihangerp.common.TableDataInfo;
 import cn.qihangerp.common.utils.StringUtils;
@@ -9,17 +7,17 @@ import cn.qihangerp.domain.SysDictData;
 import cn.qihangerp.module.service.ISysDictDataService;
 import cn.qihangerp.module.service.ISysDictTypeService;
 import cn.qihangerp.security.common.BaseController;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * 数据字典信息
- * 
+ *
  * @author qihang
  */
 @RestController
