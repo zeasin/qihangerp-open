@@ -105,7 +105,7 @@ export default {
         ]
       },
       report:{
-        inventory:50,
+        waitShip:0,
         salesVolume:5989.98,
         orderCount:302,
         shopCount:8

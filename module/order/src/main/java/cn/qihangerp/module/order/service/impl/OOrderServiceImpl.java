@@ -1455,6 +1455,10 @@ public class OOrderServiceImpl extends ServiceImpl<OOrderMapper, OOrder>
         return orderMapper.getTodaySalesDaily();
     }
 
+    @Override
+    public Integer getWaitShipOrderAllCount() {
+        return orderMapper.getWaitShipOrderAllCount();
+    }
 //    /**
 //     * 新增订单
 //     *

@@ -21,6 +21,7 @@ public interface OOrderMapper extends BaseMapper<OOrder> {
 
     List<SalesDailyVo> salesDaily();
     SalesDailyVo getTodaySalesDaily();
+    Integer getWaitShipOrderAllCount();
 }
 
 

@@ -33,8 +33,9 @@ public class ReportController extends BaseController {
         // 今日销售
         SalesDailyVo todaySalesDaily = orderService.getTodaySalesDaily();
         // 查询库存
-        Long allInventoryQuantity = inventoryService.getAllInventoryQuantity();
-        result.put("inventory",allInventoryQuantity.doubleValue());
+//        Long allInventoryQuantity = inventoryService.getAllInventoryQuantity();
+//        result.put("inventory",allInventoryQuantity.doubleValue());
+        result.put("waitShip",orderService.getWaitShipOrderAllCount());
         result.put("salesVolume",todaySalesDaily.getAmount());
         result.put("orderCount",todaySalesDaily.getCount().doubleValue());
         result.put("shopCount",shopCount.doubleValue());

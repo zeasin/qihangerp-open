@@ -33,9 +33,9 @@
         </div>
         <div class="card-panel-description">
           <div class="card-panel-text">
-            当前库存
+            待发货
           </div>
-          <count-to :start-val="0" :end-val="chartData.inventory" :duration="3000" class="card-panel-num" />
+          <count-to :start-val="0" :end-val="chartData.waitShip" :duration="3000" class="card-panel-num" />
         </div>
       </div>
     </el-col>

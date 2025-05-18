@@ -46,4 +46,5 @@ public interface OOrderService extends IService<OOrder> {
 
     List<SalesDailyVo> salesDaily();
     SalesDailyVo getTodaySalesDaily();
+    Integer getWaitShipOrderAllCount();
 }
