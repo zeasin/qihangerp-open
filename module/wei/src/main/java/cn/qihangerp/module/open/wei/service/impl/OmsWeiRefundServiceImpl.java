@@ -69,8 +69,8 @@ public class OmsWeiRefundServiceImpl extends ServiceImpl<OmsWeiRefundMapper, Oms
                 if(refund.getSkuId()!=null) {
                     List<OmsWeiGoodsSku> pddGoodsSku = goodsSkuMapper.selectList(new LambdaQueryWrapper<OmsWeiGoodsSku>().eq(OmsWeiGoodsSku::getSkuId, refund.getSkuId()));
                     if (pddGoodsSku != null && !pddGoodsSku.isEmpty()) {
-                        update.setOGoodsId(pddGoodsSku.get(0).getOGoodsId());
-                        update.setOGoodsSkuId(pddGoodsSku.get(0).getOGoodsSkuId());
+                        update.setOGoodsId(pddGoodsSku.get(0).getErpGoodsId());
+                        update.setOGoodsSkuId(pddGoodsSku.get(0).getErpGoodsSkuId());
                     }
                 }
                 mapper.updateById(update);
@@ -82,8 +82,8 @@ public class OmsWeiRefundServiceImpl extends ServiceImpl<OmsWeiRefundMapper, Oms
                 if(refund.getSkuId()!=null) {
                     List<OmsWeiGoodsSku> pddGoodsSku = goodsSkuMapper.selectList(new LambdaQueryWrapper<OmsWeiGoodsSku>().eq(OmsWeiGoodsSku::getSkuId, refund.getSkuId()));
                     if (pddGoodsSku != null && !pddGoodsSku.isEmpty()) {
-                        refund.setOGoodsId(pddGoodsSku.get(0).getOGoodsId());
-                        refund.setOGoodsSkuId(pddGoodsSku.get(0).getOGoodsSkuId());
+                        refund.setOGoodsId(pddGoodsSku.get(0).getErpGoodsId());
+                        refund.setOGoodsSkuId(pddGoodsSku.get(0).getErpGoodsSkuId());
                     }
                 }
                 refund.setShopId(shopId);

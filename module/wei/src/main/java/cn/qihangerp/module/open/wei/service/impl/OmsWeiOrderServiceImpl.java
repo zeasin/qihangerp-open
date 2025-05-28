@@ -90,16 +90,16 @@ public class OmsWeiOrderServiceImpl extends ServiceImpl<OmsWeiOrderMapper, OmsWe
                         itemUpdate.setId(taoOrderItems.get(0).getId());
                         List<OmsWeiGoodsSku> skus = goodsSkuMapper.selectList(new LambdaQueryWrapper<OmsWeiGoodsSku>().eq(OmsWeiGoodsSku::getSkuId, item.getSkuId()));
                         if (skus != null && !skus.isEmpty()) {
-                            itemUpdate.setOGoodsId(skus.get(0).getOGoodsId());
-                            itemUpdate.setOGoodsSkuId(skus.get(0).getOGoodsSkuId());
+                            itemUpdate.setOGoodsId(skus.get(0).getErpGoodsId());
+                            itemUpdate.setOGoodsSkuId(skus.get(0).getErpGoodsSkuId());
                         }
                         itemMapper.updateById(itemUpdate);
                     } else {
                         // 新增
                         List<OmsWeiGoodsSku> skus = goodsSkuMapper.selectList(new LambdaQueryWrapper<OmsWeiGoodsSku>().eq(OmsWeiGoodsSku::getSkuId, item.getSkuId()));
                         if (skus != null && !skus.isEmpty()) {
-                            item.setOGoodsId(skus.get(0).getOGoodsId());
-                            item.setOGoodsSkuId(skus.get(0).getOGoodsSkuId());
+                            item.setOGoodsId(skus.get(0).getErpGoodsId());
+                            item.setOGoodsSkuId(skus.get(0).getErpGoodsSkuId());
                         }
                         item.setShopId(shopId);
                         item.setOrderId(order.getOrderId());
@@ -116,8 +116,8 @@ public class OmsWeiOrderServiceImpl extends ServiceImpl<OmsWeiOrderMapper, OmsWe
                 for (OmsWeiOrderItem item : order.getItems()) {
                     List<OmsWeiGoodsSku> skus = goodsSkuMapper.selectList(new LambdaQueryWrapper<OmsWeiGoodsSku>().eq(OmsWeiGoodsSku::getSkuId, item.getSkuId()));
                     if (skus != null && !skus.isEmpty()) {
-                        item.setOGoodsId(skus.get(0).getOGoodsId());
-                        item.setOGoodsSkuId(skus.get(0).getOGoodsSkuId());
+                        item.setOGoodsId(skus.get(0).getErpGoodsId());
+                        item.setOGoodsSkuId(skus.get(0).getErpGoodsSkuId());
                     }
                     item.setShopId(shopId);
                     item.setOrderId(order.getOrderId());

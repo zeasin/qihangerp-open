@@ -19,8 +19,10 @@
             <result property="skuAttr" column="sku_attr" jdbcType="VARCHAR"/>
             <result property="skuAttrs" column="sku_attrs" jdbcType="VARCHAR"/>
             <result property="skuDeliverInfo" column="sku_deliver_info" jdbcType="VARCHAR"/>
-            <result property="oGoodsId" column="o_goods_id" jdbcType="BIGINT"/>
-            <result property="oGoodsSkuId" column="o_goods_sku_id" jdbcType="BIGINT"/>
+            <result property="erpGoodsId" column="erp_goods_id" jdbcType="BIGINT"/>
+            <result property="erpGoodsSkuId" column="erp_goods_sku_id" jdbcType="BIGINT"/>
+            <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+            <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
     </resultMap>
 
     <sql id="Base_Column_List">
@@ -28,7 +30,7 @@
         sku_id,out_sku_id,title,
         thumb_img,sale_price,stock_num,
         sku_code,status,sku_attr,
-        sku_attrs,sku_deliver_info,o_goods_id,
-        o_goods_sku_id
+        sku_attrs,sku_deliver_info,erp_goods_id,
+        erp_goods_sku_id,create_time,update_time
     </sql>
 </mapper>

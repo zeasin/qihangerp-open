@@ -2,6 +2,8 @@ package cn.qihangerp.module.open.wei.service;
 
 import cn.qihangerp.common.PageQuery;
 import cn.qihangerp.common.PageResult;
+import cn.qihangerp.common.ResultVo;
+import cn.qihangerp.domain.bo.LinkErpGoodsSkuBo;
 import cn.qihangerp.module.open.wei.domain.OmsWeiGoodsSku;
 import com.baomidou.mybatisplus.extension.service.IService;
 
@@ -12,4 +14,6 @@ import com.baomidou.mybatisplus.extension.service.IService;
 */
 public interface OmsWeiGoodsSkuService extends IService<OmsWeiGoodsSku> {
     PageResult<OmsWeiGoodsSku> queryPageList(OmsWeiGoodsSku bo, PageQuery pageQuery);
+
+    ResultVo linkErpGoodsSku(LinkErpGoodsSkuBo bo);
 }

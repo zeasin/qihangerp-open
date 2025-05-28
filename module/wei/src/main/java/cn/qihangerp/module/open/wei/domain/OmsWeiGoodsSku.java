@@ -1,18 +1,25 @@
 package cn.qihangerp.module.open.wei.domain;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
+import java.util.Date;
 import lombok.Data;
 
 /**
  * 
  * @TableName oms_wei_goods_sku
  */
+@TableName(value ="oms_wei_goods_sku")
 @Data
 public class OmsWeiGoodsSku implements Serializable {
     /**
      * 
      */
-    private String id;
+    @TableId(type = IdType.AUTO)
+    private Long id;
 
     /**
      * 店铺id
@@ -82,12 +89,23 @@ public class OmsWeiGoodsSku implements Serializable {
     /**
      * 商品id(o_goods外键)
      */
-    private Long oGoodsId;
+    private Long erpGoodsId;
 
     /**
      * 商品skuid(o_goods_sku外键)
      */
-    private Long oGoodsSkuId;
+    private Long erpGoodsSkuId;
 
+    /**
+     * 创建时间
+     */
+    private Date createTime;
+
+    /**
+     * 更新时间
+     */
+    private Date updateTime;
+
+    @TableField(exist = false)
     private static final long serialVersionUID = 1L;
 }
