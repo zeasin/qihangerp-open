@@ -145,8 +145,8 @@ public class DouOrderServiceImpl extends ServiceImpl<DouOrderMapper, DouOrder>
                     // 新增
                     DouGoodsSku goodsSku = goodsSkuMapper.selectById(item.getSkuId());
                     if (goodsSku != null) {
-                        item.setOGoodsId(goodsSku.getOGoodsId());
-                        item.setOGoodsSkuId(goodsSku.getOGoodsSkuId());
+                        item.setOGoodsId(goodsSku.getErpGoodsId().toString());
+                        item.setOGoodsSkuId(goodsSku.getErpGoodsSkuId().toString());
                     }
                     itemMapper.insert(item);
                 }
@@ -161,8 +161,8 @@ public class DouOrderServiceImpl extends ServiceImpl<DouOrderMapper, DouOrder>
                 for (DouOrderItem item : order.getItems()) {
                     DouGoodsSku goodsSku = goodsSkuMapper.selectById(item.getSkuId());
                     if (goodsSku != null) {
-                        item.setOGoodsId(goodsSku.getOGoodsId());
-                        item.setOGoodsSkuId(goodsSku.getOGoodsSkuId());
+                        item.setOGoodsId(goodsSku.getErpGoodsId().toString());
+                        item.setOGoodsSkuId(goodsSku.getErpGoodsSkuId().toString());
                     }
                     itemMapper.insert(item);
                 }

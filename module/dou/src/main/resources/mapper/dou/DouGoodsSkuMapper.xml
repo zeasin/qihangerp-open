@@ -7,6 +7,8 @@
     <resultMap id="BaseResultMap" type="cn.qihangerp.module.open.dou.domain.DouGoodsSku">
             <id property="id" column="id" jdbcType="BIGINT"/>
             <result property="productId" column="product_id" jdbcType="BIGINT"/>
+            <result property="name" column="name" jdbcType="VARCHAR"/>
+            <result property="img" column="img" jdbcType="VARCHAR"/>
             <result property="specId" column="spec_id" jdbcType="BIGINT"/>
             <result property="code" column="code" jdbcType="VARCHAR"/>
             <result property="skuType" column="sku_type" jdbcType="INTEGER"/>
@@ -29,48 +31,24 @@
             <result property="normalStockNum" column="normal_stock_num" jdbcType="INTEGER"/>
             <result property="channelStockNum" column="channel_stock_num" jdbcType="INTEGER"/>
             <result property="sellProperties" column="sell_properties" jdbcType="VARCHAR"/>
-            <result property="oGoodsId" column="o_goods_id" jdbcType="BIGINT"/>
-            <result property="oGoodsSkuId" column="o_goods_sku_id" jdbcType="BIGINT"/>
-            <result property="shopId" column="shop_id" jdbcType="INTEGER"/>
-            <result property="name" column="name" jdbcType="VARCHAR"/>
-            <result property="img" column="img" jdbcType="VARCHAR"/>
+            <result property="erpGoodsId" column="erp_goods_id" jdbcType="BIGINT"/>
+            <result property="erpGoodsSkuId" column="erp_goods_sku_id" jdbcType="BIGINT"/>
+            <result property="shopId" column="shop_id" jdbcType="BIGINT"/>
+            <result property="pullTime" column="pull_time" jdbcType="TIMESTAMP"/>
+            <result property="modifyTime" column="modify_time" jdbcType="TIMESTAMP"/>
     </resultMap>
 
     <sql id="Base_Column_List">
-        id,product_id,spec_id,
-        code,sku_type,sku_status,
-        out_sku_id,spec_detail_id1,spec_detail_id2,
-        spec_detail_id3,spec_detail_name1,spec_detail_name2,
-        spec_detail_name3,price,create_time,
-        stock_num,prehold_stock_num,prom_stock_num,
-        step_stock_num,prehold_step_stock_num,prom_step_stock_num,
-        normal_stock_num,channel_stock_num,sell_properties,
-        o_goods_id,o_goods_sku_id,shop_id,
-        name,img
+        id,product_id,name,
+        img,spec_id,code,
+        sku_type,sku_status,out_sku_id,
+        spec_detail_id1,spec_detail_id2,spec_detail_id3,
+        spec_detail_name1,spec_detail_name2,spec_detail_name3,
+        price,create_time,stock_num,
+        prehold_stock_num,prom_stock_num,step_stock_num,
+        prehold_step_stock_num,prom_step_stock_num,normal_stock_num,
+        channel_stock_num,sell_properties,erp_goods_id,
+        erp_goods_sku_id,shop_id,pull_time,
+        modify_time
     </sql>
-
-    <select id="selectSkuPageList" resultType="cn.qihangerp.module.open.dou.domain.vo.DouGoodsSkuListVo">
-        SELECT sku.*,ogs.outer_erp_sku_id FROM oms_dou_goods_sku sku
-
-        LEFT JOIN o_goods_sku ogs on ogs.id = sku.erp_goods_sku_id
-        WHERE 1=1
-        <if test="shopId != null and shopId != ''">
-            AND sku.shop_id = #{shopId}
-        </if>
-        <if test="productId != null ">
-            AND sku.product_id = #{productId}
-        </if>
-        <if test="skuId != null ">
-            AND sku.id = #{skuId}
-        </if>
-        <if test="code != null and code != ''">
-            AND sku.code = #{code}
-        </if>
-        <if test="hasLink != null and hasLink == 0">
-            AND (sku.erp_goods_sku_id is NULL or sku.erp_goods_sku_id = 0)
-        </if>
-        <if test="hasLink != null and hasLink == 1">
-            AND sku.erp_goods_sku_id is NOT NULL and sku.erp_goods_sku_id != 0
-        </if>
-    </select>
 </mapper>

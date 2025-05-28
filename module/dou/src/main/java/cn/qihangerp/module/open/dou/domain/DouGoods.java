@@ -1,23 +1,26 @@
 package cn.qihangerp.module.open.dou.domain;
 
+import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
-import lombok.Data;
-
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
+import lombok.Data;
+
 /**
  * 抖店商品表
- * @TableName dou_goods
+ * @TableName oms_dou_goods
  */
-@TableName("oms_dou_goods")
+@TableName(value ="oms_dou_goods")
 @Data
 public class DouGoods implements Serializable {
     /**
      * 
      */
+    @TableId(type = IdType.AUTO)
     private Long id;
 
     /**
@@ -33,9 +36,7 @@ public class DouGoods implements Serializable {
     /**
      * 商品类型；0-普通；1-新客商品；3-虚拟；6-玉石闪购；7-云闪购 ；127-其他类型；
      */
-    private Long productType;
-    private Long marketPrice;
-    private Long discountPrice;
+    private Integer productType;
 
     /**
      * 商品标题。
@@ -50,12 +51,22 @@ public class DouGoods implements Serializable {
     /**
      * 商品审核状态: 1-未提交；2-待审核；3-审核通过；4-审核未通过；5-封禁；7-审核通过待上架；
      */
-    private Long checkStatus;
+    private Integer checkStatus;
+
+    /**
+     * 
+     */
+    private Long marketPrice;
+
+    /**
+     * 
+     */
+    private Long discountPrice;
 
     /**
      * 商品在店铺中状态: 0-在线；1-下线；2-删除；
      */
-    private Long status;
+    private Integer status;
 
     /**
      * 商品规格，全局唯一
@@ -65,12 +76,12 @@ public class DouGoods implements Serializable {
     /**
      * 商品创建时间，unix时间戳，单位：秒；
      */
-    private Long createTime;
+    private Integer createTime;
 
     /**
      * 商品更新时间，unix时间戳，单位：秒；
      */
-    private Long updateTime;
+    private Integer updateTime;
 
     /**
      * 商品详情，最大支持50张图片，单张详情图宽高比不超2000*2000px，大小5M内，仅支持jpg/jpeg/png格式；
@@ -90,12 +101,12 @@ public class DouGoods implements Serializable {
     /**
      * 是否是组合商品，true-是，false-不是；
      */
-    private Boolean isPackageProduct;
+    private String isPackageProduct;
 
     /**
      * erp商品id
      */
-    private Long oGoodsId;
+    private Long erpGoodsId;
 
     /**
      * 拉取时间
@@ -108,7 +119,8 @@ public class DouGoods implements Serializable {
     private Date modifyTime;
 
     @TableField(exist = false)
-    private List<DouGoodsSku> skuList;
-
     private static final long serialVersionUID = 1L;
+
+    @TableField(exist = false)
+    private List<DouGoodsSku> skuList;
 }

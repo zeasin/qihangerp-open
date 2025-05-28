@@ -2,6 +2,8 @@ package cn.qihangerp.module.open.dou.service;
 
 import cn.qihangerp.common.PageQuery;
 import cn.qihangerp.common.PageResult;
+import cn.qihangerp.common.ResultVo;
+import cn.qihangerp.domain.bo.LinkErpGoodsSkuBo;
 import cn.qihangerp.module.open.dou.domain.DouGoodsSku;
 import cn.qihangerp.module.open.dou.domain.bo.DouGoodsBo;
 import cn.qihangerp.module.open.dou.domain.vo.DouGoodsSkuListVo;
@@ -14,5 +16,6 @@ import com.baomidou.mybatisplus.extension.service.IService;
 * @createDate 2024-05-31 17:23:21
 */
 public interface DouGoodsSkuService extends IService<DouGoodsSku> {
-    PageResult<DouGoodsSkuListVo> queryPageList(DouGoodsBo bo, PageQuery pageQuery);
+    PageResult<DouGoodsSku> queryPageList(DouGoodsBo bo, PageQuery pageQuery);
+    ResultVo linkErpGoodsSku(LinkErpGoodsSkuBo bo);
 }

@@ -1,26 +1,40 @@
 package cn.qihangerp.module.open.dou.domain;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
-import lombok.Data;
-
 import java.io.Serializable;
+import java.util.Date;
+import lombok.Data;
 
 /**
  * 抖店商品Sku表
- * @TableName dou_goods_sku
+ * @TableName oms_dou_goods_sku
  */
-@TableName("oms_dou_goods_sku")
+@TableName(value ="oms_dou_goods_sku")
 @Data
 public class DouGoodsSku implements Serializable {
     /**
      * 商品sku_id;抖店系统生成。
      */
-    private Long id;
+    @TableId
+    private String id;
 
     /**
      * 商品ID；抖店系统生成。
      */
     private Long productId;
+
+    /**
+     * 商品标题。
+     */
+    private String name;
+
+    /**
+     * 商品主图的第一张图
+     */
+    private String img;
 
     /**
      * 规格ID
@@ -35,12 +49,12 @@ public class DouGoodsSku implements Serializable {
     /**
      * 库存类型；0-普通；1-区域库存；10-阶梯库存；
      */
-    private Long skuType;
+    private Integer skuType;
 
     /**
      * sku状态 true上架 false下架
      */
-    private Boolean skuStatus;
+    private String skuStatus;
 
     /**
      * 外部的skuId；商家自定义；未设置返回为0。
@@ -82,53 +96,53 @@ public class DouGoodsSku implements Serializable {
     /**
      * 商品价格，单位：分
      */
-    private Long price;
+    private Integer price;
 
     /**
      * 创建时间，时间戳：单位秒；
      */
-    private Long createTime;
+    private Integer createTime;
 
     /**
      * ku_type=0时，表示普通库存数量 ;sku_type=1时，使用stock_map，表示区域库存数量
      */
-    private Long stockNum;
+    private Integer stockNum;
 
     /**
      * sku_type=0时，表示预占库存数量； sku_type=1时，表示区域库存数量，使用prehold_stock_map
      */
-    private Long preholdStockNum;
+    private Integer preholdStockNum;
 
     /**
      * 活动库存
      */
-    private Long promStockNum;
+    private Integer promStockNum;
 
     /**
      * 
 阶梯库存
      */
-    private Long stepStockNum;
+    private Integer stepStockNum;
 
     /**
      * 预占阶梯库存
      */
-    private Long preholdStepStockNum;
+    private Integer preholdStepStockNum;
 
     /**
      * 活动阶梯库存
      */
-    private Long promStepStockNum;
+    private Integer promStepStockNum;
 
     /**
      * 库存模型V2新增 普通库存 非活动可售
      */
-    private Long normalStockNum;
+    private Integer normalStockNum;
 
     /**
      * 库存模型V2新增 渠道库存
      */
-    private Long channelStockNum;
+    private Integer channelStockNum;
 
     /**
      * 销售属性，代替spec_detail_id123、spec_detail_name123
@@ -138,12 +152,12 @@ public class DouGoodsSku implements Serializable {
     /**
      * 商品id(o_goods外键)
      */
-    private String oGoodsId;
+    private Long erpGoodsId;
 
     /**
      * 商品skuid(o_goods_sku外键)
      */
-    private String oGoodsSkuId;
+    private Long erpGoodsSkuId;
 
     /**
      * 店铺id
@@ -151,14 +165,16 @@ public class DouGoodsSku implements Serializable {
     private Long shopId;
 
     /**
-     * 商品标题。
+     * 拉取时间
      */
-    private String name;
+    private Date pullTime;
 
     /**
-     * 商品主图的第一张图
+     * 更新时间
      */
-    private String img;
+    private Date modifyTime;
 
+    @TableField(exist = false)
     private static final long serialVersionUID = 1L;
+
 }
