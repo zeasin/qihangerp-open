@@ -1,22 +1,27 @@
 package cn.qihangerp.module.open.jd.domain;
 
+import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
-
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
+import lombok.Data;
+
 /**
- * 
- * @TableName jd_goods
+ * 京东商品表
+ * @TableName oms_jd_goods
  */
-@TableName("oms_jd_goods")
+@TableName(value ="oms_jd_goods")
+@Data
 public class JdGoods implements Serializable {
     /**
      * 
      */
+    @TableId(type = IdType.AUTO)
     private Long id;
 
     /**
@@ -52,12 +57,12 @@ public class JdGoods implements Serializable {
     /**
      * 商品最后一次修改时间
      */
-    private Date modified;
+    private String modified;
 
     /**
      * 商品创建时间，只读属性
      */
-    private Date created;
+    private String created;
 
     /**
      * 最后下架时间
@@ -87,7 +92,7 @@ public class JdGoods implements Serializable {
     /**
      * 
      */
-    private Float weight;
+    private Double weight;
 
     /**
      * 
@@ -152,11 +157,6 @@ public class JdGoods implements Serializable {
     /**
      * 
      */
-    private Long shopId;
-
-    /**
-     * 
-     */
     private String sellPoint;
 
     /**
@@ -168,449 +168,31 @@ public class JdGoods implements Serializable {
      * 
      */
     private String spuId;
+
+    /**
+     * 店铺id（sys_shop表id）
+     */
+    private Long shopId;
+
+    /**
+     * 商品id(o_goods外键)
+     */
+    private Long erpGoodsId;
+
+    /**
+     * 创建时间
+     */
+    private Date createTime;
+
+    /**
+     * 更新时间
+     */
+    private Date updateTime;
     @TableField(exist = false)
     private List<JdGoodsSku> skuList;
 
-    public List<JdGoodsSku> getSkuList() {
-        return skuList;
-    }
-
-    public void setSkuList(List<JdGoodsSku> skuList) {
-        this.skuList = skuList;
-    }
-
+    @TableField(exist = false)
     private static final long serialVersionUID = 1L;
-
-    /**
-     * 
-     */
-    public Long getId() {
-        return id;
-    }
-
-    /**
-     * 
-     */
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    /**
-     * 商品id
-     */
-    public Long getWareId() {
-        return wareId;
-    }
-
-    /**
-     * 商品id
-     */
-    public void setWareId(Long wareId) {
-        this.wareId = wareId;
-    }
-
-    /**
-     * 商品名称
-     */
-    public String getTitle() {
-        return title;
-    }
-
-    /**
-     * 商品名称
-     */
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    /**
-     * 商品状态 -1：删除 1:从未上架 2:自主下架 4:系统下架 8:上架 513:从未上架待审 514:自主下架待审 516:系统下架待审 520:上架待审核 1028:系统下架审核失败
-     */
-    public Integer getWareStatus() {
-        return wareStatus;
-    }
-
-    /**
-     * 商品状态 -1：删除 1:从未上架 2:自主下架 4:系统下架 8:上架 513:从未上架待审 514:自主下架待审 516:系统下架待审 520:上架待审核 1028:系统下架审核失败
-     */
-    public void setWareStatus(Integer wareStatus) {
-        this.wareStatus = wareStatus;
-    }
-
-    /**
-     * 	商品外部ID,商家自行设置的ID（便于关联京东商品）
-     */
-    public String getOuterId() {
-        return outerId;
-    }
-
-    /**
-     * 	商品外部ID,商家自行设置的ID（便于关联京东商品）
-     */
-    public void setOuterId(String outerId) {
-        this.outerId = outerId;
-    }
-
-    /**
-     * 商品货号
-     */
-    public String getItemNum() {
-        return itemNum;
-    }
-
-    /**
-     * 商品货号
-     */
-    public void setItemNum(String itemNum) {
-        this.itemNum = itemNum;
-    }
-
-    /**
-     * 商品的条形码.UPC码,SN码,PLU码统称为条形码
-     */
-    public String getBarCode() {
-        return barCode;
-    }
-
-    /**
-     * 商品的条形码.UPC码,SN码,PLU码统称为条形码
-     */
-    public void setBarCode(String barCode) {
-        this.barCode = barCode;
-    }
-
-    /**
-     * 商品最后一次修改时间
-     */
-    public Date getModified() {
-        return modified;
-    }
-
-    /**
-     * 商品最后一次修改时间
-     */
-    public void setModified(Date modified) {
-        this.modified = modified;
-    }
-
-    /**
-     * 商品创建时间，只读属性
-     */
-    public Date getCreated() {
-        return created;
-    }
-
-    /**
-     * 商品创建时间，只读属性
-     */
-    public void setCreated(Date created) {
-        this.created = created;
-    }
-
-    /**
-     * 最后下架时间
-     */
-    public Date getOfflineTime() {
-        return offlineTime;
-    }
-
-    /**
-     * 最后下架时间
-     */
-    public void setOfflineTime(Date offlineTime) {
-        this.offlineTime = offlineTime;
-    }
-
-    /**
-     * 最后上架时间
-     */
-    public Date getOnlineTime() {
-        return onlineTime;
-    }
-
-    /**
-     * 最后上架时间
-     */
-    public void setOnlineTime(Date onlineTime) {
-        this.onlineTime = onlineTime;
-    }
-
-    /**
-     * 发货地
-     */
-    public String getDelivery() {
-        return delivery;
-    }
-
-    /**
-     * 发货地
-     */
-    public void setDelivery(String delivery) {
-        this.delivery = delivery;
-    }
-
-    /**
-     * 包装清单
-     */
-    public String getPackListing() {
-        return packListing;
-    }
-
-    /**
-     * 包装清单
-     */
-    public void setPackListing(String packListing) {
-        this.packListing = packListing;
-    }
-
-    /**
-     * 包装规格
-     */
-    public String getWrap() {
-        return wrap;
-    }
-
-    /**
-     * 包装规格
-     */
-    public void setWrap(String wrap) {
-        this.wrap = wrap;
-    }
-
-    /**
-     * 
-     */
-    public Float getWeight() {
-        return weight;
-    }
-
-    /**
-     * 
-     */
-    public void setWeight(Float weight) {
-        this.weight = weight;
-    }
-
-    /**
-     * 
-     */
-    public Integer getWidth() {
-        return width;
-    }
-
-    /**
-     * 
-     */
-    public void setWidth(Integer width) {
-        this.width = width;
-    }
-
-    /**
-     * 
-     */
-    public Integer getHeight() {
-        return height;
-    }
-
-    /**
-     * 
-     */
-    public void setHeight(Integer height) {
-        this.height = height;
-    }
-
-    /**
-     * 
-     */
-    public Integer getLength() {
-        return length;
-    }
-
-    /**
-     * 
-     */
-    public void setLength(Integer length) {
-        this.length = length;
-    }
-
-    /**
-     * 
-     */
-    public String getMobileDesc() {
-        return mobileDesc;
-    }
-
-    /**
-     * 
-     */
-    public void setMobileDesc(String mobileDesc) {
-        this.mobileDesc = mobileDesc;
-    }
-
-    /**
-     * 
-     */
-    public String getIntroduction() {
-        return introduction;
-    }
-
-    /**
-     * 
-     */
-    public void setIntroduction(String introduction) {
-        this.introduction = introduction;
-    }
-
-    /**
-     * 
-     */
-    public String getAfterSales() {
-        return afterSales;
-    }
-
-    /**
-     * 
-     */
-    public void setAfterSales(String afterSales) {
-        this.afterSales = afterSales;
-    }
-
-    /**
-     * 
-     */
-    public String getLogo() {
-        return logo;
-    }
-
-    /**
-     * 
-     */
-    public void setLogo(String logo) {
-        this.logo = logo;
-    }
-
-    /**
-     * 
-     */
-    public BigDecimal getMarketPrice() {
-        return marketPrice;
-    }
-
-    /**
-     * 
-     */
-    public void setMarketPrice(BigDecimal marketPrice) {
-        this.marketPrice = marketPrice;
-    }
-
-    /**
-     * 
-     */
-    public BigDecimal getCostPrice() {
-        return costPrice;
-    }
-
-    /**
-     * 
-     */
-    public void setCostPrice(BigDecimal costPrice) {
-        this.costPrice = costPrice;
-    }
-
-    /**
-     * 
-     */
-    public BigDecimal getJdPrice() {
-        return jdPrice;
-    }
-
-    /**
-     * 
-     */
-    public void setJdPrice(BigDecimal jdPrice) {
-        this.jdPrice = jdPrice;
-    }
-
-    /**
-     * 
-     */
-    public String getBrandName() {
-        return brandName;
-    }
-
-    /**
-     * 
-     */
-    public void setBrandName(String brandName) {
-        this.brandName = brandName;
-    }
-
-    /**
-     * 
-     */
-    public Integer getStockNum() {
-        return stockNum;
-    }
-
-    /**
-     * 
-     */
-    public void setStockNum(Integer stockNum) {
-        this.stockNum = stockNum;
-    }
-
-    /**
-     * 
-     */
-    public Long getShopId() {
-        return shopId;
-    }
-
-    public void setShopId(Long shopId) {
-        this.shopId = shopId;
-    }
-
-    /**
-     * 
-     */
-    public String getSellPoint() {
-        return sellPoint;
-    }
-
-    /**
-     * 
-     */
-    public void setSellPoint(String sellPoint) {
-        this.sellPoint = sellPoint;
-    }
-
-    /**
-     * 
-     */
-    public String getAfterSaleDesc() {
-        return afterSaleDesc;
-    }
-
-    /**
-     * 
-     */
-    public void setAfterSaleDesc(String afterSaleDesc) {
-        this.afterSaleDesc = afterSaleDesc;
-    }
-
-    /**
-     * 
-     */
-    public String getSpuId() {
-        return spuId;
-    }
-
-    /**
-     * 
-     */
-    public void setSpuId(String spuId) {
-        this.spuId = spuId;
-    }
 
     @Override
     public boolean equals(Object that) {
@@ -651,10 +233,13 @@ public class JdGoods implements Serializable {
             && (this.getJdPrice() == null ? other.getJdPrice() == null : this.getJdPrice().equals(other.getJdPrice()))
             && (this.getBrandName() == null ? other.getBrandName() == null : this.getBrandName().equals(other.getBrandName()))
             && (this.getStockNum() == null ? other.getStockNum() == null : this.getStockNum().equals(other.getStockNum()))
-            && (this.getShopId() == null ? other.getShopId() == null : this.getShopId().equals(other.getShopId()))
             && (this.getSellPoint() == null ? other.getSellPoint() == null : this.getSellPoint().equals(other.getSellPoint()))
             && (this.getAfterSaleDesc() == null ? other.getAfterSaleDesc() == null : this.getAfterSaleDesc().equals(other.getAfterSaleDesc()))
-            && (this.getSpuId() == null ? other.getSpuId() == null : this.getSpuId().equals(other.getSpuId()));
+            && (this.getSpuId() == null ? other.getSpuId() == null : this.getSpuId().equals(other.getSpuId()))
+            && (this.getShopId() == null ? other.getShopId() == null : this.getShopId().equals(other.getShopId()))
+            && (this.getErpGoodsId() == null ? other.getErpGoodsId() == null : this.getErpGoodsId().equals(other.getErpGoodsId()))
+            && (this.getCreateTime() == null ? other.getCreateTime() == null : this.getCreateTime().equals(other.getCreateTime()))
+            && (this.getUpdateTime() == null ? other.getUpdateTime() == null : this.getUpdateTime().equals(other.getUpdateTime()));
     }
 
     @Override
@@ -688,10 +273,13 @@ public class JdGoods implements Serializable {
         result = prime * result + ((getJdPrice() == null) ? 0 : getJdPrice().hashCode());
         result = prime * result + ((getBrandName() == null) ? 0 : getBrandName().hashCode());
         result = prime * result + ((getStockNum() == null) ? 0 : getStockNum().hashCode());
-        result = prime * result + ((getShopId() == null) ? 0 : getShopId().hashCode());
         result = prime * result + ((getSellPoint() == null) ? 0 : getSellPoint().hashCode());
         result = prime * result + ((getAfterSaleDesc() == null) ? 0 : getAfterSaleDesc().hashCode());
         result = prime * result + ((getSpuId() == null) ? 0 : getSpuId().hashCode());
+        result = prime * result + ((getShopId() == null) ? 0 : getShopId().hashCode());
+        result = prime * result + ((getErpGoodsId() == null) ? 0 : getErpGoodsId().hashCode());
+        result = prime * result + ((getCreateTime() == null) ? 0 : getCreateTime().hashCode());
+        result = prime * result + ((getUpdateTime() == null) ? 0 : getUpdateTime().hashCode());
         return result;
     }
 
@@ -728,10 +316,13 @@ public class JdGoods implements Serializable {
         sb.append(", jdPrice=").append(jdPrice);
         sb.append(", brandName=").append(brandName);
         sb.append(", stockNum=").append(stockNum);
-        sb.append(", shopId=").append(shopId);
         sb.append(", sellPoint=").append(sellPoint);
         sb.append(", afterSaleDesc=").append(afterSaleDesc);
         sb.append(", spuId=").append(spuId);
+        sb.append(", shopId=").append(shopId);
+        sb.append(", erpGoodsId=").append(erpGoodsId);
+        sb.append(", createTime=").append(createTime);
+        sb.append(", updateTime=").append(updateTime);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

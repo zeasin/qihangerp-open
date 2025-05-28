@@ -71,8 +71,8 @@ public class JdGoodsServiceImpl extends ServiceImpl<JdGoodsMapper, JdGoods>
                 if(StringUtils.isNotEmpty(item.getOuterId())) {
                     List<OGoodsSku> oGoodsSkus = goodsSkuMapper.selectList(new LambdaQueryWrapper<OGoodsSku>().eq(OGoodsSku::getSkuCode, item.getOuterId()));
                     if(oGoodsSkus!=null && !oGoodsSkus.isEmpty()){
-                        item.setOGoodsId(oGoodsSkus.get(0).getGoodsId().toString());
-                        item.setOGoodsSkuId(Long.parseLong(oGoodsSkus.get(0).getId().toString()));
+                        item.setErpGoodsId(Long.parseLong(oGoodsSkus.get(0).getGoodsId()));
+                        item.setErpGoodsSkuId(Long.parseLong(oGoodsSkus.get(0).getId()));
                     }
                 }
                 skuMapper.insert(item);
@@ -92,8 +92,8 @@ public class JdGoodsServiceImpl extends ServiceImpl<JdGoodsMapper, JdGoods>
             if(StringUtils.isNotEmpty(goodsSku.getOuterId())) {
                 List<OGoodsSku> oGoodsSkus = goodsSkuMapper.selectList(new LambdaQueryWrapper<OGoodsSku>().eq(OGoodsSku::getSkuCode, goodsSku.getOuterId()));
                 if(oGoodsSkus!=null && !oGoodsSkus.isEmpty()){
-                    goodsSku.setOGoodsId(oGoodsSkus.get(0).getGoodsId().toString());
-                    goodsSku.setOGoodsSkuId(Long.parseLong(oGoodsSkus.get(0).getId().toString()));
+                    goodsSku.setErpGoodsId(Long.parseLong(oGoodsSkus.get(0).getGoodsId()));
+                    goodsSku.setErpGoodsSkuId(Long.parseLong(oGoodsSkus.get(0).getId().toString()));
                 }
             }
             skuMapper.insert(goodsSku);
@@ -104,8 +104,8 @@ public class JdGoodsServiceImpl extends ServiceImpl<JdGoodsMapper, JdGoods>
             if(StringUtils.isNotEmpty(goodsSku.getOuterId())) {
                 List<OGoodsSku> oGoodsSkus = goodsSkuMapper.selectList(new LambdaQueryWrapper<OGoodsSku>().eq(OGoodsSku::getSkuCode, goodsSku.getOuterId()));
                 if(oGoodsSkus!=null && !oGoodsSkus.isEmpty()){
-                    goodsSku.setOGoodsId(oGoodsSkus.get(0).getGoodsId().toString());
-                    goodsSku.setOGoodsSkuId(Long.parseLong(oGoodsSkus.get(0).getId().toString()));
+                    goodsSku.setErpGoodsId(Long.parseLong(oGoodsSkus.get(0).getGoodsId()));
+                    goodsSku.setErpGoodsSkuId(Long.parseLong(oGoodsSkus.get(0).getId().toString()));
                 }
             }
             goodsSku.setShopId(shopId);

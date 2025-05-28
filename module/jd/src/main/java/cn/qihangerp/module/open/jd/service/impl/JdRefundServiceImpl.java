@@ -80,8 +80,8 @@ public class JdRefundServiceImpl extends ServiceImpl<JdRefundMapper, JdRefund>
                     }
                     List<JdGoodsSku> jdGoodsSkus = goodsSkuMapper.selectList(new LambdaQueryWrapper<JdGoodsSku>().eq(JdGoodsSku::getSkuId, after.getSkuId()));
                     if(!jdGoodsSkus.isEmpty()){
-                        after.setOGoodsId(jdGoodsSkus.get(0).getOGoodsId());
-                        after.setOGoodsSkuId(jdGoodsSkus.get(0).getOGoodsSkuId());
+                        after.setOGoodsId(jdGoodsSkus.get(0).getErpGoodsId().toString());
+                        after.setOGoodsSkuId(jdGoodsSkus.get(0).getErpGoodsSkuId());
                     }
                 }else {
                     update.setServiceStatus(after.getServiceStatus());
@@ -126,8 +126,8 @@ public class JdRefundServiceImpl extends ServiceImpl<JdRefundMapper, JdRefund>
                     }
                     List<JdGoodsSku> jdGoodsSkus = goodsSkuMapper.selectList(new LambdaQueryWrapper<JdGoodsSku>().eq(JdGoodsSku::getSkuId, after.getSkuId()));
                     if(!jdGoodsSkus.isEmpty()){
-                        after.setOGoodsId(jdGoodsSkus.get(0).getOGoodsId());
-                        after.setOGoodsSkuId(jdGoodsSkus.get(0).getOGoodsSkuId());
+                        after.setOGoodsId(jdGoodsSkus.get(0).getErpGoodsId().toString());
+                        after.setOGoodsSkuId(jdGoodsSkus.get(0).getErpGoodsSkuId());
                     }
                 }
                 mapper.insert(after);

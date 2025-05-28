@@ -1,10 +1,7 @@
 package cn.qihangerp.api.jd.controller;
 
 
-import cn.qihangerp.common.AjaxResult;
-import cn.qihangerp.common.PageQuery;
-import cn.qihangerp.common.PageResult;
-import cn.qihangerp.common.TableDataInfo;
+import cn.qihangerp.common.*;
 import cn.qihangerp.domain.bo.LinkErpGoodsSkuBo;
 import cn.qihangerp.module.goods.domain.OGoodsSku;
 import cn.qihangerp.module.goods.service.OGoodsSkuService;
@@ -35,7 +32,7 @@ public class JdGoodsController extends BaseController {
 
     @RequestMapping(value = "/skuList", method = RequestMethod.GET)
     public TableDataInfo skuList(JdGoodsBo bo, PageQuery pageQuery) {
-        PageResult<JdGoodsSkuListVo> result = skuService.queryPageList(bo, pageQuery);
+        PageResult<JdGoodsSku> result = skuService.queryPageList(bo, pageQuery);
 
         return getDataTable(result);
     }
@@ -57,14 +54,11 @@ public class JdGoodsController extends BaseController {
         if(StringUtils.isBlank(bo.getErpGoodsSkuId())){
             return AjaxResult.error(500,"缺少参数oGoodsSkuId");
         }
-        OGoodsSku oGoodsSku = oGoodsSkuService.getById(bo.getErpGoodsSkuId());
 
-        if(oGoodsSku == null) return AjaxResult.error(1500,"未找到系统商品sku");
-        JdGoodsSku sku = new JdGoodsSku();
-        sku.setId(bo.getId());
-        sku.setOGoodsSkuId(Long.parseLong(bo.getErpGoodsSkuId()));
-        skuService.updateById(sku);
-        return success();
+        ResultVo resultVo = skuService.linkErpGoodsSku(bo);
+        if(resultVo.getCode()==0)
+            return success();
+        else return AjaxResult.error(resultVo.getMsg());
     }
 
 }

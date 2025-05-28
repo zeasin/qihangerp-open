@@ -1,28 +1,29 @@
 package cn.qihangerp.module.open.jd.domain;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
-import lombok.Data;
-
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
+import lombok.Data;
 
 /**
- * 
- * @TableName jd_goods_sku
+ * 京东商品SKU表
+ * @TableName oms_jd_goods_sku
  */
-@TableName("oms_jd_goods_sku")
+@TableName(value ="oms_jd_goods_sku")
 @Data
 public class JdGoodsSku implements Serializable {
     /**
      * 
      */
-    private String id;
-
-
+    @TableId(type = IdType.AUTO)
+    private Long id;
 
     /**
-     * 
+     * 平台商品id
      */
     private Long wareId;
 
@@ -30,8 +31,6 @@ public class JdGoodsSku implements Serializable {
      * 
      */
     private Long skuId;
-
-    private Long shopId;
 
     /**
      * 
@@ -89,15 +88,30 @@ public class JdGoodsSku implements Serializable {
     private String currencySpuId;
 
     /**
-     * erp商品id
+     * 商品id(o_goods外键)
      */
-    private String oGoodsId;
+    private Long erpGoodsId;
 
     /**
-     * erp商品sku id
+     * 商品skuid(o_goods_sku外键)
      */
-    private Long oGoodsSkuId;
+    private Long erpGoodsSkuId;
 
+    /**
+     * 店铺id
+     */
+    private Long shopId;
+
+    /**
+     * 创建时间
+     */
+    private Date createTime;
+
+    /**
+     * 更新时间
+     */
+    private Date updateTime;
+
+    @TableField(exist = false)
     private static final long serialVersionUID = 1L;
-
 }

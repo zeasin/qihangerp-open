@@ -6,16 +6,16 @@
 
     <resultMap id="BaseResultMap" type="cn.qihangerp.module.open.jd.domain.JdGoods">
             <id property="id" column="id" jdbcType="BIGINT"/>
-            <result property="wareId" column="ware_id" jdbcType="VARCHAR"/>
+            <result property="wareId" column="ware_id" jdbcType="BIGINT"/>
             <result property="title" column="title" jdbcType="VARCHAR"/>
-            <result property="wareStatus" column="ware_status" jdbcType="VARCHAR"/>
+            <result property="wareStatus" column="ware_status" jdbcType="INTEGER"/>
             <result property="outerId" column="outer_id" jdbcType="VARCHAR"/>
             <result property="itemNum" column="item_num" jdbcType="VARCHAR"/>
             <result property="barCode" column="bar_code" jdbcType="VARCHAR"/>
-            <result property="modified" column="modified" jdbcType="DATE"/>
-            <result property="created" column="created" jdbcType="DATE"/>
-            <result property="offlineTime" column="offline_time" jdbcType="DATE"/>
-            <result property="onlineTime" column="online_time" jdbcType="DATE"/>
+            <result property="modified" column="modified" jdbcType="VARCHAR"/>
+            <result property="created" column="created" jdbcType="VARCHAR"/>
+            <result property="offlineTime" column="offline_time" jdbcType="TIMESTAMP"/>
+            <result property="onlineTime" column="online_time" jdbcType="TIMESTAMP"/>
             <result property="delivery" column="delivery" jdbcType="VARCHAR"/>
             <result property="packListing" column="pack_listing" jdbcType="VARCHAR"/>
             <result property="wrap" column="wrap" jdbcType="VARCHAR"/>
@@ -32,10 +32,13 @@
             <result property="jdPrice" column="jd_price" jdbcType="DECIMAL"/>
             <result property="brandName" column="brand_name" jdbcType="VARCHAR"/>
             <result property="stockNum" column="stock_num" jdbcType="INTEGER"/>
-            <result property="shopId" column="shop_id" jdbcType="INTEGER"/>
             <result property="sellPoint" column="sell_point" jdbcType="VARCHAR"/>
             <result property="afterSaleDesc" column="after_sale_desc" jdbcType="VARCHAR"/>
             <result property="spuId" column="spu_id" jdbcType="VARCHAR"/>
+            <result property="shopId" column="shop_id" jdbcType="BIGINT"/>
+            <result property="erpGoodsId" column="erp_goods_id" jdbcType="BIGINT"/>
+            <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+            <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
     </resultMap>
 
     <sql id="Base_Column_List">
@@ -48,7 +51,8 @@
         mobile_desc,introduction,after_sales,
         logo,market_price,cost_price,
         jd_price,brand_name,stock_num,
-        jd_shop_id,sell_point,after_sale_desc,
-        spu_id
+        sell_point,after_sale_desc,spu_id,
+        shop_id,erp_goods_id,create_time,
+        update_time
     </sql>
 </mapper>
