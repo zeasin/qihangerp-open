@@ -29,7 +29,7 @@ public class ReportController extends BaseController {
     public AjaxResult todayDaily()
     {
         Long shopCount = shopService.list().stream().count();
-        Map<String,Double> result = new HashMap<>();
+        Map<String,Object> result = new HashMap<>();
         // 今日销售
         SalesDailyVo todaySalesDaily = orderService.getTodaySalesDaily();
         // 查询库存

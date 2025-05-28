@@ -39,7 +39,7 @@
     <select id="selectSkuPageList" resultType="cn.qihangerp.module.open.tao.domain.vo.TaoGoodsSkuListVo">
         SELECT sku.*,g.title,g.pic_url,ogs.outer_erp_sku_id,g.shop_id FROM oms_tao_goods_sku sku
         LEFT JOIN oms_tao_goods g on g.id = sku.tao_goods_id
-        LEFT JOIN o_goods_sku ogs on ogs.id = sku.o_goods_sku_id
+        LEFT JOIN o_goods_sku ogs on ogs.id = sku.erp_goods_sku_id
         WHERE 1=1
         <if test="shopId != null and shopId != ''">
             AND g.shop_id = #{shopId}
@@ -54,10 +54,10 @@
             AND sku.outer_id = #{outerId}
         </if>
         <if test="hasLink != null and hasLink == 0">
-            AND (sku.o_goods_sku_id is NULL or sku.o_goods_sku_id = 0)
+            AND (sku.erp_goods_sku_id is NULL or sku.erp_goods_sku_id = 0)
         </if>
         <if test="hasLink != null and hasLink == 1">
-            AND sku.o_goods_sku_id is NOT NULL and sku.o_goods_sku_id != 0
+            AND sku.erp_goods_sku_id is NOT NULL and sku.erp_goods_sku_id != 0
         </if>
     </select>
 </mapper>

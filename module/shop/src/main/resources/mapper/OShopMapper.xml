@@ -15,7 +15,7 @@
             <result property="remark" column="remark" jdbcType="VARCHAR"/>
             <result property="sellerId" column="seller_id" jdbcType="BIGINT"/>
             <result property="appKey" column="app_key" jdbcType="VARCHAR"/>
-            <result property="appSercet" column="app_sercet" jdbcType="VARCHAR"/>
+            <result property="appSecret" column="app_secret" jdbcType="VARCHAR"/>
             <result property="accessToken" column="access_token" jdbcType="VARCHAR"/>
             <result property="expiresIn" column="expires_in" jdbcType="BIGINT"/>
             <result property="accessTokenBegin" column="access_token_begin" jdbcType="BIGINT"/>
@@ -28,7 +28,7 @@
         id,name,type,
         url,sort,status,
         modify_on,remark,seller_id,
-        app_key,app_sercet,access_token,
+        app_key,app_secret,access_token,
         expires_in,access_token_begin,refresh_token,
         refresh_token_timeout,api_request_url
     </sql>

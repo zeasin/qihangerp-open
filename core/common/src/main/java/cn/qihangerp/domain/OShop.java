@@ -66,7 +66,7 @@ public class OShop implements Serializable {
     /**
      * Appsercet
      */
-    private String appSercet;
+    private String appSecret;
 
     /**
      * 第三方平台sessionKey（access_token）
