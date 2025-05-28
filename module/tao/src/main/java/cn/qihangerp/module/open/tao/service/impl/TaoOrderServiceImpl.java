@@ -152,8 +152,8 @@ public class TaoOrderServiceImpl extends ServiceImpl<TaoOrderMapper, TaoOrder>
                         itemUpdate.setInvoiceNo(item.getInvoiceNo());
                         List<TaoGoodsSku> skus = goodsSkuService.list(new LambdaQueryWrapper<TaoGoodsSku>().eq(TaoGoodsSku::getSkuId, item.getSkuId()));
                         if (skus != null && !skus.isEmpty()) {
-                            itemUpdate.setoGoodsId(skus.get(0).getOGoodsId());
-                            itemUpdate.setoGoodsSkuId(skus.get(0).getOGoodsSkuId());
+                            itemUpdate.setoGoodsId(skus.get(0).getErpGoodsId().toString());
+                            itemUpdate.setoGoodsSkuId(skus.get(0).getErpGoodsSkuId().toString());
                         }
 
                         itemMapper.updateById(itemUpdate);
@@ -161,8 +161,8 @@ public class TaoOrderServiceImpl extends ServiceImpl<TaoOrderMapper, TaoOrder>
                         // 新增
                         List<TaoGoodsSku> skus = goodsSkuService.list(new LambdaQueryWrapper<TaoGoodsSku>().eq(TaoGoodsSku::getSkuId, item.getSkuId()));
                         if (skus != null && !skus.isEmpty()) {
-                            item.setoGoodsId(skus.get(0).getOGoodsId());
-                            item.setoGoodsSkuId(skus.get(0).getOGoodsSkuId());
+                            item.setoGoodsId(skus.get(0).getErpGoodsId().toString());
+                            item.setoGoodsSkuId(skus.get(0).getErpGoodsSkuId().toString());
                         }
                         itemMapper.insert(item);
                     }

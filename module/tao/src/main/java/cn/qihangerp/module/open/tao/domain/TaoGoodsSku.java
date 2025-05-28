@@ -1,22 +1,25 @@
 package cn.qihangerp.module.open.tao.domain;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
-import lombok.Data;
-
 import java.io.Serializable;
 import java.util.Date;
+import lombok.Data;
 
 /**
- * 
- * @TableName tao_goods_sku
+ * 淘宝商品SKU表
+ * @TableName oms_tao_goods_sku
  */
-@TableName("oms_tao_goods_sku")
+@TableName(value ="oms_tao_goods_sku")
 @Data
 public class TaoGoodsSku implements Serializable {
     /**
      * 主键id
      */
-    private String id;
+    @TableId(type = IdType.AUTO)
+    private Long id;
 
     /**
      * 外键id
@@ -94,20 +97,30 @@ public class TaoGoodsSku implements Serializable {
     private String barcode;
 
     /**
-     * erp商品SKUid
+     * 商品id(o_goods外键)
      */
-    private String oGoodsSkuId;
+    private Long erpGoodsId;
 
     /**
-     * erp商品id
+     * 商品skuid(o_goods_sku外键)
      */
-    private String oGoodsId;
+    private Long erpGoodsSkuId;
 
     /**
      * 创建时间
      */
     private Date createTime;
 
-    private static final long serialVersionUID = 1L;
+    /**
+     * 更新时间
+     */
+    private Date updateTime;
 
+    /**
+     * 店铺id
+     */
+    private Long shopId;
+
+    @TableField(exist = false)
+    private static final long serialVersionUID = 1L;
 }

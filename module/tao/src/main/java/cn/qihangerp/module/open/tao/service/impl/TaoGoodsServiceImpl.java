@@ -67,8 +67,8 @@ public class TaoGoodsServiceImpl extends ServiceImpl<TaoGoodsMapper, TaoGoods>
                     if(StringUtils.isNotEmpty(sku.getOuterId())) {
                         List<OGoodsSku> oGoodsSkus = goodsSkuMapper.selectList(new LambdaQueryWrapper<OGoodsSku>().eq(OGoodsSku::getSkuCode, sku.getOuterId()));
                         if(oGoodsSkus!=null && !oGoodsSkus.isEmpty()){
-                            sku.setOGoodsId(oGoodsSkus.get(0).getGoodsId().toString());
-                            sku.setOGoodsSkuId(oGoodsSkus.get(0).getId().toString());
+                            sku.setErpGoodsId(Long.parseLong(oGoodsSkus.get(0).getGoodsId()));
+                            sku.setErpGoodsSkuId(Long.parseLong(oGoodsSkus.get(0).getId()));
                         }
                     }
                     skuMapper.insert(sku);
@@ -88,8 +88,8 @@ public class TaoGoodsServiceImpl extends ServiceImpl<TaoGoodsMapper, TaoGoods>
                     if(StringUtils.isNotEmpty(sku.getOuterId())) {
                         List<OGoodsSku> oGoodsSkus = goodsSkuMapper.selectList(new LambdaQueryWrapper<OGoodsSku>().eq(OGoodsSku::getSkuCode, sku.getOuterId()));
                         if(oGoodsSkus!=null && !oGoodsSkus.isEmpty()){
-                            sku.setOGoodsId(oGoodsSkus.get(0).getGoodsId().toString());
-                            sku.setOGoodsSkuId(oGoodsSkus.get(0).getId().toString());
+                            sku.setErpGoodsId(Long.parseLong(oGoodsSkus.get(0).getGoodsId()));
+                            sku.setErpGoodsSkuId(Long.parseLong(oGoodsSkus.get(0).getId()));
                         }
                     }
 

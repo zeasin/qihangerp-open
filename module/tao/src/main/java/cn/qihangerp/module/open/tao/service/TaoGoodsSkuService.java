@@ -2,6 +2,8 @@ package cn.qihangerp.module.open.tao.service;
 
 import cn.qihangerp.common.PageQuery;
 import cn.qihangerp.common.PageResult;
+import cn.qihangerp.common.ResultVo;
+import cn.qihangerp.domain.bo.LinkErpGoodsSkuBo;
 import cn.qihangerp.module.open.tao.domain.TaoGoodsSku;
 import cn.qihangerp.module.open.tao.domain.bo.TaoGoodsBo;
 import cn.qihangerp.module.open.tao.domain.vo.TaoGoodsSkuListVo;
@@ -14,5 +16,6 @@ import com.baomidou.mybatisplus.extension.service.IService;
 * @createDate 2024-02-29 19:01:35
 */
 public interface TaoGoodsSkuService extends IService<TaoGoodsSku> {
-    PageResult<TaoGoodsSkuListVo> queryPageList(TaoGoodsBo bo, PageQuery pageQuery);
+    PageResult<TaoGoodsSku> queryPageList(TaoGoodsBo bo, PageQuery pageQuery);
+    ResultVo linkErpGoodsSku(LinkErpGoodsSkuBo bo);
 }
