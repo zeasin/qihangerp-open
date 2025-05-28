@@ -1,23 +1,26 @@
 package cn.qihangerp.module.open.pdd.domain;
 
+import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
-import lombok.Data;
-
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
+import lombok.Data;
+
 /**
  * pdd商品表
- * @TableName pdd_goods
+ * @TableName oms_pdd_goods
  */
-@TableName("oms_pdd_goods")
+@TableName(value ="oms_pdd_goods")
 @Data
 public class PddGoods implements Serializable {
     /**
      * 
      */
+    @TableId(type = IdType.AUTO)
     private Long id;
 
     /**
@@ -36,6 +39,11 @@ public class PddGoods implements Serializable {
     private Long goodsQuantity;
 
     /**
+     * 商家外部编码（goods）
+     */
+    private String outerGoodsId;
+
+    /**
      * 是否多sku，0-单sku，1-多sku
      */
     private Integer isMoreSku;
@@ -51,6 +59,11 @@ public class PddGoods implements Serializable {
     private String thumbUrl;
 
     /**
+     * 市场价，单位分
+     */
+    private Long marketPrice;
+
+    /**
      * 商品创建时间的时间戳
      */
     private Long createdAt;
@@ -63,7 +76,7 @@ public class PddGoods implements Serializable {
     /**
      * erp商品id
      */
-    private Long oGoodsId;
+    private Long erpGoodsId;
 
     /**
      * 创建时间
@@ -74,9 +87,8 @@ public class PddGoods implements Serializable {
      * 更新时间
      */
     private Date updateTime;
-
     @TableField(exist = false)
     private List<PddGoodsSku> skuList;
-
+    @TableField(exist = false)
     private static final long serialVersionUID = 1L;
 }

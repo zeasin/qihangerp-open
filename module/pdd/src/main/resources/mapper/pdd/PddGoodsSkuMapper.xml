@@ -10,47 +10,25 @@
             <result property="goodsId" column="goods_id" jdbcType="BIGINT"/>
             <result property="goodsName" column="goods_name" jdbcType="VARCHAR"/>
             <result property="thumbUrl" column="thumb_url" jdbcType="VARCHAR"/>
+            <result property="outerGoodsId" column="outer_goods_id" jdbcType="VARCHAR"/>
             <result property="outerId" column="outer_id" jdbcType="VARCHAR"/>
             <result property="skuQuantity" column="sku_quantity" jdbcType="BIGINT"/>
             <result property="spec" column="spec" jdbcType="VARCHAR"/>
+            <result property="price" column="price" jdbcType="BIGINT"/>
             <result property="isSkuOnsale" column="is_sku_onsale" jdbcType="INTEGER"/>
-            <result property="oGoodsId" column="o_goods_id" jdbcType="BIGINT"/>
-            <result property="oGoodsSkuId" column="o_goods_sku_id" jdbcType="BIGINT"/>
-            <result property="shopId" column="shop_id" jdbcType="INTEGER"/>
+            <result property="erpGoodsId" column="erp_goods_id" jdbcType="BIGINT"/>
+            <result property="erpGoodsSkuId" column="erp_goods_sku_id" jdbcType="BIGINT"/>
+            <result property="shopId" column="shop_id" jdbcType="BIGINT"/>
             <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
             <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
     </resultMap>
 
     <sql id="Base_Column_List">
         id,sku_id,goods_id,
-        goods_name,thumb_url,outer_id,
-        sku_quantity,spec,is_sku_onsale,
-        o_goods_id,o_goods_sku_id,shop_id,
-        create_time,update_time
+        goods_name,thumb_url,outer_goods_id,
+        outer_id,sku_quantity,spec,
+        price,is_sku_onsale,erp_goods_id,
+        erp_goods_sku_id,shop_id,create_time,
+        update_time
     </sql>
-
-    <select id="selectSkuPageList" resultType="cn.qihangerp.module.open.pdd.domain.vo.PddGoodsSkuListVo">
-        SELECT sku.*,ogs.outer_erp_sku_id FROM oms_pdd_goods_sku sku
-
-        LEFT JOIN o_goods_sku ogs on ogs.id = sku.erp_goods_sku_id
-        WHERE 1=1
-        <if test="shopId != null and shopId != ''">
-            AND sku.shop_id = #{shopId}
-        </if>
-        <if test="goodsId != null and goodsId != ''">
-            AND sku.goods_id = #{goodsId}
-        </if>
-        <if test="skuId != null and skuId != ''">
-            AND sku.sku_id = #{skuId}
-        </if>
-        <if test="outerId != null and outerId != ''">
-            AND sku.outer_id = #{outerId}
-        </if>
-        <if test="hasLink != null and hasLink == 0">
-            AND (sku.erp_goods_sku_id is NULL or sku.erp_goods_sku_id = 0)
-        </if>
-        <if test="hasLink != null and hasLink == 1">
-            AND sku.erp_goods_sku_id is NOT NULL and sku.erp_goods_sku_id != 0
-        </if>
-    </select>
 </mapper>

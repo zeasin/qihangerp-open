@@ -185,8 +185,8 @@ public class PddOrderServiceImpl extends ServiceImpl<PddOrderMapper, PddOrder>
                 for (PddOrderItem item : order.getItems()) {
                     List<PddGoodsSku> pddGoodsSku = goodsSkuMapper.selectList(new LambdaQueryWrapper<PddGoodsSku>().eq(PddGoodsSku::getSkuId, item.getSkuId()));
                     if (pddGoodsSku != null && !pddGoodsSku.isEmpty()) {
-                        item.setOGoodsId(pddGoodsSku.get(0).getOGoodsId());
-                        item.setOGoodsSkuId(pddGoodsSku.get(0).getOGoodsSkuId());
+                        item.setOGoodsId(pddGoodsSku.get(0).getErpGoodsId().toString());
+                        item.setOGoodsSkuId(pddGoodsSku.get(0).getErpGoodsSkuId().toString());
                     }
                     item.setOrderSn(order.getOrderSn());
                     itemMapper.insert(item);
@@ -201,8 +201,8 @@ public class PddOrderServiceImpl extends ServiceImpl<PddOrderMapper, PddOrder>
                 for (PddOrderItem item : order.getItems()) {
                     List<PddGoodsSku> pddGoodsSku = goodsSkuMapper.selectList(new LambdaQueryWrapper<PddGoodsSku>().eq(PddGoodsSku::getSkuId, item.getSkuId()));
                     if (pddGoodsSku != null && !pddGoodsSku.isEmpty()) {
-                        item.setOGoodsId(pddGoodsSku.get(0).getOGoodsId());
-                        item.setOGoodsSkuId(pddGoodsSku.get(0).getOGoodsSkuId());
+                        item.setOGoodsId(pddGoodsSku.get(0).getErpGoodsId().toString());
+                        item.setOGoodsSkuId(pddGoodsSku.get(0).getErpGoodsSkuId().toString());
                     }
                     item.setOrderSn(order.getOrderSn());
                     itemMapper.insert(item);

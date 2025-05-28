@@ -66,16 +66,16 @@ public class PddRefundServiceImpl extends ServiceImpl<PddRefundMapper, PddRefund
             mapper.updateById(update);
             List<PddGoodsSku> pddGoodsSku = goodsSkuMapper.selectList(new LambdaQueryWrapper<PddGoodsSku>().eq(PddGoodsSku::getSkuId, refund.getSkuId()));
             if (pddGoodsSku != null && !pddGoodsSku.isEmpty()) {
-                refund.setOGoodsId(pddGoodsSku.get(0).getOGoodsId());
-                refund.setOGoodsSkuId(pddGoodsSku.get(0).getOGoodsSkuId());
+                refund.setOGoodsId(pddGoodsSku.get(0).getErpGoodsId().toString());
+                refund.setOGoodsSkuId(pddGoodsSku.get(0).getErpGoodsSkuId().toString());
             }
             return ResultVo.error(ResultVoEnum.DataExist, "退款已经存在，更新成功");
 
         }else{
             List<PddGoodsSku> pddGoodsSku = goodsSkuMapper.selectList(new LambdaQueryWrapper<PddGoodsSku>().eq(PddGoodsSku::getSkuId, refund.getSkuId()));
             if (pddGoodsSku != null && !pddGoodsSku.isEmpty()) {
-                refund.setOGoodsId(pddGoodsSku.get(0).getOGoodsId());
-                refund.setOGoodsSkuId(pddGoodsSku.get(0).getOGoodsSkuId());
+                refund.setOGoodsId(pddGoodsSku.get(0).getErpGoodsId().toString());
+                refund.setOGoodsSkuId(pddGoodsSku.get(0).getErpGoodsSkuId().toString());
             }
             refund.setShopId(shopId);
             refund.setCreateTime(new Date());

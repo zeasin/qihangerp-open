@@ -2,6 +2,8 @@ package cn.qihangerp.module.open.pdd.service;
 
 import cn.qihangerp.common.PageQuery;
 import cn.qihangerp.common.PageResult;
+import cn.qihangerp.common.ResultVo;
+import cn.qihangerp.domain.bo.LinkErpGoodsSkuBo;
 import cn.qihangerp.module.open.pdd.domain.PddGoodsSku;
 import cn.qihangerp.module.open.pdd.domain.bo.PddGoodsBo;
 import cn.qihangerp.module.open.pdd.domain.vo.PddGoodsSkuListVo;
@@ -14,5 +16,6 @@ import com.baomidou.mybatisplus.extension.service.IService;
 * @createDate 2024-06-04 17:11:49
 */
 public interface PddGoodsSkuService extends IService<PddGoodsSku> {
-    PageResult<PddGoodsSkuListVo> queryPageList(PddGoodsBo bo, PageQuery pageQuery);
+    PageResult<PddGoodsSku> queryPageList(PddGoodsSku bo, PageQuery pageQuery);
+    ResultVo linkErpGoodsSku(LinkErpGoodsSkuBo bo);
 }
