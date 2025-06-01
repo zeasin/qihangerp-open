@@ -207,7 +207,7 @@ public class OOrderServiceImpl extends ServiceImpl<OOrderMapper, OOrder>
             orderItem.setSkuNum(itemObject.getString("outerSkuId"));
             orderItem.setSkuId(itemObject.getString("skuId"));
             orderItem.setGoodsId(itemObject.getLong("oGoodsId"));
-            orderItem.setGoodsSkuId(itemObject.getString("oGoodsSkuId"));
+            orderItem.setGoodsSkuId(itemObject.getLong("oGoodsSkuId"));
             orderItem.setGoodsTitle(itemObject.getString("skuName"));
             orderItem.setGoodsPrice(StringUtils.isEmpty(itemObject.getString("jdPrice")) ? 0.0 : Double.parseDouble(itemObject.getString("jdPrice")));
             Integer quantity = itemObject.getInteger("itemTotal");
@@ -392,7 +392,7 @@ public class OOrderServiceImpl extends ServiceImpl<OOrderMapper, OOrder>
                 orderItem.setSkuNum(itemObject.getString("sku"));
                 orderItem.setSkuId(itemObject.getString("sku"));
                 orderItem.setGoodsId(itemObject.getLong("ogoodsId"));
-                orderItem.setGoodsSkuId(itemObject.getString("ogoodsSkuId"));
+                orderItem.setGoodsSkuId(itemObject.getLong("ogoodsSkuId"));
                 orderItem.setGoodsImg("");
                 orderItem.setGoodsSpec(itemObject.getString("wareName"));
                 orderItem.setGoodsTitle(itemObject.getString("wareName"));
@@ -675,7 +675,7 @@ public class OOrderServiceImpl extends ServiceImpl<OOrderMapper, OOrder>
             orderItem.setSkuNum(itemObject.getString("outerSkuId"));
             orderItem.setSkuId(itemObject.getString("skuId"));
             orderItem.setGoodsId(itemObject.getLong("oGoodsId"));
-            orderItem.setGoodsSkuId(itemObject.getString("oGoodsSkuId"));
+            orderItem.setGoodsSkuId(itemObject.getLong("oGoodsSkuId"));
             orderItem.setGoodsImg(itemObject.getString("picPath"));
             orderItem.setGoodsSpec(itemObject.getString("skuPropertiesName"));
             orderItem.setGoodsTitle(itemObject.getString("title"));
@@ -819,7 +819,7 @@ public class OOrderServiceImpl extends ServiceImpl<OOrderMapper, OOrder>
                 orderItem.setSkuNum(itemObject.getString("outerId"));
                 orderItem.setSkuId(itemObject.getString("skuId"));
                 orderItem.setGoodsId(itemObject.getLong("ogoodsId"));
-                orderItem.setGoodsSkuId(itemObject.getString("ogoodsSkuId"));
+                orderItem.setGoodsSkuId(itemObject.getLong("ogoodsSkuId"));
                 orderItem.setGoodsImg(itemObject.getString("goodsImg"));
                 orderItem.setGoodsSpec(itemObject.getString("goodsSpec"));
                 orderItem.setGoodsTitle(itemObject.getString("goodsName"));
@@ -928,7 +928,7 @@ public class OOrderServiceImpl extends ServiceImpl<OOrderMapper, OOrder>
                     orderItem.setSkuNum(itemObject.getString("outerId"));
                     orderItem.setSkuId(itemObject.getString("skuId"));
                     orderItem.setGoodsId(itemObject.getLong("ogoodsId"));
-                    orderItem.setGoodsSkuId(itemObject.getString("ogoodsSkuId"));
+                    orderItem.setGoodsSkuId(itemObject.getLong("ogoodsSkuId"));
                     orderItem.setGoodsImg(itemObject.getString("goodsImg"));
                     orderItem.setGoodsSpec(itemObject.getString("goodsSpec"));
                     orderItem.setGoodsTitle(itemObject.getString("goodsName"));
@@ -1164,7 +1164,7 @@ public class OOrderServiceImpl extends ServiceImpl<OOrderMapper, OOrder>
                 orderItem.setSkuNum(itemObject.getString("outSkuId"));
                 orderItem.setSkuId(itemObject.getString("skuId"));
                 orderItem.setGoodsId(itemObject.getLong("ogoodsId"));
-                orderItem.setGoodsSkuId(itemObject.getString("ogoodsSkuId"));
+                orderItem.setGoodsSkuId(itemObject.getLong("ogoodsSkuId"));
                 orderItem.setGoodsImg(itemObject.getString("productPic"));
 
 //                if(org.springframework.util.StringUtils.hasText(item.getSpec())) {
@@ -1311,7 +1311,7 @@ public class OOrderServiceImpl extends ServiceImpl<OOrderMapper, OOrder>
                 orderItem.setSkuNum(item.getSkuNum());
                 orderItem.setSkuId(item.getSkuId());
                 orderItem.setGoodsId(item.getGoodsId());
-                orderItem.setGoodsSkuId(item.getGoodsSkuId()+"");
+                orderItem.setGoodsSkuId(item.getGoodsSkuId());
                 orderItem.setGoodsImg(item.getGoodsImg());
                 orderItem.setGoodsSpec(item.getGoodsSpec());
                 orderItem.setGoodsTitle(item.getGoodsTitle());
@@ -1357,10 +1357,7 @@ public class OOrderServiceImpl extends ServiceImpl<OOrderMapper, OOrder>
                 .eq(bo.getOrderStatus()!=null,OOrder::getOrderStatus,bo.getOrderStatus())
                 .ge(org.springframework.util.StringUtils.hasText(bo.getStartTime()),OOrder::getOrderTime,bo.getStartTime()+" 00:00:00")
                 .le(org.springframework.util.StringUtils.hasText(bo.getEndTime()),OOrder::getOrderTime,bo.getEndTime()+" 23:59:59")
-                .eq(bo.getErpPushStatus()!=null && bo.getErpPushStatus() == 0,OOrder::getErpPushStatus,0)
-                .eq(bo.getErpPushStatus()!=null && bo.getErpPushStatus() == 100,OOrder::getErpPushStatus,100)
-                .eq(bo.getErpPushStatus()!=null && bo.getErpPushStatus() == 200,OOrder::getErpPushStatus,200)
-                .gt(bo.getErpPushStatus()!=null && bo.getErpPushStatus() == 500,OOrder::getErpPushStatus,200)
+
 //                .eq(org.springframework.util.StringUtils.hasText(bo.getReceiverName()),OOrder::getReceiverName,bo.getReceiverName())
 //                .like(org.springframework.util.StringUtils.hasText(bo.getReceiverMobile()),OOrder::getReceiverMobile,bo.getReceiverMobile())
                 ;
@@ -1390,14 +1387,49 @@ public class OOrderServiceImpl extends ServiceImpl<OOrderMapper, OOrder>
 
         return PageResult.build(pages);
     }
+    /**
+     * 获取待发货list（去除处理过的）
+     * @param bo
+     * @param pageQuery
+     * @return
+     */
+    @Override
+    public PageResult<OOrder> queryWaitShipmentPageList(OrderSearchRequest bo, PageQuery pageQuery) {
 
+        LambdaQueryWrapper<OOrder> queryWrapper = new LambdaQueryWrapper<OOrder>()
+                .eq(bo.getShopId()!=null,OOrder::getShopId,bo.getShopId())
+                .eq(bo.getShopType()!=null,OOrder::getShopType,bo.getShopType())
+                .eq(OOrder::getOrderStatus,1)
+                .eq(OOrder::getRefundStatus,1)
+                .eq(OOrder::getShipStatus,0)//发货状态 0 待发货 1 已分配供应商发货 2全部发货
+//                .lt(ErpOrder::getShipType,2)//ship_type发货方式 0 自己发货1联合发货2供应商发货
+                .ge(org.springframework.util.StringUtils.hasText(bo.getStartTime()),OOrder::getOrderTime,bo.getStartTime())
+                .le(org.springframework.util.StringUtils.hasText(bo.getEndTime()),OOrder::getOrderTime,bo.getEndTime())
+                .eq(org.springframework.util.StringUtils.hasText(bo.getOrderNum()),OOrder::getOrderNum,bo.getOrderNum())
+                ;
+        Page<OOrder> pages = orderMapper.selectPage(pageQuery.build(), queryWrapper);
+
+        // 查询子订单
+        if(pages.getRecords()!=null){
+            for (OOrder order:pages.getRecords()) {
+                order.setItemList(orderItemMapper.selectList(new LambdaQueryWrapper<OOrderItem>()
+                                .eq(OOrderItem::getOrderId, order.getId())
+                                .eq(OOrderItem::getShipStatus,0)
+//                        .eq(ErpOrderItem::getShipType,0)
+                ));
+            }
+        }
+
+        return PageResult.build(pages);
+    }
     @Override
     public OOrder queryDetailById(Long id) {
         OOrder oOrder = orderMapper.selectById(id);
         if(oOrder!=null) {
 //           oOrder.setItemList(orderItemMapper.selectList(new LambdaQueryWrapper<OOrderItem>().eq(OOrderItem::getOrderId, oOrder.getId())));
+
             oOrder.setItemVoList(orderItemMapper.selectOrderItemListByOrderId(id));
-            // 获取优惠信息
+             //获取优惠信息
             if(oOrder.getShopType()==EnumShopType.TAO.getIndex()){
                 oOrder.setDiscounts(orderMapper.getTaoOrderDiscount(oOrder.getOrderNum()));
             } else if (oOrder.getShopType()==EnumShopType.JD.getIndex()) {

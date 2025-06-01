@@ -76,7 +76,7 @@ public class OOrderItemServiceImpl extends ServiceImpl<OOrderItemMapper, OOrderI
     public ResultVo<Integer> updateErpSkuId(String id, Long erpSkuId) {
         OOrderItem update = new OOrderItem();
         update.setId(id);
-        update.setGoodsSkuId(erpSkuId.toString());
+        update.setGoodsSkuId(erpSkuId);
         update.setUpdateBy("手动修改ERP SKU ID");
         update.setUpdateTime(new Date());
         mapper.updateById(update);

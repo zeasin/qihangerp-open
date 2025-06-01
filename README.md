@@ -165,7 +165,8 @@ A[录入拦截] -->B(通知仓库)
 #### 1 配置MySQL
 
 + 创建数据库`qihang-oms`
-  + 导入数据库结构：sql脚本`docs\qihang-oms.sql`
++ 导入数据库结构：sql脚本`docs\qihang-oms.sql`
++ 导入初始化数据：sql脚本`docs\qihang-oms-data.sql`
 
 
 #### 2 启动Redis

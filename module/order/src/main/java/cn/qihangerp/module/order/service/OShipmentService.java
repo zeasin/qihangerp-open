@@ -47,5 +47,5 @@ public interface OShipmentService extends IService<OShipment> {
      * @param logisticsCode
      * @return
      */
-    ResultVo<Integer> shipSendMessage(String orderNum, EnumShopType shopType,String logisticsCompany,String logisticsCode);
+//    ResultVo<Integer> shipSendMessage(String orderNum, EnumShopType shopType,String logisticsCompany,String logisticsCode);
 }

@@ -168,7 +168,7 @@ public class OShipmentServiceImpl extends ServiceImpl<OShipmentMapper, OShipment
                             shipStockUp.setOrderNum(oOrders.get(0).getOrderNum());
                             shipStockUp.setOriginalSkuId(item.getSkuId());
                             shipStockUp.setGoodsId(item.getGoodsId());
-                            shipStockUp.setSpecId(item.getGoodsSkuId());
+                            shipStockUp.setSpecId(item.getGoodsSkuId().toString());
                             shipStockUp.setGoodsTitle(item.getGoodsTitle());
                             shipStockUp.setGoodsImg(item.getGoodsImg());
                             shipStockUp.setGoodsSpec(item.getGoodsSpec());
@@ -187,92 +187,92 @@ public class OShipmentServiceImpl extends ServiceImpl<OShipmentMapper, OShipment
         return ResultVo.success();
     }
 
-    @Transactional
-    @Override
-    public ResultVo<Integer> shipSendMessage(String orderNum, EnumShopType shopType,String logisticsCompany,String logisticsCode) {
-
-        List<OOrder> oOrders = orderMapper.selectList(new LambdaQueryWrapper<OOrder>().eq(OOrder::getOrderNum, orderNum).eq(OOrder::getShopType, shopType.getIndex()));
-        if(oOrders == null || oOrders.size()==0){
-            log.info("===========订单发货错误：OOrder表中没有找到订单数据====="+orderNum);
-        }else {
-            log.info("===========订单发货开始处理业务====="+orderNum);
-            // 更新erp sale order 订单表发货状态
-            if(oOrders.get(0).getOrderStatus()!=3){
-                //2是已发货
-                OOrder update = new OOrder();
-                update.setId(oOrders.get(0).getId());
-                update.setOrderStatus(2);
-                update.setShippingCompany(logisticsCompany);
-                update.setShippingNumber(logisticsCode);
-                update.setShippingCost(BigDecimal.ZERO);
-                update.setShippingMan("消息通知发货完成");
-                update.setShippingTime(new Date());
-//                update.setShipStatus(3);
-
-                update.setUpdateTime(new Date());
-                update.setUpdateBy("消息通知发货完成");
-                orderMapper.updateById(update);
-            }
-            // 更新备货表相关订单状态0_ship_stock_up
-            OShipStockUp shipStockUp = new OShipStockUp();
-            shipStockUp.setUpdateBy("消息通知发货完成");
-            shipStockUp.setUpdateTime(new Date());
-            shipStockUp.setStatus(3);//状态0待备货1备货中2已出库3已发货
-            shipStockUpMapper.update(shipStockUp,new LambdaQueryWrapper<OShipStockUp>().eq(OShipStockUp::getSaleOrderId,oOrders.get(0).getId()));
-
-            //插入发货表数据o_shipment & o_shipment_item
-            List<OOrderItem> oOrderItems = itemMapper.selectList(new LambdaQueryWrapper<OOrderItem>().eq(OOrderItem::getOrderId, oOrders.get(0).getId()));
-            List<String> orderNums = new ArrayList<>();
-            List<String> subOrderNums = new ArrayList<>();
-            List<OShipmentItem> shippingItemList = new ArrayList<>();
-            for (OOrderItem oOrderItem:oOrderItems) {
-//                if (oOrderItem.getRefundStatus()!=1) {
-//                    return ResultVo.error(ResultVoEnum.StatusError, orderItemId + "子订单退款状态不允许发货");
-//                }
-
-                orderNums.add(oOrderItem.getOrderNum());
-                subOrderNums.add(oOrderItem.getSubOrderNum());
-
-                // 添加shipping_item
-                OShipmentItem shippingItem = new OShipmentItem();
-                shippingItem.setOrderId(oOrderItem.getOrderId());
-                shippingItem.setOrderItemId(oOrderItem.getId());
-                shippingItem.setOrderNum(oOrderItem.getOrderNum());
-                shippingItem.setSubOrderNum(oOrderItem.getSubOrderNum());
-                shippingItemList.add(shippingItem);
-            }
-
-            // 订单发货主表
-            OShipment shipping = new OShipment();
-            shipping.setShippingType(1);//订单发货
-            shipping.setShopId(oOrders.get(0).getShopId());
-            shipping.setOrderNums(String.join(", ", orderNums));
-            shipping.setSubOrderNums(String.join(", ", subOrderNums));
-            shipping.setReceiverName(oOrders.get(0).getReceiverName());
-            shipping.setReceiverMobile(oOrders.get(0).getReceiverMobile());
-            shipping.setProvince(oOrders.get(0).getProvince());
-            shipping.setCity(oOrders.get(0).getCity());
-            shipping.setTown(oOrders.get(0).getTown());
-            shipping.setAddress(oOrders.get(0).getAddress());
-            shipping.setLogisticsCompany(logisticsCompany);
-            shipping.setLogisticsCompanyCode(logisticsCompany);
-            shipping.setWaybillCode(logisticsCode);
-            shipping.setShippingTime(new Date());
-//            shipping.setRemark("手动发货");
-            shipping.setCreateTime(new Date());
-            mapper.insert(shipping);
-
-            // 添加发货子表
-            for (OShipmentItem item:shippingItemList) {
-                item.setShippingId(shipping.getId());
-                shippingItemMapper.insert(item);
-            }
-
-
-        }
-
-        return ResultVo.success();
-    }
+//    @Transactional
+//    @Override
+//    public ResultVo<Integer> shipSendMessage(String orderNum, EnumShopType shopType,String logisticsCompany,String logisticsCode) {
+//
+//        List<OOrder> oOrders = orderMapper.selectList(new LambdaQueryWrapper<OOrder>().eq(OOrder::getOrderNum, orderNum).eq(OOrder::getShopType, shopType.getIndex()));
+//        if(oOrders == null || oOrders.size()==0){
+//            log.info("===========订单发货错误：OOrder表中没有找到订单数据====="+orderNum);
+//        }else {
+//            log.info("===========订单发货开始处理业务====="+orderNum);
+//            // 更新erp sale order 订单表发货状态
+//            if(oOrders.get(0).getOrderStatus()!=3){
+//                //2是已发货
+//                OOrder update = new OOrder();
+//                update.setId(oOrders.get(0).getId());
+//                update.setOrderStatus(2);
+//                update.setShippingCompany(logisticsCompany);
+//                update.setShippingNumber(logisticsCode);
+//                update.setShippingCost(BigDecimal.ZERO);
+//                update.setShippingMan("消息通知发货完成");
+//                update.setShippingTime(new Date());
+////                update.setShipStatus(3);
+//
+//                update.setUpdateTime(new Date());
+//                update.setUpdateBy("消息通知发货完成");
+//                orderMapper.updateById(update);
+//            }
+//            // 更新备货表相关订单状态0_ship_stock_up
+//            OShipStockUp shipStockUp = new OShipStockUp();
+//            shipStockUp.setUpdateBy("消息通知发货完成");
+//            shipStockUp.setUpdateTime(new Date());
+//            shipStockUp.setStatus(3);//状态0待备货1备货中2已出库3已发货
+//            shipStockUpMapper.update(shipStockUp,new LambdaQueryWrapper<OShipStockUp>().eq(OShipStockUp::getSaleOrderId,oOrders.get(0).getId()));
+//
+//            //插入发货表数据o_shipment & o_shipment_item
+//            List<OOrderItem> oOrderItems = itemMapper.selectList(new LambdaQueryWrapper<OOrderItem>().eq(OOrderItem::getOrderId, oOrders.get(0).getId()));
+//            List<String> orderNums = new ArrayList<>();
+//            List<String> subOrderNums = new ArrayList<>();
+//            List<OShipmentItem> shippingItemList = new ArrayList<>();
+//            for (OOrderItem oOrderItem:oOrderItems) {
+////                if (oOrderItem.getRefundStatus()!=1) {
+////                    return ResultVo.error(ResultVoEnum.StatusError, orderItemId + "子订单退款状态不允许发货");
+////                }
+//
+//                orderNums.add(oOrderItem.getOrderNum());
+//                subOrderNums.add(oOrderItem.getSubOrderNum());
+//
+//                // 添加shipping_item
+//                OShipmentItem shippingItem = new OShipmentItem();
+//                shippingItem.setOrderId(oOrderItem.getOrderId());
+//                shippingItem.setOrderItemId(oOrderItem.getId());
+//                shippingItem.setOrderNum(oOrderItem.getOrderNum());
+//                shippingItem.setSubOrderNum(oOrderItem.getSubOrderNum());
+//                shippingItemList.add(shippingItem);
+//            }
+//
+//            // 订单发货主表
+//            OShipment shipping = new OShipment();
+//            shipping.setShippingType(1);//订单发货
+//            shipping.setShopId(oOrders.get(0).getShopId());
+//            shipping.setOrderNums(String.join(", ", orderNums));
+//            shipping.setSubOrderNums(String.join(", ", subOrderNums));
+//            shipping.setReceiverName(oOrders.get(0).getReceiverName());
+//            shipping.setReceiverMobile(oOrders.get(0).getReceiverMobile());
+//            shipping.setProvince(oOrders.get(0).getProvince());
+//            shipping.setCity(oOrders.get(0).getCity());
+//            shipping.setTown(oOrders.get(0).getTown());
+//            shipping.setAddress(oOrders.get(0).getAddress());
+//            shipping.setLogisticsCompany(logisticsCompany);
+//            shipping.setLogisticsCompanyCode(logisticsCompany);
+//            shipping.setWaybillCode(logisticsCode);
+//            shipping.setShippingTime(new Date());
+////            shipping.setRemark("手动发货");
+//            shipping.setCreateTime(new Date());
+//            mapper.insert(shipping);
+//
+//            // 添加发货子表
+//            for (OShipmentItem item:shippingItemList) {
+//                item.setShippingId(shipping.getId());
+//                shippingItemMapper.insert(item);
+//            }
+//
+//
+//        }
+//
+//        return ResultVo.success();
+//    }
 }
 
 

@@ -6,7 +6,10 @@
 
     <resultMap id="BaseResultMap" type="cn.qihangerp.module.order.domain.OOrderItem">
             <id property="id" column="id" jdbcType="BIGINT"/>
+            <result property="shopId" column="shop_id" jdbcType="BIGINT"/>
+            <result property="shopType" column="shop_type" jdbcType="INTEGER"/>
             <result property="orderId" column="order_id" jdbcType="BIGINT"/>
+            <result property="orderNum" column="order_num" jdbcType="VARCHAR"/>
             <result property="subOrderNum" column="sub_order_num" jdbcType="VARCHAR"/>
             <result property="skuId" column="sku_id" jdbcType="VARCHAR"/>
             <result property="goodsId" column="goods_id" jdbcType="BIGINT"/>
@@ -25,7 +28,8 @@
             <result property="refundCount" column="refund_count" jdbcType="INTEGER"/>
             <result property="refundStatus" column="refund_status" jdbcType="INTEGER"/>
             <result property="orderStatus" column="order_status" jdbcType="INTEGER"/>
-            <result property="hasPushErp" column="has_push_erp" jdbcType="INTEGER"/>
+            <result property="shipType" column="ship_type" jdbcType="INTEGER"/>
+            <result property="shipStatus" column="ship_status" jdbcType="INTEGER"/>
             <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
             <result property="createBy" column="create_by" jdbcType="VARCHAR"/>
             <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
@@ -33,13 +37,16 @@
     </resultMap>
 
     <sql id="Base_Column_List">
-        id,order_id,sub_order_num,
+        id,shop_id,shop_type,
+        order_id,order_num,sub_order_num,
         sku_id,goods_id,goods_sku_id,
         goods_title,goods_img,goods_num,
-        goods_spec,sku_num,goods_price,discount_amount,
-        item_amount,payment,quantity,remark,
-        refund_count,refund_status,order_status,has_push_erp,create_time,
-        create_by,update_time,update_by
+        goods_spec,sku_num,goods_price,
+        item_amount,discount_amount,payment,
+        quantity,remark,refund_count,
+        refund_status,order_status,ship_type,
+        ship_status,create_time,create_by,
+        update_time,update_by
     </sql>
 
     <select id="selectPageVo" parameterType="cn.qihangerp.module.order.domain.bo.OrderItemListBo" resultType="cn.qihangerp.module.order.domain.vo.OrderItemListVo">
@@ -50,7 +57,7 @@
         left join o_goods_sku as gs on gs.id = oi.goods_sku_id
         WHERE 1=1
         <if test="qw.shopId!=null">
-           and o.shop_id = #{qw.shopId}
+            and o.shop_id = #{qw.shopId}
         </if>
         <if test="qw.orderNum!=null and qw.orderNum !=''">
             and oi.order_num = #{qw.orderNum}
@@ -78,10 +85,10 @@
 
     <select id="selectOrderItemListByOrderId" parameterType="Long" resultType="cn.qihangerp.module.order.domain.vo.OrderItemListVo">
         SELECT
-        oi.*,o.shop_id,o.order_time,gs.outer_erp_sku_id
+            oi.*,o.shop_id,o.order_time,gs.outer_erp_sku_id
         FROM o_order_item as oi
-        left join o_order as o on o.id = oi.order_id
-        left join o_goods_sku as gs on gs.id = oi.goods_sku_id
+                 left join o_order as o on o.id = oi.order_id
+                 left join o_goods_sku as gs on gs.id = oi.goods_sku_id
         WHERE oi.order_id = #{orderId}
 
     </select>

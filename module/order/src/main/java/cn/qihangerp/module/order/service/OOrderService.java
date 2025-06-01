@@ -31,6 +31,13 @@ public interface OOrderService extends IService<OOrder> {
 
     List<OOrder> getList(OOrder order);
     PageResult<OOrder> queryPageList(OrderSearchRequest bo, PageQuery pageQuery);
+    /**
+     * 获取待发货list（去除处理过的）
+     * @param bo
+     * @param pageQuery
+     * @return
+     */
+    PageResult<OOrder> queryWaitShipmentPageList(OrderSearchRequest bo, PageQuery pageQuery);
 
     OOrder queryDetailById(Long id);
 

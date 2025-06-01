@@ -8,6 +8,14 @@ export function listOrder(query) {
     params: query
   })
 }
+// 查询待自己发货的订单列表（待发货的）
+export function waitSelfShipmentList(query) {
+  return request({
+    url: '/order/waitShipmentList',
+    method: 'get',
+    params: query
+  })
+}
 
 // 查询店铺订单详细
 export function getOrder(id) {
