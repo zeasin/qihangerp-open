@@ -4,9 +4,7 @@ import cn.qihangerp.common.PageQuery;
 import cn.qihangerp.common.PageResult;
 import cn.qihangerp.common.ResultVo;
 import cn.qihangerp.common.enums.EnumShopType;
-
 import cn.qihangerp.module.order.domain.OShipment;
-import cn.qihangerp.module.order.domain.bo.OrderShipBo;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 
@@ -24,20 +22,6 @@ public interface OShipmentService extends IService<OShipment> {
      */
     PageResult<OShipment> queryPageList(OShipment shipping, PageQuery pageQuery);
 
-    /**
-     * 手动订单发货
-     * @param shipping
-     * @return
-     */
-    ResultVo<Integer> handOrderShip(OrderShipBo shipping);
-
-    /**
-     * 订单备货（很多逻辑）
-     * @param orderNum
-     * @param shopType
-     * @return
-     */
-    ResultVo<Integer> shipStockup(String orderNum, EnumShopType shopType);
 
     /**
      * 发货消息

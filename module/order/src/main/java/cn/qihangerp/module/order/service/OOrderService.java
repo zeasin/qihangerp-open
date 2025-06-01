@@ -3,6 +3,8 @@ package cn.qihangerp.module.order.service;
 
 import cn.qihangerp.module.order.domain.OOrder;
 import cn.qihangerp.module.order.domain.OOrderItem;
+import cn.qihangerp.module.order.domain.bo.OrderAllocateShipRequest;
+import cn.qihangerp.module.order.domain.bo.OrderShipRequest;
 import cn.qihangerp.module.order.domain.vo.SalesDailyVo;
 import cn.qihangerp.request.OrderSearchRequest;
 import com.alibaba.fastjson2.JSONObject;
@@ -21,15 +23,7 @@ import java.util.List;
 * @createDate 2024-03-09 13:15:57
 */
 public interface OOrderService extends IService<OOrder> {
-    ResultVo<Integer> jdOrderMessage(String orderId, JSONObject orderDetail);
-    ResultVo<Integer> jdvcOrderMessage(String orderId,JSONObject orderDetail );
-    ResultVo<Integer> taoOrderMessage(String tid,JSONObject orderDetail );
-    ResultVo<Integer> pddOrderMessage(String orderSn,JSONObject orderDetail );
-    ResultVo<Integer> douOrderMessage(String orderId,JSONObject orderDetail );
-    ResultVo<Integer> offlineOrderMessage(String orderNum);
-    ResultVo<Integer> weiOrderMessage(String orderNum,JSONObject orderDetail );
 
-    List<OOrder> getList(OOrder order);
     PageResult<OOrder> queryPageList(OrderSearchRequest bo, PageQuery pageQuery);
     /**
      * 获取待发货list（去除处理过的）
@@ -54,4 +48,18 @@ public interface OOrderService extends IService<OOrder> {
     List<SalesDailyVo> salesDaily();
     SalesDailyVo getTodaySalesDaily();
     Integer getWaitShipOrderAllCount();
+    /**
+     * 手动发货
+     * @param shipBo
+     * @return
+     */
+    ResultVo<Integer> manualShipmentOrder(OrderShipRequest shipBo, String createBy);
+
+    /**
+     * 分配给供应商发货
+     * @param shipBo
+     * @param createBy
+     * @return
+     */
+    ResultVo<Integer> allocateShipmentOrder(OrderAllocateShipRequest shipBo, String createBy);
 }

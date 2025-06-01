@@ -4,6 +4,8 @@ package cn.qihangerp.api.order.controller;
 import cn.qihangerp.common.AjaxResult;
 import cn.qihangerp.common.PageQuery;
 import cn.qihangerp.common.TableDataInfo;
+import cn.qihangerp.module.order.domain.bo.OrderAllocateShipRequest;
+import cn.qihangerp.module.order.domain.bo.OrderShipRequest;
 import cn.qihangerp.module.order.service.OOrderItemService;
 import cn.qihangerp.module.order.service.OOrderService;
 import cn.qihangerp.request.OrderSearchRequest;
@@ -48,6 +50,34 @@ public class OrderController extends BaseController
     {
         var pageList = orderService.queryWaitShipmentPageList(order,pageQuery);
         return getDataTable(pageList);
+    }
+
+    /**
+     * 订单发货(手动发货)
+     * @param shipBo
+     * @return
+     */
+    @PostMapping("/manualShipment")
+    public AjaxResult manualShipment(@RequestBody OrderShipRequest shipBo)
+    {
+        if(getUserId()==1) return AjaxResult.error("超级管理员不能操作");
+        var result = orderService.manualShipmentOrder(shipBo,getUsername());
+        if(result.getCode() == 0) return AjaxResult.success();
+        else return AjaxResult.error(result.getMsg());
+    }
+
+    /**
+     * 分配供应商发货
+     * @param shipBo
+     * @return
+     */
+    @PostMapping("/allocateShipmentOrder")
+    public AjaxResult allocateShipmentOrder(@RequestBody OrderAllocateShipRequest shipBo)
+    {
+        if(getUserId()==1) return AjaxResult.error("超级管理员不能操作");
+        var result = orderService.allocateShipmentOrder(shipBo,getUsername());
+        if(result.getCode() == 0) return AjaxResult.success();
+        else return AjaxResult.error(result.getMsg());
     }
 
     /**

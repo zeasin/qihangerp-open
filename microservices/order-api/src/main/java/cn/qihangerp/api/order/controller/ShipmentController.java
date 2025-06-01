@@ -1,11 +1,9 @@
 package cn.qihangerp.api.order.controller;
 
-
 import cn.qihangerp.common.AjaxResult;
 import cn.qihangerp.common.PageQuery;
 import cn.qihangerp.common.TableDataInfo;
 import cn.qihangerp.module.order.domain.OShipment;
-import cn.qihangerp.module.order.domain.bo.OrderShipBo;
 import cn.qihangerp.module.order.service.OOrderService;
 import cn.qihangerp.module.order.service.OShipmentService;
 import cn.qihangerp.security.common.BaseController;
@@ -38,30 +36,5 @@ public class ShipmentController extends BaseController {
         return getDataTable(orderService.searchOrderItemByReceiverMobile(receiverMobile));
     }
 
-    /**
-     * 订单发货
-     * @param shipping
-     * @return
-     */
-    @PostMapping("/handShip")
-    public AjaxResult orderHandShip(@RequestHeader("Authorization") String authorization,@RequestBody OrderShipBo shipping)
-    {
 
-        var result = shippingService.handOrderShip(shipping);
-//        if(result.getCode() == ResultVoEnum.SUCCESS.getIndex()) {
-//            // 发货
-//            TaoOrderShipBo bo = new TaoOrderShipBo();
-//            bo.setShopId(shipping.getShopId());
-////            bo.setTid(shipping.getOrderId());
-//            bo.setWaybillCode(shipping.getShipCode());
-//            bo.setWaybillCompany(shipping.getShipCompany());
-//
-//            JSONObject jsonObject = taoApiService.orderShip(authorization, bo);
-//            return AjaxResult.success();
-//        }else{
-//            return AjaxResult.error(result.getCode(),result.getMsg());
-//        }
-
-        return AjaxResult.success();
-    }
 }
