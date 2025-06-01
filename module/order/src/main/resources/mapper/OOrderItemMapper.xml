@@ -28,6 +28,7 @@
             <result property="refundCount" column="refund_count" jdbcType="INTEGER"/>
             <result property="refundStatus" column="refund_status" jdbcType="INTEGER"/>
             <result property="orderStatus" column="order_status" jdbcType="INTEGER"/>
+            <result property="shipper" column="shipper" jdbcType="INTEGER"/>
             <result property="shipType" column="ship_type" jdbcType="INTEGER"/>
             <result property="shipStatus" column="ship_status" jdbcType="INTEGER"/>
             <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
@@ -37,7 +38,7 @@
     </resultMap>
 
     <sql id="Base_Column_List">
-        id,shop_id,shop_type,
+        id,shop_id,shop_type,shipper,
         order_id,order_num,sub_order_num,
         sku_id,goods_id,goods_sku_id,
         goods_title,goods_img,goods_num,

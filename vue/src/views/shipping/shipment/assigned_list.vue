@@ -118,8 +118,8 @@
       </el-table-column>
       <el-table-column label="发货状态" align="center" prop="shipStatus" >
         <template slot-scope="scope">
-          <el-tag type="success" v-if="scope.row.shipStatus === 0" style="margin-bottom: 6px;">待发货</el-tag>
-          <el-tag type="success" v-if="scope.row.shipStatus === 1" style="margin-bottom: 6px;">已分配发货</el-tag>
+<!--          <el-tag type="success" v-if="scope.row.shipStatus === 0" style="margin-bottom: 6px;">待发货</el-tag>-->
+          <el-tag type="success" v-if="scope.row.shipStatus === 1" style="margin-bottom: 6px;">待供应商发货</el-tag>
           <el-tag type="success" v-if="scope.row.shipStatus === 2" style="margin-bottom: 6px;">已发货</el-tag>
           <br />
           <!-- 1：无售后或售后关闭，2：售后处理中，3：退款中，4： 退款成功 -->
@@ -246,12 +246,7 @@
 
 <script>
 import '@riophae/vue-treeselect/dist/vue-treeselect.css'
-import {
-  getOrder,
-  manualShipmentOrder,
-  allocateShipmentOrder,
-  assignedShipmentList
-} from "@/api/order/order";
+import {assignedShipmentList} from "@/api/order/order";
 
 
 import {listLogisticsStatus} from "@/api/api/logistics";

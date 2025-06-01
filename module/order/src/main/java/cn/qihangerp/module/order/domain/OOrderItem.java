@@ -131,10 +131,9 @@ public class OOrderItem implements Serializable {
      */
     private Integer orderStatus;
 
-    /**
-     * 发货类型（0仓库发货；1供应商代发；2联合发货-实际上不存在这种情况）
-     */
-    private Integer shipType;
+    //发货方式 0 自己发货1联合发货2供应商发货
+    private Integer shipper;
+    private Integer shipType;//发货方式1电子面单发货2手动发货
 
     /**
      * 发货状态 0 待发货 1 已发货

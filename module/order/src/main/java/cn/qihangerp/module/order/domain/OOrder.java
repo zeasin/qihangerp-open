@@ -35,6 +35,7 @@ public class OOrder implements Serializable {
      */
     private Integer shopType;
 
+
     /**
      * 店铺ID
      */
@@ -135,10 +136,9 @@ public class OOrder implements Serializable {
      */
     private Date orderTime;
 
-    /**
-     * 发货方式 0 自己发货1联合发货2供应商发货
-     */
-    private Integer shipType;
+    //发货方式 0 自己发货1联合发货2供应商发货
+    private Integer shipper;
+    private Integer shipType;//发货方式1电子面单发货2手动发货
 
     /**
      * 发货状态 0 待发货 1 部分发货 2全部发货

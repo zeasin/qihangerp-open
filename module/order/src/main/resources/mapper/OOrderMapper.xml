@@ -28,6 +28,7 @@
             <result property="city" column="city" jdbcType="VARCHAR"/>
             <result property="town" column="town" jdbcType="VARCHAR"/>
             <result property="orderTime" column="order_time" jdbcType="TIMESTAMP"/>
+            <result property="shipper" column="shipper" jdbcType="INTEGER"/>
             <result property="shipType" column="ship_type" jdbcType="INTEGER"/>
             <result property="shipStatus" column="ship_status" jdbcType="INTEGER"/>
             <result property="shipCompany" column="ship_company" jdbcType="VARCHAR"/>
@@ -40,7 +41,7 @@
     </resultMap>
 
     <sql id="Base_Column_List">
-        id,order_num,shop_type,
+        id,order_num,shop_type,shipper,
         shop_id,remark,buyer_memo,
         seller_memo,tag,refund_status,
         order_status,goods_amount,post_fee,
@@ -99,6 +100,6 @@
             COUNT(*) AS count
         FROM
             o_order as o
-        WHERE order_status=1
+        WHERE order_status=1 and refund_status=1 and ship_status != 2
     </select>
 </mapper>

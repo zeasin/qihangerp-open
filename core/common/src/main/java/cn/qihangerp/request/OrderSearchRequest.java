@@ -6,6 +6,9 @@ import lombok.Data;
 public class OrderSearchRequest {
     private Integer shopId;
     private Integer shopType;
+    private Integer shipper;
+    private Integer shipType;
+
     private String orderNum;
     private String orderStatus;
     private String startTime;

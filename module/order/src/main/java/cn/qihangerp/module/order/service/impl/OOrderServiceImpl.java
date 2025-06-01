@@ -157,6 +157,76 @@ public class OOrderServiceImpl extends ServiceImpl<OOrderMapper, OOrder>
 
         return PageResult.build(pages);
     }
+
+    /**
+     * 查询分配给供应商发货的订单list
+     * @param bo
+     * @param pageQuery
+     * @return
+     */
+    @Override
+    public PageResult<OOrder> queryAssignedShipmentList(OrderSearchRequest bo, PageQuery pageQuery) {
+        LambdaQueryWrapper<OOrder> queryWrapper = new LambdaQueryWrapper<OOrder>()
+                .eq(bo.getShopId()!=null,OOrder::getShopId,bo.getShopId())
+                .eq(bo.getShopType()!=null,OOrder::getShopType,bo.getShopType())
+                .ne(OOrder::getShipper,0)//ship_type发货方 0 自己发货1联合发货2供应商发货
+                .ge(org.springframework.util.StringUtils.hasText(bo.getStartTime()),OOrder::getOrderTime,bo.getStartTime())
+                .le(org.springframework.util.StringUtils.hasText(bo.getEndTime()),OOrder::getOrderTime,bo.getEndTime())
+                .eq(org.springframework.util.StringUtils.hasText(bo.getOrderNum()),OOrder::getOrderNum,bo.getOrderNum())
+                ;
+        Page<OOrder> pages = orderMapper.selectPage(pageQuery.build(), queryWrapper);
+
+        // 查询子订单
+        if(pages.getRecords()!=null){
+            for (OOrder order:pages.getRecords()) {
+                order.setItemList(orderItemMapper.selectList(new LambdaQueryWrapper<OOrderItem>()
+                        .eq(OOrderItem::getOrderId, order.getId())
+                        .ne(OOrderItem::getShipper,0)
+                ));
+//                order.setShipmentList(shipmentMapper.selectList(new LambdaQueryWrapper<ErpShipment>().eq(ErpShipment::getOrderId,order.getId())));
+            }
+        }
+
+        return PageResult.build(pages);
+
+    }
+
+    /**
+     * 已经发货的list（去除分配给供应商发货的）
+     * @param bo
+     * @param pageQuery
+     * @return
+     */
+    @Override
+    public PageResult<OOrder> queryShippedPageList(OrderSearchRequest bo, PageQuery pageQuery) {
+        LambdaQueryWrapper<OOrder> queryWrapper = new LambdaQueryWrapper<OOrder>()
+
+                .eq(bo.getShopId()!=null,OOrder::getShopId,bo.getShopId())
+                .eq(bo.getShopType()!=null,OOrder::getShopType,bo.getShopType())
+                .eq(bo.getShipType()!=null,OOrder::getShipType,bo.getShipType())
+                .eq(OOrder::getShipStatus,2)//发货状态 0 待发货 1 已分配供应商发货 2全部发货
+
+                .ge(org.springframework.util.StringUtils.hasText(bo.getStartTime()),OOrder::getOrderTime,bo.getStartTime())
+                .le(org.springframework.util.StringUtils.hasText(bo.getEndTime()),OOrder::getOrderTime,bo.getEndTime())
+                .eq(org.springframework.util.StringUtils.hasText(bo.getOrderNum()),OOrder::getOrderNum,bo.getOrderNum())
+                ;
+        Page<OOrder> pages = orderMapper.selectPage(pageQuery.build(), queryWrapper);
+
+        // 查询子订单
+        if(pages.getRecords()!=null){
+            for (OOrder order:pages.getRecords()) {
+                order.setItemList(orderItemMapper.selectList(new LambdaQueryWrapper<OOrderItem>()
+                        .eq(OOrderItem::getOrderId, order.getId())
+                        .eq(OOrderItem::getShipStatus,2)
+                ));
+//                order.setShipmentList(shipmentMapper.selectList(new LambdaQueryWrapper<ErpShipment>().eq(ErpShipment::getOrderId,order.getId())));
+            }
+        }
+
+        return PageResult.build(pages);
+    }
+
+
     @Override
     public OOrder queryDetailById(Long id) {
         OOrder oOrder = orderMapper.selectById(id);
