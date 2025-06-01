@@ -4,8 +4,7 @@ import request from '@/utils/request'
 export function getWaybillAccountList(data) {
   return request({
     url: '/wei/ewaybill/get_waybill_account_list',
-    method: 'post',
-    data: data
+    method: 'get'
   })
 }
 

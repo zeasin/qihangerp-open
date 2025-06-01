@@ -73,29 +73,29 @@ public class JdOrderItem implements Serializable {
     /**
      * erp商品id
      */
-    private String oGoodsId;
+    private String erpGoodsId;
 
     /**
      * erp商品sku id
      */
-    private Long oGoodsSkuId;
+    private Long erpGoodsSkuId;
 
     private static final long serialVersionUID = 1L;
 
-    public String getoGoodsId() {
-        return oGoodsId;
+    public String getErpGoodsId() {
+        return erpGoodsId;
     }
 
-    public void setoGoodsId(String oGoodsId) {
-        this.oGoodsId = oGoodsId;
+    public void setErpGoodsId(String erpGoodsId) {
+        this.erpGoodsId = erpGoodsId;
     }
 
-    public Long getoGoodsSkuId() {
-        return oGoodsSkuId;
+    public Long getErpGoodsSkuId() {
+        return erpGoodsSkuId;
     }
 
-    public void setoGoodsSkuId(Long oGoodsSkuId) {
-        this.oGoodsSkuId = oGoodsSkuId;
+    public void setErpGoodsSkuId(Long erpGoodsSkuId) {
+        this.erpGoodsSkuId = erpGoodsSkuId;
     }
 
     /**
