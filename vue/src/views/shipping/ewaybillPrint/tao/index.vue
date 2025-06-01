@@ -297,31 +297,7 @@ export default {
       this.multiple = !selection.length
     },
     openWs() {
-      const ws = new WebSocket('ws://127.0.0.1:13528');
-      ws.onopen = () => {
-        console.log('与打印组件建立连接成功: ');
-        // 或打印机
-        ws.send(JSON.stringify({
-          requestID: '12345',
-          cmd: 'getPrinters',
-          "version": "1.0"
-        }))
-      };
-      let obj = this.$modal;
-      ws.onmessage = (e) => {
-        const resp = JSON.parse(e.data || '{}')
-        if (resp.cmd === 'getPrinters') {
-          this.printerList = resp.printers
-          obj.msgSuccess("打印组件连接成功！");
-          console.log('打印机列表: ', resp.printers);
-        }
-      };
-      // 当发生错误时触发
-      ws.onerror = function (error) {
-        obj.msgError("打印组件连接失败！请安装并启动菜鸟云打印组件！");
-        console.error('WebSocket error:', error);
-        // alert('WebSocket error occurred. Check the console for more details.');
-      };
+      this.$modal.msgError("开源版本未实现电子面单相关功能！请自行对接发货");
     },
     // 取号弹窗
     handleGetEwaybillCode() {
@@ -365,14 +341,6 @@ export default {
       });
     },
     handlePrintEwaybill() {
-      // if (!this.ws) {
-      //   this.$modal.msgError('打印组件连接失败！请安装并启动微信视频号小单打印组件！');
-      //   this.openWs()
-      // }
-      // if(!this.printParams.deliver){
-      //   this.$modal.msgError('请选择快递公司！');
-      //   return
-      // }
       if (!this.printParams.printer) {
         this.$modal.msgError('请选择打印机！');
         return
@@ -380,50 +348,6 @@ export default {
       const ids = this.ids;
       getWaybillPrintData({shopId: this.queryParams.shopId, ids: ids}).then(response => {
         console.log("======打印======", response.data)
-        if (response.data) {
-          const ws = new WebSocket('ws://127.0.0.1:13528');
-          ws.onopen = () => {
-            let printData = []
-            response.data.forEach(x => printData.push(JSON.parse(x.printData)))
-            console.log('开始打印: 组合打印数据：', printData);
-            // 打印
-            ws.send(JSON.stringify({
-              "cmd": "print",
-              "requestID": this.getUUID(8, 16),
-              "version": "1.0",
-              "task": {
-                "taskID": this.getUUID(8,10),
-                "preview": false,
-                "printer": this.printParams.printer,
-                "previewType": "pdf",
-                "firstDocumentNumber": 10,
-                "totalDocumentCount": 100,
-                "documents": [{
-                  "documentID": this.getUUID(8,10),
-                  "contents": printData
-                }]
-              }
-            }))
-          };
-          let obj = this.$modal;
-          ws.onmessage = (e) => {
-            const resp = JSON.parse(e.data || '{}')
-            if (resp.cmd === 'print') {
-              console.log('打印结果: ', resp);
-              obj.msgSuccess("打印成功！" + JSON.stringify(resp));
-              // 请求回调
-              return pushWaybillPrintSuccess({shopId: this.queryParams.shopId, ids: ids})
-            }
-          };
-
-
-          // 当发生错误时触发
-          ws.onerror = function (error) {
-            obj.msgError("打印失败！");
-            console.error('WebSocket error:', error);
-            // alert('WebSocket error occurred. Check the console for more details.');
-          };
-        }
       });
 
 

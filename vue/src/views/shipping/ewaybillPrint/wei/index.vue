@@ -171,7 +171,7 @@
 import '@riophae/vue-treeselect/dist/vue-treeselect.css'
 
 import {listShop} from "@/api/shop/shop";
-import {getWaybillAccountList, pullWaybillAccount, getWaybillCode, pushWaybillPrintSuccess,pushShipSend} from "@/api/wei/ewaybill";
+import {getWaybillAccountList, pullWaybillAccount, getWaybillCode, pushWaybillPrintSuccess,pushShipSend,getWaybillPrintData} from "@/api/wei/ewaybill";
 import {listOrder} from "@/api/wei/order";
 
 
@@ -331,30 +331,7 @@ export default {
       });
     },
     openWs() {
-      const ws = new WebSocket('ws://127.0.0.1:12705');
-      ws.onopen = () => {
-        console.log('与打印组件建立连接成功: ');
-        // 或打印机
-        ws.send(JSON.stringify({
-          requestID: '12345',
-          command: 'getPrinterList'
-        }))
-      };
-      let obj = this.$modal;
-      ws.onmessage = (e) => {
-        const resp = JSON.parse(e.data || '{}')
-        if (resp.command === 'getPrinterList') {
-          this.printerList = resp.printerList
-          obj.msgSuccess("打印组件连接成功！");
-          console.log('打印机列表: ', resp.printerList);
-        }
-      };
-      // 当发生错误时触发
-      ws.onerror = function(error) {
-        obj.msgError("打印组件连接失败！请安装并启动微信视频号小店打印组件！");
-        console.error('WebSocket error:', error);
-        // alert('WebSocket error occurred. Check the console for more details.');
-      };
+      this.$modal.msgError("开源版本未实现电子面单相关功能！请自行对接发货");
     },
     handlePrintEwaybill() {
       if (!this.printParams.printer) {
@@ -364,57 +341,6 @@ export default {
       getWaybillPrintData({shopId: this.queryParams.shopId, ids: this.ids}).then(response => {
         console.log("======打印======", response.data)
         if (response.data) {
-          const ws = new WebSocket('ws://127.0.0.1:12705');
-
-          ws.onopen = () => {
-            console.log('开始打印: ');
-            // 打印
-            ws.send(JSON.stringify({
-              command: 'print',
-              version: '2.0', // 必传
-              requestID: '1234', // String, 调用方保证唯一
-              taskList: [{
-                taskID: '1234', // String, 调用方保证唯一
-                printInfo: 'JTdCJTIycHJpbnREYXRhJTIyJTNBJTdCJTIyd2F5YmlsbElkJTIyJTNBJTIyNzM2MTE0NjI1MzgzODUlMjIlMkMlMjJwcmludFRpbWUlMjIlM0ElMjIyMDI0JTJGMDYlMkYwMyUyMDE4JTNBNDUlMjIlMkMlMjJzZXJ2aWNlcyUyMiUzQSU1QiU1RCUyQyUyMnJlY2VpdmVyTmFtZSUyMiUzQSUyMiVFNSVBRSVBMyoqJTIyJTJDJTIycmVjZWl2ZXJQaG9uZSUyMiUzQSUyMjEzNyoqKiozODQwJTIyJTJDJTIycmVjZWl2ZXJBZGRyZXNzJTIyJTNBJTIyJUU0JUI4JThBJUU2JUI1JUI3JUU1JUI4JTgyJUU0JUI4JThBJUU2JUI1JUI3JUU1JUI4JTgyJUU2JUI1JUE2JUU0JUI4JTlDJUU2JTk2JUIwJUU1JThDJUJBJUU1JUJDJUEwJUU2JUIxJTlGJUU5JTk1JTg3JUU1JUFEJTk5JUU2JUExJUE1JUU4JUI3JUFGMjM4JUU1JUJDJTg0MzAlRTUlOEYlQjcyMDIlRTUlQUUlQTQlMjIlMkMlMjJzZW5kZXJOYW1lJTIyJTNBJTIyJUU0JUI4JTgzJUU5JTg3JThDJUU1JTlEJUFBJTIyJTJDJTIyc2VuZGVyUGhvbmUlMjIlM0ElMjIxNTgxODU5MDExOSUyMiUyQyUyMnNlbmRlckFkZHJlc3MlMjIlM0ElMjIlRTUlQjklQkYlRTQlQjglOUMlRTclOUMlODElRTYlQjclQjElRTUlOUMlQjMlRTUlQjglODIlRTUlQUUlOUQlRTUlQUUlODklRTUlOEMlQkF4eHh4eDElRTUlOEYlQjclRTUlOEMlOTclRTklOTclQTglMjIlMkMlMjJzaXRlQ29kZSUyMiUzQSUyMjU1ODMwJTIyJTJDJTIyZXdheWJpbGxPcmRlcklkJTIyJTNBJTIyMzQ4NjYxMzA5Mzg5ODE0MTY5OSUyMiUyQyUyMmJhZ0FkZHIlMjIlM0ElMjIlRTYlQjIlQUElRTQlQjglOUMlMjIlMkMlMjJtYXJrJTIyJTNBJTIyMzEwLSUyMFA2JTIwMDMxJTIwJTVCQjMxJTVEJTIyJTJDJTIyc3RvcmVOYW1lJTIyJTNBJTIyJUU5JUFBJTg0JUU5JUI5JUJGJUU2JTlDJTlCJUU1JUIxJUIxJUU0JUI4JTkzJUU1JThEJTk2JUU1JUJBJTk3JTIyJTJDJTIyY3VzdG9tZXJOb3RlcyUyMiUzQSUyMiUyMiUyQyUyMm1lcmNoYW50Tm90ZXMlMjIlM0ElMjIlMjIlMkMlMjJvcmRlcklkJTIyJTNBJTIyMzcyMDI5MzQxNTUwOTk1NDgxNiUyMiU3RCUyQyUyMnRlbXBsYXRlJTIyJTNBJTdCJTIydGVtcGxhdGVJZCUyMiUzQSUyMnNpbmdsZSUyMiUyQyUyMnRlbXBsYXRlTmFtZSUyMiUzQSUyMiVFOSVCQiU5OCVFOCVBRSVBNCVFNyVBOSVCQSVFNiVBOCVBMSVFNiU5RCVCRiUyMiUyQyUyMnRlbXBsYXRlRGVzYyUyMiUzQSUyMiVFNCVCOCU4MCVFOCU4MSU5NCVFNSU4RCU5NSVFNiVBMCU4NyVFNSU4NyU4NiVFNiVBOCVBMSVFNiU5RCVCRiUyMiUyQyUyMnRlbXBsYXRlVHlwZSUyMiUzQSUyMnNpbmdsZSUyMiUyQyUyMm9wdGlvbkxpc3QlMjIlM0ElN0IlN0QlMkMlMjJvcHRpb25zJTIyJTNBJTVCJTVEJTJDJTIyY29kZSUyMiUzQTAlMkMlMjJkZWxpdmVyeUlkJTIyJTNBJTIyWlRPJTIyJTJDJTIydGVtcGxhdGVVcmwlMjIlM0ElMjJodHRwcyUzQSUyRiUyRm1tZWMtc2hvcC0xMjU4MzQ0NzA3LmNvcy5hcC1zaGFuZ2hhaS5teXFjbG91ZC5jb20lMkZzaG9wJTJGcHVibGljJTJGMjAyMy0xMC0yNSUyRjNlY2JiM2FhLTViY2YtNDA0ZC05NzJhLThhMDhhODE2MjIzYy5odG1sJTIyJTJDJTIyY3VzdG9tQ29uZmlnJTIyJTNBJTdCJTIyd2lkdGglMjIlM0E2NTYlMkMlMjJoZWlnaHQlMjIlM0EzMDAlMkMlMjJsZWZ0JTIyJTNBNjAlMkMlMjJ0b3AlMjIlM0E5MzAlN0QlMkMlMjJ3aWR0aCUyMiUzQTc2JTJDJTIyaGVpZ2h0JTIyJTNBMTMwJTdEJTdE', // String, [获取打印报文]接口返回的print_info
-                printNum: {
-                  curNum: 1, // 打印计数-当前张数
-                  sumNum: 2, // 打印计数-总张数
-                },
-                splitControl: 0,// 可不传， 默认为0， 根据自定义内容自动分页；1，禁止分页；2；强制分页， 内容打印在第二页
-                showDeliveryLogo: 0, // 可不传， 默认为1， 传0时不展示快递公司logo
-                // 自定义模板信息，没有自定义模板需求可不传
-
-                // 面单补充信息，用来覆盖寄件人信息，没有这种需求可以不传
-
-              }],
-              printType: 1, // Number 打印类型，默认为 1，打印固定高度的面单；如果为2，则打印任意自定义内容，需要传递 size 参数指定纸张尺寸，printInfo 改为传递 base64 格式的 html
-              size: {
-                width: 76, // 纸张尺寸，单位毫米，printType 为 2 时必传
-                height: 130
-              },
-              printer: this.printParams.printer, // 选中的打印机，printer.name
-            }))
-          };
-
-
-          let obj = this.$modal;
-          ws.onmessage = (e) => {
-            const resp = JSON.parse(e.data || '{}')
-            if (resp.command === 'print') {
-              console.log('打印结果: ', resp);
-              // 请求回调
-              return pushWaybillPrintSuccess({shopId: this.queryParams.shopId, ids: this.ids})
-              // obj.msgError("打印结果！"+JSON.stringify(resp));
-            }
-          };
-
-
-          // 当发生错误时触发
-          ws.onerror = function (error) {
-            obj.msgError("打印失败！");
-            console.error('WebSocket error:', error);
-            // alert('WebSocket error occurred. Check the console for more details.');
-          };
         }
       });
     },
