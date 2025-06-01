@@ -116,5 +116,10 @@ public class ShopController extends BaseController {
         }
         return toAjax(logisticsCompanyService.updateStatus(company.getId(),newStatus));
     }
+    @PostMapping("/logistics/add")
+    public AjaxResult add(@RequestBody OLogisticsCompany company)
+    {
+        return toAjax(logisticsCompanyService.save(company));
+    }
 
 }

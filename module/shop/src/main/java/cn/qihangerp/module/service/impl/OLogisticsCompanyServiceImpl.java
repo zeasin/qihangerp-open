@@ -40,6 +40,7 @@ public class OLogisticsCompanyServiceImpl extends ServiceImpl<OLogisticsCompanyM
 
     @Override
     public List<OLogisticsCompany> queryListByStatus(Integer status, Integer shopType, Integer shopId) {
+        if(status==null) status=1;
         LambdaQueryWrapper<OLogisticsCompany> queryWrapper = new LambdaQueryWrapper<OLogisticsCompany>().
                 eq(OLogisticsCompany::getStatus, status)
                 .eq(shopId != null, OLogisticsCompany::getShopId, shopId)

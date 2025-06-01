@@ -231,3 +231,9 @@ export function tansParams(params) {
 export function blobValidate(data) {
   return data.type !== 'application/json'
 }
+// 金额格式化
+export function amountFormatter(row, column, cellValue, index) {
+  if(cellValue) {
+    return '￥' + cellValue.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
+  }
+}

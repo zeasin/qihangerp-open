@@ -8,7 +8,7 @@
         <print-pdd v-if="item.id === 300"></print-pdd>
         <print-dou v-if="item.id === 400"></print-dou>
         <print-wei v-if="item.id === 500"></print-wei>
-        <print-offline v-if="item.id === 999"></print-offline>
+<!--        <print-offline v-if="item.id === 999"></print-offline>-->
       </el-tab-pane>
 
 <!--      <el-tab-pane label="淘宝天猫" name="printTao" lazy>-->
@@ -55,7 +55,7 @@ export default {
   },
   mounted() {
     listPlatform({status:0}).then(res => {
-      this.typeList = res.rows;
+      this.typeList = res.rows.filter(x=>x.id<999);
       this.activeName = this.typeList[0].code
     })
   },

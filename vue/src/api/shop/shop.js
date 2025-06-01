@@ -101,7 +101,7 @@ export function listLogisticsStatus(query) {
 // 新增物流公司
 export function addLogistics(data) {
   return request({
-    url: '/api/oms-api/logistics',
+    url: '/api/oms-api/shop/logistics/add',
     method: 'post',
     data: data
   })

@@ -109,7 +109,7 @@
           </el-table>
         </template>
       </el-table-column>
-      <el-table-column label="订单金额" align="center" prop="orderAmount" :formatter="amountFormatter"/>
+      <el-table-column label="订单金额" align="center" prop="amount" :formatter="amountFormatter"/>
       <el-table-column label="下单时间" align="center" prop="orderCreateTime" width="180">
         <template slot-scope="scope">
           <span>{{ parseTime(scope.row.orderTime) }}</span>
@@ -141,29 +141,6 @@
       @pagination="getList"
     />
 
-    <!-- 取号 -->
-    <el-dialog title="取号" :visible.sync="getCodeOpen" width="500px" append-to-body>
-      <el-form ref="form" :model="form" :rules="rules" label-width="120px">
-        <el-form-item label="电子面单账户" prop="accountId">
-          <el-select v-model="form.accountId" placeholder="请选择电子面单账户" clearable>
-            <el-option
-              v-for="item in deliverList"
-              :key="item.id"
-              :label="item.deliveryId"
-              :value="item.id">
-              <span style="float: left">{{ item.deliveryId }}</span>
-              <span style="float: right; color: #8492a6; font-size: 13px" >{{item.siteName}}:{{item.available}}</span>
-            </el-option>
-          </el-select>
-
-        </el-form-item>
-
-      </el-form>
-      <div slot="footer" class="dialog-footer">
-        <el-button type="primary" @click="getCodeOpenForm">取号并发货</el-button>
-        <el-button @click="cancel">取 消</el-button>
-      </div>
-    </el-dialog>
 
 
     <!-- 打包发货对话框 -->
@@ -214,7 +191,7 @@
         </el-descriptions>
 
         <el-divider content-position="center">商品明细</el-divider>
-        <el-table :data="form.itemList"  style="margin-bottom: 10px;">
+        <el-table :data="form.itemVoList"  style="margin-bottom: 10px;">
           <!-- <el-table-column type="selection" width="50" align="center" /> -->
           <el-table-column label="序号" align="center" type="index" width="50"/>
 
@@ -348,9 +325,7 @@ import {
   waitSelfShipmentList
 } from "@/api/order/order";
 
-
-import {listLogisticsStatus} from "@/api/api/logistics";
-import {listShop} from "@/api/shop/shop";
+import {listShop,listLogisticsStatus} from "@/api/shop/shop";
 import {amountFormatter, parseTime} from "@/utils/zhijian";
 import {getDicts} from "@/api/system/dict/data";
 
@@ -486,32 +461,7 @@ export default {
         this.open = true;
       });
     },
-    getUUID(len, radix) {
-      var chars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'.split('');
-      var uuid = [], i;
-      radix = radix || chars.length;
-      if (len) {
-        for (i = 0; i < len; i++) uuid[i] = chars[0 | Math.random() * radix];
-      } else {
-        var r;
-        uuid[8] = uuid[13] = uuid[18] = uuid[23] = '-';
-        uuid[14] = '4';
-        for (i = 0; i < 36; i++) {
-          if (!uuid[i]) {
-            r = 0 | Math.random() * 16;
-            uuid[i] = chars[(i == 19) ? (r & 0x3) | 0x8 : r];
-          }
-        }
-      }
-      return uuid.join('');
-    },
 
-    handleShipSend(){
-      pushShipSend({shopId: this.queryParams.shopId, ids: this.ids}).then(response => {
-        this.$modal.msgSuccess("发货成功！");
-        this.getList()
-      })
-    },
     // 分配给供应商发货
     allocateShipmentToSupplier(row){
       this.reset();
@@ -534,8 +484,8 @@ export default {
         this.form.width=0
         this.form.height=0
         this.form.weight=0.0
-        this.form.shippingCost=4.0
-        this.form.packageAmount=1.0
+        this.form.shippingCost=0.0
+        this.form.packageAmount=0.0
         listLogisticsStatus({shopType:response.data.shopType}).then(resp=>{
           this.logisticsList = resp.rows
         })
