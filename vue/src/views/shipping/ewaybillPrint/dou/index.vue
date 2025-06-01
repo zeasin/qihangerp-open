@@ -290,31 +290,7 @@ export default {
       this.multiple = !selection.length
     },
     openWs() {
-      const ws = new WebSocket('ws://127.0.0.1:13888');
-      ws.onopen = () => {
-        console.log('与打印组件建立连接成功: ');
-        // 或打印机
-        ws.send(JSON.stringify({
-          requestID: '1234554',
-          cmd: 'getPrinters',
-          "version": "1.0"
-        }))
-      };
-      let obj = this.$modal;
-      ws.onmessage = (e) => {
-        const resp = JSON.parse(e.data || '{}')
-        if (resp.cmd === 'getPrinters') {
-          this.printerList = resp.printers
-          obj.msgSuccess("打印组件连接成功！");
-          console.log('打印机列表: ', resp.printers);
-        }
-      };
-      // 当发生错误时触发
-      ws.onerror = function (error) {
-        obj.msgError("打印组件连接失败！请安装并启动字节打印组件！");
-        console.error('WebSocket error:', error);
-        // alert('WebSocket error occurred. Check the console for more details.');
-      };
+      this.$modal.msgError("开源版本未实现电子面单相关功能！请自行对接发货");
     },
     // 取号弹窗
     handleGetEwaybillCode() {
@@ -374,48 +350,7 @@ export default {
       getWaybillPrintData({shopId: this.queryParams.shopId, ids: ids}).then(response => {
         console.log("======打印======", response.data)
         if (response.data) {
-          const ws = new WebSocket('ws://127.0.0.1:13888');
-          ws.onopen = () => {
-            let printData = []
-            response.data.forEach(x => printData.push(JSON.parse(x.printData)))
-            console.log('开始打印: 组合打印数据：', printData);
-            // 打印
-            ws.send(JSON.stringify({
-              "cmd": "print",
-              "requestID": this.getUUID(8, 16),
-              "version": "1.0",
-              "task": {
-                "taskID": this.getUUID(8,10),
-                "preview": false,
-                "printer": this.printParams.printer,
-                "previewType": "pdf",
-                "firstDocumentNumber": 10,
-                "totalDocumentCount": 100,
-                "documents": [{
-                  "documentID": this.getUUID(8,10),
-                  "contents": printData
-                }]
-              }
-            }))
-          };
-          let obj = this.$modal;
-          ws.onmessage = (e) => {
-            const resp = JSON.parse(e.data || '{}')
-            if (resp.cmd === 'print') {
-              console.log('打印结果: ', resp);
-              obj.msgSuccess("打印成功！" + JSON.stringify(resp));
-              // 请求回调
-              return pushWaybillPrintSuccess({shopId: this.queryParams.shopId, ids: ids})
-            }
-          };
-
-
-          // 当发生错误时触发
-          ws.onerror = function (error) {
-            obj.msgError("打印失败！");
-            console.error('WebSocket error:', error);
-            // alert('WebSocket error occurred. Check the console for more details.');
-          };
+          this.$modal.msgError("开源版本未实现电子面单相关功能！请自行对接发货");
         }
       });
 
@@ -424,25 +359,7 @@ export default {
     handleShipSend(){
       this.$modal.msgError("开源版本未实现平台发货！请自行对接发货");
     },
-    getUUID(len, radix) {
-      var chars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'.split('');
-      var uuid = [], i;
-      radix = radix || chars.length;
-      if (len) {
-        for (i = 0; i < len; i++) uuid[i] = chars[0 | Math.random() * radix];
-      } else {
-        var r;
-        uuid[8] = uuid[13] = uuid[18] = uuid[23] = '-';
-        uuid[14] = '4';
-        for (i = 0; i < 36; i++) {
-          if (!uuid[i]) {
-            r = 0 | Math.random() * 16;
-            uuid[i] = chars[(i == 19) ? (r & 0x3) | 0x8 : r];
-          }
-        }
-      }
-      return uuid.join('');
-    }
+
   }
 };
 </script>
