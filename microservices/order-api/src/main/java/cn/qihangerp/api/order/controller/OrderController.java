@@ -86,7 +86,6 @@ public class OrderController extends BaseController
     @PostMapping("/manualShipment")
     public AjaxResult manualShipment(@RequestBody OrderShipRequest shipBo)
     {
-        if(getUserId()==1) return AjaxResult.error("超级管理员不能操作");
         var result = orderService.manualShipmentOrder(shipBo,getUsername());
         if(result.getCode() == 0) return AjaxResult.success();
         else return AjaxResult.error(result.getMsg());
@@ -100,7 +99,6 @@ public class OrderController extends BaseController
     @PostMapping("/allocateShipmentOrder")
     public AjaxResult allocateShipmentOrder(@RequestBody OrderAllocateShipRequest shipBo)
     {
-        if(getUserId()==1) return AjaxResult.error("超级管理员不能操作");
         var result = orderService.allocateShipmentOrder(shipBo,getUsername());
         if(result.getCode() == 0) return AjaxResult.success();
         else return AjaxResult.error(result.getMsg());

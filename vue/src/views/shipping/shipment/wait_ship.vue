@@ -275,7 +275,7 @@
         </el-descriptions>
 
         <el-divider content-position="center">商品明细</el-divider>
-        <el-table :data="form.itemList"  style="margin-bottom: 10px;">
+        <el-table :data="form.itemVoList"  style="margin-bottom: 10px;">
           <!-- <el-table-column type="selection" width="50" align="center" /> -->
           <el-table-column label="序号" align="center" type="index" width="50"/>
 
@@ -469,6 +469,12 @@ export default {
       console.log('======',id)
       getOrder(id).then(response => {
         this.form = response.data;
+        this.form.length=0
+        this.form.width=0
+        this.form.height=0
+        this.form.weight=0.0
+        this.form.shippingCost=0.0
+        this.form.packageAmount=0.0
         this.allocateShipmentOpen = true;
         // this.detailTitle = "订单详情";
       });
