@@ -94,7 +94,7 @@
           </el-row>
         </template>
       </el-table-column>
-      <el-table-column label="订单金额" align="center" prop="orderAmount" :formatter="amountFormatter"/>
+      <el-table-column label="订单金额" align="center" prop="amount" :formatter="amountFormatter"/>
       <el-table-column label="下单时间" align="center" prop="orderCreateTime" width="180">
         <template slot-scope="scope">
           <span>{{ parseTime(scope.row.orderTime) }}</span>

@@ -117,7 +117,7 @@
         <el-tag v-if="scope.row.shipper==1" size="small">供应商发货</el-tag>
         </template>
       </el-table-column>
-      <el-table-column label="订单金额" align="center" prop="orderAmount" :formatter="amountFormatter"/>
+      <el-table-column label="订单金额" align="center" prop="amount" :formatter="amountFormatter"/>
     </el-table>
 
     <pagination
