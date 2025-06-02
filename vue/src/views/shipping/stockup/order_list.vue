@@ -6,7 +6,7 @@
           <el-option v-for="item in shopList" :key="item.id" :label="item.name" :value="item.id">
             <span style="float: left">{{ item.name }}</span>
 
-              <span style="float: right; color: #8492a6; font-size: 13px"  v-if="item.type === 500">视频号小店</span>
+              <span style="float: right; color: #8492a6; font-size: 13px"  v-if="item.type === 500">微信小店</span>
               <span style="float: right; color: #8492a6; font-size: 13px"  v-if="item.type === 200">京东POP</span>
               <span style="float: right; color: #8492a6; font-size: 13px"  v-if="item.type === 280">京东自营</span>
               <span style="float: right; color: #8492a6; font-size: 13px"  v-if="item.type === 100">淘宝天猫</span>

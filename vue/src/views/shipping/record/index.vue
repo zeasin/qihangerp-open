@@ -9,11 +9,13 @@
             :label="item.name"
             :value="item.id">
             <span style="float: left">{{ item.name }}</span>
-            <span style="float: right; color: #8492a6; font-size: 13px"  v-if="item.type === 1">淘宝天猫</span>
-            <span style="float: right; color: #8492a6; font-size: 13px"  v-if="item.type === 2">京东POP</span>
-            <span style="float: right; color: #8492a6; font-size: 13px"  v-if="item.type === 3">抖店</span>
-            <span style="float: right; color: #8492a6; font-size: 13px"  v-if="item.type === 4">拼多多</span>
-            <span style="float: right; color: #8492a6; font-size: 13px"  v-if="item.type === 5">京东自营</span>
+            <span style="float: right; color: #8492a6; font-size: 13px"  v-if="item.type === 500">微信小店</span>
+            <span style="float: right; color: #8492a6; font-size: 13px"  v-if="item.type === 200">京东POP</span>
+            <span style="float: right; color: #8492a6; font-size: 13px"  v-if="item.type === 280">京东自营</span>
+            <span style="float: right; color: #8492a6; font-size: 13px"  v-if="item.type === 100">淘宝天猫</span>
+            <span style="float: right; color: #8492a6; font-size: 13px"  v-if="item.type === 300">拼多多</span>
+            <span style="float: right; color: #8492a6; font-size: 13px"  v-if="item.type === 400">抖店</span>
+            <span style="float: right; color: #8492a6; font-size: 13px"  v-if="item.type === 999">线下渠道</span>
           </el-option>
         </el-select>
       </el-form-item>
@@ -51,36 +53,35 @@
           @click="handleShipping"
         >手动订单发货</el-button>
       </el-col>
-      <el-col :span="1.5">
-        <el-button
-          type="danger"
-          plain
-          icon="el-icon-download"
-          size="mini"
-          @click="handleShippingLog"
-        >ERP发货推送记录</el-button>
-      </el-col>
+<!--      <el-col :span="1.5">-->
+<!--        <el-button-->
+<!--          type="danger"-->
+<!--          plain-->
+<!--          icon="el-icon-download"-->
+<!--          size="mini"-->
+<!--          @click="handleShippingLog"-->
+<!--        >ERP发货推送记录</el-button>-->
+<!--      </el-col>-->
       <right-toolbar :showSearch.sync="showSearch" @queryTable="getList"></right-toolbar>
     </el-row>
 
     <el-table v-loading="loading" :data="dataList" >
 <!--      <el-table-column type="selection" width="55" align="center" />-->
-      <el-table-column label="主订单" align="center" prop="orderNums" />
-      <el-table-column label="子订单" align="center" prop="subOrderNums" />
+      <el-table-column label="订单号" align="left" prop="orderNum" />
       <el-table-column label="店铺" align="center" prop="shopId" >
         <template slot-scope="scope">
-          <span>{{ shopList.find(x=>x.id === scope.row.shopId).name  }}</span>
+          <span>{{ shopList.find(x=>x.id == scope.row.shopId)?shopList.find(x=>x.id == scope.row.shopId).name :'' }}</span>
         </template>
       </el-table-column>
       <el-table-column label="类型" align="center" prop="shippingType" >
         <template slot-scope="scope">
-          <el-tag size="small" v-if="scope.row.shippingType === 1">订单发货</el-tag>
-          <el-tag size="small" v-if="scope.row.shippingType === 2">商品补发</el-tag>
-          <el-tag size="small" v-if="scope.row.shippingType === 3">商品换货</el-tag>
+          <el-tag size="small" v-if="scope.row.shipType === 1">订单发货</el-tag>
+          <el-tag size="small" v-if="scope.row.shipType === 2">商品补发</el-tag>
+          <el-tag size="small" v-if="scope.row.shipType === 3">商品换货</el-tag>
         </template>
       </el-table-column>
-      <el-table-column label="快递公司" align="center" prop="logisticsCompany" />
-       <el-table-column label="快递单号" align="center" prop="waybillCode" />
+      <el-table-column label="快递公司" align="center" prop="shipCompany" />
+       <el-table-column label="快递单号" align="center" prop="shipCode" />
        <el-table-column label="备注" align="center" prop="remark" />
        <el-table-column label="发货时间" align="center" prop="createTime" >
          <template slot-scope="scope">
@@ -109,11 +110,13 @@
               :label="item.name"
               :value="item.id">
               <span style="float: left">{{ item.name }}</span>
-              <span style="float: right; color: #8492a6; font-size: 13px"  v-if="item.type === 1">淘宝天猫</span>
-              <span style="float: right; color: #8492a6; font-size: 13px"  v-if="item.type === 2">京东POP</span>
-              <span style="float: right; color: #8492a6; font-size: 13px"  v-if="item.type === 3">抖店</span>
-              <span style="float: right; color: #8492a6; font-size: 13px"  v-if="item.type === 4">拼多多</span>
-              <span style="float: right; color: #8492a6; font-size: 13px"  v-if="item.type === 5">京东自营</span>
+              <span style="float: right; color: #8492a6; font-size: 13px"  v-if="item.type === 500">微信小店</span>
+              <span style="float: right; color: #8492a6; font-size: 13px"  v-if="item.type === 200">京东POP</span>
+              <span style="float: right; color: #8492a6; font-size: 13px"  v-if="item.type === 280">京东自营</span>
+              <span style="float: right; color: #8492a6; font-size: 13px"  v-if="item.type === 100">淘宝天猫</span>
+              <span style="float: right; color: #8492a6; font-size: 13px"  v-if="item.type === 300">拼多多</span>
+              <span style="float: right; color: #8492a6; font-size: 13px"  v-if="item.type === 400">抖店</span>
+              <span style="float: right; color: #8492a6; font-size: 13px"  v-if="item.type === 999">线下渠道</span>
             </el-option>
           </el-select>
         </el-form-item>
