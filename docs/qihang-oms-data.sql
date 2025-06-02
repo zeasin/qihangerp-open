@@ -11,7 +11,7 @@
  Target Server Version : 80200
  File Encoding         : 65001
 
- Date: 01/06/2025 14:23:45
+ Date: 02/06/2025 11:08:54
 */
 
 SET NAMES utf8mb4;
@@ -263,17 +263,15 @@ INSERT INTO `sys_menu` VALUES (117, '菜单管理', 5, 1, 'menu', 'system/menu/i
 INSERT INTO `sys_menu` VALUES (2077, '店铺商品管理', 3, 21, 'shop_goods', 'shop/goods/index', NULL, 1, 0, 'C', '0', '0', '', 'shopping', 'admin', '2024-03-28 10:29:59', 'admin', '2025-03-24 12:37:43', '');
 INSERT INTO `sys_menu` VALUES (2078, '添加ERP商品', 4, 99, 'create', 'goods/create', NULL, 1, 0, 'C', '1', '0', '', 'checkbox', 'admin', '2024-03-18 07:59:57', 'admin', '2024-09-07 16:41:46', '');
 INSERT INTO `sys_menu` VALUES (2079, '字典管理', 5, 9, 'dict', 'system/dict/index', NULL, 1, 0, 'C', '0', '0', '', 'dict', 'admin', '2024-03-18 08:43:55', 'admin', '2024-03-18 08:44:08', '');
-INSERT INTO `sys_menu` VALUES (2084, '电子面单设置', 3, 22, 'ewaybill_account', 'shop/ewaybillAccount/index', NULL, 1, 0, 'C', '0', '0', '', 'code', 'admin', '2024-03-21 20:05:09', 'admin', '2025-05-19 14:17:30', '');
-INSERT INTO `sys_menu` VALUES (2086, '定时任务配置', 3, 80, 'task_list', 'shop/task/index', NULL, 1, 0, 'C', '0', '0', '', 'time-range', 'admin', '2024-03-22 19:29:20', 'admin', '2025-05-19 14:24:21', '');
 INSERT INTO `sys_menu` VALUES (2087, '发货管理', 0, 20, 'ship', NULL, NULL, 1, 0, 'M', '0', '0', '', 'guide', 'admin', '2024-03-30 17:36:10', 'admin', '2024-08-25 15:45:48', '');
-INSERT INTO `sys_menu` VALUES (2088, '发货设置', 2087, 9, 'ship_logistics', 'shipping/logistics/index', NULL, 1, 0, 'C', '0', '0', '', 'checkbox', 'admin', '2024-03-30 17:37:01', 'admin', '2025-05-23 20:07:04', '');
-INSERT INTO `sys_menu` VALUES (2089, '发货记录', 2087, 3, 'record', 'shipping/index', NULL, 1, 0, 'C', '0', '0', '', 'guide', 'admin', '2024-03-30 17:37:42', 'admin', '2024-07-28 18:56:02', '');
+INSERT INTO `sys_menu` VALUES (2088, '发货设置', 2087, 9, 'ship_set', 'shipping/logistics/index', NULL, 1, 0, 'C', '0', '0', '', 'checkbox', 'admin', '2024-03-30 17:37:01', 'admin', '2025-06-01 15:02:10', '');
+INSERT INTO `sys_menu` VALUES (2089, '发货记录', 2087, 3, 'record', 'shipping/record/index', NULL, 1, 0, 'C', '0', '0', '', 'guide', 'admin', '2024-03-30 17:37:42', 'admin', '2025-06-02 09:45:44', '');
 INSERT INTO `sys_menu` VALUES (2090, '角色管理', 5, 2, 'role', 'system/role/index', NULL, 1, 0, 'C', '0', '0', NULL, 'peoples', 'admin', '2024-03-31 12:40:50', '', NULL, '');
 INSERT INTO `sys_menu` VALUES (2091, '部门管理', 5, 3, 'dept', 'system/dept/index', NULL, 1, 0, 'C', '0', '0', NULL, 'tree', 'admin', '2024-03-31 12:42:57', '', NULL, '');
 INSERT INTO `sys_menu` VALUES (2092, '售后处理记录', 2, 5, 'processing', 'afterSale/index', NULL, 1, 0, 'C', '0', '0', '', 'documentation', 'admin', '2024-04-06 17:27:03', 'admin', '2024-07-28 18:59:41', '');
 INSERT INTO `sys_menu` VALUES (2093, '订单明细', 1, 2, 'order_item_list', 'order/item_list', NULL, 1, 0, 'C', '0', '0', NULL, 'chart', 'admin', '2024-04-06 18:58:06', '', NULL, '');
-INSERT INTO `sys_menu` VALUES (2094, '取号&发货', 2087, 1, 'print', 'shipping/ewaybillPrint/index', NULL, 1, 0, 'C', '0', '0', '', 'edit', 'admin', '2024-07-20 11:04:54', 'admin', '2025-05-17 20:17:32', '');
-INSERT INTO `sys_menu` VALUES (2096, '备货清单', 2087, 2, 'stockup', 'shipping/stockup', NULL, 1, 0, 'C', '0', '0', '', 'email', 'admin', '2024-07-20 11:53:24', 'admin', '2024-07-28 20:44:10', '');
+INSERT INTO `sys_menu` VALUES (2094, '电子面单发货', 2087, 1, 'print', 'shipping/ewaybillPrint/index', NULL, 1, 0, 'C', '0', '0', '', 'edit', 'admin', '2024-07-20 11:04:54', 'admin', '2025-06-01 14:26:27', '');
+INSERT INTO `sys_menu` VALUES (2096, '备货单', 2087, 2, 'stockup', 'shipping/stockup', NULL, 1, 0, 'C', '0', '0', '', 'email', 'admin', '2024-07-20 11:53:24', 'admin', '2025-06-02 09:10:24', '');
 INSERT INTO `sys_menu` VALUES (2097, '物流跟踪', 2087, 5, 'logistics', 'shipping/stocking/index', NULL, 1, 0, 'C', '0', '1', '', 'list', 'admin', '2024-07-20 11:54:18', 'admin', '2025-05-25 14:32:27', '');
 INSERT INTO `sys_menu` VALUES (2099, '私域订单管理', 1, 10, 'offline_order_list', 'order/private/index', NULL, 1, 0, 'C', '0', '1', '', 'checkbox', 'admin', '2024-07-27 17:33:03', 'admin', '2025-05-24 13:10:53', '');
 INSERT INTO `sys_menu` VALUES (2100, '私域售后管理', 2, 3, 'offline_aftersale', 'refund/private/index', NULL, 1, 0, 'C', '0', '1', '', 'code', 'admin', '2024-07-27 17:33:33', 'admin', '2025-05-25 14:59:03', '');
@@ -360,7 +358,7 @@ CREATE TABLE `sys_role`  (
 -- Records of sys_role
 -- ----------------------------
 INSERT INTO `sys_role` VALUES (1, '超级管理员', 'admin', 1, '1', 1, 1, '0', '0', 'admin', '2023-08-07 19:31:37', '', NULL, '超级管理员');
-INSERT INTO `sys_role` VALUES (2, '普通角色', 'common', 2, '2', 1, 1, '0', '0', 'admin', '2023-08-07 19:31:37', 'admin', '2025-03-02 15:55:27', '普通角色');
+INSERT INTO `sys_role` VALUES (2, '普通角色', 'common', 2, '2', 1, 1, '0', '0', 'admin', '2023-08-07 19:31:37', 'admin', '2025-06-02 08:58:07', '普通角色');
 
 -- ----------------------------
 -- Table structure for sys_role_menu
@@ -388,9 +386,8 @@ INSERT INTO `sys_role_menu` VALUES (2, 106);
 INSERT INTO `sys_role_menu` VALUES (2, 108);
 INSERT INTO `sys_role_menu` VALUES (2, 110);
 INSERT INTO `sys_role_menu` VALUES (2, 112);
+INSERT INTO `sys_role_menu` VALUES (2, 2077);
 INSERT INTO `sys_role_menu` VALUES (2, 2078);
-INSERT INTO `sys_role_menu` VALUES (2, 2084);
-INSERT INTO `sys_role_menu` VALUES (2, 2086);
 INSERT INTO `sys_role_menu` VALUES (2, 2087);
 INSERT INTO `sys_role_menu` VALUES (2, 2088);
 INSERT INTO `sys_role_menu` VALUES (2, 2089);
@@ -404,11 +401,19 @@ INSERT INTO `sys_role_menu` VALUES (2, 2100);
 INSERT INTO `sys_role_menu` VALUES (2, 2101);
 INSERT INTO `sys_role_menu` VALUES (2, 2103);
 INSERT INTO `sys_role_menu` VALUES (2, 2104);
+INSERT INTO `sys_role_menu` VALUES (2, 2105);
+INSERT INTO `sys_role_menu` VALUES (2, 2106);
 INSERT INTO `sys_role_menu` VALUES (2, 2108);
 INSERT INTO `sys_role_menu` VALUES (2, 2109);
 INSERT INTO `sys_role_menu` VALUES (2, 2110);
 INSERT INTO `sys_role_menu` VALUES (2, 2111);
 INSERT INTO `sys_role_menu` VALUES (2, 2112);
+INSERT INTO `sys_role_menu` VALUES (2, 2114);
+INSERT INTO `sys_role_menu` VALUES (2, 2115);
+INSERT INTO `sys_role_menu` VALUES (2, 2116);
+INSERT INTO `sys_role_menu` VALUES (2, 2117);
+INSERT INTO `sys_role_menu` VALUES (2, 2118);
+INSERT INTO `sys_role_menu` VALUES (2, 2129);
 
 -- ----------------------------
 -- Table structure for sys_task
@@ -490,7 +495,7 @@ CREATE TABLE `sys_user`  (
 -- ----------------------------
 -- Records of sys_user
 -- ----------------------------
-INSERT INTO `sys_user` VALUES (1, NULL, 'admin', '启航老齐A', '00', '280645618@qq.com', '18123879144', '1', '', '$2a$10$7JB720yubVSZvUI0rEqK/.VqGOZTH.ulu33dHOiBE8ByOhJIrdAu2', '0', '0', '127.0.0.1', '2025-06-01 14:21:31', 'admin', '2023-08-07 19:31:37', '', '2025-06-01 14:21:31', '管理员');
+INSERT INTO `sys_user` VALUES (1, NULL, 'admin', '启航老齐A', '00', '280645618@qq.com', '18123879144', '1', '', '$2a$10$7JB720yubVSZvUI0rEqK/.VqGOZTH.ulu33dHOiBE8ByOhJIrdAu2', '0', '0', '127.0.0.1', '2025-06-02 10:57:23', 'admin', '2023-08-07 19:31:37', '', '2025-06-02 10:57:22', '管理员');
 INSERT INTO `sys_user` VALUES (2, NULL, 'openapi', 'openApi接口专用', '00', '2806456181@qq.com', '15818590000', '0', '', '$2a$10$fHkhoqbMiyracAsTzl38H.55bu.M.of1FXk2EK7RQBjfic3tLU0Ue', '0', '0', '127.0.0.1', '2024-06-24 10:23:35', 'admin', '2024-03-17 14:55:22', 'admin', '2024-06-24 10:23:35', NULL);
 INSERT INTO `sys_user` VALUES (101, 101, '15818590119', 'aaa123', '00', '', '', '0', '', '$2a$10$pXcT6cHaObMeKuYd9vZb5uEb8PyUdF2AcqqRN1cBqiA9rV4qYQW7G', '0', '2', '', NULL, 'admin', '2024-08-15 13:45:25', '', NULL, NULL);
 INSERT INTO `sys_user` VALUES (102, 101, '15818590119', '老齐', '00', '', '', '0', '', '$2a$10$ysk.zgJ8wh25c7vOjKyZ8uarM2hkG0S51j8GYdJSo2kZmc3f8HdKe', '0', '0', '', NULL, 'admin', '2024-08-15 13:49:59', 'admin', '2025-02-10 16:26:20', NULL);
