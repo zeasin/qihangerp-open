@@ -4,10 +4,10 @@ import cn.qihangerp.common.AjaxResult;
 import cn.qihangerp.common.PageQuery;
 import cn.qihangerp.common.ResultVo;
 import cn.qihangerp.common.TableDataInfo;
-import cn.qihangerp.module.stock.domain.WmsStockIn;
+import cn.qihangerp.module.stock.domain.ErpStockIn;
 import cn.qihangerp.module.stock.request.StockInCreateRequest;
 import cn.qihangerp.module.stock.request.StockInRequest;
-import cn.qihangerp.module.stock.service.WmsStockInService;
+import cn.qihangerp.module.stock.service.ErpStockInService;
 import cn.qihangerp.security.common.BaseController;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -16,9 +16,9 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/erp-api/stockIn")
 public class StockInController extends BaseController {
-    private final WmsStockInService stockInService;
+    private final ErpStockInService stockInService;
     @GetMapping("/list")
-    public TableDataInfo list(WmsStockIn bo, PageQuery pageQuery)
+    public TableDataInfo list(ErpStockIn bo, PageQuery pageQuery)
     {
         var pageList = stockInService.queryPageList(bo,pageQuery);
         return getDataTable(pageList);
@@ -45,7 +45,7 @@ public class StockInController extends BaseController {
     @GetMapping(value = "/{id}")
     public AjaxResult getInfo(@PathVariable("id") Long id)
     {
-        WmsStockIn entry = stockInService.getDetailAndItemById(id);
+        ErpStockIn entry = stockInService.getDetailAndItemById(id);
 
         return success(entry);
     }
