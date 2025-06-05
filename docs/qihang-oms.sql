@@ -11,7 +11,7 @@
  Target Server Version : 80200
  File Encoding         : 65001
 
- Date: 02/06/2025 11:09:09
+ Date: 05/06/2025 20:15:57
 */
 
 SET NAMES utf8mb4;
@@ -215,11 +215,11 @@ CREATE TABLE `erp_stock_out_item`  (
   `source_order_id` bigint NOT NULL COMMENT '来源订单id',
   `source_order_item_id` bigint NOT NULL COMMENT '来源订单itemId出库对应的itemId，如：order_item表id、invoice_info表id',
   `source_order_num` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '来源订单号',
-  `goods_id` int NOT NULL COMMENT '商品id',
-  `spec_id` int NOT NULL COMMENT '商品规格id',
+  `goods_id` bigint NOT NULL COMMENT '商品id',
+  `spec_id` bigint NOT NULL COMMENT '商品规格id',
   `spec_num` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '规格编码',
-  `original_quantity` bigint NOT NULL COMMENT '总数量',
-  `out_quantity` bigint NOT NULL DEFAULT 0 COMMENT '已出库数量',
+  `original_quantity` int NOT NULL COMMENT '总数量',
+  `out_quantity` int NOT NULL DEFAULT 0 COMMENT '已出库数量',
   `complete_time` datetime NULL DEFAULT NULL COMMENT '完成出库时间',
   `picked_time` datetime NULL DEFAULT NULL COMMENT '完成拣货时间',
   `status` int NOT NULL DEFAULT 0 COMMENT '状态：0待出库1部分出库2全部出库',
@@ -239,9 +239,11 @@ CREATE TABLE `erp_stock_out_item_position`  (
   `entry_item_id` bigint NOT NULL DEFAULT 0 COMMENT '出库单ItemID',
   `goods_inventory_id` bigint NOT NULL DEFAULT 0 COMMENT '库存ID',
   `goods_inventory_detail_id` bigint NOT NULL DEFAULT 0 COMMENT '库存详情ID',
-  `quantity` bigint NOT NULL DEFAULT 0 COMMENT '出库数量',
-  `location_id` int NULL DEFAULT NULL COMMENT '出库仓位ID',
-  `operator_id` int NULL DEFAULT 0 COMMENT '出库操作人userid',
+  `quantity` int NOT NULL DEFAULT 0 COMMENT '出库数量',
+  `warehouse_id` bigint NULL DEFAULT NULL COMMENT '仓库ID',
+  `position_id` bigint NULL DEFAULT NULL COMMENT '仓位id',
+  `position_num` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '仓位编码',
+  `operator_id` bigint NULL DEFAULT 0 COMMENT '出库操作人userid',
   `operator_name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '出库操作人',
   `out_time` datetime NULL DEFAULT NULL COMMENT '出库时间',
   PRIMARY KEY (`id`) USING BTREE,
@@ -481,6 +483,7 @@ CREATE TABLE `o_goods_inventory`  (
 DROP TABLE IF EXISTS `o_goods_inventory_batch`;
 CREATE TABLE `o_goods_inventory_batch`  (
   `id` bigint NOT NULL AUTO_INCREMENT COMMENT '主键ID',
+  `inventory_id` bigint NOT NULL COMMENT '库存id',
   `batch_num` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '批次号',
   `origin_qty` bigint NOT NULL COMMENT '初始数量',
   `current_qty` bigint NOT NULL DEFAULT 0 COMMENT '当前数量',
@@ -632,7 +635,7 @@ CREATE TABLE `o_logistics_company`  (
   `remark` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '备注',
   `status` int NULL DEFAULT NULL COMMENT '状态（0禁用1启用）',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 285 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '快递公司表' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 1929074086936350722 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '快递公司表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Table structure for o_order
@@ -750,7 +753,7 @@ CREATE TABLE `o_order_ship_list`  (
   `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
   `update_by` varchar(25) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '更新人',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '发货-备货表（取号发货加入备货清单、分配供应商发货加入备货清单）' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '发货-备货表（取号发货加入备货清单、分配供应商发货加入备货清单）' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Table structure for o_order_ship_list_item
@@ -782,7 +785,7 @@ CREATE TABLE `o_order_ship_list_item`  (
   `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
   `update_by` varchar(25) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '更新人',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '发货-备货表（打单加入备货清单）' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '发货-备货表（打单加入备货清单）' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Table structure for o_refund
