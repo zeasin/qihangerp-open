@@ -38,17 +38,19 @@ public class ErpStockOutItemPosition implements Serializable {
     /**
      * 出库数量
      */
-    private Long quantity;
+    private Integer quantity;
 
     /**
      * 出库仓位ID
      */
-    private Integer locationId;
+    private Long warehouseId;
+    private Long positionId;
+    private String positionNum;
 
     /**
      * 出库操作人userid
      */
-    private Integer operatorId;
+    private Long operatorId;
 
     /**
      * 出库操作人

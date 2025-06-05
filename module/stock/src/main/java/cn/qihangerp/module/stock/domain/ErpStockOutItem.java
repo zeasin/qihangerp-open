@@ -43,12 +43,12 @@ public class ErpStockOutItem implements Serializable {
     /**
      * 商品id
      */
-    private Integer goodsId;
+    private Long goodsId;
 
     /**
      * 商品规格id
      */
-    private Integer specId;
+    private Long specId;
 
     /**
      * 规格编码
@@ -58,12 +58,12 @@ public class ErpStockOutItem implements Serializable {
     /**
      * 总数量
      */
-    private Long originalQuantity;
+    private Integer originalQuantity;
 
     /**
      * 已出库数量
      */
-    private Long outQuantity;
+    private Integer outQuantity;
 
     /**
      * 完成出库时间
