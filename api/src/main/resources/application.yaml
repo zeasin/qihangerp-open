@@ -32,7 +32,12 @@ spring:
     url: jdbc:mysql://localhost:3306/qihang-oms?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8
     username: root
     password: Andy_123
-
+    hikari:
+      maximum-pool-size: 10
+      min-idle: 5
+      connection-timeout: 30000
+      idle-timeout: 600000
+      max-lifetime: 1800000
 qihangerp:
   # 验证码类型 math 数字计算 char 字符验证
   captchaType: math
