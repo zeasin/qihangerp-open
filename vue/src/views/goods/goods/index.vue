@@ -1,0 +1,44 @@
+<template>
+  <div class="app-container">
+    <el-tabs v-model="activeName" @tab-click="handleClick">
+
+      <el-tab-pane label="商品库" name="ProductList" >
+        <product-list></product-list>
+      </el-tab-pane>
+
+      <el-tab-pane label="商品库SKU明细" name="ProductSkuList" lazy>
+        <product-sku-list></product-sku-list>
+      </el-tab-pane>
+
+    </el-tabs>
+
+  </div>
+</template>
+
+<script>
+
+import ProductList  from "@/views/goods/goods/goods.vue";
+import ProductSkuList  from "@/views/goods/goods/goods_sku.vue";
+
+
+export default {
+  name: "GoodsLibs",
+  components:{ProductList,ProductSkuList},
+  data() {
+    return {
+      activeName: 'ProductList'
+    };
+  },
+  created() {
+
+  },
+  mounted() {
+
+  },
+  methods: {
+    handleClick(tab, event) {
+      console.log(tab, event);
+    }
+  }
+};
+</script>

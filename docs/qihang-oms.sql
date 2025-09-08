@@ -1,17 +1,17 @@
 /*
- Navicat Premium Data Transfer
+ Navicat Premium Dump SQL
 
  Source Server         : localhost
  Source Server Type    : MySQL
- Source Server Version : 80200
+ Source Server Version : 80032 (8.0.32)
  Source Host           : localhost:3306
  Source Schema         : qihang-oms
 
  Target Server Type    : MySQL
- Target Server Version : 80200
+ Target Server Version : 80032 (8.0.32)
  File Encoding         : 65001
 
- Date: 05/06/2025 20:15:57
+ Date: 08/09/2025 19:15:28
 */
 
 SET NAMES utf8mb4;
@@ -33,6 +33,10 @@ CREATE TABLE `erp_echo_config`  (
 ) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = 'ERP系统交互配置表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
+-- Records of erp_echo_config
+-- ----------------------------
+
+-- ----------------------------
 -- Table structure for erp_echo_log
 -- ----------------------------
 DROP TABLE IF EXISTS `erp_echo_log`;
@@ -46,6 +50,10 @@ CREATE TABLE `erp_echo_log`  (
   `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '与erp系统接口交互记录' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of erp_echo_log
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for erp_shipment
@@ -82,8 +90,12 @@ CREATE TABLE `erp_shipment`  (
   `update_time` datetime NULL DEFAULT NULL,
   `update_by` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
-  INDEX `order_id_index`(`order_id`) USING BTREE
+  INDEX `order_id_index`(`order_id` ASC) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '发货记录表' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of erp_shipment
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for erp_shipment_item
@@ -116,9 +128,13 @@ CREATE TABLE `erp_shipment_item`  (
   `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
   `update_by` varchar(25) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '更新人',
   PRIMARY KEY (`id`) USING BTREE,
-  INDEX `goodId_index`(`erp_goods_id`) USING BTREE,
-  INDEX `order_id`(`order_item_id`) USING BTREE
+  INDEX `goodId_index`(`erp_goods_id` ASC) USING BTREE,
+  INDEX `order_id`(`order_item_id` ASC) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '发货明细表' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of erp_shipment_item
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for erp_stock_in
@@ -144,6 +160,10 @@ CREATE TABLE `erp_stock_in`  (
   `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '入库单' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of erp_stock_in
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for erp_stock_in_item
@@ -172,8 +192,12 @@ CREATE TABLE `erp_stock_in_item`  (
   `update_by` varchar(25) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '更新人',
   `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
   PRIMARY KEY (`id`) USING BTREE,
-  INDEX `specIndex`(`sku_id`) USING BTREE
+  INDEX `specIndex`(`sku_id` ASC) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '入库单明细' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of erp_stock_in_item
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for erp_stock_out
@@ -205,6 +229,10 @@ CREATE TABLE `erp_stock_out`  (
 ) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '出库单' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
+-- Records of erp_stock_out
+-- ----------------------------
+
+-- ----------------------------
 -- Table structure for erp_stock_out_item
 -- ----------------------------
 DROP TABLE IF EXISTS `erp_stock_out_item`;
@@ -226,8 +254,12 @@ CREATE TABLE `erp_stock_out_item`  (
   `create_time` datetime NULL DEFAULT NULL,
   `update_time` datetime NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
-  INDEX `specIndex`(`spec_id`) USING BTREE
+  INDEX `specIndex`(`spec_id` ASC) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '出库单明细' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of erp_stock_out_item
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for erp_stock_out_item_position
@@ -247,8 +279,12 @@ CREATE TABLE `erp_stock_out_item_position`  (
   `operator_name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '出库操作人',
   `out_time` datetime NULL DEFAULT NULL COMMENT '出库时间',
   PRIMARY KEY (`id`) USING BTREE,
-  INDEX `goods_stock_info_item_id_index`(`goods_inventory_detail_id`) USING BTREE
+  INDEX `goods_stock_info_item_id_index`(`goods_inventory_detail_id` ASC) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '出库仓位详情' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of erp_stock_out_item_position
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for erp_warehouse
@@ -273,6 +309,10 @@ CREATE TABLE `erp_warehouse`  (
 ) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '仓库表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
+-- Records of erp_warehouse
+-- ----------------------------
+
+-- ----------------------------
 -- Table structure for erp_warehouse_position
 -- ----------------------------
 DROP TABLE IF EXISTS `erp_warehouse_position`;
@@ -294,6 +334,10 @@ CREATE TABLE `erp_warehouse_position`  (
   `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 25 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '仓库仓位表' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of erp_warehouse_position
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for o_after_sale
@@ -341,6 +385,10 @@ CREATE TABLE `o_after_sale`  (
 ) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = 'OMS售后处理表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
+-- Records of o_after_sale
+-- ----------------------------
+
+-- ----------------------------
 -- Table structure for o_goods
 -- ----------------------------
 DROP TABLE IF EXISTS `o_goods`;
@@ -386,10 +434,14 @@ CREATE TABLE `o_goods`  (
   `city` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '发货地市',
   `town` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '发货地区',
   PRIMARY KEY (`id`) USING BTREE,
-  UNIQUE INDEX `goods_id_unique`(`outer_erp_goods_id`) USING BTREE,
-  INDEX `number`(`goods_num`) USING BTREE,
-  INDEX `id`(`id`) USING BTREE
+  UNIQUE INDEX `goods_id_unique`(`outer_erp_goods_id` ASC) USING BTREE,
+  INDEX `number`(`goods_num` ASC) USING BTREE,
+  INDEX `id`(`id` ASC) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 16 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = 'OMS商品表' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of o_goods
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for o_goods_brand
@@ -405,6 +457,10 @@ CREATE TABLE `o_goods_brand`  (
   `update_time` datetime NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of o_goods_brand
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for o_goods_category
@@ -428,6 +484,10 @@ CREATE TABLE `o_goods_category`  (
 ) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
+-- Records of o_goods_category
+-- ----------------------------
+
+-- ----------------------------
 -- Table structure for o_goods_category_attribute
 -- ----------------------------
 DROP TABLE IF EXISTS `o_goods_category_attribute`;
@@ -439,6 +499,10 @@ CREATE TABLE `o_goods_category_attribute`  (
   `code` char(5) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '固定值color颜色size尺码style款式',
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of o_goods_category_attribute
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for o_goods_category_attribute_value
@@ -453,6 +517,10 @@ CREATE TABLE `o_goods_category_attribute_value`  (
   `isDelete` int NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 427 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of o_goods_category_attribute_value
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for o_goods_inventory
@@ -474,8 +542,12 @@ CREATE TABLE `o_goods_inventory`  (
   `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '更新时间',
   `update_by` varchar(25) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '更新人',
   PRIMARY KEY (`id`) USING BTREE,
-  INDEX `specIdIndex`(`sku_id`) USING BTREE
+  INDEX `specIdIndex`(`sku_id` ASC) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 45 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '商品库存表' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of o_goods_inventory
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for o_goods_inventory_batch
@@ -502,6 +574,10 @@ CREATE TABLE `o_goods_inventory_batch`  (
   `update_by` varchar(25) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '更新人',
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '商品库存批次' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of o_goods_inventory_batch
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for o_goods_inventory_operation
@@ -534,6 +610,10 @@ CREATE TABLE `o_goods_inventory_operation`  (
   `update_by` varchar(25) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '更新人',
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '仓库库存操作记录表' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of o_goods_inventory_operation
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for o_goods_sku
@@ -570,10 +650,14 @@ CREATE TABLE `o_goods_sku`  (
   `create_time` datetime NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
   PRIMARY KEY (`id`) USING BTREE,
-  UNIQUE INDEX `sku_id_unique`(`outer_erp_sku_id`) USING BTREE,
-  INDEX `id`(`id`) USING BTREE,
-  INDEX `number`(`sku_code`) USING BTREE
+  UNIQUE INDEX `sku_id_unique`(`outer_erp_sku_id` ASC) USING BTREE,
+  INDEX `id`(`id` ASC) USING BTREE,
+  INDEX `number`(`sku_code` ASC) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 45 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = 'OMS商品SKU表' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of o_goods_sku
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for o_goods_sku_attr
@@ -590,6 +674,10 @@ CREATE TABLE `o_goods_sku_attr`  (
   `img` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of o_goods_sku_attr
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for o_goods_supplier
@@ -618,8 +706,12 @@ CREATE TABLE `o_goods_supplier`  (
   `purchaserName` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '分管采购员',
   `createTime` datetime NULL DEFAULT NULL COMMENT '创建时间',
   PRIMARY KEY (`id`) USING BTREE,
-  INDEX `id`(`id`) USING BTREE
+  INDEX `id`(`id` ASC) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 34 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of o_goods_supplier
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for o_logistics_company
@@ -636,6 +728,10 @@ CREATE TABLE `o_logistics_company`  (
   `status` int NULL DEFAULT NULL COMMENT '状态（0禁用1启用）',
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 1929074086936350722 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '快递公司表' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of o_logistics_company
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for o_order
@@ -676,9 +772,13 @@ CREATE TABLE `o_order`  (
   `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
   `update_by` varchar(25) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '更新人',
   PRIMARY KEY (`id`) USING BTREE,
-  UNIQUE INDEX `order_sn_index`(`order_num`) USING BTREE,
-  INDEX `shopid_index`(`shop_id`) USING BTREE
+  UNIQUE INDEX `order_sn_index`(`order_num` ASC) USING BTREE,
+  INDEX `shopid_index`(`shop_id` ASC) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 40 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = 'OMS订单表' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of o_order
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for o_order_item
@@ -716,10 +816,14 @@ CREATE TABLE `o_order_item`  (
   `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
   `update_by` varchar(25) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '更新人',
   PRIMARY KEY (`id`) USING BTREE,
-  INDEX `goodId_index`(`goods_id`) USING BTREE,
-  INDEX `order_id`(`order_id`) USING BTREE,
-  INDEX `order_num_index`(`order_num`) USING BTREE
+  INDEX `goodId_index`(`goods_id` ASC) USING BTREE,
+  INDEX `order_id`(`order_id` ASC) USING BTREE,
+  INDEX `order_num_index`(`order_num` ASC) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 45 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = 'OMS订单明细表' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of o_order_item
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for o_order_ship_list
@@ -756,6 +860,10 @@ CREATE TABLE `o_order_ship_list`  (
 ) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '发货-备货表（取号发货加入备货清单、分配供应商发货加入备货清单）' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
+-- Records of o_order_ship_list
+-- ----------------------------
+
+-- ----------------------------
 -- Table structure for o_order_ship_list_item
 -- ----------------------------
 DROP TABLE IF EXISTS `o_order_ship_list_item`;
@@ -786,6 +894,10 @@ CREATE TABLE `o_order_ship_list_item`  (
   `update_by` varchar(25) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '更新人',
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '发货-备货表（打单加入备货清单）' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of o_order_ship_list_item
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for o_refund
@@ -829,6 +941,48 @@ CREATE TABLE `o_refund`  (
 ) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = 'OMS售后处理表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
+-- Records of o_refund
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for o_ship_stock_up
+-- ----------------------------
+DROP TABLE IF EXISTS `o_ship_stock_up`;
+CREATE TABLE `o_ship_stock_up`  (
+  `id` bigint NOT NULL AUTO_INCREMENT,
+  `shop_id` bigint NULL DEFAULT NULL COMMENT '店铺id',
+  `sale_order_id` bigint NULL DEFAULT NULL COMMENT 'erp订单id',
+  `sale_order_item_id` bigint NULL DEFAULT NULL COMMENT 'erp订单itemid',
+  `order_num` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '订单编号',
+  `original_sku_id` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '原始订单skuid',
+  `goods_id` bigint NULL DEFAULT 0 COMMENT 'erp系统商品id',
+  `spec_id` bigint NULL DEFAULT 0 COMMENT 'erp系统商品规格id',
+  `goods_title` varchar(100) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '商品标题',
+  `goods_img` varchar(300) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '商品图片',
+  `goods_spec` varchar(2550) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '商品规格',
+  `goods_num` varchar(35) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '商品编码',
+  `spec_num` varchar(35) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '商品规格编码',
+  `quantity` int NOT NULL COMMENT '商品数量',
+  `status` int NOT NULL COMMENT '状态0待备货1备货中2备货完成3已发货',
+  `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
+  `create_by` varchar(25) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '创建人',
+  `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
+  `update_by` varchar(25) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '更新人',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 1827537194227638275 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '发货-备货表（打单加入备货清单）' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of o_ship_stock_up
+-- ----------------------------
+INSERT INTO `o_ship_stock_up` VALUES (1817540108503371777, 1, 1817230905045843970, 1817230905091981313, '1722092947647399', '1', 0, 0, 'AA', NULL, 'BB', NULL, 'AABB001', 1, 3, '2024-07-28 20:38:25', '消息通知备货', '2024-07-30 23:06:18', '消息通知发货完成');
+INSERT INTO `o_ship_stock_up` VALUES (1823982945285689345, 1, 1823969793328271361, 1823969793403768833, '172370314299481', '1', 0, 0, 'AA', NULL, 'BB', NULL, 'AABB001', 1, 3, '2024-08-15 15:19:57', '消息通知备货', '2024-08-15 15:36:51', '消息通知发货完成');
+INSERT INTO `o_ship_stock_up` VALUES (1823989949987192833, 2, 1823988373058998273, 1823988373058998274, '1723707501431263', '1', 0, 0, 'AA', NULL, 'BB', NULL, 'AABB001', 1, 3, '2024-08-15 15:47:47', '消息通知备货', '2024-08-18 16:14:59', '消息通知发货完成');
+INSERT INTO `o_ship_stock_up` VALUES (1823991276628770817, 2, 1823991184286973954, 1823991184349888514, '1723708260966435', '1', 0, 0, 'AA', NULL, 'BB', NULL, 'AABB001', 1, 3, '2024-08-15 15:53:03', '消息通知备货', '2024-08-18 16:13:54', '消息通知发货完成');
+INSERT INTO `o_ship_stock_up` VALUES (1823991276628770818, 2, 1823991184286973954, 1823991184349888515, '1723708260966435', '2', 0, 0, 'AAABBB', 'https://cbu01.alicdn.com/img/ibank/O1CN012YyP5f1hbcSsvkd3k_!!2218127114296-0-cib.jpg', '红罐加多宝', NULL, 'AABB002', 1, 3, '2024-08-15 15:53:03', '消息通知备货', '2024-08-18 16:13:54', '消息通知发货完成');
+INSERT INTO `o_ship_stock_up` VALUES (1825085906361516034, 1, 1825085325148422145, 1825085325215531009, '1723968921461168', '2', 0, 0, 'AAABBB', 'https://cbu01.alicdn.com/img/ibank/O1CN012YyP5f1hbcSsvkd3k_!!2218127114296-0-cib.jpg', '红罐加多宝', NULL, 'AABB002', 1, 0, '2024-08-18 16:22:43', '消息通知备货', NULL, NULL);
+INSERT INTO `o_ship_stock_up` VALUES (1827537194227638274, 1, 1827306479443587074, 1827306487383404546, '1724485556330230', '2', 0, 0, 'AAABBB', 'https://cbu01.alicdn.com/img/ibank/O1CN012YyP5f1hbcSsvkd3k_!!2218127114296-0-cib.jpg', '红罐加多宝', NULL, 'AABB002', 1, 3, '2024-08-25 10:43:16', '消息通知备货', '2024-08-25 10:46:09', '消息通知发货完成');
+
+-- ----------------------------
 -- Table structure for o_ship_waybill
 -- ----------------------------
 DROP TABLE IF EXISTS `o_ship_waybill`;
@@ -848,6 +1002,83 @@ CREATE TABLE `o_ship_waybill`  (
   `update_by` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '更新人',
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '发货-电子面单记录表（打单记录）' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of o_ship_waybill
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for o_shipment
+-- ----------------------------
+DROP TABLE IF EXISTS `o_shipment`;
+CREATE TABLE `o_shipment`  (
+  `id` bigint NOT NULL,
+  `shop_id` int NULL DEFAULT NULL COMMENT '店铺id',
+  `shipping_type` int NULL DEFAULT NULL COMMENT '发货类型（1订单发货2商品补发3商品换货）',
+  `order_nums` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '发货的所有订单号，以逗号隔开',
+  `sub_order_nums` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '发货的所有子订单号，以逗号隔开',
+  `receiver_name` varchar(55) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '收件人姓名',
+  `receiver_mobile` varchar(55) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '收件人手机号',
+  `province` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '省',
+  `city` varchar(35) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '市',
+  `town` varchar(55) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '区',
+  `address` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '详细地址',
+  `logistics_company` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '物流公司',
+  `logistics_company_code` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '物流公司编码',
+  `waybill_code` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '物流单号',
+  `shipping_fee` decimal(6, 0) NULL DEFAULT NULL COMMENT '物流费用',
+  `shipping_time` datetime NULL DEFAULT NULL COMMENT '发货时间',
+  `shipping_operator` varchar(25) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '发货操作人',
+  `shipping_status` int NULL DEFAULT NULL COMMENT '物流状态（1运输中2已完成）',
+  `package_weight` float NULL DEFAULT NULL COMMENT '包裹重量',
+  `package_length` float NULL DEFAULT NULL COMMENT '包裹长度',
+  `package_width` float NULL DEFAULT NULL COMMENT '包裹宽度',
+  `package_height` float NULL DEFAULT NULL COMMENT '包裹高度',
+  `package_operator` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '打包操作人',
+  `package_time` datetime NULL DEFAULT NULL COMMENT '打包时间',
+  `packages` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL COMMENT '包裹内容JSON',
+  `remark` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '备注',
+  `create_time` datetime NULL DEFAULT NULL,
+  `create_by` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  `update_time` datetime NULL DEFAULT NULL,
+  `update_by` datetime NULL DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '发货-发货记录表' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of o_shipment
+-- ----------------------------
+INSERT INTO `o_shipment` VALUES (1793528218323984386, 1, 1, '3619388556309315725', '3619388556310315725', '操家群', '18413251546-9955', '浙江省', '杭州市', '上城区', '丁兰街道华鹤街3号卓越明熙府1幢1单元802室', 'SF', 'SF', 'SF21502222', NULL, '2024-05-23 14:23:44', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-05-23 14:23:44', NULL, NULL, NULL);
+INSERT INTO `o_shipment` VALUES (1818302160343851010, 1, 1, '1722092947647399', '1722092947647399', '启航', '15818590119', '山西省', '阳泉市', '郊区', 'AAAAAAAAAAAAAAAAAAAA', NULL, NULL, NULL, NULL, '2024-07-30 23:06:30', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-07-30 23:06:30', NULL, NULL, NULL);
+INSERT INTO `o_shipment` VALUES (1823987200621006849, 1, 1, '172370314299481', '172370314299481', 'qq', '13852200666', '河北省', '秦皇岛市', '山海关区', 'aaaaa', 'SFTC001', 'SFTC001', 'AAD33343', NULL, '2024-08-15 15:36:51', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-08-15 15:36:51', NULL, NULL, NULL);
+INSERT INTO `o_shipment` VALUES (1825083688862351361, 2, 1, '1723708260966435, 1723708260966435', '17237082609664351, 17237082609664352', 'aaa', '13012345678', '福建省', '三明市', '清流县', 'aa', 'SFTC001', 'SFTC001', 'AAA222222', NULL, '2024-08-18 16:13:54', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-08-18 16:13:54', NULL, NULL, NULL);
+INSERT INTO `o_shipment` VALUES (1825083959646617601, 2, 1, '1723707501431263', '1723707501431263', 'aaaa', '13134567890', '山西省', '晋城市', '陵川县', 'aaaa', 'SFTC001', 'SFTC001', '1111111', NULL, '2024-08-18 16:14:59', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-08-18 16:14:59', NULL, NULL, NULL);
+INSERT INTO `o_shipment` VALUES (1827537919972241410, 1, 1, '1724485556330230', '1724485556330230', 'a', 'aa', '内蒙古自治区', '赤峰市', '松山区', 'aa', 'SFTC001', 'SFTC001', '000000', NULL, '2024-08-25 10:46:09', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-08-25 10:46:09', NULL, NULL, NULL);
+
+-- ----------------------------
+-- Table structure for o_shipment_item
+-- ----------------------------
+DROP TABLE IF EXISTS `o_shipment_item`;
+CREATE TABLE `o_shipment_item`  (
+  `id` bigint NOT NULL,
+  `shipping_id` bigint NULL DEFAULT NULL COMMENT '发货表id',
+  `order_id` bigint NULL DEFAULT NULL COMMENT 'o_order表id',
+  `order_item_id` bigint NULL DEFAULT NULL COMMENT 'o_order_item表id',
+  `order_num` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '订单编号（第三方平台）',
+  `sub_order_num` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '子订单号（第三方平台）',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '发货-发货记录明细表' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of o_shipment_item
+-- ----------------------------
+INSERT INTO `o_shipment_item` VALUES (1793528218730831874, 1793528218323984386, 1777587002076016642, 1777587002231205891, '3619388556309315725', '3619388556310315725');
+INSERT INTO `o_shipment_item` VALUES (1818302165259575297, 1818302160343851010, 1817230905045843970, 1817230905091981313, '1722092947647399', '1722092947647399');
+INSERT INTO `o_shipment_item` VALUES (1823987200621006850, 1823987200621006849, 1823969793328271361, 1823969793403768833, '172370314299481', '172370314299481');
+INSERT INTO `o_shipment_item` VALUES (1825083688933654529, 1825083688862351361, 1823991184286973954, 1823991184349888514, '1723708260966435', '17237082609664351');
+INSERT INTO `o_shipment_item` VALUES (1825083688933654530, 1825083688862351361, 1823991184286973954, 1823991184349888515, '1723708260966435', '17237082609664352');
+INSERT INTO `o_shipment_item` VALUES (1825083959646617602, 1825083959646617601, 1823988373058998273, 1823988373058998274, '1723707501431263', '1723707501431263');
+INSERT INTO `o_shipment_item` VALUES (1827537919972241411, 1827537919972241410, 1827306479443587074, 1827306487383404546, '1724485556330230', '1724485556330230');
 
 -- ----------------------------
 -- Table structure for o_shop
@@ -880,6 +1111,10 @@ CREATE TABLE `o_shop`  (
 ) ENGINE = InnoDB AUTO_INCREMENT = 1007 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '店铺表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
+-- Records of o_shop
+-- ----------------------------
+
+-- ----------------------------
 -- Table structure for o_shop_daily
 -- ----------------------------
 DROP TABLE IF EXISTS `o_shop_daily`;
@@ -908,6 +1143,10 @@ CREATE TABLE `o_shop_daily`  (
   `update_by` varchar(25) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '更新人',
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '店铺日报' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of o_shop_daily
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for o_shop_daily_detail
@@ -944,6 +1183,10 @@ CREATE TABLE `o_shop_daily_detail`  (
 ) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '店铺日报明细（sku级别）' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
+-- Records of o_shop_daily_detail
+-- ----------------------------
+
+-- ----------------------------
 -- Table structure for o_shop_platform
 -- ----------------------------
 DROP TABLE IF EXISTS `o_shop_platform`;
@@ -962,6 +1205,16 @@ CREATE TABLE `o_shop_platform`  (
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '店铺平台配置表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
+-- Records of o_shop_platform
+-- ----------------------------
+INSERT INTO `o_shop_platform` VALUES (100, '淘宝天猫', 'TMALL', '', NULL, 'http://www.qihangerp.cn', 'http://gw.api.taobao.com/router/rest', 0, 0, 1);
+INSERT INTO `o_shop_platform` VALUES (200, '京东POP', 'JD-POP', '', NULL, 'http://www.qihangerp.cn', 'https://api.jd.com/routerjson', 0, 0, 1);
+INSERT INTO `o_shop_platform` VALUES (300, '拼多多', 'PDD', '', NULL, 'http://www.qihangerp.cn', 'https://gw-api.pinduoduo.com/api/router', 0, 0, 1);
+INSERT INTO `o_shop_platform` VALUES (400, '抖店', 'DOUDIAN', '7496863701597783592', '999b47a2-4991-48ba-b23f-9bc30172a6b3', 'http://www.qihangerp.cn', 'https://openapi-fxg.jinritemai.com/', 0, 0, 1);
+INSERT INTO `o_shop_platform` VALUES (500, '微信小店', 'WEISHOP', '', NULL, 'http://www.qihangerp.cn', 'https://api.weixin.qq.com', 0, 0, 1);
+INSERT INTO `o_shop_platform` VALUES (999, '线下渠道', 'OFFLINE', NULL, NULL, NULL, NULL, 0, 0, NULL);
+
+-- ----------------------------
 -- Table structure for o_shop_pull_lasttime
 -- ----------------------------
 DROP TABLE IF EXISTS `o_shop_pull_lasttime`;
@@ -974,6 +1227,10 @@ CREATE TABLE `o_shop_pull_lasttime`  (
   `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 102 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '店铺更新最后时间记录' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of o_shop_pull_lasttime
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for o_shop_pull_logs
@@ -993,6 +1250,10 @@ CREATE TABLE `o_shop_pull_logs`  (
 ) ENGINE = InnoDB AUTO_INCREMENT = 12 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '店铺更新日志表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
+-- Records of o_shop_pull_logs
+-- ----------------------------
+
+-- ----------------------------
 -- Table structure for o_shop_region
 -- ----------------------------
 DROP TABLE IF EXISTS `o_shop_region`;
@@ -1008,6 +1269,11 @@ CREATE TABLE `o_shop_region`  (
   `update_by` varchar(25) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '更新人',
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '店铺地区表' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of o_shop_region
+-- ----------------------------
+INSERT INTO `o_shop_region` VALUES (1, '中国', 1, '86', 0, '2025-02-10 10:42:54', 'system', '2025-02-10 10:42:57', NULL);
 
 -- ----------------------------
 -- Table structure for offline_goods_sku
@@ -1038,10 +1304,14 @@ CREATE TABLE `offline_goods_sku`  (
   `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
   `update_by` varchar(25) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '更新人',
   PRIMARY KEY (`id`) USING BTREE,
-  UNIQUE INDEX `sku_id_unique`(`o_goods_sku_id`) USING BTREE,
-  INDEX `id`(`id`) USING BTREE,
-  INDEX `number`(`sku_code`) USING BTREE
+  UNIQUE INDEX `sku_id_unique`(`o_goods_sku_id` ASC) USING BTREE,
+  INDEX `id`(`id` ASC) USING BTREE,
+  INDEX `number`(`sku_code` ASC) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = 'OMS商品SKU表' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of offline_goods_sku
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for offline_order
@@ -1082,9 +1352,13 @@ CREATE TABLE `offline_order`  (
   `update_by` varchar(25) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '更新人',
   `oms_push_status` int NULL DEFAULT 0 COMMENT 'OMS推送状态(1已推送0未推送）',
   PRIMARY KEY (`id`) USING BTREE,
-  UNIQUE INDEX `order_sn_index`(`order_num`) USING BTREE,
-  INDEX `shopid_index`(`shop_id`) USING BTREE
+  UNIQUE INDEX `order_sn_index`(`order_num` ASC) USING BTREE,
+  INDEX `shopid_index`(`shop_id` ASC) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 15 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '线下渠道订单表' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of offline_order
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for offline_order_item
@@ -1117,9 +1391,13 @@ CREATE TABLE `offline_order_item`  (
   `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
   `update_by` varchar(25) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '更新人',
   PRIMARY KEY (`id`) USING BTREE,
-  INDEX `goodId_index`(`goods_id`) USING BTREE,
-  INDEX `order_id`(`order_id`) USING BTREE
+  INDEX `goodId_index`(`goods_id` ASC) USING BTREE,
+  INDEX `order_id`(`order_id` ASC) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 16 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '渠道订单明细表' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of offline_order_item
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for offline_refund
@@ -1158,6 +1436,10 @@ CREATE TABLE `offline_refund`  (
 ) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '线下渠道退款表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
+-- Records of offline_refund
+-- ----------------------------
+
+-- ----------------------------
 -- Table structure for oms_dou_goods
 -- ----------------------------
 DROP TABLE IF EXISTS `oms_dou_goods`;
@@ -1184,6 +1466,10 @@ CREATE TABLE `oms_dou_goods`  (
   `modify_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '抖店商品表' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of oms_dou_goods
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for oms_dou_goods_sku
@@ -1223,6 +1509,10 @@ CREATE TABLE `oms_dou_goods_sku`  (
   `modify_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '抖店商品Sku表' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of oms_dou_goods_sku
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for oms_dou_order
@@ -1314,8 +1604,12 @@ CREATE TABLE `oms_dou_order`  (
   `oms_push_result` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL COMMENT 'oms订单库推送结果',
   `oms_push_time` datetime NULL DEFAULT NULL COMMENT 'oms订单库推送时间（记录最后一次）',
   PRIMARY KEY (`id`) USING BTREE,
-  INDEX `order_id_index`(`order_id`) USING BTREE
+  INDEX `order_id_index`(`order_id` ASC) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 8 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '抖店订单表' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of oms_dou_order
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for oms_dou_order_item
@@ -1378,8 +1672,12 @@ CREATE TABLE `oms_dou_order_item`  (
   `o_goods_id` bigint NULL DEFAULT NULL COMMENT '商品id(o_goods外键)',
   `o_goods_sku_id` bigint NULL DEFAULT NULL COMMENT '商品skuid(o_goods_sku外键)',
   PRIMARY KEY (`id`) USING BTREE,
-  INDEX `order_id_index`(`order_id`) USING BTREE
+  INDEX `order_id_index`(`order_id` ASC) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '抖店订单明细表' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of oms_dou_order_item
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for oms_dou_refund
@@ -1439,8 +1737,12 @@ CREATE TABLE `oms_dou_refund`  (
   `o_goods_id` bigint NULL DEFAULT NULL COMMENT '商品id(o_goods外键)',
   `o_goods_sku_id` bigint NULL DEFAULT NULL COMMENT '商品skuid(o_goods_sku外键)',
   PRIMARY KEY (`id`) USING BTREE,
-  INDEX `aftersale_id_index`(`aftersale_id`) USING BTREE
+  INDEX `aftersale_id_index`(`aftersale_id` ASC) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '抖店退款表' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of oms_dou_refund
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for oms_jd_goods
@@ -1485,6 +1787,10 @@ CREATE TABLE `oms_jd_goods`  (
 ) ENGINE = InnoDB AUTO_INCREMENT = 72 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '京东商品表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
+-- Records of oms_jd_goods
+-- ----------------------------
+
+-- ----------------------------
 -- Table structure for oms_jd_goods_sku
 -- ----------------------------
 DROP TABLE IF EXISTS `oms_jd_goods_sku`;
@@ -1510,6 +1816,10 @@ CREATE TABLE `oms_jd_goods_sku`  (
   `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 813 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '京东商品SKU表' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of oms_jd_goods_sku
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for oms_jd_order
@@ -1565,8 +1875,12 @@ CREATE TABLE `oms_jd_order`  (
   `open_id_buyer` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '买家的账号信息(区分大小写) 可选字段',
   `create_time` datetime NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
-  INDEX `order_id_index`(`order_id`) USING BTREE
+  INDEX `order_id_index`(`order_id` ASC) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 1464 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '京东订单表' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of oms_jd_order
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for oms_jd_order_coupon
@@ -1580,6 +1894,10 @@ CREATE TABLE `oms_jd_order_coupon`  (
   `coupon_price` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '优惠金额。',
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 4128 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '京东订单优惠明细表' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of oms_jd_order_coupon
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for oms_jd_order_item
@@ -1603,6 +1921,10 @@ CREATE TABLE `oms_jd_order_item`  (
   `erp_goods_sku_id` bigint NULL DEFAULT NULL COMMENT '商品skuid(o_goods_sku外键)',
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 1794 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '京东订单明细表' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of oms_jd_order_item
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for oms_jd_refund
@@ -1670,8 +1992,309 @@ CREATE TABLE `oms_jd_refund`  (
   `sku_count` int NULL DEFAULT NULL COMMENT '退款数量',
   `question_desc` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
-  INDEX `service_id_index`(`service_id`) USING BTREE
+  INDEX `service_id_index`(`service_id` ASC) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 16 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '京东退款与售后表' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of oms_jd_refund
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for oms_jd_vc_goods
+-- ----------------------------
+DROP TABLE IF EXISTS `oms_jd_vc_goods`;
+CREATE TABLE `oms_jd_vc_goods`  (
+  `id` bigint NOT NULL,
+  `ware_id` bigint NULL DEFAULT NULL COMMENT '商品编号',
+  `ware_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '商品名称',
+  `sale_state` int NULL DEFAULT NULL COMMENT '上下柜状态 0：下柜，1：上柜，2:可上柜',
+  `modify_time` datetime NULL DEFAULT NULL COMMENT '修改时间',
+  `is_primary` int NULL DEFAULT NULL COMMENT '是否有主图',
+  `is_gaea` int NULL DEFAULT NULL COMMENT '是否盖亚 0:非盖亚 1：盖亚',
+  `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
+  `update_time` datetime NULL DEFAULT NULL COMMENT '修改时间',
+  `o_goods_id` bigint NULL DEFAULT NULL COMMENT '商品id(o_goods外键)',
+  `o_goods_sku_id` bigint NULL DEFAULT NULL COMMENT '商品skuid(o_goods_sku外键)',
+  `shop_id` int NULL DEFAULT NULL COMMENT '店铺id',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of oms_jd_vc_goods
+-- ----------------------------
+INSERT INTO `oms_jd_vc_goods` VALUES (1794271784633602050, 100091911384, '曲美家居（QM）沙发 皮沙发头层牛皮大直排-四人位-2.7m 烟雨灰', 0, '2024-09-03 20:43:55', 1, 0, '2024-05-25 15:38:24', '2024-09-16 19:54:09', 0, 0, 5);
+INSERT INTO `oms_jd_vc_goods` VALUES (1794271784675545090, 100085057003, '曲美家居（QM）沙发 真皮沙发头层牛皮大小户型直排-四人位-2.7m 砂砾白', 0, '2024-09-03 20:43:54', 1, 0, '2024-05-25 15:38:24', '2024-09-16 19:54:09', 0, 0, 5);
+INSERT INTO `oms_jd_vc_goods` VALUES (1794271784704905218, 100109940892, '曲美家居真皮双人床 黑色靠包简约框架床1.8*2米', 0, '2024-08-28 06:35:33', 1, 0, '2024-05-25 15:38:24', '2024-09-16 19:54:09', 0, 0, 5);
+INSERT INTO `oms_jd_vc_goods` VALUES (1794271784734265345, 100109940874, '曲美家居（QM）床 皮艺床卧室大床意式简约单人床1.5*2米', 0, '2024-08-28 06:35:33', 1, 0, '2024-05-25 15:38:24', '2024-09-16 19:54:09', 0, 0, 5);
+INSERT INTO `oms_jd_vc_goods` VALUES (1794271784763625473, 100097068103, '曲美家居（QM）床 皮床 意式拉点大床单人床1.5*2.0m', 1, '2024-08-28 06:35:33', 1, 0, '2024-05-25 15:38:24', '2024-09-16 19:54:09', 0, 0, 5);
+INSERT INTO `oms_jd_vc_goods` VALUES (1794271784801374209, 100097068085, '曲美家居（QM）双人床 卧室大床意式现代牛皮床网红方块拉点床1.8*2米', 1, '2024-08-28 08:58:49', 1, 0, '2024-05-25 15:38:24', '2024-09-16 19:54:09', 0, 0, 5);
+INSERT INTO `oms_jd_vc_goods` VALUES (1794271784826540034, 100104914490, '曲美家居（QM）床 双人床 真皮信封床卧室皮艺软床1.5*2.0m', 0, '2024-08-28 06:35:33', 1, 0, '2024-05-25 15:38:24', '2024-09-16 19:54:09', 0, 0, 5);
+INSERT INTO `oms_jd_vc_goods` VALUES (1794271784851705857, 100093712745, '曲美家居（QM）床 双人床 真皮信封床卧室皮艺软床1.8*2.0m', 0, '2024-08-28 06:35:33', 1, 0, '2024-05-25 15:38:24', '2024-09-16 19:54:09', 0, 0, 5);
+INSERT INTO `oms_jd_vc_goods` VALUES (1794271784868483073, 100093712743, '曲美家居床 双人床 皮床 卧室软床奶油风仙女床卷装排骨架单人床1.5*2.0m', 0, '2024-08-28 06:35:33', 1, 0, '2024-05-25 15:38:24', '2024-09-16 19:54:09', 0, 0, 5);
+INSERT INTO `oms_jd_vc_goods` VALUES (1794272653290749954, 100079179856, '曲美家居床头柜 弯曲木白石纹板胡桃色储物柜', 0, '2024-09-01 18:04:30', 1, 0, '2024-05-25 15:41:51', '2024-09-16 19:54:09', 0, 0, 5);
+INSERT INTO `oms_jd_vc_goods` VALUES (1794273050608705538, 100093712721, '曲美家居（QM） 真皮床 双人床 卧室软床奶油风仙女床卷装排骨架皮艺床1.8*2.0m', 0, '2024-08-28 06:35:33', 1, 0, '2024-05-25 15:43:26', '2024-09-16 19:54:09', 0, 0, 5);
+INSERT INTO `oms_jd_vc_goods` VALUES (1794273050646454273, 100091911390, '曲美家居（QM）餐桌椅 弯曲木餐桌长方形140cm 一桌四椅戈尔浅胡桃+深灰色', 0, '2024-09-03 20:43:58', 1, 0, '2024-05-25 15:43:26', '2024-09-16 19:54:09', 0, 0, 5);
+INSERT INTO `oms_jd_vc_goods` VALUES (1794273050675814401, 100091911388, '曲美家居（QM）餐桌椅 弯曲木餐桌长方形140cm 一桌四椅合观胡桃+深灰色', 0, '2024-09-03 20:44:01', 1, 0, '2024-05-25 15:43:26', '2024-09-16 19:54:09', 0, 0, 5);
+INSERT INTO `oms_jd_vc_goods` VALUES (1794273050705174529, 100091911386, '曲美家居（QM）餐桌椅 弯曲木餐桌长方形140cm 一桌四椅戈尔浅胡桃+奶油白', 0, '2024-09-03 20:43:56', 1, 0, '2024-05-25 15:43:26', '2024-09-16 19:54:09', 0, 0, 5);
+INSERT INTO `oms_jd_vc_goods` VALUES (1794273050738728961, 100091911366, '曲美家居（QM）餐桌椅 弯曲木餐桌长方形140cm 一桌四椅合观胡桃+奶油白', 0, '2024-09-03 20:43:59', 1, 0, '2024-05-25 15:43:26', '2024-09-16 19:54:09', 0, 0, 5);
+INSERT INTO `oms_jd_vc_goods` VALUES (1794273050763894786, 100091911338, '曲美家居（QM）弯曲木真皮床软床1.5*2.0m 砂砾白双人床', 0, '2024-09-01 19:40:18', 1, 0, '2024-05-25 15:43:26', '2024-09-16 19:54:09', 0, 0, 5);
+INSERT INTO `oms_jd_vc_goods` VALUES (1794273050793254914, 100086010289, '曲美家居（QM）沙发 真皮沙发客厅直排头层牛皮-三人位-2.2m 砂砾白', 0, '2024-08-28 06:35:32', 1, 0, '2024-05-25 15:43:26', '2024-09-16 19:54:09', 0, 0, 5);
+INSERT INTO `oms_jd_vc_goods` VALUES (1794273050810032129, 100086010257, '曲美家居（QM）沙发 皮沙发头层牛皮客厅直排-三人位-2.2m 烟雨灰', 0, '2024-08-28 06:35:32', 1, 0, '2024-05-25 15:43:26', '2024-09-16 19:54:09', 0, 0, 5);
+INSERT INTO `oms_jd_vc_goods` VALUES (1794273050831003650, 100085057005, '曲美家居（QM）弯曲木真皮床框架床1.5*2.0m 烟雨灰双人床', 0, '2024-08-28 06:35:32', 1, 0, '2024-05-25 15:43:26', '2024-09-16 19:54:09', 0, 0, 5);
+INSERT INTO `oms_jd_vc_goods` VALUES (1794273050851975170, 100085056997, '曲美家居（QM）双人床 弯曲木皮床实木卧室婚床1.8*2.0m 砂砾白', 0, '2024-09-01 19:39:44', 1, 0, '2024-05-25 15:43:26', '2024-09-16 19:54:09', 0, 0, 5);
+INSERT INTO `oms_jd_vc_goods` VALUES (1794273050885529602, 100085056995, '曲美家居（QM）弯曲木真皮床实木床1.8*2.0m 烟雨灰双人床', 0, '2024-09-01 18:20:09', 1, 0, '2024-05-25 15:43:26', '2024-09-16 19:54:09', 0, 0, 5);
+INSERT INTO `oms_jd_vc_goods` VALUES (1794273050906501121, 100079454246, '曲美家居床 皮艺床实木框架双人床1.5*2.0m', 0, '2024-08-28 06:35:32', 1, 0, '2024-05-25 15:43:26', '2024-09-16 19:54:09', 0, 0, 5);
+INSERT INTO `oms_jd_vc_goods` VALUES (1794273050927472642, 100079179884, '曲美家居床 真皮床 实木框架卧室皮艺大床1.5*2.0m双人床', 0, '2024-08-28 06:35:31', 1, 0, '2024-05-25 15:43:26', '2024-09-16 19:54:09', 0, 0, 5);
+INSERT INTO `oms_jd_vc_goods` VALUES (1794273050948444162, 100079179882, '曲美家居床头柜 奶油白双大抽屉卧室储物柜', 0, '2024-08-28 06:35:31', 1, 0, '2024-05-25 15:43:26', '2024-09-16 19:54:09', 0, 0, 5);
+INSERT INTO `oms_jd_vc_goods` VALUES (1794273050977804289, 100078688188, '曲美家居乳胶床垫 黄麻床垫 小口径独立袋弹簧26cm厚软硬双面床垫1.5*2.0m', 0, '2024-08-28 06:35:30', 1, 0, '2024-05-25 15:43:26', '2024-09-16 19:54:09', 0, 0, 5);
+INSERT INTO `oms_jd_vc_goods` VALUES (1794273050994581506, 100078688172, '曲美家居乳胶床垫 软硬双面黄麻床垫厚26cm 双人床垫 独立袋弹簧1.8*2.0m', 0, '2024-08-28 06:35:30', 1, 0, '2024-05-25 15:43:26', '2024-09-16 19:54:09', 0, 0, 5);
+INSERT INTO `oms_jd_vc_goods` VALUES (1794273051015553025, 100078688166, '曲美家居床 皮床实木床意式极简卧室大床-优雅驼 1.5*2.0m单人床', 0, '2024-08-28 06:35:30', 1, 0, '2024-05-25 15:43:26', '2024-09-16 19:54:09', 0, 0, 5);
+INSERT INTO `oms_jd_vc_goods` VALUES (1794273051032330241, 100078688148, '曲美家居双人床  皮床实木床意式极简风卧室大床-优雅驼 1.8*2.0m', 1, '2024-08-28 06:35:30', 1, 0, '2024-05-25 15:43:26', '2024-09-16 19:54:09', 0, 0, 5);
+INSERT INTO `oms_jd_vc_goods` VALUES (1794273051053301761, 100076758487, '曲美家居双人床 皮艺床实木框架床卧室婚床 1.8*2.0m', 0, '2024-08-28 06:35:30', 1, 0, '2024-05-25 15:43:26', '2024-09-16 19:54:09', 0, 0, 5);
+INSERT INTO `oms_jd_vc_goods` VALUES (1794273051074273281, 100076574967, '曲美家居双人床 牛皮床实木框架卧室皮艺大床1.8*2.0m ', 0, '2024-08-28 06:35:29', 1, 0, '2024-05-25 15:43:26', '2024-09-16 19:54:10', 0, 0, 5);
+INSERT INTO `oms_jd_vc_goods` VALUES (1794273051091050497, 100076574953, '曲美家居床头柜 轻奢黄双大抽屉卧室储物柜', 0, '2024-08-28 06:35:29', 1, 0, '2024-05-25 15:43:26', '2024-09-16 19:54:10', 0, 0, 5);
+INSERT INTO `oms_jd_vc_goods` VALUES (1794273051116216322, 100066588665, '曲美家居（QM）床 双人床 现代简约家具婚床卧室架子床1.8*2米', 0, '2024-08-28 06:35:29', 1, 0, '2024-05-25 15:43:26', '2024-09-16 19:54:10', 0, 0, 5);
+INSERT INTO `oms_jd_vc_goods` VALUES (1794273051132993537, 100064431086, '曲美家居凝胶记忆棉独立袋弹簧26cm厚垫子1.8*2米', 0, '2024-08-28 06:35:29', 1, 0, '2024-05-25 15:43:26', '2024-09-16 19:54:10', 0, 0, 5);
+INSERT INTO `oms_jd_vc_goods` VALUES (1794273051153965057, 100064431074, '曲美家居（QM）凝胶记忆棉独立袋弹簧26cm厚垫子1.5*2米', 0, '2024-08-28 06:35:29', 1, 0, '2024-05-25 15:43:26', '2024-09-16 19:54:10', 0, 0, 5);
+INSERT INTO `oms_jd_vc_goods` VALUES (1794273051170742274, 100064198182, '曲美家居（QM）床双人床 北欧风卧室大床结实耐用框架床1.5*2米', 0, '2024-08-28 06:35:28', 1, 0, '2024-05-25 15:43:26', '2024-09-16 19:54:10', 0, 0, 5);
+INSERT INTO `oms_jd_vc_goods` VALUES (1794273051187519490, 100062711475, '曲美家居（QM）床 皮床现代主卧皮艺床1.5*2m单人床', 1, '2024-08-28 06:35:28', 1, 0, '2024-05-25 15:43:26', '2024-09-16 19:54:10', 0, 0, 5);
+INSERT INTO `oms_jd_vc_goods` VALUES (1794273051200102401, 100059710381, '曲美家居（QM）床垫 乳胶床垫 独立袋弹簧床垫1.5*2米', 0, '2024-08-28 06:35:28', 1, 0, '2024-05-25 15:43:26', '2024-09-16 19:54:10', 0, 0, 5);
+INSERT INTO `oms_jd_vc_goods` VALUES (1794273051216879618, 100059710357, '曲美家居（QM）床头柜 现代简约床头柜卧室轻奢收纳储物床边柜清新绿', 0, '2024-09-01 18:18:55', 1, 0, '2024-05-25 15:43:26', '2024-09-16 19:54:09', 0, 0, 5);
+INSERT INTO `oms_jd_vc_goods` VALUES (1794273051233656834, 100059710355, '曲美家居（QM）床垫 乳胶床垫 独立袋弹簧床垫1.8*2.0m', 0, '2024-08-28 06:35:27', 1, 0, '2024-05-25 15:43:26', '2024-09-16 19:54:10', 0, 0, 5);
+INSERT INTO `oms_jd_vc_goods` VALUES (1794273051254628353, 100058433110, '曲美家居（QM）乳胶床垫弹簧床垫1.8米*2米黄麻软硬双面席梦思床垫子', 0, '2024-08-28 06:35:27', 1, 0, '2024-05-25 15:43:26', '2024-09-16 19:54:10', 0, 0, 5);
+INSERT INTO `oms_jd_vc_goods` VALUES (1794273051275599873, 100058433040, '曲美家居（QM）乳胶床垫弹簧床垫1.5x2米黄麻软硬双面单人床垫子', 0, '2024-08-28 06:35:27', 1, 0, '2024-05-25 15:43:26', '2024-09-16 19:54:10', 0, 0, 5);
+INSERT INTO `oms_jd_vc_goods` VALUES (1794273051292377089, 100058374484, '曲美家居（QM）双人床 皮床现代主卧皮艺床1.8*2m', 1, '2024-08-28 06:35:26', 1, 0, '2024-05-25 15:43:26', '2024-09-16 19:54:10', 0, 0, 5);
+INSERT INTO `oms_jd_vc_goods` VALUES (1794273051309154306, 100052615522, '曲美家居（QM）床 牛皮床双人床 1.5*2米主卧大床婚床现代简约家具', 1, '2024-08-28 06:35:25', 1, 0, '2024-05-25 15:43:26', '2024-09-16 19:54:10', 0, 0, 5);
+INSERT INTO `oms_jd_vc_goods` VALUES (1794273051330125826, 100052615498, '曲美家居（QM）皮床 床双人床 1.8*2米主卧大床婚床现代简约家具', 1, '2024-09-01 22:18:59', 1, 0, '2024-05-25 15:43:26', '2024-09-16 19:54:09', 0, 0, 5);
+INSERT INTO `oms_jd_vc_goods` VALUES (1794273051346903041, 100081971405, '曲美家居全屋定制餐厅一桌四椅', 0, '2024-08-28 06:35:32', 1, 0, '2024-05-25 15:43:26', '2024-09-16 19:54:09', 0, 0, 5);
+INSERT INTO `oms_jd_vc_goods` VALUES (1794273051363680258, 100087284376, '曲美家居全屋定制次卧（1.5m床*1+床垫*1+床头柜*1+三门衣柜*1）', 0, '2024-08-28 06:35:33', 1, 0, '2024-05-25 15:43:26', '2024-09-16 19:54:09', 0, 0, 5);
+INSERT INTO `oms_jd_vc_goods` VALUES (1794273051376263169, 100087284374, '曲美家居全屋定制主卧（双人床*1+床垫*1+床头柜*2+四门衣柜*1）', 0, '2024-08-28 06:35:32', 1, 0, '2024-05-25 15:43:26', '2024-09-16 19:54:09', 0, 0, 5);
+INSERT INTO `oms_jd_vc_goods` VALUES (1794273051388846081, 100081971389, '曲美家居定制书房卧室（单人床*1+床垫*1+书柜*1+书桌椅*1）', 0, '2024-08-28 06:35:32', 1, 0, '2024-05-25 15:43:26', '2024-09-16 19:54:09', 0, 0, 5);
+INSERT INTO `oms_jd_vc_goods` VALUES (1794273051401428994, 100081971391, '曲美家居全屋定制客厅（3人沙发*1+单人沙发*1+茶几*1+电视柜*1）		', 0, '2024-08-28 06:35:32', 1, 0, '2024-05-25 15:43:26', '2024-09-16 19:54:09', 0, 0, 5);
+INSERT INTO `oms_jd_vc_goods` VALUES (1794273051422400513, 100053851400, '曲美家居（QM）床 双人床 现代简约家具婚床卧室架子床', 0, '2024-08-28 06:35:26', 1, 0, '2024-05-25 15:43:26', '2024-09-16 19:54:10', 0, 0, 5);
+INSERT INTO `oms_jd_vc_goods` VALUES (1794273051443372033, 100053851370, '曲美家居（QM）床双人床 北欧风卧室大床结实耐用框架床', 0, '2024-08-28 06:35:25', 1, 0, '2024-05-25 15:43:26', '2024-09-16 19:54:10', 0, 0, 5);
+INSERT INTO `oms_jd_vc_goods` VALUES (1794273051460149250, 100079454244, '曲美家居沙发 耐猫抓沙发科技皮客厅意式极简懒人沙发-卡其色三人位2.2m ', 0, '2024-08-28 06:35:31', 1, 0, '2024-05-25 15:43:26', '2024-09-16 19:54:09', 0, 0, 5);
+INSERT INTO `oms_jd_vc_goods` VALUES (1794273051476926466, 100079454232, '曲美家居餐桌椅 弯曲木餐桌长方形140cm 一桌四椅合观胡桃+奶油白', 0, '2024-08-28 06:35:31', 1, 0, '2024-05-25 15:43:26', '2024-09-16 19:54:09', 0, 0, 5);
+INSERT INTO `oms_jd_vc_goods` VALUES (1794273051489509378, 100079454230, '曲美家居餐桌椅 弯曲木餐桌长方形140cm 一桌四椅戈尔浅胡桃+深灰色', 0, '2024-08-28 06:35:31', 1, 0, '2024-05-25 15:43:26', '2024-09-16 19:54:09', 0, 0, 5);
+INSERT INTO `oms_jd_vc_goods` VALUES (1794273051506286593, 100079454228, '曲美家居懒人沙发 沙发  客厅意式沙发头层牛皮直排沙发-奶茶棕三人位2.2m', 0, '2024-08-28 06:35:31', 1, 0, '2024-05-25 15:43:26', '2024-09-16 19:54:09', 0, 0, 5);
+INSERT INTO `oms_jd_vc_goods` VALUES (1794273051523063809, 100079454216, '曲美家居餐桌椅 弯曲木餐桌长方形140cm 一桌四椅戈尔浅胡桃+奶油白', 0, '2024-08-28 06:35:31', 1, 0, '2024-05-25 15:43:26', '2024-09-16 19:54:09', 0, 0, 5);
+INSERT INTO `oms_jd_vc_goods` VALUES (1794273051531452418, 100079454214, '曲美家居（QM）沙发 懒人沙发 客厅意式极简沙发进口头层牛皮-奶茶棕多人位3.2m', 0, '2024-08-28 06:35:31', 1, 0, '2024-05-25 15:43:26', '2024-09-16 19:54:09', 0, 0, 5);
+INSERT INTO `oms_jd_vc_goods` VALUES (1794273051552423937, 100079454212, '曲美家居懒人沙发 客厅意式沙发进口头层牛皮直排沙发-奶茶棕四人位2.85m', 0, '2024-08-28 06:35:31', 1, 0, '2024-05-25 15:43:26', '2024-09-16 19:54:09', 0, 0, 5);
+INSERT INTO `oms_jd_vc_goods` VALUES (1794273051565006849, 100079454202, '曲美家居床 弯曲木真皮床软床1.5*2.0m 砂砾白双人床', 0, '2024-08-28 06:35:31', 1, 0, '2024-05-25 15:43:26', '2024-09-16 19:54:09', 0, 0, 5);
+INSERT INTO `oms_jd_vc_goods` VALUES (1794273051573395458, 100079454200, '曲美家居沙发 耐猫抓沙发科技皮客厅意式极简懒人沙发-卡其色四人位2.85m', 0, '2024-08-28 06:35:31', 1, 0, '2024-05-25 15:43:26', '2024-09-16 19:54:09', 0, 0, 5);
+INSERT INTO `oms_jd_vc_goods` VALUES (1794273051590172673, 100079454198, '曲美家居餐桌椅 弯曲木餐桌长方形140cm 一桌四椅合观胡桃+深灰色', 0, '2024-08-28 06:35:31', 1, 0, '2024-05-25 15:43:26', '2024-09-16 19:54:09', 0, 0, 5);
+INSERT INTO `oms_jd_vc_goods` VALUES (1794273051619532801, 100079454186, '曲美家居弯曲木真皮床框架床1.5*2.0m 烟雨灰双人床', 0, '2024-08-28 06:35:31', 1, 0, '2024-05-25 15:43:26', '2024-09-16 19:54:09', 0, 0, 5);
+INSERT INTO `oms_jd_vc_goods` VALUES (1794273051640504321, 100079454170, '曲美家居沙发 真皮沙发头层牛皮大小户型直排-四人位-2.7m 砂砾白', 0, '2024-08-28 06:35:31', 1, 0, '2024-05-25 15:43:26', '2024-09-16 19:54:09', 0, 0, 5);
+INSERT INTO `oms_jd_vc_goods` VALUES (1794273051648892930, 100079179886, '曲美家居茶几 加厚钢化玻璃茶几弯曲木胡桃实木框架', 0, '2024-08-28 06:35:31', 1, 0, '2024-05-25 15:43:26', '2024-09-16 19:54:09', 0, 0, 5);
+INSERT INTO `oms_jd_vc_goods` VALUES (1794273051678253057, 100079179872, '曲美家居沙发 懒人沙发 客厅意式极简沙发进口头层牛皮-黑色多人位3.2m', 0, '2024-08-28 06:35:30', 1, 0, '2024-05-25 15:43:26', '2024-09-16 19:54:09', 0, 0, 5);
+INSERT INTO `oms_jd_vc_goods` VALUES (1794273051690835970, 100078688146, '曲美家居曲美家居双人床  皮床实木床意式极简风卧室大床-大地棕 1.8*2.0m', 0, '2024-08-28 06:35:30', 1, 0, '2024-05-25 15:43:26', '2024-09-16 19:54:09', 0, 0, 5);
+INSERT INTO `oms_jd_vc_goods` VALUES (1794273051707613185, 100076758481, '曲美家居沙发 耐猫抓沙发科技皮客厅意式极简懒人沙发-卡其色多人位3.2m', 0, '2024-08-28 06:35:30', 1, 0, '2024-05-25 15:43:26', '2024-09-16 19:54:10', 0, 0, 5);
+INSERT INTO `oms_jd_vc_goods` VALUES (1794273051724390402, 100076758449, '曲美家居弯曲木真皮床实木床1.8*2.0m 烟雨灰双人床', 0, '2024-08-28 06:35:30', 1, 0, '2024-05-25 15:43:26', '2024-09-16 19:54:10', 0, 0, 5);
+INSERT INTO `oms_jd_vc_goods` VALUES (1794273051736973314, 100076758447, '曲美家居沙发 真皮沙发客厅直排头层牛皮-三人位-2.2m 砂砾白', 0, '2024-08-28 06:35:30', 1, 0, '2024-05-25 15:43:26', '2024-09-16 19:54:10', 0, 0, 5);
+INSERT INTO `oms_jd_vc_goods` VALUES (1794273051745361922, 100076758439, '曲美家居床 双人床 弯曲木皮床实木卧室婚床1.8*2.0m 砂砾白', 0, '2024-08-28 06:35:30', 1, 0, '2024-05-25 15:43:26', '2024-09-16 19:54:10', 0, 0, 5);
+INSERT INTO `oms_jd_vc_goods` VALUES (1794273051770527745, 100076758437, '曲美家居沙发 皮沙发头层牛皮客厅直排-三人位-2.2m 烟雨灰', 0, '2024-08-28 06:35:30', 1, 0, '2024-05-25 15:43:26', '2024-09-16 19:54:10', 0, 0, 5);
+INSERT INTO `oms_jd_vc_goods` VALUES (1794273051778916353, 100076758435, '曲美家居沙发 皮沙发头层牛皮大直排-四人位-2.7m 烟雨灰', 0, '2024-08-28 06:35:29', 1, 0, '2024-05-25 15:43:26', '2024-09-16 19:54:10', 0, 0, 5);
+INSERT INTO `oms_jd_vc_goods` VALUES (1794273051799887873, 100076574949, '曲美家居衣柜 四门大衣柜 对开门平开门卧室时尚储物柜 大衣柜', 0, '2024-08-28 06:35:29', 1, 0, '2024-05-25 15:43:26', '2024-09-16 19:54:10', 0, 0, 5);
+INSERT INTO `oms_jd_vc_goods` VALUES (1794273051841830913, 100076574947, '曲美家居沙发 真皮沙发 客厅意式极简懒人沙发进口头层牛皮-黑色三人位', 0, '2024-08-28 06:35:29', 1, 0, '2024-05-25 15:43:26', '2024-09-16 19:54:10', 0, 0, 5);
+INSERT INTO `oms_jd_vc_goods` VALUES (1794273051875385346, 100076574945, '曲美家居沙发 懒人沙发 客厅意式极简沙发进口头层牛皮-黑色四人位2.85m', 0, '2024-08-28 06:35:29', 1, 0, '2024-05-25 15:43:26', '2024-09-16 19:54:10', 0, 0, 5);
+INSERT INTO `oms_jd_vc_goods` VALUES (1794273051892162561, 100076574941, '曲美家居（QM）衣柜 四门大衣柜 对开门平开门卧室时尚储物柜 大衣柜', 0, '2024-08-28 06:35:29', 1, 0, '2024-05-25 15:43:26', '2024-09-16 19:54:10', 0, 0, 5);
+INSERT INTO `oms_jd_vc_goods` VALUES (1794273051908939777, 100076574937, '曲美家居（QM）衣柜 四门大衣柜 对开门平开门卧室时尚储物柜 大衣柜', 0, '2024-08-28 06:35:29', 1, 0, '2024-05-25 15:43:26', '2024-09-16 19:54:10', 0, 0, 5);
+INSERT INTO `oms_jd_vc_goods` VALUES (1794273051921522689, 100076245907, '曲美家居曲美家居床 皮床实木床意式极简卧室大床-大地棕 1.5*2.0m单人床', 0, '2024-08-28 06:35:29', 1, 0, '2024-05-25 15:43:26', '2024-09-16 19:54:10', 0, 0, 5);
+INSERT INTO `oms_jd_vc_goods` VALUES (1794273051938299905, 100067518449, '曲美家居（QM）圆餐桌 意式加厚岩板奶油风桌子餐厅家具', 0, '2024-08-28 06:35:29', 1, 0, '2024-05-25 15:43:26', '2024-09-16 19:54:10', 0, 0, 5);
+INSERT INTO `oms_jd_vc_goods` VALUES (1794273051946688514, 100067452715, '曲美家居圆餐桌 意式加厚岩板奶油风一桌四椅餐厅家具', 0, '2024-08-28 06:35:29', 1, 0, '2024-05-25 15:43:26', '2024-09-16 19:54:10', 0, 0, 5);
+INSERT INTO `oms_jd_vc_goods` VALUES (1794273051959271425, 100065589292, '曲美家居（QM）餐椅 软座凳子百搭餐厅家具 椅子*2', 0, '2024-08-28 06:35:29', 1, 0, '2024-05-25 15:43:26', '2024-09-16 19:54:10', 0, 0, 5);
+INSERT INTO `oms_jd_vc_goods` VALUES (1794273051980242946, 100064010050, '曲美家居电视柜落地奶油风客厅岩板柜子储物双抽屉', 0, '2024-08-28 06:35:28', 1, 0, '2024-05-25 15:43:26', '2024-09-16 19:54:10', 0, 0, 5);
+INSERT INTO `oms_jd_vc_goods` VALUES (1794273051997020162, 100064010040, '曲美家居（QM）茶几奶油风岩板客厅矮桌储物柜子', 0, '2024-08-28 06:35:28', 1, 0, '2024-05-25 15:43:26', '2024-09-16 19:54:10', 0, 0, 5);
+INSERT INTO `oms_jd_vc_goods` VALUES (1794273052005408770, 100062711495, '曲美家居（QM）床头柜 卧室轻奢个性小型储物柜（右）', 0, '2024-08-28 06:35:28', 1, 0, '2024-05-25 15:43:26', '2024-09-16 19:54:10', 0, 0, 5);
+INSERT INTO `oms_jd_vc_goods` VALUES (1794273052026380289, 100058889181, '曲美家居（QM）床 布艺双人床1.8m*2.0m简约主卧实木框架', 0, '2024-08-28 06:35:27', 1, 0, '2024-05-25 15:43:26', '2024-09-16 19:54:10', 0, 0, 5);
+INSERT INTO `oms_jd_vc_goods` VALUES (1794273052038963202, 100058433832, '曲美家居（QM）床头柜 卧室轻奢储物柜（左）', 0, '2024-08-28 06:35:27', 1, 0, '2024-05-25 15:43:26', '2024-09-16 19:54:10', 0, 0, 5);
+INSERT INTO `oms_jd_vc_goods` VALUES (1794273052059934722, 100058432952, '曲美家居（QM）床头柜 卧室轻奢储物柜（左）', 0, '2024-08-28 06:35:26', 1, 0, '2024-05-25 15:43:26', '2024-09-16 19:54:10', 0, 0, 5);
+INSERT INTO `oms_jd_vc_goods` VALUES (1794273052076711938, 100058432940, '曲美家居（QM）床头柜 卧室轻奢储物柜（左）', 0, '2024-08-28 06:35:26', 1, 0, '2024-05-25 15:43:26', '2024-09-16 19:54:10', 0, 0, 5);
+INSERT INTO `oms_jd_vc_goods` VALUES (1794273052097683458, 100058374502, '曲美家居（QM）皮床 卧室软床1.5*2.0米意式简约风单人床', 0, '2024-08-28 06:35:26', 1, 0, '2024-05-25 15:43:26', '2024-09-16 19:54:10', 0, 0, 5);
+INSERT INTO `oms_jd_vc_goods` VALUES (1794273052122849281, 100058374492, '曲美家居（QM）床 双人床 悬浮床 真皮床1.8米*2米卧室极简风自动感应灯带', 0, '2024-08-28 06:35:26', 1, 0, '2024-05-25 15:43:26', '2024-09-16 19:54:10', 0, 0, 5);
+INSERT INTO `oms_jd_vc_goods` VALUES (1794273052139626497, 100058374490, '曲美家居（QM）牛皮床 卧室双人软床1.8*2.0米意式简约现代风双色皮', 0, '2024-08-28 06:35:26', 1, 0, '2024-05-25 15:43:26', '2024-09-16 19:54:10', 0, 0, 5);
+INSERT INTO `oms_jd_vc_goods` VALUES (1794273052156403714, 100058374488, '曲美家居（QM）悬浮床 牛皮床单人床 1.5*2m 卧室极简风', 0, '2024-08-28 06:35:26', 1, 0, '2024-05-25 15:43:26', '2024-09-16 19:54:10', 0, 0, 5);
+INSERT INTO `oms_jd_vc_goods` VALUES (1794273052168986626, 100058374486, '曲美家居（QM）真皮床 卧室双人软床1.8*2.0米意式简约双色皮', 0, '2024-08-28 06:35:26', 1, 0, '2024-05-25 15:43:26', '2024-09-16 19:54:10', 0, 0, 5);
+INSERT INTO `oms_jd_vc_goods` VALUES (1794273052189958146, 100058374470, '曲美家居（QM）皮床牛皮床  卧室软床1.5*2.0米意式简约单人床', 0, '2024-08-28 06:35:26', 1, 0, '2024-05-25 15:43:26', '2024-09-16 19:54:10', 0, 0, 5);
+INSERT INTO `oms_jd_vc_goods` VALUES (1794273052206735361, 100058374436, '曲美家居（QM）床头柜 卧室轻奢个性小型储物柜（右）', 0, '2024-08-28 06:35:26', 1, 0, '2024-05-25 15:43:26', '2024-09-16 19:54:10', 0, 0, 5);
+INSERT INTO `oms_jd_vc_goods` VALUES (1794273052219318274, 100058374434, '曲美家居（QM）床头柜 卧室轻奢个性小型储物柜（右）', 0, '2024-08-28 06:35:26', 1, 0, '2024-05-25 15:43:26', '2024-09-16 19:54:10', 0, 0, 5);
+INSERT INTO `oms_jd_vc_goods` VALUES (1794273052244484098, 100052615496, '曲美家居（QM）布艺床 双人床 卧室软床1.5*2.0m', 0, '2024-08-28 06:35:25', 1, 0, '2024-05-25 15:43:26', '2024-09-16 19:54:10', 0, 0, 5);
+INSERT INTO `oms_jd_vc_goods` VALUES (1794273052252872705, 100058432984, '曲美家居（QM）沙发 懒人沙发客厅大转角大座深组合沙发3.7m（左转角）', 0, '2024-08-28 06:35:27', 1, 0, '2024-05-25 15:43:26', '2024-09-16 19:54:10', 0, 0, 5);
+INSERT INTO `oms_jd_vc_goods` VALUES (1794273052278038529, 100055007336, '曲美家居（QM）沙发 客厅家具科技布沙发大小户型组合三人位2.42米雅灰色', 0, '2024-08-28 06:35:26', 1, 0, '2024-05-25 15:43:26', '2024-09-16 19:54:10', 0, 0, 5);
+INSERT INTO `oms_jd_vc_goods` VALUES (1794273052294815745, 100066880299, '曲美家居（QM）真皮悬浮床QM23-B10配件床帮床架（单拍不发货）', 0, '2024-08-16 00:32:07', 1, 0, '2024-05-25 15:43:26', '2024-09-16 19:54:10', 0, 0, 5);
+INSERT INTO `oms_jd_vc_goods` VALUES (1794273052303204353, 100060482731, '曲美家居（QM）沙发 科技布艺沙发客厅组合沙发四人位3.16米', 0, '2024-08-28 06:35:28', 1, 0, '2024-05-25 15:43:26', '2024-09-16 19:54:10', 0, 0, 5);
+INSERT INTO `oms_jd_vc_goods` VALUES (1794273052319981569, 100079454264, '曲美家居床 单人床 真皮床卧室软床烟灰色1.5*2.0m', 0, '2024-08-28 06:35:32', 1, 0, '2024-05-25 15:43:26', '2024-09-16 19:54:09', 0, 0, 5);
+INSERT INTO `oms_jd_vc_goods` VALUES (1794273052328370177, 100079454248, '曲美家居双人床 床 真皮床卧室软床烟灰色1.8*2.0m ', 0, '2024-08-28 06:35:32', 1, 0, '2024-05-25 15:43:26', '2024-09-16 19:54:09', 0, 0, 5);
+INSERT INTO `oms_jd_vc_goods` VALUES (1794273052349341697, 100068114249, '曲美家居LAB墩墩沙发 模块沙发 方块豆腐块沙发自由组合客厅沙发家具', 0, '2024-07-09 09:34:27', 1, 0, '2024-05-25 15:43:26', '2024-09-16 19:54:10', 0, 0, 5);
+INSERT INTO `oms_jd_vc_goods` VALUES (1794273052366118914, 100066482792, '曲美家居（QM）LAB墩墩沙发 模块沙发 方块豆腐块沙发自由组合客厅沙发家具', 0, '2024-07-09 09:34:29', 1, 0, '2024-05-25 15:43:26', '2024-09-16 19:54:10', 0, 0, 5);
+INSERT INTO `oms_jd_vc_goods` VALUES (1794273052378701825, 100064635382, '曲美家居（QM）曲美家居凝胶记忆棉独立袋弹簧26cm厚垫子1.8*2米', 0, '2024-08-16 00:31:34', 1, 0, '2024-05-25 15:43:26', '2024-09-16 19:54:10', 0, 0, 5);
+INSERT INTO `oms_jd_vc_goods` VALUES (1794273052387090433, 100064431062, '曲美家居（QM）床 双人床1.8米*2米 悬浮床 真皮床卧室自动感应灯带', 0, '2024-08-16 00:31:45', 1, 0, '2024-05-25 15:43:26', '2024-09-16 19:54:10', 0, 0, 5);
+INSERT INTO `oms_jd_vc_goods` VALUES (1794273052403867649, 100064431018, '曲美家居（QM）QM23-B10-配件床帮床架', 0, '2024-07-09 09:34:30', 1, 0, '2024-05-25 15:43:26', '2024-09-16 19:54:10', 0, 0, 5);
+INSERT INTO `oms_jd_vc_goods` VALUES (1794273052420644865, 100062751039, '曲美家居（QM）真皮沙发 懒人沙发客厅小户型直排66cm座深意式沙发四人位2.7m', 0, '2024-08-28 06:35:28', 1, 0, '2024-05-25 15:43:26', '2024-09-16 19:54:10', 0, 0, 5);
+INSERT INTO `oms_jd_vc_goods` VALUES (1794273052433227778, 100060237626, '曲美家居（QM）沙发 懒人沙发客厅大转角大座深组合沙发3.7m（右转角）', 0, '2024-08-28 06:35:28', 1, 0, '2024-05-25 15:43:26', '2024-09-16 19:54:10', 0, 0, 5);
+INSERT INTO `oms_jd_vc_goods` VALUES (1794273052450004994, 100060237600, '曲美家居（QM）沙发 懒人沙发 科技布艺沙发家具三人位2.7m', 0, '2024-08-28 06:35:28', 1, 0, '2024-05-25 15:43:26', '2024-09-16 19:54:10', 0, 0, 5);
+INSERT INTO `oms_jd_vc_goods` VALUES (1794273052462587905, 100060237598, '曲美家居（QM）沙发 懒人沙发客厅科技布大座深组合沙发3.7m（左转角）', 0, '2024-08-28 06:35:28', 1, 0, '2024-05-25 15:43:26', '2024-09-16 19:54:10', 0, 0, 5);
+INSERT INTO `oms_jd_vc_goods` VALUES (1794273052475170817, 100060237574, '曲美家居（QM）沙发 懒人沙发客厅科技布沙发家具3m直排', 0, '2024-08-28 06:35:28', 1, 0, '2024-05-25 15:43:26', '2024-09-16 19:54:10', 0, 0, 5);
+INSERT INTO `oms_jd_vc_goods` VALUES (1794273052491948034, 100059710379, '曲美家居（QM） 床 真皮床 复古欧包皮艺床主卧欧式实木框架家具1.5*2.0m', 0, '2024-08-28 06:35:28', 1, 0, '2024-05-25 15:43:26', '2024-09-16 19:54:10', 0, 0, 5);
+INSERT INTO `oms_jd_vc_goods` VALUES (1794273052508725250, 100058433102, '曲美家居（QM）真皮沙发客厅头层牛皮直排意式轻奢皮艺沙发三人位3.1m', 0, '2024-08-28 06:35:27', 1, 0, '2024-05-25 15:43:26', '2024-09-16 19:54:10', 0, 0, 5);
+INSERT INTO `oms_jd_vc_goods` VALUES (1794273052525502466, 100058433078, '曲美家居（QM）真皮沙发 懒人沙发客厅小户型直排大座深意式沙发三人位2.1m', 0, '2024-08-28 06:35:27', 1, 0, '2024-05-25 15:43:26', '2024-09-16 19:54:10', 0, 0, 5);
+INSERT INTO `oms_jd_vc_goods` VALUES (1794273052538085377, 100058433076, '曲美家居（QM）凝胶床垫独立袋弹簧冰丝面料1.8*2米床垫', 0, '2024-08-28 06:35:27', 1, 0, '2024-05-25 15:43:26', '2024-09-16 19:54:10', 0, 0, 5);
+INSERT INTO `oms_jd_vc_goods` VALUES (1794273052554862594, 100058433066, '曲美家居（QM）凝胶床垫独立袋弹簧冰丝面料1.5*2米床垫', 0, '2024-08-28 06:35:27', 1, 0, '2024-05-25 15:43:26', '2024-09-16 19:54:10', 0, 0, 5);
+INSERT INTO `oms_jd_vc_goods` VALUES (1794273052571639809, 100058433064, '曲美家居（QM）真皮沙发 懒人沙发客厅大户型66cm座深意式沙发直排3.3m', 0, '2024-08-28 06:35:27', 1, 0, '2024-05-25 15:43:26', '2024-09-16 19:54:10', 0, 0, 5);
+INSERT INTO `oms_jd_vc_goods` VALUES (1794273052584222722, 100058433060, '曲美家居（QM）真皮沙发客厅头层牛皮直排意式轻奢皮艺沙发四人位3.95m', 0, '2024-08-28 06:35:27', 1, 0, '2024-05-25 15:43:26', '2024-09-16 19:54:10', 0, 0, 5);
+INSERT INTO `oms_jd_vc_goods` VALUES (1794273052592611329, 100058433008, '曲美家居（QM）沙发 懒人沙发客厅大转角大座深组合沙发3.7m（右转角）', 0, '2024-08-28 06:35:27', 1, 0, '2024-05-25 15:43:26', '2024-09-16 19:54:10', 0, 0, 5);
+INSERT INTO `oms_jd_vc_goods` VALUES (1794273052613582849, 100053851392, '曲美家居（QM）沙发 懒人沙发 布艺沙发家具三人位2.7m', 0, '2024-08-28 06:35:26', 1, 0, '2024-05-25 15:43:26', '2024-09-16 19:54:10', 0, 0, 5);
+INSERT INTO `oms_jd_vc_goods` VALUES (1794273052621971457, 100053851390, '曲美家居（QM）沙发懒人沙发客厅科技布沙发家具', 0, '2024-08-28 06:35:25', 1, 0, '2024-05-25 15:43:26', '2024-09-16 19:54:10', 0, 0, 5);
+INSERT INTO `oms_jd_vc_goods` VALUES (1794273052651331585, 100053851358, '曲美家居（QM）床 真皮双人床卧室主卧法式复古软床实木框架家具1.8*2m', 0, '2024-08-28 06:35:25', 1, 0, '2024-05-25 15:43:26', '2024-09-16 19:54:10', 0, 0, 5);
+INSERT INTO `oms_jd_vc_goods` VALUES (1794273052684886018, 100052615524, '曲美家居（QM）床双人床真皮床奶油风公主床卧室软床1.5*2米', 0, '2024-08-28 06:35:25', 1, 0, '2024-05-25 15:43:26', '2024-09-16 19:54:10', 0, 0, 5);
+INSERT INTO `oms_jd_vc_goods` VALUES (1794273052777160706, 100052615500, '曲美家居（QM）床双人床奶油风真皮床卧室大床婚床1.8*2米', 0, '2024-08-28 06:35:25', 1, 0, '2024-05-25 15:43:26', '2024-09-16 19:54:10', 0, 1784836484065443842, 5);
+INSERT INTO `oms_jd_vc_goods` VALUES (1835648363102482434, 100133658606, '曲美家居（QM）lab多功能电动沙发成长型家具牛皮-两人位 2.22m 【单电动位】', 0, '2024-09-04 11:10:21', 1, 0, '2024-09-16 19:54:09', NULL, 0, 0, 5);
+INSERT INTO `oms_jd_vc_goods` VALUES (1835648363140231170, 100133658082, '曲美家居（QM）lab多功能电动沙发牛皮奶茶白大三人位 3.14m【双电动】', 0, '2024-09-04 11:10:21', 1, 0, '2024-09-16 19:54:09', NULL, 0, 0, 5);
+INSERT INTO `oms_jd_vc_goods` VALUES (1835648363140231171, 100133658026, '曲美家居（QM）lab多功能模块沙发牛皮-岩石灰 多人位 3.14m【无电动】', 0, '2024-09-04 11:10:21', 1, 0, '2024-09-16 19:54:09', NULL, 0, 0, 5);
+INSERT INTO `oms_jd_vc_goods` VALUES (1835648363207340034, 100112899277, '曲美家居lab多功能电动沙发成长型家具牛皮-奶茶白 两人位 2.22m', 0, '2024-09-04 11:10:21', 1, 0, '2024-09-16 19:54:09', NULL, 0, 0, 5);
+INSERT INTO `oms_jd_vc_goods` VALUES (1835648363207340035, 100112899275, '曲美家居（QM）lab多功能模块沙发牛皮-岩石灰 两人位2.22m 【无电动】', 0, '2024-09-04 11:10:21', 1, 0, '2024-09-16 19:54:09', NULL, 0, 0, 5);
+INSERT INTO `oms_jd_vc_goods` VALUES (1835648363270254593, 100112899245, '曲美家居lab多功能成长型模块沙发牛皮-岩石灰 单人沙发 1.3m 【无电动】', 0, '2024-09-04 11:10:21', 1, 0, '2024-09-16 19:54:09', NULL, 0, 0, 5);
+INSERT INTO `oms_jd_vc_goods` VALUES (1835648363270254594, 100112898797, '曲美家居（QM）lab多功能电动沙发成长型家具牛皮-奶茶白大三人位 3.14m', 0, '2024-09-04 11:10:21', 1, 0, '2024-09-16 19:54:09', NULL, 0, 0, 5);
+
+-- ----------------------------
+-- Table structure for oms_jd_vc_order
+-- ----------------------------
+DROP TABLE IF EXISTS `oms_jd_vc_order`;
+CREATE TABLE `oms_jd_vc_order`  (
+  `id` bigint NOT NULL,
+  `custom_order_id` bigint NULL DEFAULT NULL COMMENT '客单编号',
+  `pay` decimal(10, 2) NULL DEFAULT NULL COMMENT '支付金额',
+  `operator_state` int NULL DEFAULT NULL COMMENT '操作状态:5 新订单；10等待发货；16发货完成',
+  `order_state` int NULL DEFAULT NULL COMMENT '订单状态:7 新订单；10等待发货；16等待确认收货；19订单完成；22锁定，29删除',
+  `consignee_name` varchar(35) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '收货人姓名',
+  `telephone` varchar(25) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '固定电话',
+  `phone` varchar(25) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '手机号码',
+  `address` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '收货地址',
+  `order_remark` varchar(55) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '订单备注',
+  `order_create_date` datetime NULL DEFAULT NULL COMMENT '订购日期/订单生成时间',
+  `payment_category` varchar(25) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '支付分类: COD, NON_COD',
+  `payment_category_disp_name` varchar(25) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '支付分类名称: 货到付款, 在线支付',
+  `create_date` datetime NULL DEFAULT NULL COMMENT '创建日期',
+  `pin` varchar(55) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '下单账号',
+  `refund_source_flag` int NULL DEFAULT NULL COMMENT '退款标识',
+  `province_id` int NULL DEFAULT NULL COMMENT '省份id',
+  `province_name` varchar(55) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '省份名称',
+  `city_id` int NULL DEFAULT NULL COMMENT '市id',
+  `city_name` varchar(55) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '市名称',
+  `county_id` int NULL DEFAULT NULL COMMENT '县id',
+  `county_name` varchar(55) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '县名称',
+  `town_id` int NULL DEFAULT NULL COMMENT '镇id',
+  `town_name` varchar(55) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '镇名称',
+  `memo_by_vendor` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '厂商备注',
+  `parent_order_id` bigint NULL DEFAULT NULL COMMENT '父单号',
+  `sku` varchar(55) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '商品编号',
+  `commodity_name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '商品名称',
+  `commodity_num` int NULL DEFAULT NULL COMMENT '商品数量',
+  `jd_price` decimal(10, 2) NULL DEFAULT NULL COMMENT '京东价',
+  `discount` decimal(10, 2) NULL DEFAULT NULL COMMENT '优惠价',
+  `reduce_count` decimal(10, 2) NULL DEFAULT NULL COMMENT '优惠金额',
+  `total_carriage` decimal(6, 2) NULL DEFAULT NULL COMMENT '总运费',
+  `cost` decimal(10, 2) NULL DEFAULT NULL COMMENT '采购价',
+  `branch_name` varchar(55) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '品牌名称',
+  `update_date` bigint NULL DEFAULT NULL COMMENT '更新时间',
+  `shop_id` bigint NULL DEFAULT NULL COMMENT '店铺id',
+  `create_time` datetime NULL DEFAULT NULL COMMENT '系统创建时间',
+  `update_time` datetime NULL DEFAULT NULL COMMENT '系统更新时间',
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `custom_order_id_index`(`custom_order_id` ASC) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of oms_jd_vc_order
+-- ----------------------------
+INSERT INTO `oms_jd_vc_order` VALUES (1794920326272380930, 293372970011, 59464.00, 5, 7, '邱海淘', '18430738635-5293', '18430738635-5293', '河北石家庄市正定县正定镇正定新区三里屯街道正定启化职业技术学校中建四局项目部 手机号后四位3042', NULL, '2024-05-09 11:45:00', 'NON_COD', '在线支付', '2024-05-26 11:44:51', 'wj191498659', 0, 5, '河北', 142, '石家庄市', 42542, '正定县', 42921, '正定镇', NULL, 292192197845, '100081971405', '曲美家居全屋定制餐厅一桌四椅', 8, 7433.00, NULL, 0.00, 0.00, 7059.00, '曲美家居（QM）', 1716695091643, 5, '2024-05-27 10:35:28', '2024-05-27 10:45:09');
+INSERT INTO `oms_jd_vc_order` VALUES (1794920326863777794, 293392591482, 91808.00, 5, 7, '邱海淘', '18430738500-6972', '18430738500-6972', '河北石家庄市正定县正定镇正定新区三里屯街道正定启化职业技术学校中建四局项目部 手机号后四位3042', NULL, '2024-05-09 11:45:00', 'NON_COD', '在线支付', '2024-05-26 11:44:51', 'wj191498659', 0, 5, '河北', 142, '石家庄市', 42542, '正定县', 42921, '正定镇', NULL, 292192197845, '100087284376', '曲美家居全屋定制次卧（1.5m床*1+床垫*1+床头柜*1+三门衣柜*1）', 8, 11476.00, NULL, 0.00, 0.00, 10900.00, '曲美家居（QM）', 1716695091661, 5, '2024-05-27 10:35:29', '2024-05-27 10:45:09');
+INSERT INTO `oms_jd_vc_order` VALUES (1794920326947663873, 293411721136, 122064.00, 5, 7, '邱海淘', '18430738446-2230', '18430738446-2230', '河北石家庄市正定县正定镇正定新区三里屯街道正定启化职业技术学校中建四局项目部 手机号后四位3042', NULL, '2024-05-09 11:45:00', 'NON_COD', '在线支付', '2024-05-26 11:44:51', 'wj191498659', 0, 5, '河北', 142, '石家庄市', 42542, '正定县', 42921, '正定镇', NULL, 292192197845, '100087284374', '曲美家居全屋定制主卧（双人床*1+床垫*1+床头柜*2+四门衣柜*1）', 8, 15258.00, NULL, 0.00, 0.00, 14493.00, '曲美家居（QM）', 1716695091714, 5, '2024-05-27 10:35:29', '2024-05-27 10:45:09');
+INSERT INTO `oms_jd_vc_order` VALUES (1794920327069298689, 293411721168, 116360.00, 5, 7, '邱海淘', '18430738020-8109', '18430738020-8109', '河北石家庄市正定县正定镇正定新区三里屯街道正定启化职业技术学校中建四局项目部 手机号后四位3042', NULL, '2024-05-09 11:45:00', 'NON_COD', '在线支付', '2024-05-26 11:44:51', 'wj191498659', 0, 5, '河北', 142, '石家庄市', 42542, '正定县', 42921, '正定镇', NULL, 292192197845, '100081971391', '曲美家居全屋定制客厅（3人沙发*1+单人沙发*1+茶几*1+电视柜*1）', 8, 14545.00, NULL, 0.00, 0.00, 13817.00, '曲美家居（QM）', 1716695091818, 5, '2024-05-27 10:35:29', '2024-05-27 10:45:09');
+INSERT INTO `oms_jd_vc_order` VALUES (1794920327144796162, 293411872209, 80608.00, 5, 7, '邱海淘', '18430737848-2752', '18430737848-2752', '河北石家庄市正定县正定镇正定新区三里屯街道正定启化职业技术学校中建四局项目部 手机号后四位3042', NULL, '2024-05-09 11:45:00', 'NON_COD', '在线支付', '2024-05-26 11:44:51', 'wj191498659', 0, 5, '河北', 142, '石家庄市', 42542, '正定县', 42921, '正定镇', NULL, 292192197845, '100081971389', '曲美家居定制书房卧室（单人床*1+床垫*1+书柜*1+书桌椅*1）', 8, 10076.00, NULL, 0.00, 0.00, 9569.00, '曲美家居（QM）', 1716695091967, 5, '2024-05-27 10:35:29', NULL);
+INSERT INTO `oms_jd_vc_order` VALUES (1794920327375482882, 293297427417, 1999.00, 16, 19, '王利芹', '1******2533', '1******2533', '内蒙古兴安盟扎赉特旗音德尔镇赛罕名都5号楼1单元301', NULL, '2024-05-23 21:52:28', 'NON_COD', '在线支付', '2024-05-23 21:56:13', 'jd_5de5a3048dd90', 0, 11, '内蒙古', 895, '兴安盟', 899, '扎赉特旗', 16141, '音德尔镇', NULL, 293297427417, '100064431086', '曲美家居凝胶记忆棉独立袋弹簧26cm厚垫子1.8*2米', 1, 3999.00, NULL, 2000.00, 0.00, 1891.00, '曲美家居（QM）', 1717495886480, 5, '2024-05-27 10:35:29', '2024-09-21 09:17:13');
+INSERT INTO `oms_jd_vc_order` VALUES (1794920327484534786, 295205891630, 0.00, 5, 7, '刘念', '18400970065-7865', '18400970065-7865', '北京朝阳区奥运村街道北苑路拂林园小区16号楼904室 手机号后四位7100', NULL, '2024-05-24 14:05:09', 'NON_COD', '在线支付', '2024-05-24 14:05:10', '开卷大大有益', 0, 1, '北京', 72, '朝阳区', 55652, '奥运村街道', 0, NULL, NULL, 295205891630, '100058433040', '曲美家居（QM）乳胶床垫弹簧床垫1.5x2米黄麻软硬双面单人床垫子', 1, 3028.00, NULL, 3014.81, 0.00, 1399.00, '曲美家居（QM）', 1716530710162, 5, '2024-05-27 10:35:29', NULL);
+INSERT INTO `oms_jd_vc_order` VALUES (1794920327568420866, 293378091641, 1378.81, 5, 7, '明攀虎', '18430738598-1164', '18430738598-1164', '四川南充市顺庆区中城街道文华巷124号院3幢 手机号后四位7127', NULL, '2024-05-26 09:28:53', 'NON_COD', '在线支付', '2024-05-26 09:30:46', '2775548-32589794', 0, 22, '四川', 2022, '南充市', 43226, '顺庆区', 57186, '中城街道', NULL, 293378091641, '100058433040', '曲美家居（QM）乳胶床垫弹簧床垫1.5x2米黄麻软硬双面单人床垫子', 1, 3028.00, NULL, 1636.00, 0.00, 1399.00, '曲美家居（QM）', 1716687046289, 5, '2024-05-27 10:35:29', '2024-05-27 10:45:09');
+INSERT INTO `oms_jd_vc_order` VALUES (1794922762335281154, 293210350417, 988.60, 5, 29, '顾军', '1******7736', '1******7736', '江苏无锡市新吴区梅村街道无锡新区泰伯二期331-302 手机号后四位7736', NULL, '2024-05-20 20:34:40', 'NON_COD', '在线支付', '2024-05-20 20:34:43', 'huaji111', 1, 12, '江苏', 984, '无锡市', 53561, '新吴区', 58023, '梅村街道', NULL, 293210350417, '100059710355', '曲美家居（QM）床垫 乳胶床垫 独立袋弹簧床垫1.8*2.0m', 1, 2271.00, NULL, 1272.01, 0.00, 999.00, '曲美家居（QM）', 1716770427514, 5, '2024-05-27 10:45:09', NULL);
+INSERT INTO `oms_jd_vc_order` VALUES (1794922762700185601, 293431954129, 1045.19, 16, 19, '杨有燕', '1******2025', '1******2025', '北京朝阳区左家庄街道左家庄南里21楼润民柳芳居1单元1502', NULL, '2024-05-26 17:35:42', 'NON_COD', '在线支付', '2024-05-26 17:35:52', '森林湖280', 0, 1, '北京', 72, '朝阳区', 55692, '左家庄街道', 0, NULL, NULL, 293431954129, '100059710381', '曲美家居（QM）床垫 乳胶床垫 独立袋弹簧床垫1.5*2米', 1, 2271.00, NULL, 1225.81, 0.00, 999.00, '曲美家居（QM）', 1717326417772, 5, '2024-05-27 10:45:09', '2024-09-17 20:44:34');
+INSERT INTO `oms_jd_vc_order` VALUES (1836023437164929026, 296252726030, 2499.00, 5, 29, '黄蜂', '1******3311', '1******3311', '北京海淀区八里庄街道北洼西里51号院3号楼一单元1111', NULL, '2024-05-31 21:46:15', 'NON_COD', '在线支付', '2024-05-31 21:47:00', 'jd_xavtQlmctluo', 1, 1, '北京', 2800, '海淀区', 55811, '八里庄街道', 0, NULL, NULL, 296252726030, '100078688188', '曲美家居乳胶床垫 黄麻床垫 小口径独立袋弹簧26cm厚软硬双面床垫1.5*2.0m', 1, 3712.00, NULL, 1213.00, 0.00, 2469.00, '曲美家居（QM）', 1717304442269, 5, '2024-09-17 20:44:34', NULL);
+INSERT INTO `oms_jd_vc_order` VALUES (1837294500213547010, 293664282873, 1083.70, 5, 29, '朱海霞', '1******7322', '1******7322', '山东泰安市岱岳区马庄镇泰安市马庄镇朱家寨村', NULL, '2024-06-01 18:18:26', 'NON_COD', '在线支付', '2024-06-01 18:18:40', '爱学习的朱乐', 1, 13, '山东', 1112, '泰安市', 46665, '岱岳区', 46712, '马庄镇', NULL, 293673328890, '100059710355', '曲美家居（QM）床垫 乳胶床垫 独立袋弹簧床垫1.8*2.0m', 1, 2271.00, NULL, 1176.91, 0.00, 999.00, '曲美家居（QM）', 1717374983120, 5, '2024-09-21 08:55:19', NULL);
+
+-- ----------------------------
+-- Table structure for oms_jd_vc_order_item
+-- ----------------------------
+DROP TABLE IF EXISTS `oms_jd_vc_order_item`;
+CREATE TABLE `oms_jd_vc_order_item`  (
+  `id` bigint NOT NULL,
+  `jd_vc_order_id` bigint NOT NULL COMMENT '外键id',
+  `custom_order_id` bigint NULL DEFAULT NULL COMMENT '客单编号',
+  `sku` varchar(55) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '京东商品编码',
+  `ware_name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '商品名称',
+  `upc` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '商品UPC编码',
+  `ware_num` int NULL DEFAULT NULL COMMENT '商品数量',
+  `jd_price` decimal(10, 2) NULL DEFAULT NULL COMMENT '京东价',
+  `discount` decimal(10, 2) NULL DEFAULT NULL COMMENT '优惠价',
+  `cost` decimal(10, 2) NULL DEFAULT NULL COMMENT '采购价',
+  `po_id` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '采购单号',
+  `ro_id` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '退货单号',
+  `o_goods_id` bigint NULL DEFAULT NULL COMMENT '商品id(o_goods外键)',
+  `o_goods_sku_id` bigint NULL DEFAULT NULL COMMENT '商品skuid(o_goods_sku外键)',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of oms_jd_vc_order_item
+-- ----------------------------
+INSERT INTO `oms_jd_vc_order_item` VALUES (1794920327144796163, 1794920327144796162, 293411872209, '100081971389', '曲美家居定制书房卧室（单人床*1+床垫*1+书柜*1+书桌椅*1）', NULL, 8, 10076.00, NULL, 9569.00, NULL, NULL, NULL, NULL);
+INSERT INTO `oms_jd_vc_order_item` VALUES (1794920327509700610, 1794920327484534786, 295205891630, '100058433040', '曲美家居（QM）乳胶床垫弹簧床垫1.5x2米黄麻软硬双面单人床垫子', '100058433040', 1, 3028.00, NULL, 1399.00, NULL, NULL, NULL, NULL);
+INSERT INTO `oms_jd_vc_order_item` VALUES (1794922761580306434, 1794920326272380930, 293372970011, '100081971405', '曲美家居全屋定制餐厅一桌四椅', NULL, 8, 7433.00, NULL, 7059.00, NULL, NULL, NULL, NULL);
+INSERT INTO `oms_jd_vc_order_item` VALUES (1794922761899073538, 1794920326863777794, 293392591482, '100087284376', '曲美家居全屋定制次卧（1.5m床*1+床垫*1+床头柜*1+三门衣柜*1）', NULL, 8, 11476.00, NULL, 10900.00, NULL, NULL, NULL, NULL);
+INSERT INTO `oms_jd_vc_order_item` VALUES (1794922762112983042, 1794920326947663873, 293411721136, '100087284374', '曲美家居全屋定制主卧（双人床*1+床垫*1+床头柜*2+四门衣柜*1）', NULL, 8, 15258.00, NULL, 14493.00, NULL, NULL, NULL, NULL);
+INSERT INTO `oms_jd_vc_order_item` VALUES (1794922762222034945, 1794920327069298689, 293411721168, '100081971391', '曲美家居全屋定制客厅（3人沙发*1+单人沙发*1+茶几*1+电视柜*1）', NULL, 8, 14545.00, NULL, 13817.00, NULL, NULL, NULL, NULL);
+INSERT INTO `oms_jd_vc_order_item` VALUES (1794922762511441922, 1794922762335281154, 293210350417, '100059710355', '曲美家居（QM）床垫 乳胶床垫 独立袋弹簧床垫1.8*2.0m', '100059710355', 1, 2271.00, NULL, 999.00, NULL, NULL, NULL, NULL);
+INSERT INTO `oms_jd_vc_order_item` VALUES (1794922762620493826, 1794920327568420866, 293378091641, '100058433040', '曲美家居（QM）乳胶床垫弹簧床垫1.5x2米黄麻软硬双面单人床垫子', '100058433040', 1, 3028.00, NULL, 1399.00, NULL, NULL, NULL, NULL);
+INSERT INTO `oms_jd_vc_order_item` VALUES (1836023437102014465, 1794922762700185601, 293431954129, '100059710381', '曲美家居（QM）床垫 乳胶床垫 独立袋弹簧床垫1.5*2米', '100059710381', 1, 2271.00, NULL, 999.00, NULL, NULL, 0, 0);
+INSERT INTO `oms_jd_vc_order_item` VALUES (1836023437164929027, 1836023437164929026, 296252726030, '100078688188', '曲美家居乳胶床垫 黄麻床垫 小口径独立袋弹簧26cm厚软硬双面床垫1.5*2.0m', NULL, 1, 3712.00, NULL, 2469.00, NULL, NULL, 0, 0);
+INSERT INTO `oms_jd_vc_order_item` VALUES (1837294500263878658, 1837294500213547010, 293664282873, '100059710355', '曲美家居（QM）床垫 乳胶床垫 独立袋弹簧床垫1.8*2.0m', '100059710355', 1, 2271.00, NULL, 999.00, NULL, NULL, 0, 0);
+INSERT INTO `oms_jd_vc_order_item` VALUES (1837300014108499969, 1794920327375482882, 293297427417, '100064431086', '曲美家居凝胶记忆棉独立袋弹簧26cm厚垫子1.8*2米', NULL, 1, 3999.00, NULL, 1891.00, NULL, NULL, 0, 0);
+
+-- ----------------------------
+-- Table structure for oms_jd_vc_refund
+-- ----------------------------
+DROP TABLE IF EXISTS `oms_jd_vc_refund`;
+CREATE TABLE `oms_jd_vc_refund`  (
+  `id` bigint NOT NULL COMMENT '售前退款数据唯一标示',
+  `custom_order_id` bigint NULL DEFAULT NULL COMMENT '客户订单号',
+  `ro_apply_fee` double NULL DEFAULT NULL COMMENT '退款申请金额',
+  `ro_apply_date` datetime NULL DEFAULT NULL COMMENT '退款申请时间',
+  `order_create_date` datetime NULL DEFAULT NULL COMMENT '订单生成时间',
+  `modified_date` datetime NULL DEFAULT NULL COMMENT '退款状态更新时间',
+  `approval_state` int NULL DEFAULT NULL COMMENT '审核状态0未审核 1审核通过 2审核不通过',
+  `order_state` int NULL DEFAULT NULL COMMENT '订单状态orderState 7 新订单 10等待发货 16等待确认收货 19订单完成 22锁定 29删除',
+  `operator_state` int NULL DEFAULT NULL COMMENT '	操作状态 operatorState 5 新订单 10等待发货 16发货完成',
+  `ro_pre_no` bigint NULL DEFAULT NULL COMMENT '申请单号',
+  `ro_account` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '退款申请账户',
+  `ro_reason` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '退款申请理由',
+  `approval_suggestion` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '审核意见',
+  `vendor_store_id` int NULL DEFAULT NULL COMMENT '仓id',
+  `vendor_store_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '仓名称',
+  `order_detail_list` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL COMMENT '返回商品结果集合JSON',
+  `sku_id` varchar(25) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '商品编码',
+  `commodity_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '商品名称',
+  `commodity_num` int NULL DEFAULT NULL COMMENT '退货数量',
+  `shop_id` bigint NULL DEFAULT NULL COMMENT '店铺id',
+  `create_time` datetime NULL DEFAULT NULL COMMENT '系统创建时间',
+  `update_time` datetime NULL DEFAULT NULL COMMENT '系统更新时间',
+  `o_goods_id` bigint NULL DEFAULT NULL COMMENT '商品id(o_goods外键)',
+  `o_goods_sku_id` bigint NULL DEFAULT NULL COMMENT '商品skuid(o_goods_sku外键)',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '京东自营退款表' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of oms_jd_vc_refund
+-- ----------------------------
+INSERT INTO `oms_jd_vc_refund` VALUES (24348160994, 293210350417, 988.6, '2024-05-26 09:35:03', '2024-05-20 20:34:40', '2024-05-27 08:40:29', 1, 29, 5, 24348160994, 'huaji111', '商品无货', '供应商审核通过', -1, NULL, '[{\"commodityName\":\"曲美家居（QM）床垫 乳胶床垫 独立袋弹簧床垫1.8*2.0m\",\"commodityNum\":1,\"skuId\":\"100059710355\"}]', '100059710355', '曲美家居（QM）床垫 乳胶床垫 独立袋弹簧床垫1.8*2.0m', 1, 5, '2024-05-31 16:04:26', NULL, NULL, NULL);
+INSERT INTO `oms_jd_vc_refund` VALUES (24510666793, 296252726030, 2499, '2024-06-01 12:57:53', '2024-05-31 21:46:15', '2024-06-02 13:00:43', 1, 29, 5, 24510666793, 'jd_xavtQlmctluo', '商品错选/多选', '审核超时，系统自动审核通过', -1, NULL, '[{\"commodityName\":\"曲美家居乳胶床垫 黄麻床垫 小口径独立袋弹簧26cm厚软硬双面床垫1.5*2.0m\",\"commodityNum\":1,\"skuId\":\"100078688188\"}]', '100078688188', '曲美家居乳胶床垫 黄麻床垫 小口径独立袋弹簧26cm厚软硬双面床垫1.5*2.0m', 1, 5, '2024-09-21 11:12:59', NULL, NULL, NULL);
 
 -- ----------------------------
 -- Table structure for oms_pdd_goods
@@ -1696,6 +2319,10 @@ CREATE TABLE `oms_pdd_goods`  (
 ) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = 'pdd商品表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
+-- Records of oms_pdd_goods
+-- ----------------------------
+
+-- ----------------------------
 -- Table structure for oms_pdd_goods_sku
 -- ----------------------------
 DROP TABLE IF EXISTS `oms_pdd_goods_sku`;
@@ -1718,6 +2345,10 @@ CREATE TABLE `oms_pdd_goods_sku`  (
   `update_time` datetime NULL DEFAULT NULL COMMENT '修改时间',
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = 'pdd商品SKU表' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of oms_pdd_goods_sku
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for oms_pdd_order
@@ -1794,9 +2425,13 @@ CREATE TABLE `oms_pdd_order`  (
   `update_time` datetime NULL DEFAULT NULL COMMENT '系统更新时间',
   `duo_duo_pay_reduction` double NULL DEFAULT NULL COMMENT '多多支付优惠',
   PRIMARY KEY (`id`) USING BTREE,
-  UNIQUE INDEX `order_sn_index`(`order_sn`) USING BTREE,
-  INDEX `shopid_index`(`shop_id`) USING BTREE
+  UNIQUE INDEX `order_sn_index`(`order_sn` ASC) USING BTREE,
+  INDEX `shopid_index`(`shop_id` ASC) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci COMMENT = '拼多多订单表' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of oms_pdd_order
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for oms_pdd_order_item
@@ -1818,8 +2453,12 @@ CREATE TABLE `oms_pdd_order_item`  (
   `o_goods_id` bigint NULL DEFAULT NULL COMMENT '商品id(o_goods外键)',
   `o_goods_sku_id` bigint NULL DEFAULT NULL COMMENT '商品skuid(o_goods_sku外键)',
   PRIMARY KEY (`id`) USING BTREE,
-  INDEX `index_order_sn`(`order_sn`) USING BTREE
+  INDEX `index_order_sn`(`order_sn` ASC) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '拼多多订单明细表' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of oms_pdd_order_item
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for oms_pdd_refund
@@ -1860,6 +2499,10 @@ CREATE TABLE `oms_pdd_refund`  (
   `o_goods_sku_id` bigint NULL DEFAULT NULL COMMENT '商品skuid(o_goods_sku外键)',
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 40559843813 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '拼多多订单退款表' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of oms_pdd_refund
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for oms_tao_goods
@@ -1903,6 +2546,10 @@ CREATE TABLE `oms_tao_goods`  (
 ) ENGINE = InnoDB AUTO_INCREMENT = 76 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '淘宝商品表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
+-- Records of oms_tao_goods
+-- ----------------------------
+
+-- ----------------------------
 -- Table structure for oms_tao_goods_sku
 -- ----------------------------
 DROP TABLE IF EXISTS `oms_tao_goods_sku`;
@@ -1929,8 +2576,12 @@ CREATE TABLE `oms_tao_goods_sku`  (
   `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
   `shop_id` bigint NOT NULL COMMENT '店铺id',
   PRIMARY KEY (`id`) USING BTREE,
-  INDEX `sku_id_index`(`sku_id`) USING BTREE
+  INDEX `sku_id_index`(`sku_id` ASC) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 1484 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '淘宝商品SKU表' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of oms_tao_goods_sku
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for oms_tao_order
@@ -2018,9 +2669,13 @@ CREATE TABLE `oms_tao_order`  (
   `sid` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '物流运单号',
   `tmall_coupon_fee` bigint NULL DEFAULT NULL COMMENT '天猫商家使用，订单使用的红包信息',
   PRIMARY KEY (`id`) USING BTREE,
-  INDEX `index_tid`(`tid`) USING BTREE,
-  INDEX `shop_id_index`(`shop_id`) USING BTREE
+  INDEX `index_tid`(`tid` ASC) USING BTREE,
+  INDEX `shop_id_index`(`shop_id` ASC) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '淘宝订单表' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of oms_tao_order
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for oms_tao_order_item
@@ -2069,9 +2724,13 @@ CREATE TABLE `oms_tao_order_item`  (
   `o_goods_id` bigint NULL DEFAULT NULL COMMENT '商品id(o_goods外键)',
   `o_goods_sku_id` bigint NULL DEFAULT NULL COMMENT '商品skuid(o_goods_sku外键)',
   PRIMARY KEY (`id`) USING BTREE,
-  INDEX `tid_index`(`tid`) USING BTREE,
-  INDEX `oid_index`(`oid`) USING BTREE
+  INDEX `tid_index`(`tid` ASC) USING BTREE,
+  INDEX `oid_index`(`oid` ASC) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '淘宝订单明细表' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of oms_tao_order_item
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for oms_tao_order_promotion
@@ -2089,6 +2748,10 @@ CREATE TABLE `oms_tao_order_promotion`  (
   `kd_discount_fee` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '分摊优惠金额（免运费、限时打折时为空）,单位：元',
   `kd_child_discount_fee` varchar(2550) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '若优惠项在主订单上，返回子订单的分摊信息'
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '淘宝订单优惠明细表' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of oms_tao_order_promotion
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for oms_tao_refund
@@ -2143,8 +2806,12 @@ CREATE TABLE `oms_tao_refund`  (
   `o_goods_id` bigint NULL DEFAULT NULL COMMENT '商品id(o_goods外键)',
   `o_goods_sku_id` bigint NULL DEFAULT NULL COMMENT '商品skuid(o_goods_sku外键)',
   PRIMARY KEY (`id`) USING BTREE,
-  INDEX `refund_id_index`(`refund_id`) USING BTREE
+  INDEX `refund_id_index`(`refund_id` ASC) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '淘宝退款表' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of oms_tao_refund
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for oms_tao_waybill_account
@@ -2175,6 +2842,10 @@ CREATE TABLE `oms_tao_waybill_account`  (
 ) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '淘宝电子面单账户信息表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
+-- Records of oms_tao_waybill_account
+-- ----------------------------
+
+-- ----------------------------
 -- Table structure for oms_wei_goods
 -- ----------------------------
 DROP TABLE IF EXISTS `oms_wei_goods`;
@@ -2202,6 +2873,10 @@ CREATE TABLE `oms_wei_goods`  (
 ) ENGINE = InnoDB AUTO_INCREMENT = 30 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
+-- Records of oms_wei_goods
+-- ----------------------------
+
+-- ----------------------------
 -- Table structure for oms_wei_goods_sku
 -- ----------------------------
 DROP TABLE IF EXISTS `oms_wei_goods_sku`;
@@ -2225,8 +2900,12 @@ CREATE TABLE `oms_wei_goods_sku`  (
   `create_time` datetime NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
   PRIMARY KEY (`id`) USING BTREE,
-  INDEX `sku_id_index`(`sku_id`) USING BTREE
+  INDEX `sku_id_index`(`sku_id` ASC) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 64 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of oms_wei_goods_sku
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for oms_wei_order
@@ -2269,8 +2948,12 @@ CREATE TABLE `oms_wei_order`  (
   `erp_send_code` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT 'erp发货快递单号',
   `erp_send_status` int NULL DEFAULT 0 COMMENT 'erp发货状态',
   PRIMARY KEY (`id`) USING BTREE,
-  INDEX `order_id_index`(`order_id`) USING BTREE
+  INDEX `order_id_index`(`order_id` ASC) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 35 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of oms_wei_order
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for oms_wei_order_item
@@ -2308,6 +2991,10 @@ CREATE TABLE `oms_wei_order_item`  (
   `o_goods_sku_id` bigint NULL DEFAULT NULL COMMENT '商品skuid(o_goods_sku外键)',
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 34 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of oms_wei_order_item
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for oms_wei_refund
@@ -2349,6 +3036,10 @@ CREATE TABLE `oms_wei_refund`  (
 ) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '视频号小店退款' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
+-- Records of oms_wei_refund
+-- ----------------------------
+
+-- ----------------------------
 -- Table structure for oms_wei_waybill_account
 -- ----------------------------
 DROP TABLE IF EXISTS `oms_wei_waybill_account`;
@@ -2382,6 +3073,10 @@ CREATE TABLE `oms_wei_waybill_account`  (
 ) ENGINE = InnoDB AUTO_INCREMENT = 10 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '视频号小店电子面单账户信息表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
+-- Records of oms_wei_waybill_account
+-- ----------------------------
+
+-- ----------------------------
 -- Table structure for scm_logistics
 -- ----------------------------
 DROP TABLE IF EXISTS `scm_logistics`;
@@ -2393,6 +3088,10 @@ CREATE TABLE `scm_logistics`  (
   `status` int NULL DEFAULT NULL COMMENT '状态（0禁用1启用）',
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '采购物流公司表' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of scm_logistics
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for scm_purchase_order
@@ -2420,6 +3119,10 @@ CREATE TABLE `scm_purchase_order`  (
   `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '采购订单' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of scm_purchase_order
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for scm_purchase_order_cost
@@ -2451,6 +3154,10 @@ CREATE TABLE `scm_purchase_order_cost`  (
 ) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '采购订单费用确认表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
+-- Records of scm_purchase_order_cost
+-- ----------------------------
+
+-- ----------------------------
 -- Table structure for scm_purchase_order_item
 -- ----------------------------
 DROP TABLE IF EXISTS `scm_purchase_order_item`;
@@ -2480,13 +3187,17 @@ CREATE TABLE `scm_purchase_order_item`  (
   `is_delete` tinyint(1) NULL DEFAULT 0 COMMENT '1删除 0正常',
   `status` int NULL DEFAULT 0 COMMENT '状态（同billStatus）0待审核1正常2已作废3已入库',
   PRIMARY KEY (`id`) USING BTREE,
-  INDEX `type`(`trans_type`) USING BTREE,
-  INDEX `billdate`(`order_date`) USING BTREE,
-  INDEX `invId`(`goods_id`) USING BTREE,
-  INDEX `transType`(`trans_type`) USING BTREE,
-  INDEX `iid`(`order_id`) USING BTREE,
-  INDEX `id`(`id`) USING BTREE
+  INDEX `type`(`trans_type` ASC) USING BTREE,
+  INDEX `billdate`(`order_date` ASC) USING BTREE,
+  INDEX `invId`(`goods_id` ASC) USING BTREE,
+  INDEX `transType`(`trans_type` ASC) USING BTREE,
+  INDEX `iid`(`order_id` ASC) USING BTREE,
+  INDEX `id`(`id` ASC) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '采购订单明细' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of scm_purchase_order_item
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for scm_purchase_order_payable
@@ -2509,6 +3220,10 @@ CREATE TABLE `scm_purchase_order_payable`  (
   `update_by` varchar(25) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '更新人',
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '采购单应付款' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of scm_purchase_order_payable
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for scm_purchase_order_ship
@@ -2539,5 +3254,731 @@ CREATE TABLE `scm_purchase_order_ship`  (
   `order_spec_unit_total` int NULL DEFAULT NULL COMMENT '采购订单总件数',
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '采购订单物流表' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of scm_purchase_order_ship
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for sys_config
+-- ----------------------------
+DROP TABLE IF EXISTS `sys_config`;
+CREATE TABLE `sys_config`  (
+  `config_id` int NOT NULL AUTO_INCREMENT COMMENT '参数主键',
+  `config_name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT '参数名称',
+  `config_key` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT '参数键名',
+  `config_value` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT '参数键值',
+  `config_type` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT 'N' COMMENT '系统内置（Y是 N否）',
+  `create_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT '创建者',
+  `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
+  `update_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT '更新者',
+  `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
+  `remark` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '备注',
+  PRIMARY KEY (`config_id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 100 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '参数配置表' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of sys_config
+-- ----------------------------
+INSERT INTO `sys_config` VALUES (1, '系统名称', 'sys.name', '启航电商ERP系统', 'Y', 'admin', '2023-08-07 19:31:38', '', NULL, '蓝色 skin-blue、绿色 skin-green、紫色 skin-purple、红色 skin-red、黄色 skin-yellow');
+INSERT INTO `sys_config` VALUES (4, '账号自助-验证码开关', 'sys.account.captchaEnabled', 'false', 'Y', 'admin', '2023-08-07 19:31:38', '', NULL, '是否开启验证码功能（true开启，false关闭）');
+
+-- ----------------------------
+-- Table structure for sys_dept
+-- ----------------------------
+DROP TABLE IF EXISTS `sys_dept`;
+CREATE TABLE `sys_dept`  (
+  `dept_id` bigint NOT NULL AUTO_INCREMENT COMMENT '部门id',
+  `parent_id` bigint NULL DEFAULT 0 COMMENT '父部门id',
+  `ancestors` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT '祖级列表',
+  `dept_name` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT '部门名称',
+  `order_num` int NULL DEFAULT 0 COMMENT '显示顺序',
+  `leader` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '负责人',
+  `phone` varchar(11) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '联系电话',
+  `email` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '邮箱',
+  `status` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '0' COMMENT '部门状态（0正常 1停用）',
+  `del_flag` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '0' COMMENT '删除标志（0代表存在 2代表删除）',
+  `create_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT '创建者',
+  `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
+  `update_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT '更新者',
+  `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
+  PRIMARY KEY (`dept_id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 200 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '部门表' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of sys_dept
+-- ----------------------------
+INSERT INTO `sys_dept` VALUES (100, 0, '0', '启航技术', 0, '老齐', '15888888888', '280645618@qq.com', '0', '0', 'admin', '2023-08-07 19:31:37', 'admin', '2024-09-15 17:52:12');
+INSERT INTO `sys_dept` VALUES (101, 100, '0,100', '研发中心', 1, '老齐', '15888888888', '280645618@qq.com', '0', '0', 'admin', '2023-08-07 19:31:37', 'admin', '2024-09-15 17:52:47');
+INSERT INTO `sys_dept` VALUES (102, 100, '0,100', '市场中心', 2, '方', '15888888888', 'market@qihangerp.cn', '0', '0', 'admin', '2023-08-07 19:31:37', 'admin', '2024-09-15 17:53:28');
+INSERT INTO `sys_dept` VALUES (103, 101, '0,100,101', '研发部门', 1, '至简', '15888888888', 'ry@qq.com', '0', '2', 'admin', '2023-08-07 19:31:37', '', NULL);
+INSERT INTO `sys_dept` VALUES (104, 101, '0,100,101', '市场部门', 2, '至简', '15888888888', 'ry@qq.com', '0', '2', 'admin', '2023-08-07 19:31:37', '', NULL);
+INSERT INTO `sys_dept` VALUES (105, 101, '0,100,101', '测试部门', 3, '至简', '15888888888', 'ry@qq.com', '0', '2', 'admin', '2023-08-07 19:31:37', '', NULL);
+INSERT INTO `sys_dept` VALUES (106, 101, '0,100,101', '财务部门', 4, '至简', '15888888888', 'ry@qq.com', '0', '2', 'admin', '2023-08-07 19:31:37', '', NULL);
+INSERT INTO `sys_dept` VALUES (107, 101, '0,100,101', '运维部门', 5, '至简', '15888888888', 'ry@qq.com', '0', '2', 'admin', '2023-08-07 19:31:37', '', NULL);
+INSERT INTO `sys_dept` VALUES (108, 102, '0,100,102', '市场部门', 1, '至简', '15888888888', 'ry@qq.com', '0', '2', 'admin', '2023-08-07 19:31:37', '', NULL);
+INSERT INTO `sys_dept` VALUES (109, 102, '0,100,102', '财务部门', 2, '至简', '15888888888', 'ry@qq.com', '0', '2', 'admin', '2023-08-07 19:31:37', '', NULL);
+
+-- ----------------------------
+-- Table structure for sys_dict_data
+-- ----------------------------
+DROP TABLE IF EXISTS `sys_dict_data`;
+CREATE TABLE `sys_dict_data`  (
+  `dict_code` bigint NOT NULL AUTO_INCREMENT COMMENT '字典编码',
+  `dict_sort` int NULL DEFAULT 0 COMMENT '字典排序',
+  `dict_label` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT '字典标签',
+  `dict_value` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT '字典键值',
+  `dict_type` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT '字典类型',
+  `css_class` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '样式属性（其他样式扩展）',
+  `list_class` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '表格回显样式',
+  `is_default` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT 'N' COMMENT '是否默认（Y是 N否）',
+  `status` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '0' COMMENT '状态（0正常 1停用）',
+  `create_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT '创建者',
+  `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
+  `update_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT '更新者',
+  `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
+  `remark` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '备注',
+  PRIMARY KEY (`dict_code`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 100 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '字典数据表' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of sys_dict_data
+-- ----------------------------
+INSERT INTO `sys_dict_data` VALUES (1, 1, '男', '0', 'sys_user_sex', '', '', 'Y', '0', 'admin', '2023-08-07 19:31:38', '', NULL, '性别男');
+INSERT INTO `sys_dict_data` VALUES (2, 2, '女', '1', 'sys_user_sex', '', '', 'N', '0', 'admin', '2023-08-07 19:31:38', '', NULL, '性别女');
+INSERT INTO `sys_dict_data` VALUES (3, 3, '未知', '2', 'sys_user_sex', '', '', 'N', '0', 'admin', '2023-08-07 19:31:38', '', NULL, '性别未知');
+INSERT INTO `sys_dict_data` VALUES (4, 1, '显示', '0', 'sys_show_hide', '', 'primary', 'Y', '0', 'admin', '2023-08-07 19:31:38', '', NULL, '显示菜单');
+INSERT INTO `sys_dict_data` VALUES (5, 2, '隐藏', '1', 'sys_show_hide', '', 'danger', 'N', '0', 'admin', '2023-08-07 19:31:38', '', NULL, '隐藏菜单');
+INSERT INTO `sys_dict_data` VALUES (6, 1, '正常', '0', 'sys_normal_disable', '', 'primary', 'Y', '0', 'admin', '2023-08-07 19:31:38', '', NULL, '正常状态');
+INSERT INTO `sys_dict_data` VALUES (7, 2, '停用', '1', 'sys_normal_disable', '', 'danger', 'N', '0', 'admin', '2023-08-07 19:31:38', '', NULL, '停用状态');
+INSERT INTO `sys_dict_data` VALUES (8, 1, '正常', '0', 'sys_job_status', '', 'primary', 'Y', '0', 'admin', '2023-08-07 19:31:38', '', NULL, '正常状态');
+INSERT INTO `sys_dict_data` VALUES (9, 2, '暂停', '1', 'sys_job_status', '', 'danger', 'N', '0', 'admin', '2023-08-07 19:31:38', '', NULL, '停用状态');
+INSERT INTO `sys_dict_data` VALUES (10, 1, '默认', 'DEFAULT', 'sys_job_group', '', '', 'Y', '0', 'admin', '2023-08-07 19:31:38', '', NULL, '默认分组');
+INSERT INTO `sys_dict_data` VALUES (11, 2, '系统', 'SYSTEM', 'sys_job_group', '', '', 'N', '0', 'admin', '2023-08-07 19:31:38', '', NULL, '系统分组');
+INSERT INTO `sys_dict_data` VALUES (12, 1, '是', 'Y', 'sys_yes_no', '', 'primary', 'Y', '0', 'admin', '2023-08-07 19:31:38', '', NULL, '系统默认是');
+INSERT INTO `sys_dict_data` VALUES (13, 2, '否', 'N', 'sys_yes_no', '', 'danger', 'N', '0', 'admin', '2023-08-07 19:31:38', '', NULL, '系统默认否');
+INSERT INTO `sys_dict_data` VALUES (14, 1, '通知', '1', 'sys_notice_type', '', 'warning', 'Y', '0', 'admin', '2023-08-07 19:31:38', '', NULL, '通知');
+INSERT INTO `sys_dict_data` VALUES (15, 2, '公告', '2', 'sys_notice_type', '', 'success', 'N', '0', 'admin', '2023-08-07 19:31:38', '', NULL, '公告');
+INSERT INTO `sys_dict_data` VALUES (16, 1, '正常', '0', 'sys_notice_status', '', 'primary', 'Y', '0', 'admin', '2023-08-07 19:31:38', '', NULL, '正常状态');
+INSERT INTO `sys_dict_data` VALUES (17, 2, '关闭', '1', 'sys_notice_status', '', 'danger', 'N', '0', 'admin', '2023-08-07 19:31:38', '', NULL, '关闭状态');
+INSERT INTO `sys_dict_data` VALUES (18, 99, '其他', '0', 'sys_oper_type', '', 'info', 'N', '0', 'admin', '2023-08-07 19:31:38', '', NULL, '其他操作');
+INSERT INTO `sys_dict_data` VALUES (19, 1, '新增', '1', 'sys_oper_type', '', 'info', 'N', '0', 'admin', '2023-08-07 19:31:38', '', NULL, '新增操作');
+INSERT INTO `sys_dict_data` VALUES (20, 2, '修改', '2', 'sys_oper_type', '', 'info', 'N', '0', 'admin', '2023-08-07 19:31:38', '', NULL, '修改操作');
+INSERT INTO `sys_dict_data` VALUES (21, 3, '删除', '3', 'sys_oper_type', '', 'danger', 'N', '0', 'admin', '2023-08-07 19:31:38', '', NULL, '删除操作');
+INSERT INTO `sys_dict_data` VALUES (22, 4, '授权', '4', 'sys_oper_type', '', 'primary', 'N', '0', 'admin', '2023-08-07 19:31:38', '', NULL, '授权操作');
+INSERT INTO `sys_dict_data` VALUES (23, 5, '导出', '5', 'sys_oper_type', '', 'warning', 'N', '0', 'admin', '2023-08-07 19:31:38', '', NULL, '导出操作');
+INSERT INTO `sys_dict_data` VALUES (24, 6, '导入', '6', 'sys_oper_type', '', 'warning', 'N', '0', 'admin', '2023-08-07 19:31:38', '', NULL, '导入操作');
+INSERT INTO `sys_dict_data` VALUES (25, 7, '强退', '7', 'sys_oper_type', '', 'danger', 'N', '0', 'admin', '2023-08-07 19:31:38', '', NULL, '强退操作');
+INSERT INTO `sys_dict_data` VALUES (26, 8, '生成代码', '8', 'sys_oper_type', '', 'warning', 'N', '0', 'admin', '2023-08-07 19:31:38', '', NULL, '生成操作');
+INSERT INTO `sys_dict_data` VALUES (27, 9, '清空数据', '9', 'sys_oper_type', '', 'danger', 'N', '0', 'admin', '2023-08-07 19:31:38', '', NULL, '清空操作');
+INSERT INTO `sys_dict_data` VALUES (28, 1, '成功', '0', 'sys_common_status', '', 'primary', 'N', '0', 'admin', '2023-08-07 19:31:38', '', NULL, '正常状态');
+INSERT INTO `sys_dict_data` VALUES (29, 2, '失败', '1', 'sys_common_status', '', 'danger', 'N', '0', 'admin', '2023-08-07 19:31:38', '', NULL, '停用状态');
+
+-- ----------------------------
+-- Table structure for sys_dict_type
+-- ----------------------------
+DROP TABLE IF EXISTS `sys_dict_type`;
+CREATE TABLE `sys_dict_type`  (
+  `dict_id` bigint NOT NULL AUTO_INCREMENT COMMENT '字典主键',
+  `dict_name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT '字典名称',
+  `dict_type` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT '字典类型',
+  `status` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '0' COMMENT '状态（0正常 1停用）',
+  `create_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT '创建者',
+  `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
+  `update_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT '更新者',
+  `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
+  `remark` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '备注',
+  PRIMARY KEY (`dict_id`) USING BTREE,
+  UNIQUE INDEX `dict_type`(`dict_type` ASC) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 100 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '字典类型表' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of sys_dict_type
+-- ----------------------------
+INSERT INTO `sys_dict_type` VALUES (1, '用户性别', 'sys_user_sex', '0', 'admin', '2023-08-07 19:31:38', '', NULL, '用户性别列表');
+INSERT INTO `sys_dict_type` VALUES (2, '菜单状态', 'sys_show_hide', '0', 'admin', '2023-08-07 19:31:38', '', NULL, '菜单状态列表');
+INSERT INTO `sys_dict_type` VALUES (3, '系统开关', 'sys_normal_disable', '0', 'admin', '2023-08-07 19:31:38', '', NULL, '系统开关列表');
+INSERT INTO `sys_dict_type` VALUES (4, '任务状态', 'sys_job_status', '0', 'admin', '2023-08-07 19:31:38', '', NULL, '任务状态列表');
+INSERT INTO `sys_dict_type` VALUES (5, '任务分组', 'sys_job_group', '0', 'admin', '2023-08-07 19:31:38', '', NULL, '任务分组列表');
+INSERT INTO `sys_dict_type` VALUES (6, '系统是否', 'sys_yes_no', '0', 'admin', '2023-08-07 19:31:38', '', NULL, '系统是否列表');
+INSERT INTO `sys_dict_type` VALUES (7, '通知类型', 'sys_notice_type', '0', 'admin', '2023-08-07 19:31:38', '', NULL, '通知类型列表');
+INSERT INTO `sys_dict_type` VALUES (8, '通知状态', 'sys_notice_status', '0', 'admin', '2023-08-07 19:31:38', '', NULL, '通知状态列表');
+INSERT INTO `sys_dict_type` VALUES (9, '操作类型', 'sys_oper_type', '0', 'admin', '2023-08-07 19:31:38', '', NULL, '操作类型列表');
+INSERT INTO `sys_dict_type` VALUES (10, '系统状态', 'sys_common_status', '0', 'admin', '2023-08-07 19:31:38', '', NULL, '登录状态列表');
+
+-- ----------------------------
+-- Table structure for sys_menu
+-- ----------------------------
+DROP TABLE IF EXISTS `sys_menu`;
+CREATE TABLE `sys_menu`  (
+  `menu_id` bigint NOT NULL AUTO_INCREMENT COMMENT '菜单ID',
+  `menu_name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '菜单名称',
+  `parent_id` bigint NULL DEFAULT 0 COMMENT '父菜单ID',
+  `order_num` int NULL DEFAULT 0 COMMENT '显示顺序',
+  `path` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT '路由地址',
+  `component` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '组件路径',
+  `query` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '路由参数',
+  `is_frame` int NULL DEFAULT 1 COMMENT '是否为外链（0是 1否）',
+  `is_cache` int NULL DEFAULT 0 COMMENT '是否缓存（0缓存 1不缓存）',
+  `menu_type` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT '菜单类型（M目录 C菜单 F按钮）',
+  `visible` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '0' COMMENT '菜单状态（0显示 1隐藏）',
+  `status` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '0' COMMENT '菜单状态（0正常 1停用）',
+  `perms` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '权限标识',
+  `icon` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '#' COMMENT '菜单图标',
+  `create_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT '创建者',
+  `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
+  `update_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT '更新者',
+  `update_time` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '更新时间',
+  `remark` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT '备注',
+  PRIMARY KEY (`menu_id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 2130 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '菜单权限表' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of sys_menu
+-- ----------------------------
+INSERT INTO `sys_menu` VALUES (1, '订单管理', 0, 10, '/order', 'Layout', '', 1, 0, 'M', '0', '0', '', 'shopping', 'admin', '2023-12-27 15:00:27', 'admin', '2024-08-25 15:45:43', '系统管理目录');
+INSERT INTO `sys_menu` VALUES (2, '售后管理', 0, 30, '/refund', 'Layout', '', 1, 0, 'M', '0', '0', '', 'monitor', 'admin', '2023-12-27 15:00:27', 'admin', '2024-08-25 15:45:54', '至简官网地址');
+INSERT INTO `sys_menu` VALUES (3, '店铺设置', 0, 9, 'shop', 'Layout', '', 1, 0, 'M', '0', '0', '', 'dict', 'admin', '2023-12-29 13:29:44', 'admin', '2025-05-19 14:12:51', '');
+INSERT INTO `sys_menu` VALUES (4, '商品库', 0, 0, 'goods', 'Layout', '', 1, 0, 'M', '0', '0', '', 'international', 'admin', '2023-12-29 16:53:03', 'admin', '2025-09-08 19:08:50', '');
+INSERT INTO `sys_menu` VALUES (5, '系统设置', 0, 99, '/system', 'Layout', '', 1, 0, 'M', '0', '0', '', 'system', 'admin', '2023-12-27 15:00:27', 'admin', '2023-12-29 09:07:42.856856', '系统管理目录');
+INSERT INTO `sys_menu` VALUES (100, '订单库', 1, 1, 'order_list', 'order/index', '', 1, 0, 'C', '0', '0', '', 'shopping', 'admin', '2023-12-27 15:00:27', 'admin', '2024-09-15 16:57:59', '用户管理菜单');
+INSERT INTO `sys_menu` VALUES (101, '订单拉取日志', 1, 32, 'order_pull_logs', 'order/shopOrder/pull_log', '', 1, 0, 'C', '0', '0', '', 'documentation', 'admin', '2023-12-27 15:00:27', 'admin', '2025-05-19 14:11:59', '角色管理菜单');
+INSERT INTO `sys_menu` VALUES (102, '店铺订单管理', 1, 3, 'shop_order_list', 'order/shopOrder/index', '', 1, 0, 'C', '0', '0', '', 'monitor', 'admin', '2023-12-27 15:00:27', 'admin', '2024-04-06 11:18:00', '菜单管理菜单');
+INSERT INTO `sys_menu` VALUES (104, '售后中心', 2, 1, 'refund_list', 'refund/index', '', 1, 0, 'C', '0', '0', '', 'tree', 'admin', '2023-12-27 15:00:27', 'admin', '2024-09-15 18:58:16', '岗位管理菜单');
+INSERT INTO `sys_menu` VALUES (105, '售后拉取日志', 2, 36, 'refund_pull_logs', 'refund/shopRefund/pull_log', '', 1, 0, 'C', '0', '0', '', 'dict', 'admin', '2023-12-27 15:00:27', 'admin', '2025-05-19 14:12:28', '字典管理菜单');
+INSERT INTO `sys_menu` VALUES (106, '店铺售后管理', 2, 2, 'shop_refund_list', 'refund/shopRefund/index', '', 1, 0, 'C', '0', '0', '', 'edit', 'admin', '2023-12-27 15:00:27', 'admin', '2024-07-20 11:56:11', '参数设置菜单');
+INSERT INTO `sys_menu` VALUES (108, '店铺管理', 3, 1, 'shop_list', 'shop/index', '', 1, 0, 'C', '0', '0', '', 'tree', 'admin', '2023-12-29 09:14:02', 'admin', '2025-03-24 13:03:00', '');
+INSERT INTO `sys_menu` VALUES (110, '平台开关', 3, 81, 'platform/setting', 'shop/platform/index', '', 1, 0, 'C', '0', '0', '', 'system', 'admin', '2023-12-29 13:32:41', 'admin', '2025-05-20 20:36:38', '');
+INSERT INTO `sys_menu` VALUES (116, '用户管理', 5, 1, 'user', 'system/user/index', '', 1, 0, 'C', '0', '0', '', 'user', 'admin', '2023-12-27 15:00:27', '', '', '用户管理菜单');
+INSERT INTO `sys_menu` VALUES (117, '菜单管理', 5, 1, 'menu', 'system/menu/index', '', 1, 0, 'C', '0', '0', '', 'user', 'admin', '2023-12-27 15:00:27', '', '', '用户管理菜单');
+INSERT INTO `sys_menu` VALUES (2077, '店铺商品管理', 3, 21, 'shop_goods', 'shop/goods/index', NULL, 1, 0, 'C', '0', '0', '', 'shopping', 'admin', '2024-03-28 10:29:59', 'admin', '2025-03-24 12:37:43', '');
+INSERT INTO `sys_menu` VALUES (2078, '添加ERP商品', 4, 99, 'create', 'goods/goods/create', NULL, 1, 0, 'C', '1', '0', '', 'checkbox', 'admin', '2024-03-18 07:59:57', 'admin', '2025-09-08 19:15:00', '');
+INSERT INTO `sys_menu` VALUES (2079, '字典管理', 5, 9, 'dict', 'system/dict/index', NULL, 1, 0, 'C', '0', '0', '', 'dict', 'admin', '2024-03-18 08:43:55', 'admin', '2024-03-18 08:44:08', '');
+INSERT INTO `sys_menu` VALUES (2087, '发货管理', 0, 20, 'ship', NULL, NULL, 1, 0, 'M', '0', '0', '', 'guide', 'admin', '2024-03-30 17:36:10', 'admin', '2024-08-25 15:45:48', '');
+INSERT INTO `sys_menu` VALUES (2088, '发货设置', 2087, 9, 'ship_set', 'shipping/logistics/index', NULL, 1, 0, 'C', '0', '0', '', 'checkbox', 'admin', '2024-03-30 17:37:01', 'admin', '2025-06-01 15:02:10', '');
+INSERT INTO `sys_menu` VALUES (2089, '发货记录', 2087, 3, 'record', 'shipping/record/index', NULL, 1, 0, 'C', '0', '0', '', 'guide', 'admin', '2024-03-30 17:37:42', 'admin', '2025-06-02 09:45:44', '');
+INSERT INTO `sys_menu` VALUES (2090, '角色管理', 5, 2, 'role', 'system/role/index', NULL, 1, 0, 'C', '0', '0', NULL, 'peoples', 'admin', '2024-03-31 12:40:50', '', NULL, '');
+INSERT INTO `sys_menu` VALUES (2091, '部门管理', 5, 3, 'dept', 'system/dept/index', NULL, 1, 0, 'C', '0', '0', NULL, 'tree', 'admin', '2024-03-31 12:42:57', '', NULL, '');
+INSERT INTO `sys_menu` VALUES (2092, '售后处理记录', 2, 5, 'processing', 'afterSale/index', NULL, 1, 0, 'C', '0', '0', '', 'documentation', 'admin', '2024-04-06 17:27:03', 'admin', '2024-07-28 18:59:41', '');
+INSERT INTO `sys_menu` VALUES (2093, '订单明细', 1, 2, 'order_item_list', 'order/item_list', NULL, 1, 0, 'C', '0', '0', NULL, 'chart', 'admin', '2024-04-06 18:58:06', '', NULL, '');
+INSERT INTO `sys_menu` VALUES (2094, '电子面单发货', 2087, 1, 'print', 'shipping/ewaybillPrint/index', NULL, 1, 0, 'C', '0', '0', '', 'edit', 'admin', '2024-07-20 11:04:54', 'admin', '2025-06-01 14:26:27', '');
+INSERT INTO `sys_menu` VALUES (2096, '备货单', 2087, 2, 'stockup', 'shipping/stockup', NULL, 1, 0, 'C', '0', '0', '', 'email', 'admin', '2024-07-20 11:53:24', 'admin', '2025-06-02 09:10:24', '');
+INSERT INTO `sys_menu` VALUES (2097, '物流跟踪', 2087, 5, 'logistics', 'shipping/stocking/index', NULL, 1, 0, 'C', '0', '1', '', 'list', 'admin', '2024-07-20 11:54:18', 'admin', '2025-05-25 14:32:27', '');
+INSERT INTO `sys_menu` VALUES (2099, '私域订单管理', 1, 10, 'offline_order_list', 'order/private/index', NULL, 1, 0, 'C', '0', '1', '', 'checkbox', 'admin', '2024-07-27 17:33:03', 'admin', '2025-05-24 13:10:53', '');
+INSERT INTO `sys_menu` VALUES (2100, '私域售后管理', 2, 3, 'offline_aftersale', 'refund/private/index', NULL, 1, 0, 'C', '0', '1', '', 'code', 'admin', '2024-07-27 17:33:33', 'admin', '2025-05-25 14:59:03', '');
+INSERT INTO `sys_menu` VALUES (2101, '渠道商品管理', 4, 50, 'offline_goods_list', 'offline/goods/index', NULL, 1, 0, 'C', '0', '1', '', 'documentation', 'admin', '2024-07-27 17:33:54', 'admin', '2024-09-07 23:17:59', '');
+INSERT INTO `sys_menu` VALUES (2103, '手动创建私域订单', 1, 49, 'offline_order_create', 'order/private/create', NULL, 1, 0, 'C', '1', '0', '', 'date', 'admin', '2024-07-27 20:30:07', 'admin', '2025-03-24 11:46:51', '');
+INSERT INTO `sys_menu` VALUES (2104, '商品管理', 4, 0, 'goods_list', 'goods/goods/index', NULL, 1, 0, 'C', '0', '0', 'goods', 'example', 'admin', '2024-08-25 14:35:54', 'admin', '2025-09-08 19:12:35', '');
+INSERT INTO `sys_menu` VALUES (2105, '库存管理', 0, 40, 'stock', NULL, NULL, 1, 0, 'M', '0', '0', '', 'lock', 'admin', '2024-08-25 15:54:14', 'admin', '2025-03-24 13:32:20', '');
+INSERT INTO `sys_menu` VALUES (2106, '商品入库管理', 2105, 10, 'stock_in', 'stock/stockIn/index.vue', NULL, 1, 0, 'C', '0', '0', '', 'download', 'admin', '2024-08-25 15:56:04', 'admin', '2025-03-24 13:35:21', '');
+INSERT INTO `sys_menu` VALUES (2108, '供应商管理', 4, 90, 'supplier_list', 'goods/supplier/index', NULL, 1, 0, 'C', '0', '0', '', 'people', 'admin', '2024-08-25 18:27:55', 'admin', '2024-09-07 15:51:17', '');
+INSERT INTO `sys_menu` VALUES (2109, '商品分类管理', 4, 80, 'category_list', 'goods/category/index', NULL, 1, 0, 'C', '0', '0', '', 'edit', 'admin', '2024-08-25 18:43:28', 'admin', '2024-09-07 15:47:44', '');
+INSERT INTO `sys_menu` VALUES (2110, '商品品牌管理', 4, 81, 'brand_list', 'goods/brand/index', NULL, 1, 0, 'C', '0', '0', '', 'icon', 'admin', '2024-08-25 18:45:47', 'admin', '2024-09-07 15:48:31', '');
+INSERT INTO `sys_menu` VALUES (2111, '分类规格属性', 4, 101, 'goods_category/attribute', 'goods/category/categoryAttribute', NULL, 1, 0, 'C', '1', '0', '', 'button', 'admin', '2024-08-25 18:49:22', 'admin', '2024-09-07 16:17:01', '');
+INSERT INTO `sys_menu` VALUES (2112, '规格属性值', 4, 102, 'goods_category/attribute_value', 'goods/category/categoryAttributeValue', NULL, 1, 0, 'C', '1', '0', '', 'date', 'admin', '2024-08-25 18:51:55', 'admin', '2024-09-07 16:23:53', '');
+INSERT INTO `sys_menu` VALUES (2114, '仓库仓位设置', 2105, 90, 'warehouse', 'stock/warehouse/index.vue', NULL, 1, 0, 'C', '0', '0', '', 'cascader', 'admin', '2024-09-21 20:07:26', 'admin', '2025-03-24 13:46:52', '');
+INSERT INTO `sys_menu` VALUES (2115, '商品库存管理', 2105, 0, 'goods_inventory', 'stock/goodsInventory/index.vue', NULL, 1, 0, 'C', '0', '0', '', 'chart', 'admin', '2024-09-21 20:43:00', 'admin', '2025-03-24 13:34:55', '');
+INSERT INTO `sys_menu` VALUES (2116, '商品出库管理', 2105, 20, 'stock_out', 'stock/stockOut/index', NULL, 1, 0, 'C', '0', '0', '', 'guide', 'admin', '2024-09-21 20:44:46', 'admin', '2025-03-24 13:46:42', '');
+INSERT INTO `sys_menu` VALUES (2117, '仓位管理', 2105, 91, 'position', 'stock/warehouse/position', NULL, 1, 0, 'C', '1', '0', '', '404', 'admin', '2024-09-22 11:52:18', 'admin', '2025-03-24 13:47:04', '');
+INSERT INTO `sys_menu` VALUES (2118, '新建商品入库单', 2105, 11, 'stock_in/create', 'stock/stockIn/create.vue', NULL, 1, 0, 'C', '1', '0', '', '404', 'admin', '2024-09-22 14:49:40', 'admin', '2025-03-24 13:35:30', '');
+INSERT INTO `sys_menu` VALUES (2129, '发货&分配发货', 2087, 0, 'manual_shipment', 'shipping/shipment/index', NULL, 1, 0, 'C', '0', '0', '', 'checkbox', 'admin', '2025-06-01 13:36:57', 'admin', '2025-06-01 13:39:59', '');
+
+-- ----------------------------
+-- Table structure for sys_oss
+-- ----------------------------
+DROP TABLE IF EXISTS `sys_oss`;
+CREATE TABLE `sys_oss`  (
+  `oss_id` bigint NOT NULL AUTO_INCREMENT COMMENT '文件id',
+  `file_name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT '文件名',
+  `original_name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT '原名',
+  `file_suffix` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT '文件后缀名',
+  `url` varchar(300) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT 'URL地址',
+  `object_name` varchar(300) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT '对象名',
+  `bucket` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT '桶名',
+  `order_num` int NULL DEFAULT 0 COMMENT '显示顺序',
+  `status` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '0' COMMENT '状态（0正常 1停用）',
+  `del_flag` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '0' COMMENT '删除标志（0代表存在 2代表删除）',
+  `create_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT '创建者',
+  `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
+  `update_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT '更新者',
+  `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
+  PRIMARY KEY (`oss_id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 55 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '文件表' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of sys_oss
+-- ----------------------------
+INSERT INTO `sys_oss` VALUES (1, '主图画板 1.jpg', '主图画板 1.jpg', '.jpg', 'http://127.0.0.1:9000/images/2024/09/07/a3e935aa-d1b3-4524-bd84-e567df01f2e3.jpg', '/images/2024/09/07/a3e935aa-d1b3-4524-bd84-e567df01f2e3.jpg', 'ecerp', 0, '0', '0', '', '2024-09-07 17:38:57', '', NULL);
+INSERT INTO `sys_oss` VALUES (2, '主图画板2.jpg', '主图画板2.jpg', '.jpg', 'http://127.0.0.1:9000/images/2024/09/07/1dbe1530-787f-4461-9f20-3efa3c332588.jpg', '/images/2024/09/07/1dbe1530-787f-4461-9f20-3efa3c332588.jpg', 'ecerp', 0, '0', '0', '', '2024-09-07 17:57:54', '', NULL);
+INSERT INTO `sys_oss` VALUES (3, '主图画板5.jpg', '主图画板5.jpg', '.jpg', 'http://127.0.0.1:9000/images/2024/09/07/2dc06b89-8661-4a72-a7cd-7f85f4545c6e.jpg', '/images/2024/09/07/2dc06b89-8661-4a72-a7cd-7f85f4545c6e.jpg', 'ecerp', 0, '0', '0', '', '2024-09-07 18:03:24', '', NULL);
+INSERT INTO `sys_oss` VALUES (4, '主图画板 4.jpg', '主图画板 4.jpg', '.jpg', 'http://127.0.0.1:9000/ecerp//images/2024/09/07/3ed00452-5973-4c7e-91ae-5e87aa32dd23.jpg', '/images/2024/09/07/3ed00452-5973-4c7e-91ae-5e87aa32dd23.jpg', 'ecerp', 0, '0', '0', '', '2024-09-07 18:03:46', '', NULL);
+INSERT INTO `sys_oss` VALUES (5, '主图画板5.jpg', '主图画板5.jpg', '.jpg', 'http://127.0.0.1:9000/ecerp/images/2024/09/07/4b2583ae-65ae-45b6-9227-ebbee99d6558.jpg', '/images/2024/09/07/4b2583ae-65ae-45b6-9227-ebbee99d6558.jpg', 'ecerp', 0, '0', '0', '', '2024-09-07 18:04:47', '', NULL);
+INSERT INTO `sys_oss` VALUES (6, '主图画板2.jpg', '主图画板2.jpg', '.jpg', 'http://223.83.100.30:9001/omsimage/images/2024/09/07/a64ff14b-09d4-42d6-8d52-0344360efdbf.jpg', '/images/2024/09/07/a64ff14b-09d4-42d6-8d52-0344360efdbf.jpg', 'omsimage', 0, '0', '0', '', '2024-09-07 19:10:39', '', NULL);
+INSERT INTO `sys_oss` VALUES (7, '主图画板 1.jpg', '主图画板 1.jpg', '.jpg', 'http://223.83.100.30:9001/omsimage/images/2024/09/07/af19385d-a1dd-4efb-8257-3099706d1272.jpg', '/images/2024/09/07/af19385d-a1dd-4efb-8257-3099706d1272.jpg', 'omsimage', 0, '0', '0', '', '2024-09-07 19:26:36', '', NULL);
+INSERT INTO `sys_oss` VALUES (8, '主图画板 1.jpg', '主图画板 1.jpg', '.jpg', 'http://223.83.100.30:9001/omsimage/images/2024/09/07/5aac40e1-ddc1-41a8-a468-28d81e699980.jpg', '/images/2024/09/07/5aac40e1-ddc1-41a8-a468-28d81e699980.jpg', 'omsimage', 0, '0', '0', '', '2024-09-07 20:37:14', '', NULL);
+INSERT INTO `sys_oss` VALUES (9, '主图画板 1.jpg', '主图画板 1.jpg', '.jpg', 'http://223.83.100.30:9001/omsimage/images/2024/09/07/b28f4e15-8997-418c-bd32-b4beb4966f6b.jpg', '/images/2024/09/07/b28f4e15-8997-418c-bd32-b4beb4966f6b.jpg', 'omsimage', 0, '0', '0', '', '2024-09-07 20:37:51', '', NULL);
+INSERT INTO `sys_oss` VALUES (50, 'x4.jpg', 'x4.jpg', '.jpg', 'http://127.0.0.1:9000/images/2024/08/28/x4.jpg', '/images/2024/08/28/x4.jpg', 'ecerp', 0, '0', '0', '', '2024-08-28 22:39:05', '', NULL);
+INSERT INTO `sys_oss` VALUES (51, 'x11.jpg', 'x11.jpg', '.jpg', 'http://127.0.0.1:9000/images/2024/08/28/x11.jpg', '/images/2024/08/28/x11.jpg', 'ecerp', 0, '0', '0', '', '2024-08-28 22:47:11', '', NULL);
+INSERT INTO `sys_oss` VALUES (52, '主图画板 4.jpg', '主图画板 4.jpg', '.jpg', 'http://127.0.0.1:9000/images/2024/09/07/主图画板 4.jpg', '/images/2024/09/07/主图画板 4.jpg', 'ecerp', 0, '0', '0', '', '2024-09-07 17:31:44', '', NULL);
+INSERT INTO `sys_oss` VALUES (53, '主图画板 4.jpg', '主图画板 4.jpg', '.jpg', 'http://127.0.0.1:9000/images/2024/09/07/主图画板 4.jpg', '/images/2024/09/07/主图画板 4.jpg', 'ecerp', 0, '0', '0', '', '2024-09-07 17:35:41', '', NULL);
+INSERT INTO `sys_oss` VALUES (54, '主图画板 1.jpg', '主图画板 1.jpg', '.jpg', 'http://127.0.0.1:9000/images/2024/09/07/f35a3cb8-1b9e-41f4-8158-31d458c7efb3.jpg', '/images/2024/09/07/f35a3cb8-1b9e-41f4-8158-31d458c7efb3.jpg', 'ecerp', 0, '0', '0', '', '2024-09-07 17:36:09', '', NULL);
+
+-- ----------------------------
+-- Table structure for sys_role
+-- ----------------------------
+DROP TABLE IF EXISTS `sys_role`;
+CREATE TABLE `sys_role`  (
+  `role_id` bigint NOT NULL AUTO_INCREMENT COMMENT '角色ID',
+  `role_name` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '角色名称',
+  `role_key` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '角色权限字符串',
+  `role_sort` int NOT NULL COMMENT '显示顺序',
+  `data_scope` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '1' COMMENT '数据范围（1：全部数据权限 2：自定数据权限 3：本部门数据权限 4：本部门及以下数据权限）',
+  `menu_check_strictly` tinyint(1) NULL DEFAULT 1 COMMENT '菜单树选择项是否关联显示',
+  `dept_check_strictly` tinyint(1) NULL DEFAULT 1 COMMENT '部门树选择项是否关联显示',
+  `status` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '角色状态（0正常 1停用）',
+  `del_flag` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '0' COMMENT '删除标志（0代表存在 2代表删除）',
+  `create_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT '创建者',
+  `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
+  `update_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT '更新者',
+  `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
+  `remark` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '备注',
+  PRIMARY KEY (`role_id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 100 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '角色信息表' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of sys_role
+-- ----------------------------
+INSERT INTO `sys_role` VALUES (1, '超级管理员', 'admin', 1, '1', 1, 1, '0', '0', 'admin', '2023-08-07 19:31:37', '', NULL, '超级管理员');
+INSERT INTO `sys_role` VALUES (2, '普通角色', 'common', 2, '2', 1, 1, '0', '0', 'admin', '2023-08-07 19:31:37', 'admin', '2025-09-08 19:14:34', '普通角色');
+
+-- ----------------------------
+-- Table structure for sys_role_menu
+-- ----------------------------
+DROP TABLE IF EXISTS `sys_role_menu`;
+CREATE TABLE `sys_role_menu`  (
+  `role_id` bigint NOT NULL COMMENT '角色ID',
+  `menu_id` bigint NOT NULL COMMENT '菜单ID',
+  PRIMARY KEY (`role_id`, `menu_id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '角色和菜单关联表' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of sys_role_menu
+-- ----------------------------
+INSERT INTO `sys_role_menu` VALUES (2, 1);
+INSERT INTO `sys_role_menu` VALUES (2, 2);
+INSERT INTO `sys_role_menu` VALUES (2, 3);
+INSERT INTO `sys_role_menu` VALUES (2, 4);
+INSERT INTO `sys_role_menu` VALUES (2, 100);
+INSERT INTO `sys_role_menu` VALUES (2, 101);
+INSERT INTO `sys_role_menu` VALUES (2, 102);
+INSERT INTO `sys_role_menu` VALUES (2, 104);
+INSERT INTO `sys_role_menu` VALUES (2, 105);
+INSERT INTO `sys_role_menu` VALUES (2, 106);
+INSERT INTO `sys_role_menu` VALUES (2, 108);
+INSERT INTO `sys_role_menu` VALUES (2, 110);
+INSERT INTO `sys_role_menu` VALUES (2, 2077);
+INSERT INTO `sys_role_menu` VALUES (2, 2078);
+INSERT INTO `sys_role_menu` VALUES (2, 2087);
+INSERT INTO `sys_role_menu` VALUES (2, 2088);
+INSERT INTO `sys_role_menu` VALUES (2, 2089);
+INSERT INTO `sys_role_menu` VALUES (2, 2092);
+INSERT INTO `sys_role_menu` VALUES (2, 2093);
+INSERT INTO `sys_role_menu` VALUES (2, 2094);
+INSERT INTO `sys_role_menu` VALUES (2, 2096);
+INSERT INTO `sys_role_menu` VALUES (2, 2097);
+INSERT INTO `sys_role_menu` VALUES (2, 2099);
+INSERT INTO `sys_role_menu` VALUES (2, 2100);
+INSERT INTO `sys_role_menu` VALUES (2, 2101);
+INSERT INTO `sys_role_menu` VALUES (2, 2103);
+INSERT INTO `sys_role_menu` VALUES (2, 2104);
+INSERT INTO `sys_role_menu` VALUES (2, 2105);
+INSERT INTO `sys_role_menu` VALUES (2, 2106);
+INSERT INTO `sys_role_menu` VALUES (2, 2108);
+INSERT INTO `sys_role_menu` VALUES (2, 2109);
+INSERT INTO `sys_role_menu` VALUES (2, 2110);
+INSERT INTO `sys_role_menu` VALUES (2, 2111);
+INSERT INTO `sys_role_menu` VALUES (2, 2112);
+INSERT INTO `sys_role_menu` VALUES (2, 2114);
+INSERT INTO `sys_role_menu` VALUES (2, 2115);
+INSERT INTO `sys_role_menu` VALUES (2, 2116);
+INSERT INTO `sys_role_menu` VALUES (2, 2117);
+INSERT INTO `sys_role_menu` VALUES (2, 2118);
+INSERT INTO `sys_role_menu` VALUES (2, 2129);
+
+-- ----------------------------
+-- Table structure for sys_task
+-- ----------------------------
+DROP TABLE IF EXISTS `sys_task`;
+CREATE TABLE `sys_task`  (
+  `id` int NOT NULL,
+  `task_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  `cron` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  `method` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  `remark` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  `create_time` datetime NULL DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '后台任务配置表' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of sys_task
+-- ----------------------------
+INSERT INTO `sys_task` VALUES (1, '拉取淘宝订单', '-', NULL, '定时更新淘宝订单', '2024-03-07 09:52:40');
+INSERT INTO `sys_task` VALUES (2, '拉取京东POP订单', '-', NULL, '拉取京东POP订单', '2024-03-07 09:23:36');
+INSERT INTO `sys_task` VALUES (3, '拉取拼多多订单', '-', NULL, '定时拉取拼多多订单', '2024-04-09 11:24:14');
+INSERT INTO `sys_task` VALUES (4, '拉取抖店订单', '-', NULL, '定时拉取抖店订单', '2024-04-09 11:24:54');
+INSERT INTO `sys_task` VALUES (5, '拉取天猫退款', '-', NULL, '定时拉取天猫退款', '2024-04-09 11:25:43');
+INSERT INTO `sys_task` VALUES (6, '拉取京东售后', '-', NULL, '定时拉取京东售后', '2024-04-09 11:26:26');
+INSERT INTO `sys_task` VALUES (7, '拉取拼多多退款', '-', NULL, '定时拉取拼多多退款', '2024-04-09 11:27:01');
+INSERT INTO `sys_task` VALUES (8, '拉取抖店退款', '-', NULL, '定时拉取抖店退款', '2024-04-09 11:27:38');
+INSERT INTO `sys_task` VALUES (11, '拉取京东自营订单', '-', NULL, '拉取京东自营订单', '2024-05-27 10:57:44');
+INSERT INTO `sys_task` VALUES (12, '拉取京东自营退货', '-', NULL, '拉取京东自营退货', NULL);
+INSERT INTO `sys_task` VALUES (21, '推送待发货订单到ERP', '-', NULL, '推送待发货订单到ERP', '2024-04-22 15:48:48');
+INSERT INTO `sys_task` VALUES (22, '推送待处理售后到ERP', '-', NULL, '推送待处理售后到ERP', '2024-04-22 15:48:48');
+INSERT INTO `sys_task` VALUES (23, '推送已取消的订单到ERP', '-', NULL, '推送已取消的订单到ERP', '2024-05-29 17:57:02');
+
+-- ----------------------------
+-- Table structure for sys_task_logs
+-- ----------------------------
+DROP TABLE IF EXISTS `sys_task_logs`;
+CREATE TABLE `sys_task_logs`  (
+  `id` bigint NOT NULL COMMENT '主键ID',
+  `task_id` int NULL DEFAULT NULL COMMENT '任务ID',
+  `result` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '结果',
+  `start_time` datetime NULL DEFAULT NULL COMMENT '开始运行时间',
+  `end_time` datetime NULL DEFAULT NULL COMMENT '结束时间',
+  `status` int NULL DEFAULT NULL COMMENT '状态1运行中，2已结束',
+  `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '后台任务运行日志表' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of sys_task_logs
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for sys_user
+-- ----------------------------
+DROP TABLE IF EXISTS `sys_user`;
+CREATE TABLE `sys_user`  (
+  `user_id` bigint NOT NULL AUTO_INCREMENT COMMENT '用户ID',
+  `dept_id` bigint NULL DEFAULT NULL COMMENT '部门ID',
+  `user_name` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '用户账号',
+  `nick_name` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '用户昵称',
+  `user_type` varchar(2) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '00' COMMENT '用户类型（00系统用户）',
+  `email` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT '用户邮箱',
+  `phonenumber` varchar(11) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT '手机号码',
+  `sex` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '0' COMMENT '用户性别（0男 1女 2未知）',
+  `avatar` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT '头像地址',
+  `password` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT '密码',
+  `status` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '0' COMMENT '帐号状态（0正常 1停用）',
+  `del_flag` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '0' COMMENT '删除标志（0代表存在 2代表删除）',
+  `login_ip` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT '最后登录IP',
+  `login_date` datetime NULL DEFAULT NULL COMMENT '最后登录时间',
+  `create_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT '创建者',
+  `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
+  `update_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT '更新者',
+  `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
+  `remark` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '备注',
+  PRIMARY KEY (`user_id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 104 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '用户信息表' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of sys_user
+-- ----------------------------
+INSERT INTO `sys_user` VALUES (1, NULL, 'admin', '启航老齐A', '00', '280645618@qq.com', '18123879144', '1', '', '$2a$10$7JB720yubVSZvUI0rEqK/.VqGOZTH.ulu33dHOiBE8ByOhJIrdAu2', '0', '0', '127.0.0.1', '2025-06-05 20:34:01', 'admin', '2023-08-07 19:31:37', '', '2025-06-05 20:34:00', '管理员');
+INSERT INTO `sys_user` VALUES (2, NULL, 'openapi', 'openApi接口专用', '00', '2806456181@qq.com', '15818590000', '0', '', '$2a$10$fHkhoqbMiyracAsTzl38H.55bu.M.of1FXk2EK7RQBjfic3tLU0Ue', '0', '0', '127.0.0.1', '2024-06-24 10:23:35', 'admin', '2024-03-17 14:55:22', 'admin', '2024-06-24 10:23:35', NULL);
+INSERT INTO `sys_user` VALUES (101, 101, '15818590119', 'aaa123', '00', '', '', '0', '', '$2a$10$pXcT6cHaObMeKuYd9vZb5uEb8PyUdF2AcqqRN1cBqiA9rV4qYQW7G', '0', '2', '', NULL, 'admin', '2024-08-15 13:45:25', '', NULL, NULL);
+INSERT INTO `sys_user` VALUES (102, 101, '15818590119', '老齐', '00', '', '', '0', '', '$2a$10$ysk.zgJ8wh25c7vOjKyZ8uarM2hkG0S51j8GYdJSo2kZmc3f8HdKe', '0', '0', '', NULL, 'admin', '2024-08-15 13:49:59', 'admin', '2025-02-10 16:26:20', NULL);
+INSERT INTO `sys_user` VALUES (103, 100, '18025303180', '老方', '00', '', '', '0', '', '$2a$10$QnLM3NluG5q1xpmWep0QUOFfvNrd02hwenL4HkV0uhMbm4cEX1uIG', '0', '0', '', NULL, 'admin', '2024-09-21 17:17:56', '', NULL, NULL);
+
+-- ----------------------------
+-- Table structure for sys_user_role
+-- ----------------------------
+DROP TABLE IF EXISTS `sys_user_role`;
+CREATE TABLE `sys_user_role`  (
+  `user_id` bigint NOT NULL COMMENT '用户ID',
+  `role_id` bigint NOT NULL COMMENT '角色ID',
+  PRIMARY KEY (`user_id`, `role_id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '用户和角色关联表' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of sys_user_role
+-- ----------------------------
+INSERT INTO `sys_user_role` VALUES (1, 1);
+INSERT INTO `sys_user_role` VALUES (2, 2);
+INSERT INTO `sys_user_role` VALUES (102, 2);
+INSERT INTO `sys_user_role` VALUES (103, 2);
+
+-- ----------------------------
+-- Table structure for wms_inventory_operation
+-- ----------------------------
+DROP TABLE IF EXISTS `wms_inventory_operation`;
+CREATE TABLE `wms_inventory_operation`  (
+  `id` bigint NOT NULL AUTO_INCREMENT COMMENT '主键ID',
+  `goods_id` bigint NOT NULL COMMENT '商品id',
+  `goods_num` varchar(20) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '商品编码',
+  `sku_id` bigint NOT NULL COMMENT '商品规格id',
+  `sku_code` varchar(25) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL DEFAULT '' COMMENT '规格编码（唯一）',
+  `batch_id` bigint NOT NULL COMMENT '库存批次id',
+  `batch_num` varchar(25) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '库存批次号',
+  `type` int NOT NULL COMMENT '库存类型（1增加库存2减少库存3锁定库存）',
+  `inventory_detail_id` bigint NOT NULL COMMENT '商品库存id（本表id减库存的时候关联）',
+  `quantity` int NOT NULL DEFAULT 0 COMMENT '操作库存数量',
+  `locked_quantity` int NOT NULL COMMENT '锁定库存数量（status变成已结算时把该字段值更新到quantity）',
+  `price` double NULL DEFAULT 0 COMMENT '价格（type=1采购价格；type=2出库时的价格）',
+  `biz_type` int NOT NULL COMMENT '业务类型（10采购入库20采购退货30退货入库40订单出库）',
+  `biz_id` bigint NOT NULL COMMENT '业务单id',
+  `biz_num` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '业务单号',
+  `biz_item_id` bigint NOT NULL COMMENT '业务单itemId',
+  `status` int NOT NULL COMMENT '状态（0待结算1已结算）',
+  `remark` varchar(250) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '备注',
+  `warehouse_id` bigint NOT NULL COMMENT '仓库id',
+  `position_id` bigint NOT NULL COMMENT '仓位id',
+  `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+  `create_by` varchar(25) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '创建人',
+  `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '更新时间',
+  `update_by` varchar(25) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '更新人',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '仓库库存操作记录表' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of wms_inventory_operation
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for wms_stock_in
+-- ----------------------------
+DROP TABLE IF EXISTS `wms_stock_in`;
+CREATE TABLE `wms_stock_in`  (
+  `id` bigint NOT NULL AUTO_INCREMENT COMMENT '主键ID',
+  `stock_in_num` varchar(30) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL DEFAULT '' COMMENT '入库单据编号',
+  `stock_in_type` int NOT NULL COMMENT '来源类型（1采购订单2退货订单）',
+  `source_no` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '来源单号',
+  `source_id` bigint NULL DEFAULT NULL COMMENT '来源单id',
+  `source_goods_unit` int NULL DEFAULT NULL COMMENT '采购订单商品数',
+  `source_spec_unit_total` int NULL DEFAULT NULL COMMENT '采购订单总件数',
+  `source_spec_unit` int NULL DEFAULT NULL COMMENT '采购订单商品规格数',
+  `remark` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '备注',
+  `stock_in_operator_id` bigint NULL DEFAULT NULL COMMENT '操作入库人id',
+  `stock_in_operator` varchar(25) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '操作入库人',
+  `stock_in_time` datetime NULL DEFAULT NULL COMMENT '入库时间',
+  `status` int NOT NULL DEFAULT 0 COMMENT '状态（0待入库1部分入库2全部入库）',
+  `create_by` varchar(25) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '创建人',
+  `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
+  `update_by` varchar(25) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '更新人',
+  `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci COMMENT = '入库单' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of wms_stock_in
+-- ----------------------------
+INSERT INTO `wms_stock_in` VALUES (1, '1726994500872422', 1, 'AAA', NULL, 1, 15, 1, NULL, 1, 'aaa', '2024-09-22 16:41:54', 0, 'admin', '2024-09-22 16:41:54', NULL, NULL);
+INSERT INTO `wms_stock_in` VALUES (2, '1726994500872422', 1, 'AAA', NULL, 1, 15, 1, NULL, 1, 'aaa', NULL, 0, 'admin', '2024-09-22 17:51:55', NULL, NULL);
+
+-- ----------------------------
+-- Table structure for wms_stock_in_item
+-- ----------------------------
+DROP TABLE IF EXISTS `wms_stock_in_item`;
+CREATE TABLE `wms_stock_in_item`  (
+  `id` bigint NOT NULL AUTO_INCREMENT,
+  `stock_in_id` bigint NOT NULL COMMENT '入库单id',
+  `stock_in_type` int NULL DEFAULT NULL COMMENT '来源类型（1采购订单2退货订单）',
+  `source_no` varchar(5) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '来源单号',
+  `source_id` bigint NULL DEFAULT NULL COMMENT '来源单id',
+  `source_item_id` bigint NOT NULL COMMENT '来源单itemId',
+  `goods_id` bigint NOT NULL COMMENT '商品id',
+  `goods_num` varchar(20) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '商品编码',
+  `goods_name` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '商品名称',
+  `goods_image` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '商品图片',
+  `sku_id` bigint NOT NULL COMMENT '商品规格id',
+  `sku_code` varchar(25) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '商品规格编码',
+  `sku_name` varchar(55) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '颜色',
+  `quantity` int NOT NULL COMMENT '原始数量',
+  `in_quantity` int NOT NULL DEFAULT 0 COMMENT '入库数量',
+  `remark` varchar(500) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT '' COMMENT '备注',
+  `status` int NULL DEFAULT 0 COMMENT '状态（0待入库1部分入库2全部入库）',
+  `create_by` varchar(25) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '创建人',
+  `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
+  `update_by` varchar(25) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '更新人',
+  `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `specIndex`(`sku_id` ASC) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 1837791930231152643 CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci COMMENT = '入库单明细' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of wms_stock_in_item
+-- ----------------------------
+INSERT INTO `wms_stock_in_item` VALUES (1837774310068998145, 1, 1, 'AAA', 0, 0, 78, NULL, '红罐加多宝', 'https://cbu01.alicdn.com/img/ibank/O1CN012YyP5f1hbcSsvkd3k_!!2218127114296-0-cib.jpg', 1832398056436318216, 'JIADUOBAO2600', '大红色 均码', 15, 0, '', 0, 'admin', '2024-09-22 16:41:54', NULL, NULL);
+INSERT INTO `wms_stock_in_item` VALUES (1837791930231152642, 2, 1, 'AAA', 0, 0, 78, NULL, '红罐加多宝', NULL, 1832398056436318200, 'JIADUOBAO2600', '大红色 均码', 15, 0, '', 0, 'admin', '2024-09-22 17:51:55', NULL, NULL);
+
+-- ----------------------------
+-- Table structure for wms_stock_out
+-- ----------------------------
+DROP TABLE IF EXISTS `wms_stock_out`;
+CREATE TABLE `wms_stock_out`  (
+  `id` bigint NOT NULL AUTO_INCREMENT,
+  `stock_out_num` varchar(20) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL COMMENT '出库单编号',
+  `source_num` varchar(35) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '来源单据号',
+  `source_id` bigint NULL DEFAULT NULL COMMENT '来源单据Id',
+  `stock_out_type` int NOT NULL DEFAULT 1 COMMENT '出库类型1订单拣货出库2采购退货出库3盘点出库4报损出库',
+  `goods_unit` int NOT NULL COMMENT '商品数',
+  `spec_unit` int NOT NULL COMMENT '商品规格数',
+  `spec_unit_total` int NOT NULL COMMENT '总件数',
+  `out_total` int NULL DEFAULT NULL COMMENT '已出库数量',
+  `remark` varchar(500) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '备注',
+  `status` int NOT NULL COMMENT '状态：0待出库1部分出库2全部出库',
+  `print_status` int NOT NULL COMMENT '打印状态：是否打印1已打印0未打印',
+  `print_time` datetime NULL DEFAULT NULL COMMENT '打印时间',
+  `out_time` datetime NULL DEFAULT NULL COMMENT '出库时间',
+  `complete_time` datetime NULL DEFAULT NULL COMMENT '完成出库时间',
+  `operator_id` int NULL DEFAULT 0 COMMENT '出库操作人userid',
+  `operator_name` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '出库操作人',
+  `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建日期',
+  `create_by` varchar(20) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '创建人',
+  `update_time` datetime NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+  `update_by` varchar(20) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '更新人',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 1794205460481933314 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '出库单' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of wms_stock_out
+-- ----------------------------
+INSERT INTO `wms_stock_out` VALUES (1785676644348735490, '202405012220056', NULL, NULL, 1, 1, 1, 1, NULL, NULL, 0, 0, NULL, NULL, NULL, 0, NULL, '2024-05-01 22:24:23', '生成拣货单', '2024-05-01 22:24:22', NULL);
+INSERT INTO `wms_stock_out` VALUES (1786204816504958978, '202405030923075', NULL, NULL, 1, 1, 1, 1, 1, NULL, 2, 0, NULL, '2024-05-03 10:56:33', '2024-05-03 10:56:33', 1, 'admin', '2024-05-03 09:23:09', '生成拣货单', '2024-05-03 10:56:34', '出库');
+INSERT INTO `wms_stock_out` VALUES (1788393466709282818, '202405091020024', NULL, NULL, 1, 1, 1, 1, 0, NULL, 0, 0, NULL, NULL, NULL, 0, NULL, '2024-05-09 10:20:04', '生成拣货单', '2024-05-09 10:20:03', NULL);
+INSERT INTO `wms_stock_out` VALUES (1794205460481933313, '202405251109432', NULL, NULL, 1, 1, 1, 1, 0, NULL, 0, 0, NULL, NULL, NULL, 0, NULL, '2024-05-25 11:14:51', '生成拣货单', '2024-05-25 11:14:51', NULL);
+
+-- ----------------------------
+-- Table structure for wms_stock_out_item
+-- ----------------------------
+DROP TABLE IF EXISTS `wms_stock_out_item`;
+CREATE TABLE `wms_stock_out_item`  (
+  `id` bigint NOT NULL AUTO_INCREMENT COMMENT '主键ID',
+  `stock_out_type` int NOT NULL COMMENT '出库类型1订单拣货出库2采购退货出库3盘点出库4报损出库',
+  `entry_id` bigint NOT NULL COMMENT '出库单id（外键）',
+  `source_order_id` bigint NOT NULL COMMENT '来源订单id',
+  `source_order_item_id` bigint NOT NULL COMMENT '来源订单itemId出库对应的itemId，如：order_item表id、invoice_info表id',
+  `source_order_num` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL DEFAULT '' COMMENT '来源订单号',
+  `goods_id` int NOT NULL COMMENT '商品id',
+  `spec_id` int NOT NULL COMMENT '商品规格id',
+  `spec_num` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL DEFAULT '' COMMENT '规格编码',
+  `original_quantity` bigint NOT NULL COMMENT '总数量',
+  `out_quantity` bigint NOT NULL DEFAULT 0 COMMENT '已出库数量',
+  `complete_time` datetime NULL DEFAULT NULL COMMENT '完成出库时间',
+  `picked_time` datetime NULL DEFAULT NULL COMMENT '完成拣货时间',
+  `status` int NOT NULL DEFAULT 0 COMMENT '状态：0待出库1部分出库2全部出库',
+  `create_time` datetime NULL DEFAULT NULL,
+  `update_time` datetime NULL DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `specIndex`(`spec_id` ASC) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 1794205460544847874 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '出库单明细' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of wms_stock_out_item
+-- ----------------------------
+INSERT INTO `wms_stock_out_item` VALUES (1785676644373901314, 1, 1785676644348735490, 38, 442, '2055782964491095876', 9, 23, '2720210080260001', 1, 0, NULL, NULL, 0, '2024-05-01 22:24:23', NULL);
+INSERT INTO `wms_stock_out_item` VALUES (1786204816504958979, 1, 1786204816504958978, 41, 1785584827112509446, '2137984935735126281', 9, 32, '2720210080260105', 1, 1, '2024-05-03 10:56:27', '2024-05-03 10:56:26', 2, '2024-05-03 09:23:09', NULL);
+INSERT INTO `wms_stock_out_item` VALUES (1788393466763808769, 1, 1788393466709282818, 51, 1785584827112509452, 'A13885020023320', 1228, 1228, 'GZYYZ72773100', 1, 0, NULL, NULL, 0, '2024-05-09 10:20:04', NULL);
+INSERT INTO `wms_stock_out_item` VALUES (1794205460544847873, 1, 1794205460481933313, 49, 1785584827112509450, 'AD3702565220', 1229, 1229, 'GZYYZ72776200', 1, 0, NULL, NULL, 0, '2024-05-25 11:14:51', NULL);
+
+-- ----------------------------
+-- Table structure for wms_stock_out_item_position
+-- ----------------------------
+DROP TABLE IF EXISTS `wms_stock_out_item_position`;
+CREATE TABLE `wms_stock_out_item_position`  (
+  `id` bigint NOT NULL AUTO_INCREMENT COMMENT '主键ID',
+  `entry_id` bigint NOT NULL COMMENT '出库单ID',
+  `entry_item_id` bigint NOT NULL DEFAULT 0 COMMENT '出库单ItemID',
+  `goods_inventory_id` bigint NOT NULL DEFAULT 0 COMMENT '库存ID',
+  `goods_inventory_detail_id` bigint NOT NULL DEFAULT 0 COMMENT '库存详情ID',
+  `quantity` bigint NOT NULL DEFAULT 0 COMMENT '出库数量',
+  `location_id` int NULL DEFAULT NULL COMMENT '出库仓位ID',
+  `operator_id` int NULL DEFAULT 0 COMMENT '出库操作人userid',
+  `operator_name` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '出库操作人',
+  `out_time` datetime NULL DEFAULT NULL COMMENT '出库时间',
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `goods_stock_info_item_id_index`(`goods_inventory_detail_id` ASC) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 1786228283631636482 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '出库仓位详情' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of wms_stock_out_item_position
+-- ----------------------------
+INSERT INTO `wms_stock_out_item_position` VALUES (1786220616376844290, 1786204816504958978, 1786204816504958979, 6, 7, 1, 20, 1, 'admin', '2024-05-03 10:25:55');
+INSERT INTO `wms_stock_out_item_position` VALUES (1786228283631636481, 1786204816504958978, 1786204816504958979, 6, 7, 1, 20, 1, 'admin', '2024-05-03 10:56:24');
+
+-- ----------------------------
+-- Table structure for wms_warehouse
+-- ----------------------------
+DROP TABLE IF EXISTS `wms_warehouse`;
+CREATE TABLE `wms_warehouse`  (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `number` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '仓库编号',
+  `name` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '仓库名称',
+  `province` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '省',
+  `city` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '市',
+  `district` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '区',
+  `street` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '街道',
+  `address` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '地址',
+  `remark` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '备注',
+  `status` int NOT NULL DEFAULT 0 COMMENT '状态0禁用  1正常',
+  `create_by` varchar(25) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '创建人',
+  `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
+  `update_by` varchar(25) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '更新人',
+  `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '仓库表' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of wms_warehouse
+-- ----------------------------
+INSERT INTO `wms_warehouse` VALUES (1, 'SHENZHEN', '深圳仓库', '广东省', '深圳市', '宝安区', '福永街道', NULL, '自营仓库', 1, 'admin', '2022-03-07 20:06:10', NULL, '2022-03-07 20:06:10');
+
+-- ----------------------------
+-- Table structure for wms_warehouse_position
+-- ----------------------------
+DROP TABLE IF EXISTS `wms_warehouse_position`;
+CREATE TABLE `wms_warehouse_position`  (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `warehouse_id` int NOT NULL COMMENT '仓库id',
+  `number` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '仓库/货架编号',
+  `name` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '仓位/货架名称',
+  `parent_id` int NOT NULL COMMENT '上级id',
+  `depth` int NULL DEFAULT 1 COMMENT '层级深度1级2级3级',
+  `parent_id1` int NOT NULL COMMENT '一级类目id',
+  `parent_id2` int NOT NULL COMMENT '二级类目id',
+  `address` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '地址',
+  `remark` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '备注',
+  `isDelete` int NOT NULL DEFAULT 0 COMMENT '0正常  1删除',
+  `create_by` varchar(25) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '创建人',
+  `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
+  `update_by` varchar(25) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '更新人',
+  `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 25 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '仓库仓位表' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of wms_warehouse_position
+-- ----------------------------
+INSERT INTO `wms_warehouse_position` VALUES (1, 1, '001', '深圳虚拟仓库', 0, 1, 0, 0, NULL, NULL, 0, 'admin', '2022-03-07 20:06:10', NULL, '2022-03-07 20:06:10');
+INSERT INTO `wms_warehouse_position` VALUES (2, 1, 'A', 'A区', 1, 2, 1, 0, NULL, NULL, 0, 'admin', '2022-03-07 20:06:24', NULL, '2022-03-07 20:06:24');
+INSERT INTO `wms_warehouse_position` VALUES (3, 1, 'B', 'B区', 1, 2, 1, 0, NULL, NULL, 0, 'admin', '2022-03-07 20:06:38', NULL, '2022-03-07 20:06:38');
+INSERT INTO `wms_warehouse_position` VALUES (4, 1, 'C', 'C区', 1, 2, 1, 0, NULL, NULL, 0, 'admin', '2022-03-07 20:06:47', NULL, '2022-03-07 20:06:47');
+INSERT INTO `wms_warehouse_position` VALUES (5, 1, 'A01-1-01', 'A01-1-01', 2, 3, 1, 2, NULL, NULL, 0, 'admin', '2022-03-07 20:12:39', NULL, '2022-03-07 20:12:39');
+INSERT INTO `wms_warehouse_position` VALUES (6, 1, 'A01-1-02', 'A01-1-02', 2, 3, 1, 2, NULL, NULL, 0, 'admin', '2022-03-07 20:12:39', NULL, '2022-03-07 20:12:39');
+INSERT INTO `wms_warehouse_position` VALUES (7, 1, 'A01-1-03', 'A01-1-03', 2, 3, 1, 2, NULL, NULL, 0, 'admin', '2022-03-07 20:12:39', NULL, '2022-03-07 20:12:39');
+INSERT INTO `wms_warehouse_position` VALUES (8, 1, 'A01-1-04', 'A01-1-04', 2, 3, 1, 2, NULL, NULL, 0, 'admin', '2022-03-07 20:12:39', NULL, '2022-03-07 20:12:39');
+INSERT INTO `wms_warehouse_position` VALUES (9, 1, 'A01-1-05', 'A01-1-05', 2, 3, 1, 2, NULL, NULL, 0, 'admin', '2022-03-07 20:12:39', NULL, '2022-03-07 20:12:39');
+INSERT INTO `wms_warehouse_position` VALUES (10, 1, 'A01-1-06', 'A01-1-06', 2, 3, 1, 2, NULL, NULL, 0, 'admin', '2022-03-07 20:12:39', NULL, '2022-03-07 20:12:39');
+INSERT INTO `wms_warehouse_position` VALUES (11, 1, 'A01-1-07', 'A01-1-07', 2, 3, 1, 2, NULL, NULL, 0, 'admin', '2022-03-07 20:12:39', NULL, '2022-03-07 20:12:39');
+INSERT INTO `wms_warehouse_position` VALUES (12, 1, 'A01-1-08', 'A01-1-08', 2, 3, 1, 2, NULL, NULL, 0, 'admin', '2022-03-07 20:12:39', NULL, '2022-03-07 20:12:39');
+INSERT INTO `wms_warehouse_position` VALUES (13, 1, 'A01-1-09', 'A01-1-09', 2, 3, 1, 2, NULL, NULL, 0, 'admin', '2022-03-07 20:12:39', NULL, '2022-03-07 20:12:39');
+INSERT INTO `wms_warehouse_position` VALUES (14, 1, 'A01-1-10', 'A01-1-10', 2, 3, 1, 2, NULL, NULL, 0, 'admin', '2022-03-07 20:12:39', NULL, '2022-03-07 20:12:39');
+INSERT INTO `wms_warehouse_position` VALUES (15, 1, 'A01-1-11', 'A01-1-11', 2, 3, 1, 2, NULL, NULL, 0, 'admin', '2022-03-07 20:12:39', NULL, '2022-03-07 20:12:39');
+INSERT INTO `wms_warehouse_position` VALUES (16, 1, 'A01-1-12', 'A01-1-12', 2, 3, 1, 2, NULL, NULL, 0, 'admin', '2022-03-07 20:12:39', NULL, '2022-03-07 20:12:39');
+INSERT INTO `wms_warehouse_position` VALUES (17, 1, 'A01-1-13', 'A01-1-13', 2, 3, 1, 2, NULL, NULL, 0, 'admin', '2022-03-07 20:12:39', NULL, '2022-03-07 20:12:39');
+INSERT INTO `wms_warehouse_position` VALUES (18, 1, 'A01-1-14', 'A01-1-14', 2, 3, 1, 2, NULL, NULL, 0, 'admin', '2022-03-07 20:12:39', NULL, '2022-03-07 20:12:39');
+INSERT INTO `wms_warehouse_position` VALUES (19, 1, 'A01-1-15', 'A01-1-15', 2, 3, 1, 2, NULL, NULL, 0, 'admin', '2022-03-07 20:12:39', NULL, '2022-03-07 20:12:39');
+INSERT INTO `wms_warehouse_position` VALUES (20, 1, 'A01-1-16', 'A01-1-16', 2, 3, 1, 2, NULL, NULL, 0, 'admin', '2022-03-07 20:12:39', NULL, '2022-03-07 20:12:39');
 
 SET FOREIGN_KEY_CHECKS = 1;
