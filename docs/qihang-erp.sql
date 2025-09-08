@@ -5,13 +5,13 @@
  Source Server Type    : MySQL
  Source Server Version : 80032 (8.0.32)
  Source Host           : localhost:3306
- Source Schema         : qihang-oms
+ Source Schema         : qihang-erp
 
  Target Server Type    : MySQL
  Target Server Version : 80032 (8.0.32)
  File Encoding         : 65001
 
- Date: 08/09/2025 20:10:26
+ Date: 08/09/2025 20:21:09
 */
 
 SET NAMES utf8mb4;
