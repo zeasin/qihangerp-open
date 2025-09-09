@@ -95,7 +95,11 @@
             <artifactId>poi-ooxml</artifactId>
             <version>5.2.5</version>
         </dependency>
-
+        <dependency>
+            <groupId>cn.qihangerp.module</groupId>
+            <artifactId>erp</artifactId>
+            <version>1.0</version>
+        </dependency>
         <dependency>
             <groupId>cn.qihangerp.services</groupId>
             <artifactId>sys-api</artifactId>
@@ -175,11 +179,41 @@
             <artifactId>stock</artifactId>
             <version>1.0</version>
         </dependency>
-<!--        <dependency>-->
-<!--            <groupId>cn.qihangerp.module</groupId>-->
-<!--            <artifactId>open</artifactId>-->
-<!--            <version>1.0</version>-->
-<!--        </dependency>-->
+        <dependency>
+            <groupId>cn.qihangerp.module</groupId>
+            <artifactId>tao</artifactId>
+            <version>1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>cn.qihangerp.module</groupId>
+            <artifactId>jd</artifactId>
+            <version>1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>cn.qihangerp.module</groupId>
+            <artifactId>pdd</artifactId>
+            <version>1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>cn.qihangerp.module</groupId>
+            <artifactId>dou</artifactId>
+            <version>1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>cn.qihangerp.module</groupId>
+            <artifactId>wei</artifactId>
+            <version>1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>cn.qihangerp.module</groupId>
+            <artifactId>goods</artifactId>
+            <version>1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>cn.qihangerp.module</groupId>
+            <artifactId>order</artifactId>
+            <version>1.0</version>
+        </dependency>
 
 
 <!--        <dependency>-->
