@@ -6,6 +6,8 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
+
 import lombok.Data;
 
 /**
@@ -110,4 +112,7 @@ public class ErpPurchaseOrder {
      * 更新时间
      */
     private Date updateTime;
+
+    @TableField(exist = false)
+    private List<ErpPurchaseOrderItem> itemList;
 }

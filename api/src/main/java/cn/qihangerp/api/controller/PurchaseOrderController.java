@@ -4,6 +4,7 @@ import cn.qihangerp.common.AjaxResult;
 import cn.qihangerp.common.PageQuery;
 import cn.qihangerp.common.PageResult;
 import cn.qihangerp.common.TableDataInfo;
+import cn.qihangerp.module.erp.bo.SearchBo;
 import cn.qihangerp.module.erp.domain.ErpPurchaseOrder;
 import cn.qihangerp.module.erp.service.ErpPurchaseOrderService;
 import cn.qihangerp.security.common.BaseController;
@@ -28,19 +29,8 @@ public class PurchaseOrderController extends BaseController
      *
      */
     @GetMapping("/list")
-    public TableDataInfo list(SearchRequest bo, PageQuery pageQuery)
+    public TableDataInfo list(SearchBo bo, PageQuery pageQuery)
     {
-        Integer userIdentity = SecurityUtils.getUserIdentity();
-        Long merchantId = 0l;
-        if(userIdentity == null||userIdentity==0){
-            merchantId = 0L;
-        }else if(userIdentity==20){
-            merchantId = SecurityUtils.getDeptId();
-        }else {
-            merchantId = -1L;
-        }
-        bo.setMerchantId(merchantId);
-
         PageResult<ErpPurchaseOrder> pageResult = erpPurchaseOrderService.queryPageList(bo, pageQuery);
         return getDataTable(pageResult);
     }
