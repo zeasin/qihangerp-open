@@ -8,7 +8,9 @@ import cn.qihangerp.module.erp.bo.PurchaseOrderAddBo;
 import cn.qihangerp.module.erp.bo.PurchaseOrderOptionBo;
 import cn.qihangerp.module.erp.bo.SearchBo;
 import cn.qihangerp.module.erp.domain.ErpPurchaseOrderItem;
+import cn.qihangerp.module.erp.domain.ErpPurchaseOrderShip;
 import cn.qihangerp.module.erp.mapper.ErpPurchaseOrderItemMapper;
+import cn.qihangerp.module.erp.mapper.ErpPurchaseOrderShipMapper;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -217,7 +219,7 @@ public class ErpPurchaseOrderServiceImpl extends ServiceImpl<ErpPurchaseOrderMap
 
             // 生成物流信息
             ErpPurchaseOrderShip ship = new ErpPurchaseOrderShip();
-            ship.setMerchantId(order.getMerchantId());
+
             ship.setId(order.getId());
             ship.setOrderId(order.getId());
             ship.setSupplierId(order.getSupplierId());

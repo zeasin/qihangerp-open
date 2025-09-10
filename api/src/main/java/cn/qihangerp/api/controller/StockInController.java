@@ -29,7 +29,7 @@ public class StockInController extends BaseController {
         var pageList = stockInService.queryPageList(bo,pageQuery);
         
         // 🔍 调试点2: 检查查询结果
-        System.out.println("查询结果数量: " + (pageList != null ? pageList.getRows().size() : 0));
+        System.out.println("查询结果数量: " + (pageList != null ? pageList.getRecords().size() : 0));
         
         return getDataTable(pageList);
     }

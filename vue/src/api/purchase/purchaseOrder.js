@@ -3,7 +3,7 @@ import request from '@/utils/request'
 // 查询采购订单列表
 export function listPurchaseOrder(query) {
   return request({
-    url: '/erp-api/scm/purchase/list',
+    url: '/erp/purchase/list',
     method: 'get',
     params: query
   })
@@ -24,7 +24,7 @@ export function addPurchaseOrder(data) {
     method: 'post',
     data: data
   })
-}
+} 
 
 // 修改采购订单
 export function updatePurchaseOrder(data) {

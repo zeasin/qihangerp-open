@@ -32,8 +32,6 @@ public class PurchaseOrderAddBo
     private BigDecimal orderAmount;
     private String createBy;
 
-    private Long merchantId;
-
     private List<PurchaseOrderAddItemBo> goodsList;
 
 

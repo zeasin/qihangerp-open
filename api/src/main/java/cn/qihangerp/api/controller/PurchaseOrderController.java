@@ -4,6 +4,8 @@ import cn.qihangerp.common.AjaxResult;
 import cn.qihangerp.common.PageQuery;
 import cn.qihangerp.common.PageResult;
 import cn.qihangerp.common.TableDataInfo;
+import cn.qihangerp.module.erp.bo.PurchaseOrderAddBo;
+import cn.qihangerp.module.erp.bo.PurchaseOrderOptionBo;
 import cn.qihangerp.module.erp.bo.SearchBo;
 import cn.qihangerp.module.erp.domain.ErpPurchaseOrder;
 import cn.qihangerp.module.erp.service.ErpPurchaseOrderService;
@@ -43,23 +45,13 @@ public class PurchaseOrderController extends BaseController
     }
 
     @PostMapping("/create")
-    public AjaxResult add(@RequestBody PurchaseOrderAddRequest addBo, HttpServletRequest request)
+    public AjaxResult add(@RequestBody PurchaseOrderAddBo addBo, HttpServletRequest request)
     {
-        Integer userIdentity = SecurityUtils.getUserIdentity();
-        Long merchantId = 0l;
-        if(userIdentity == null||userIdentity==0){
-            merchantId = 0l;
-        }else if(userIdentity==20){
-            merchantId = SecurityUtils.getDeptId();
-        }else{
-            merchantId = -1L;
-        }
-        addBo.setMerchantId(merchantId);
         addBo.setCreateBy(getUsername());
         return toAjax(erpPurchaseOrderService.createPurchaseOrder(addBo));
     }
     @PutMapping("/updateStatus")
-    public AjaxResult updateStatus(@RequestBody PurchaseOrderOptionRequest req, HttpServletRequest request)
+    public AjaxResult updateStatus(@RequestBody PurchaseOrderOptionBo req, HttpServletRequest request)
     {
         req.setUpdateBy(getUsername());
         int result = erpPurchaseOrderService.updateScmPurchaseOrder(req);
