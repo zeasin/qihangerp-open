@@ -1,7 +1,6 @@
-package com.youlai.boot.system.enums;
+package cn.qihangerp.api.enums;
 
 import com.baomidou.mybatisplus.annotation.EnumValue;
-import com.youlai.boot.common.base.IBaseEnum;
 import lombok.Getter;
 
 /**

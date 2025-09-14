@@ -1,7 +1,6 @@
-package com.youlai.boot.system.model.entity;
+package cn.qihangerp.api.model.entity;
 
 import com.baomidou.mybatisplus.annotation.*;
-
 import lombok.Getter;
 import lombok.Setter;
 

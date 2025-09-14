@@ -1,7 +1,6 @@
-package com.youlai.boot.common.base;
+package cn.qihangerp.api.enums;
 
-
-import cn.hutool.core.util.ObjectUtil;
+import cn.qihangerp.api.common.ObjectUtil;
 
 import java.util.EnumSet;
 import java.util.Objects;

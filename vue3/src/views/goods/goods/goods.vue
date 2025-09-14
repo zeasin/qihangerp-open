@@ -352,18 +352,16 @@
 
 <script>
 import { listGoods, getGoods, delGoods, addGoods, updateGoods } from "@/api/goods/goods";
-import Treeselect from '@riophae/vue-treeselect'
-import '@riophae/vue-treeselect/dist/vue-treeselect.css'
+
 import { listCategory } from "@/api/goods/category";
-import {getToken} from "@/utils/auth";
+
 import {listSupplier} from "@/api/goods/supplier";
 export default {
   name: "Goods",
-  components: { Treeselect },
+  components: {  },
   data() {
     return {
       importOpen:false,
-      headers: { 'Authorization': 'Bearer ' + getToken() },
       // 遮罩层
       loading: true,
       // 选中数组
@@ -435,7 +433,8 @@ export default {
     };
   },
   created() {
-    listCategory(this.queryParams).then(response => {
+    listCategory().then(response => {
+      console.log("=-----===",response)
         this.categoryList = response.rows
         this.categoryTree = this.buildTree(response.rows,0)
         listSupplier({}).then(response => {

@@ -1,4 +1,4 @@
-package com.youlai.boot.common.result;
+package cn.qihangerp.api.common;
 
 /**
  * 响应码接口

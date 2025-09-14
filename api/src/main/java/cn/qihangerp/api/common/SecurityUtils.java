@@ -1,10 +1,7 @@
-package com.youlai.boot.core.security.util;
+package cn.qihangerp.api.common;
 
-import cn.hutool.core.collection.CollectionUtil;
-import cn.hutool.core.util.StrUtil;
-import com.youlai.boot.common.constant.SecurityConstants;
-import com.youlai.boot.common.constant.SystemConstants;
-import com.youlai.boot.core.security.model.SysUserDetails;
+import cn.qihangerp.api.constant.SecurityConstants;
+import cn.qihangerp.api.constant.SystemConstants;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpHeaders;
 import org.springframework.security.core.Authentication;
@@ -13,7 +10,10 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.Objects;
+import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
@@ -23,62 +23,6 @@ import java.util.stream.Collectors;
  * @since 2021/1/10
  */
 public class SecurityUtils {
-
-    /**
-     * 获取当前登录人信息
-     *
-     * @return Optional<SysUserDetails>
-     */
-    public static Optional<SysUserDetails> getUser() {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        if (authentication != null) {
-            Object principal = authentication.getPrincipal();
-            if (principal instanceof SysUserDetails) {
-                return Optional.of((SysUserDetails) principal);
-            }
-        }
-        return Optional.empty();
-    }
-
-
-    /**
-     * 获取用户ID
-     *
-     * @return Long
-     */
-    public static Long getUserId() {
-        return getUser().map(SysUserDetails::getUserId).orElse(null);
-    }
-
-
-    /**
-     * 获取用户账号
-     *
-     * @return String 用户账号
-     */
-    public static String getUsername() {
-        return getUser().map(SysUserDetails::getUsername).orElse(null);
-    }
-
-
-    /**
-     * 获取部门ID
-     *
-     * @return Long
-     */
-    public static Long getDeptId() {
-        return getUser().map(SysUserDetails::getDeptId).orElse(null);
-    }
-
-    /**
-     * 获取数据权限范围
-     *
-     * @return Integer
-     */
-    public static Integer getDataScope() {
-        return getUser().map(SysUserDetails::getDataScope).orElse(null);
-    }
-
 
     /**
      * 获取角色集合

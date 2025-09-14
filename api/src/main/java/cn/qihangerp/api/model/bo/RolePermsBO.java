@@ -1,4 +1,4 @@
-package com.youlai.boot.system.model.bo;
+package cn.qihangerp.api.model.bo;
 
 import lombok.Data;
 

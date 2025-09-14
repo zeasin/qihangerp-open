@@ -1,4 +1,4 @@
-package com.youlai.boot.common.constant;
+package cn.qihangerp.api.constant;
 
 /**
  * Redis 常量

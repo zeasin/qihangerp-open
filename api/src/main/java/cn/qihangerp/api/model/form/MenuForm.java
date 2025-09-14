@@ -1,6 +1,7 @@
-package com.youlai.boot.system.model.form;
+package cn.qihangerp.api.model.form;
 
-import com.youlai.boot.common.model.KeyValue;
+
+import cn.qihangerp.api.model.KeyValue;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import org.hibernate.validator.constraints.Range;
@@ -62,5 +63,6 @@ public class MenuForm {
 
     @Schema(description = "路由参数")
     private List<KeyValue> params;
+
 
 }

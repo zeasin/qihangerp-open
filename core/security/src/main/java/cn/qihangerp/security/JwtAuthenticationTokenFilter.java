@@ -67,7 +67,7 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
             authenticationToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
             SecurityContextHolder.getContext().setAuthentication(authenticationToken);
         } else {
-            fallback(" 授权过期！", response);
+            fallback(" 授权过期！aaaa", response);
             return;
         }
         chain.doFilter(request, response);

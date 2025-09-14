@@ -1,4 +1,4 @@
-package com.youlai.boot.common.model;
+package cn.qihangerp.api.model;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;

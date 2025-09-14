@@ -1,6 +1,5 @@
-package com.youlai.boot.common.enums;
+package cn.qihangerp.api.enums;
 
-import com.youlai.boot.common.base.IBaseEnum;
 import lombok.Getter;
 
 /**

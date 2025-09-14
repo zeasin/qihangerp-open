@@ -1,8 +1,9 @@
-package com.youlai.boot.system.converter;
+package cn.qihangerp.api.converter;
 
-import com.youlai.boot.system.model.entity.Menu;
-import com.youlai.boot.system.model.vo.MenuVO;
-import com.youlai.boot.system.model.form.MenuForm;
+
+import cn.qihangerp.api.model.entity.Menu;
+import cn.qihangerp.api.model.form.MenuForm;
+import cn.qihangerp.api.model.vo.MenuVO;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 

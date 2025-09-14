@@ -1,4 +1,4 @@
-package com.youlai.boot.common.result;
+package cn.qihangerp.api.common;
 
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;

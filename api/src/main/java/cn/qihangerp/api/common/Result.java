@@ -1,6 +1,5 @@
-package com.youlai.boot.common.result;
+package cn.qihangerp.api.common;
 
-import cn.hutool.core.util.StrUtil;
 import lombok.Data;
 
 import java.io.Serializable;

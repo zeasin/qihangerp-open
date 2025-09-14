@@ -1,4 +1,4 @@
-package com.youlai.boot.system.model.vo;
+package cn.qihangerp.api.model.vo;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import io.swagger.v3.oas.annotations.media.Schema;

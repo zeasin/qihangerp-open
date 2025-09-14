@@ -1,4 +1,4 @@
-package com.youlai.boot.common.constant;
+package cn.qihangerp.api.constant;
 
 /**
  * 安全模块常量

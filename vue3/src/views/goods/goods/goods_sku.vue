@@ -168,14 +168,14 @@
 
 <script>
 import {listGoodsSpec, getGoodsSpec, updateGoodsSpec, addGoodsSpec} from "@/api/goods/goodsSpec";
-import {getToken} from "@/utils/auth";
+
 
 export default {
   name: "GoodsSpec",
   data() {
     return {
       importOpen:false,
-      headers: { 'Authorization': 'Bearer ' + getToken() },
+
       // 遮罩层
       loading: true,
       // 选中数组
