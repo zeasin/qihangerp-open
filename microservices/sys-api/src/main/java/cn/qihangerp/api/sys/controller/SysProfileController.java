@@ -1,5 +1,6 @@
 package cn.qihangerp.api.sys.controller;
 
+import cn.qihangerp.api.sys.model.CurrentUserDTO;
 import cn.qihangerp.common.AjaxResult;
 import cn.qihangerp.common.utils.StringUtils;
 import cn.qihangerp.domain.SysUser;
@@ -10,6 +11,11 @@ import cn.qihangerp.security.common.SecurityUtils;
 import cn.qihangerp.service.ISysUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * 个人信息 业务处理
@@ -37,6 +43,28 @@ public class SysProfileController extends BaseController
         AjaxResult ajax = AjaxResult.success(user);
         ajax.put("roleGroup", userService.selectUserRoleGroup(loginUser.getUsername()));
 //        ajax.put("postGroup", userService.selectUserPostGroup(loginUser.getUsername()));
+        return ajax;
+    }
+
+    @GetMapping("/me")
+    public AjaxResult me()
+    {
+        LoginUser loginUser = getLoginUser();
+        SysUser user = loginUser.getUser();
+        CurrentUserDTO dto = new CurrentUserDTO();
+        dto.setUserId(user.getUserId());
+        dto.setAvatar("https://foruda.gitee.com/images/1723603502796844527/03cdca2a_716974.gif");
+        dto.setUsername(user.getUserName());
+        dto.setNickname(user.getNickName());
+        Set<String> roles = new HashSet<>();
+        roles.add(userService.selectUserRoleGroup(loginUser.getUsername()));
+        dto.setRoles(roles);
+//        dto.setPerms();
+
+        AjaxResult ajax = AjaxResult.success(user);
+        ajax.put("roleGroup", userService.selectUserRoleGroup(loginUser.getUsername()));
+//        ajax.put("postGroup", userService.selectUserPostGroup(loginUser.getUsername()));
+        ajax.put("data", dto);
         return ajax;
     }
 

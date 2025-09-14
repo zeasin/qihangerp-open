@@ -29,7 +29,9 @@ public class MetaVo
      * 内链地址（http(s)://开头）
      */
     private String link;
-
+    private boolean hidden;
+    private boolean alwaysShow;
+    private String params;
     public MetaVo()
     {
     }
@@ -103,5 +105,29 @@ public class MetaVo
     public void setLink(String link)
     {
         this.link = link;
+    }
+
+    public boolean isHidden() {
+        return hidden;
+    }
+
+    public void setHidden(boolean hidden) {
+        this.hidden = hidden;
+    }
+
+    public boolean isAlwaysShow() {
+        return alwaysShow;
+    }
+
+    public void setAlwaysShow(boolean alwaysShow) {
+        this.alwaysShow = alwaysShow;
+    }
+
+    public String getParams() {
+        return params;
+    }
+
+    public void setParams(String params) {
+        this.params = params;
     }
 }

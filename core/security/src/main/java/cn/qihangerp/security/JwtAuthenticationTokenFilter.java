@@ -53,6 +53,8 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
                 || request.getRequestURI().equals("/order/get_detail")
                 || request.getRequestURI().equals("/refund/get_detail")
                 || request.getRequestURI().contains("/system/config")
+                || request.getRequestURI().contains("/swagger-ui")
+                || request.getRequestURI().contains("/v3/api-docs")
         ) {
             // 登录页面，放行 || request.getRequestURI().equals("/order/get_detail")
             chain.doFilter(request, response);

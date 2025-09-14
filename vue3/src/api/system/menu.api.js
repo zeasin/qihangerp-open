@@ -11,7 +11,7 @@ const MenuAPI = {
    */
   getRoutes() {
     return request({
-      url: `${MENU_BASE_URL}/routes`,
+      url: `/getRouters`,
       method: "get",
     });
   },

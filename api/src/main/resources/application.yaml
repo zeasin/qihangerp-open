@@ -75,3 +75,10 @@ mybatis-plus:
 
 
 
+springdoc:
+  api-docs:
+    path: /v3/api-docs            # 设置API文档的访问路径
+  swagger-ui:
+    path: /swagger-ui.html        # 设置Swagger UI的访问路径
+    url: /v3/api-docs
+

@@ -1,5 +1,7 @@
 package cn.qihangerp.domain.vo;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+
 import java.util.List;
 
 /**
@@ -53,6 +55,7 @@ public class RouterVo
     /**
      * 子路由
      */
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private List<RouterVo> children;
 
     public String getName()

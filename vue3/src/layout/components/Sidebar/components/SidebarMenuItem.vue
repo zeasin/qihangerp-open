@@ -94,6 +94,12 @@ const onlyOneChild = ref();
  * @returns 是否仅有一个可见子节点
  */
 function hasOneShowingChild(children = [], parent) {
+  console.log('==============1111111111',children)
+  // 确保 children 是一个有效的数组
+  if (!Array.isArray(children)) {
+    console.warn('children is not a valid array:', children);
+    return false; // 或者返回适当的默认值
+  }
   // 过滤出可见子节点
   const showingChildren = children.filter((route) => {
     if (!route.meta?.hidden) {
