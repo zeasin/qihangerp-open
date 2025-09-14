@@ -20,7 +20,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 /**
@@ -54,6 +56,12 @@ public class SysLoginController
             // 生成令牌
             String token = loginService.login(loginBody.getUsername(), loginBody.getPassword(), loginBody.getCode(),
                     loginBody.getUuid());
+            Map<String,Object> map = new HashMap<String,Object>();
+            map.put("accessToken",token);
+            map.put("expiresIn",7200);
+            map.put("refreshToken",token);
+            map.put("tokenType","Bearer");
+            ajax.put("data",map);
             ajax.put(Constants.TOKEN, token);
             return ajax;
         }catch (Exception e){
