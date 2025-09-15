@@ -1,10 +1,9 @@
 package cn.qihangerp.module.service.impl;
 
+import cn.qihangerp.interfaces.OShopPlatformService;
 import cn.qihangerp.model.entity.OShopPlatform;
 import cn.qihangerp.module.mapper.OShopPlatformMapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import cn.qihangerp.module.service.OShopPlatformService;
-
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -16,7 +15,7 @@ import org.springframework.stereotype.Service;
 @AllArgsConstructor
 @Service
 public class OShopPlatformServiceImpl extends ServiceImpl<OShopPlatformMapper, OShopPlatform>
-    implements OShopPlatformService{
+    implements OShopPlatformService {
     private final OShopPlatformMapper mapper;
     @Override
     public OShopPlatform selectById(Integer id) {

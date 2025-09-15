@@ -10,8 +10,8 @@ import cn.qihangerp.model.entity.OShopPullLogs;
 import cn.qihangerp.module.open.dou.domain.DouGoods;
 import cn.qihangerp.module.open.dou.domain.DouGoodsSku;
 import cn.qihangerp.module.open.dou.service.DouGoodsService;
-import cn.qihangerp.module.service.OShopPullLasttimeService;
-import cn.qihangerp.module.service.OShopPullLogsService;
+import cn.qihangerp.interfaces.OShopPullLasttimeService;
+import cn.qihangerp.interfaces.OShopPullLogsService;
 
 import cn.qihangerp.open.common.ApiResultVo;
 

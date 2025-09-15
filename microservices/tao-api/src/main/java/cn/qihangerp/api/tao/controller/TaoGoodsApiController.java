@@ -16,8 +16,8 @@ import cn.qihangerp.module.open.tao.domain.TaoGoods;
 import cn.qihangerp.module.open.tao.domain.TaoGoodsSku;
 import cn.qihangerp.module.open.tao.service.TaoGoodsService;
 
-import cn.qihangerp.module.service.OShopPullLasttimeService;
-import cn.qihangerp.module.service.OShopPullLogsService;
+import cn.qihangerp.interfaces.OShopPullLasttimeService;
+import cn.qihangerp.interfaces.OShopPullLogsService;
 import cn.qihangerp.open.common.ApiResultVo;
 
 import cn.qihangerp.open.tao.TaoGoodsApiHelper;

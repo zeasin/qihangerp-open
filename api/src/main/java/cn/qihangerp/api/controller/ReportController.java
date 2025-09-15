@@ -6,7 +6,7 @@ import cn.qihangerp.model.vo.SalesDailyVo;
 import cn.qihangerp.model.vo.SalesTopSkuVo;
 import cn.qihangerp.module.order.service.OOrderItemService;
 import cn.qihangerp.module.order.service.OOrderService;
-import cn.qihangerp.module.service.OShopService;
+import cn.qihangerp.interfaces.OShopService;
 import cn.qihangerp.security.common.BaseController;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;

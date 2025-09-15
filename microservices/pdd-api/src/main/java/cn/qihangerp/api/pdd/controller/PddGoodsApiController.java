@@ -10,8 +10,8 @@ import cn.qihangerp.model.entity.OShopPullLogs;
 import cn.qihangerp.module.open.pdd.domain.PddGoods;
 import cn.qihangerp.module.open.pdd.domain.PddGoodsSku;
 import cn.qihangerp.module.open.pdd.service.PddGoodsService;
-import cn.qihangerp.module.service.OShopPullLasttimeService;
-import cn.qihangerp.module.service.OShopPullLogsService;
+import cn.qihangerp.interfaces.OShopPullLasttimeService;
+import cn.qihangerp.interfaces.OShopPullLogsService;
 
 import cn.qihangerp.open.common.ApiResultVo;
 

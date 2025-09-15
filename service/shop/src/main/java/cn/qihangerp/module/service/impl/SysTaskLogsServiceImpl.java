@@ -1,15 +1,13 @@
 package cn.qihangerp.module.service.impl;
 
+import cn.qihangerp.interfaces.SysTaskLogsService;
 import cn.qihangerp.model.entity.SysTaskLogs;
 import cn.qihangerp.module.mapper.SysTaskLogsMapper;
-import cn.qihangerp.module.service.SysTaskLogsService;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import cn.qihangerp.common.PageQuery;
 import cn.qihangerp.common.PageResult;
-
-
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
