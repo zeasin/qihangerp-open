@@ -1,12 +1,10 @@
 package cn.qihangerp.api.goods.controller;
 
-
-
 import cn.qihangerp.common.AjaxResult;
 import cn.qihangerp.common.TableDataInfo;
-import cn.qihangerp.module.goods.domain.OGoodsCategory;
-import cn.qihangerp.module.goods.domain.OGoodsCategoryAttribute;
-import cn.qihangerp.module.goods.domain.OGoodsCategoryAttributeValue;
+import cn.qihangerp.model.entity.OGoodsCategory;
+import cn.qihangerp.model.entity.OGoodsCategoryAttribute;
+import cn.qihangerp.model.entity.OGoodsCategoryAttributeValue;
 import cn.qihangerp.module.goods.service.OGoodsCategoryAttributeService;
 import cn.qihangerp.module.goods.service.OGoodsCategoryAttributeValueService;
 import cn.qihangerp.module.goods.service.OGoodsCategoryService;
@@ -14,7 +12,6 @@ import cn.qihangerp.security.common.BaseController;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.Arrays;
 import java.util.Date;
 
@@ -73,7 +70,9 @@ public class GoodsCategoryController  extends BaseController {
     @GetMapping("/attribute_list")
     public TableDataInfo attributeList(Integer categoryId)
     {
-        var pageList = categoryAttributeService.list(new LambdaQueryWrapper<OGoodsCategoryAttribute>().eq(OGoodsCategoryAttribute::getCategoryId,categoryId));
+        var pageList = categoryAttributeService.list(
+                new LambdaQueryWrapper<OGoodsCategoryAttribute>()
+                .eq(OGoodsCategoryAttribute::getCategoryId,categoryId));
         return getDataTable(pageList);
     }
 
@@ -109,7 +108,8 @@ public class GoodsCategoryController  extends BaseController {
     public TableDataInfo attributeValueList(Integer categoryAttributeId)
     {
         var pageList = categoryAttributeValueService.list(
-                new LambdaQueryWrapper<OGoodsCategoryAttributeValue>().eq(OGoodsCategoryAttributeValue::getCategoryAttributeId,categoryAttributeId));
+                new LambdaQueryWrapper<OGoodsCategoryAttributeValue>()
+                        .eq(OGoodsCategoryAttributeValue::getCategoryAttributeId,categoryAttributeId));
         return getDataTable(pageList);
 
     }

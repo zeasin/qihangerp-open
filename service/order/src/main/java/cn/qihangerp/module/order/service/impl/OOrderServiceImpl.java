@@ -1,10 +1,9 @@
 package cn.qihangerp.module.order.service.impl;
 
-
 import cn.qihangerp.domain.OLogisticsCompany;
-import cn.qihangerp.module.goods.domain.OGoods;
-import cn.qihangerp.module.goods.domain.OGoodsSku;
-import cn.qihangerp.module.goods.domain.OGoodsSupplier;
+import cn.qihangerp.model.entity.OGoods;
+import cn.qihangerp.model.entity.OGoodsSku;
+import cn.qihangerp.model.entity.OGoodsSupplier;
 import cn.qihangerp.module.goods.mapper.OGoodsMapper;
 import cn.qihangerp.module.goods.mapper.OGoodsSkuMapper;
 import cn.qihangerp.module.goods.mapper.OGoodsSupplierMapper;
@@ -17,8 +16,6 @@ import cn.qihangerp.module.order.domain.vo.SalesDailyVo;
 import cn.qihangerp.module.order.mapper.*;
 import cn.qihangerp.module.order.service.OOrderService;
 import cn.qihangerp.request.OrderSearchRequest;
-import com.alibaba.fastjson2.JSONArray;
-import com.alibaba.fastjson2.JSONObject;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -27,18 +24,12 @@ import cn.qihangerp.common.PageResult;
 import cn.qihangerp.common.ResultVo;
 import cn.qihangerp.common.ResultVoEnum;
 import cn.qihangerp.common.enums.EnumShopType;
-import cn.qihangerp.common.enums.JdOrderStateEnum;
-import cn.qihangerp.common.enums.TaoOrderStateEnum;
-import cn.qihangerp.common.utils.DateUtils;
-import cn.qihangerp.common.utils.StringUtils;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.java.Log;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
-import java.math.BigDecimal;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

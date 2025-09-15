@@ -1,6 +1,6 @@
 package cn.qihangerp.module.goods.service;
 
-import cn.qihangerp.module.goods.domain.OGoodsInventoryBatch;
+import cn.qihangerp.model.entity.OGoodsInventoryBatch;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**

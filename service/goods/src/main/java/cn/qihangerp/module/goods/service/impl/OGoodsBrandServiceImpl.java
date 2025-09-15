@@ -1,11 +1,11 @@
 package cn.qihangerp.module.goods.service.impl;
 
+import cn.qihangerp.model.entity.OGoodsBrand;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import cn.qihangerp.common.PageQuery;
 import cn.qihangerp.common.PageResult;
-import cn.qihangerp.module.goods.domain.OGoodsBrand;
 import cn.qihangerp.module.goods.service.OGoodsBrandService;
 import cn.qihangerp.module.goods.mapper.OGoodsBrandMapper;
 import lombok.AllArgsConstructor;

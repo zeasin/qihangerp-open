@@ -3,12 +3,10 @@ package cn.qihangerp.api.jd.controller;
 
 import cn.qihangerp.common.*;
 import cn.qihangerp.domain.bo.LinkErpGoodsSkuBo;
-import cn.qihangerp.module.goods.domain.OGoodsSku;
 import cn.qihangerp.module.goods.service.OGoodsSkuService;
 import cn.qihangerp.module.open.jd.domain.JdGoods;
 import cn.qihangerp.module.open.jd.domain.JdGoodsSku;
 import cn.qihangerp.module.open.jd.domain.bo.JdGoodsBo;
-import cn.qihangerp.module.open.jd.domain.vo.JdGoodsSkuListVo;
 import cn.qihangerp.module.open.jd.service.JdGoodsService;
 import cn.qihangerp.module.open.jd.service.JdGoodsSkuService;
 import cn.qihangerp.security.common.BaseController;

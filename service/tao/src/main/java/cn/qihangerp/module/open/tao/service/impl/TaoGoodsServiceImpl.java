@@ -1,11 +1,10 @@
 package cn.qihangerp.module.open.tao.service.impl;
 
-
 import cn.qihangerp.common.PageQuery;
 import cn.qihangerp.common.PageResult;
 import cn.qihangerp.common.ResultVoEnum;
 import cn.qihangerp.common.utils.StringUtils;
-import cn.qihangerp.module.goods.domain.OGoodsSku;
+import cn.qihangerp.model.entity.OGoodsSku;
 import cn.qihangerp.module.goods.mapper.OGoodsSkuMapper;
 import cn.qihangerp.module.open.tao.domain.TaoGoods;
 import cn.qihangerp.module.open.tao.domain.TaoGoodsSku;

@@ -1,7 +1,6 @@
 package cn.qihangerp.module.open.jd.service.impl;
 
-
-import cn.qihangerp.module.goods.domain.OGoodsSku;
+import cn.qihangerp.model.entity.OGoodsSku;
 import cn.qihangerp.module.goods.mapper.OGoodsSkuMapper;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;

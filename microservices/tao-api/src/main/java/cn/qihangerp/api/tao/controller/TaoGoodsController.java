@@ -3,12 +3,10 @@ package cn.qihangerp.api.tao.controller;
 
 import cn.qihangerp.common.*;
 import cn.qihangerp.domain.bo.LinkErpGoodsSkuBo;
-import cn.qihangerp.module.goods.domain.OGoodsSku;
 import cn.qihangerp.module.goods.service.OGoodsSkuService;
 import cn.qihangerp.module.open.tao.domain.TaoGoods;
 import cn.qihangerp.module.open.tao.domain.TaoGoodsSku;
 import cn.qihangerp.module.open.tao.domain.bo.TaoGoodsBo;
-import cn.qihangerp.module.open.tao.domain.vo.TaoGoodsSkuListVo;
 import cn.qihangerp.module.open.tao.service.TaoGoodsService;
 import cn.qihangerp.module.open.tao.service.TaoGoodsSkuService;
 import cn.qihangerp.security.common.BaseController;

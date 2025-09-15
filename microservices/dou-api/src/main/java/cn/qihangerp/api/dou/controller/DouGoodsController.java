@@ -3,12 +3,10 @@ package cn.qihangerp.api.dou.controller;
 
 import cn.qihangerp.common.*;
 import cn.qihangerp.domain.bo.LinkErpGoodsSkuBo;
-import cn.qihangerp.module.goods.domain.OGoodsSku;
 import cn.qihangerp.module.goods.service.OGoodsSkuService;
 import cn.qihangerp.module.open.dou.domain.DouGoods;
 import cn.qihangerp.module.open.dou.domain.DouGoodsSku;
 import cn.qihangerp.module.open.dou.domain.bo.DouGoodsBo;
-import cn.qihangerp.module.open.dou.domain.vo.DouGoodsSkuListVo;
 import cn.qihangerp.module.open.dou.service.DouGoodsService;
 import cn.qihangerp.module.open.dou.service.DouGoodsSkuService;
 import cn.qihangerp.security.common.BaseController;

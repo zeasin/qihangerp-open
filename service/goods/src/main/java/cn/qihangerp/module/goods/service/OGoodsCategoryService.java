@@ -1,6 +1,6 @@
 package cn.qihangerp.module.goods.service;
 
-import cn.qihangerp.module.goods.domain.OGoodsCategory;
+import cn.qihangerp.model.entity.OGoodsCategory;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**

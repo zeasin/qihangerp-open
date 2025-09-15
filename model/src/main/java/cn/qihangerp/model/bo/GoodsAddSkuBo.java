@@ -1,4 +1,4 @@
-package cn.qihangerp.module.goods.domain.bo;
+package cn.qihangerp.model.bo;
 
 import java.math.BigDecimal;
 

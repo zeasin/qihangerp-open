@@ -1,6 +1,6 @@
 package cn.qihangerp.module.goods.service;
 
-import cn.qihangerp.module.goods.domain.OGoodsCategoryAttributeValue;
+import cn.qihangerp.model.entity.OGoodsCategoryAttributeValue;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**

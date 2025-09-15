@@ -1,9 +1,7 @@
 package cn.qihangerp.module.order.service.impl;
 
 import cn.qihangerp.common.*;
-import cn.qihangerp.module.goods.domain.OGoodsSku;
-
-
+import cn.qihangerp.model.entity.OGoodsSku;
 import cn.qihangerp.module.goods.mapper.OGoodsSkuMapper;
 import cn.qihangerp.module.order.domain.OAfterSale;
 import cn.qihangerp.module.order.domain.OOrder;

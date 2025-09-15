@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.qihangerp.module.goods.mapper.OGoodsMapper">
 
-    <resultMap id="BaseResultMap" type="cn.qihangerp.module.goods.domain.OGoods">
+    <resultMap id="BaseResultMap" type="cn.qihangerp.model.entity.OGoods">
             <id property="id" column="id" jdbcType="BIGINT"/>
             <result property="name" column="name" jdbcType="VARCHAR"/>
             <result property="image" column="image" jdbcType="VARCHAR"/>
@@ -46,7 +46,7 @@
             <result property="updateBy" column="update_by" jdbcType="VARCHAR"/>
             <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
     </resultMap>
-    <resultMap type="cn.qihangerp.module.goods.domain.vo.GoodsSpecListVo" id="GoodsSpecListVoResult">
+    <resultMap type="cn.qihangerp.model.vo.GoodsSpecListVo" id="GoodsSpecListVoResult">
         <result property="skuId"    column="sku_id"    />
         <result property="goodsName"    column="goods_name"    />
         <result property="skuName"    column="sku_name"    />

@@ -1,4 +1,4 @@
-package cn.qihangerp.module.goods.domain;
+package cn.qihangerp.model.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;

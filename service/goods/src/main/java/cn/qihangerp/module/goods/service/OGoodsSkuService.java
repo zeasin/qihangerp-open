@@ -1,7 +1,6 @@
 package cn.qihangerp.module.goods.service;
 
-
-import cn.qihangerp.module.goods.domain.OGoodsSku;
+import cn.qihangerp.model.entity.OGoodsSku;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 import java.util.List;

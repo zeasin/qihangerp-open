@@ -1,11 +1,11 @@
 package cn.qihangerp.module.goods.service.impl;
 
-import cn.qihangerp.module.goods.domain.OGoodsCategoryAttribute;
-import cn.qihangerp.module.goods.domain.OGoodsCategoryAttributeValue;
+import cn.qihangerp.model.entity.OGoodsCategory;
+import cn.qihangerp.model.entity.OGoodsCategoryAttribute;
+import cn.qihangerp.model.entity.OGoodsCategoryAttributeValue;
 import cn.qihangerp.module.goods.mapper.OGoodsCategoryAttributeMapper;
 import cn.qihangerp.module.goods.mapper.OGoodsCategoryAttributeValueMapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import cn.qihangerp.module.goods.domain.OGoodsCategory;
 import cn.qihangerp.module.goods.service.OGoodsCategoryService;
 import cn.qihangerp.module.goods.mapper.OGoodsCategoryMapper;
 import lombok.AllArgsConstructor;

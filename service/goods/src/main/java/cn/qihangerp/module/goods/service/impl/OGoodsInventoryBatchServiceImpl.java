@@ -1,7 +1,7 @@
 package cn.qihangerp.module.goods.service.impl;
 
+import cn.qihangerp.model.entity.OGoodsInventoryBatch;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import cn.qihangerp.module.goods.domain.OGoodsInventoryBatch;
 import cn.qihangerp.module.goods.service.OGoodsInventoryBatchService;
 import cn.qihangerp.module.goods.mapper.OGoodsInventoryBatchMapper;
 import org.springframework.stereotype.Service;

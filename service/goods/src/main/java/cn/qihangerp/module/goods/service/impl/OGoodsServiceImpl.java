@@ -1,11 +1,15 @@
 package cn.qihangerp.module.goods.service.impl;
 
-import cn.qihangerp.module.goods.domain.OGoodsInventory;
-import cn.qihangerp.module.goods.domain.vo.GoodsSpecListVo;
+import cn.qihangerp.model.bo.GoodsAddBo;
+import cn.qihangerp.model.bo.GoodsAddSkuBo;
+import cn.qihangerp.model.entity.OGoods;
+import cn.qihangerp.model.entity.OGoodsInventory;
+import cn.qihangerp.model.entity.OGoodsSku;
+import cn.qihangerp.model.entity.OGoodsSkuAttr;
+import cn.qihangerp.model.vo.GoodsSpecListVo;
 import cn.qihangerp.module.goods.mapper.OGoodsInventoryMapper;
 import cn.qihangerp.module.goods.mapper.OGoodsMapper;
 import cn.qihangerp.module.goods.mapper.OGoodsSkuAttrMapper;
-
 import cn.qihangerp.module.goods.mapper.OGoodsSkuMapper;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -13,19 +17,11 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import cn.qihangerp.common.PageQuery;
 import cn.qihangerp.common.PageResult;
 import cn.qihangerp.common.ResultVo;
-
-import cn.qihangerp.module.goods.domain.OGoods;
-import cn.qihangerp.module.goods.domain.OGoodsSku;
-import cn.qihangerp.module.goods.domain.OGoodsSkuAttr;
-import cn.qihangerp.module.goods.domain.bo.GoodsAddBo;
-import cn.qihangerp.module.goods.domain.bo.GoodsAddSkuBo;
 import cn.qihangerp.module.goods.service.OGoodsService;
-
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
-
 import java.util.Date;
 import java.util.List;
 

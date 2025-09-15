@@ -2,7 +2,7 @@ package cn.qihangerp.module.goods.service;
 
 import cn.qihangerp.common.PageQuery;
 import cn.qihangerp.common.PageResult;
-import cn.qihangerp.module.goods.domain.OGoodsBrand;
+import cn.qihangerp.model.entity.OGoodsBrand;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**

@@ -1,26 +1,18 @@
 package cn.qihangerp.api.goods.controller;
 
 import cn.qihangerp.common.*;
-import cn.qihangerp.module.goods.domain.OGoods;
-import cn.qihangerp.module.goods.domain.OGoodsSku;
-import cn.qihangerp.module.goods.domain.bo.GoodsAddBo;
-import cn.qihangerp.module.goods.domain.vo.GoodsSpecListVo;
+import cn.qihangerp.model.bo.GoodsAddBo;
+import cn.qihangerp.model.entity.OGoods;
+import cn.qihangerp.model.entity.OGoodsSku;
+import cn.qihangerp.model.vo.GoodsSpecListVo;
 import cn.qihangerp.module.goods.service.OGoodsService;
 import cn.qihangerp.module.goods.service.OGoodsSkuService;
 import cn.qihangerp.security.common.BaseController;
-import com.fasterxml.jackson.databind.exc.InvalidFormatException;
 import lombok.AllArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.HashMap;
+
 import java.util.List;
-import java.util.Map;
 
 /**
  * 商品管理Controller
