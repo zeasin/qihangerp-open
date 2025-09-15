@@ -1,9 +1,11 @@
 package cn.qihangerp.api.sys.controller;
+
 import cn.qihangerp.common.AjaxResult;
 import cn.qihangerp.common.TableDataInfo;
 import cn.qihangerp.common.utils.StringUtils;
-import cn.qihangerp.domain.SysRole;
-import cn.qihangerp.domain.SysUser;
+import cn.qihangerp.interfaces.ISysUserService;
+import cn.qihangerp.model.entity.SysRole;
+import cn.qihangerp.model.entity.SysUser;
 import cn.qihangerp.module.domain.SysDept;
 import cn.qihangerp.module.domain.SysUserRole;
 import cn.qihangerp.module.service.ISysDeptService;
@@ -12,7 +14,6 @@ import cn.qihangerp.module.service.SysPermissionService;
 import cn.qihangerp.security.LoginUser;
 import cn.qihangerp.security.TokenService;
 import cn.qihangerp.security.common.BaseController;
-import cn.qihangerp.service.ISysUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;

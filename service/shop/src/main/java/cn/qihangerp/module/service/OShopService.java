@@ -1,7 +1,7 @@
 package cn.qihangerp.module.service;
 
 import cn.qihangerp.common.enums.EnumShopType;
-import cn.qihangerp.domain.OShop;
+import cn.qihangerp.model.entity.OShop;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 import java.util.List;

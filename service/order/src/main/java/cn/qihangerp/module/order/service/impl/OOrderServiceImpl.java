@@ -1,6 +1,6 @@
 package cn.qihangerp.module.order.service.impl;
 
-import cn.qihangerp.domain.OLogisticsCompany;
+import cn.qihangerp.model.entity.OLogisticsCompany;
 import cn.qihangerp.model.entity.OGoods;
 import cn.qihangerp.model.entity.OGoodsSku;
 import cn.qihangerp.model.entity.OGoodsSupplier;
@@ -15,7 +15,7 @@ import cn.qihangerp.module.order.domain.vo.OrderDiscountVo;
 import cn.qihangerp.module.order.domain.vo.SalesDailyVo;
 import cn.qihangerp.module.order.mapper.*;
 import cn.qihangerp.module.order.service.OOrderService;
-import cn.qihangerp.request.OrderSearchRequest;
+import cn.qihangerp.model.request.OrderSearchRequest;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;

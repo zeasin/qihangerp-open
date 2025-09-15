@@ -1,8 +1,7 @@
 package cn.qihangerp.module.service.impl;
 
-
-import cn.qihangerp.common.DictUtils;
-import cn.qihangerp.domain.SysDictData;
+import cn.qihangerp.model.entity.SysDictData;
+import cn.qihangerp.module.DictUtils;
 import cn.qihangerp.module.mapper.SysDictDataMapper;
 import cn.qihangerp.module.service.ISysDictDataService;
 import org.springframework.beans.factory.annotation.Autowired;

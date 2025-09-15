@@ -8,7 +8,7 @@ import cn.qihangerp.module.order.domain.bo.OfflineOrderCreateBo;
 import cn.qihangerp.module.order.domain.bo.OfflineOrderShipBo;
 import com.baomidou.mybatisplus.extension.service.IService;
 
-import cn.qihangerp.request.OrderSearchRequest;
+import cn.qihangerp.model.request.OrderSearchRequest;
 
 
 /**

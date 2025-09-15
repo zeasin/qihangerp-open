@@ -1,6 +1,6 @@
 package cn.qihangerp.module.service;
 
-import cn.qihangerp.domain.OShopPullLasttime;
+import cn.qihangerp.model.entity.OShopPullLasttime;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**

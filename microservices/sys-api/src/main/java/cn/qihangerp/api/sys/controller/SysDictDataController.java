@@ -3,7 +3,7 @@ package cn.qihangerp.api.sys.controller;
 import cn.qihangerp.common.AjaxResult;
 import cn.qihangerp.common.TableDataInfo;
 import cn.qihangerp.common.utils.StringUtils;
-import cn.qihangerp.domain.SysDictData;
+import cn.qihangerp.model.entity.SysDictData;
 import cn.qihangerp.module.service.ISysDictDataService;
 import cn.qihangerp.module.service.ISysDictTypeService;
 import cn.qihangerp.security.common.BaseController;
@@ -70,7 +70,7 @@ public class SysDictDataController extends BaseController
     @PostMapping
     public AjaxResult add(@Validated @RequestBody SysDictData dict)
     {
-        dict.setCreateBy(getUsername());
+//        dict.setCreateBy(getUsername());
         return toAjax(dictDataService.insertDictData(dict));
     }
 
@@ -81,7 +81,7 @@ public class SysDictDataController extends BaseController
     @PutMapping
     public AjaxResult edit(@Validated @RequestBody SysDictData dict)
     {
-        dict.setUpdateBy(getUsername());
+//        dict.setUpdateBy(getUsername());
         return toAjax(dictDataService.updateDictData(dict));
     }
 

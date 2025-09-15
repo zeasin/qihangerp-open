@@ -8,7 +8,7 @@ import cn.qihangerp.module.order.domain.bo.OrderAllocateShipRequest;
 import cn.qihangerp.module.order.domain.bo.OrderShipRequest;
 import cn.qihangerp.module.order.service.OOrderItemService;
 import cn.qihangerp.module.order.service.OOrderService;
-import cn.qihangerp.request.OrderSearchRequest;
+import cn.qihangerp.model.request.OrderSearchRequest;
 import cn.qihangerp.security.common.BaseController;
 import lombok.AllArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;

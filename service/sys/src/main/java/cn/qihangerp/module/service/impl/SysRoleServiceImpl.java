@@ -1,15 +1,11 @@
 package cn.qihangerp.module.service.impl;
 
-
-
 import cn.qihangerp.common.ServiceException;
 import cn.qihangerp.common.constant.UserConstants;
 import cn.qihangerp.common.utils.SpringUtils;
 import cn.qihangerp.common.utils.StringUtils;
-
-
-import cn.qihangerp.domain.SysRole;
-import cn.qihangerp.domain.SysUser;
+import cn.qihangerp.model.entity.SysRole;
+import cn.qihangerp.model.entity.SysUser;
 import cn.qihangerp.module.domain.SysRoleMenu;
 import cn.qihangerp.module.domain.SysUserRole;
 import cn.qihangerp.module.mapper.SysRoleMapper;

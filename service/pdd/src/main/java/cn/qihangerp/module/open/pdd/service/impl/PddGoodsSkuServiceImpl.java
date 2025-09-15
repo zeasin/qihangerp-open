@@ -3,7 +3,7 @@ package cn.qihangerp.module.open.pdd.service.impl;
 import cn.qihangerp.common.PageQuery;
 import cn.qihangerp.common.PageResult;
 import cn.qihangerp.common.ResultVo;
-import cn.qihangerp.domain.bo.LinkErpGoodsSkuBo;
+import cn.qihangerp.model.bo.LinkErpGoodsSkuBo;
 import cn.qihangerp.model.entity.OGoods;
 import cn.qihangerp.model.entity.OGoodsSku;
 import cn.qihangerp.module.goods.service.OGoodsService;

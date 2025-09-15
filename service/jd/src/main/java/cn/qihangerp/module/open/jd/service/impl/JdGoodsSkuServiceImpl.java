@@ -1,7 +1,7 @@
 package cn.qihangerp.module.open.jd.service.impl;
 
 import cn.qihangerp.common.ResultVo;
-import cn.qihangerp.domain.bo.LinkErpGoodsSkuBo;
+import cn.qihangerp.model.bo.LinkErpGoodsSkuBo;
 import cn.qihangerp.model.entity.OGoods;
 import cn.qihangerp.model.entity.OGoodsSku;
 import cn.qihangerp.module.goods.service.OGoodsService;

@@ -3,18 +3,16 @@ package cn.qihangerp.api.sys.controller;
 import cn.qihangerp.api.sys.model.CurrentUserDTO;
 import cn.qihangerp.common.AjaxResult;
 import cn.qihangerp.common.utils.StringUtils;
-import cn.qihangerp.domain.SysUser;
+import cn.qihangerp.interfaces.ISysUserService;
+import cn.qihangerp.model.entity.SysUser;
 import cn.qihangerp.security.LoginUser;
 import cn.qihangerp.security.TokenService;
 import cn.qihangerp.security.common.BaseController;
 import cn.qihangerp.security.common.SecurityUtils;
-import cn.qihangerp.service.ISysUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Map;
 import java.util.Set;
 
 /**

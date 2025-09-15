@@ -1,7 +1,6 @@
 package cn.qihangerp.module.mapper;
 
-
-import cn.qihangerp.domain.SysTaskLogs;
+import cn.qihangerp.model.entity.SysTaskLogs;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**

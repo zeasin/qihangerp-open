@@ -2,7 +2,7 @@ package cn.qihangerp.api.controller;
 
 import cn.qihangerp.common.AjaxResult;
 import cn.qihangerp.common.TableDataInfo;
-import cn.qihangerp.domain.OShopPlatform;
+import cn.qihangerp.model.entity.OShopPlatform;
 import cn.qihangerp.module.service.OShopPlatformService;
 import cn.qihangerp.module.service.OShopService;
 import cn.qihangerp.security.common.BaseController;

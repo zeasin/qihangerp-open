@@ -2,7 +2,7 @@ package cn.qihangerp.api.wei.controller;
 
 
 import cn.qihangerp.common.*;
-import cn.qihangerp.domain.bo.LinkErpGoodsSkuBo;
+import cn.qihangerp.model.bo.LinkErpGoodsSkuBo;
 import cn.qihangerp.module.goods.service.OGoodsSkuService;
 import cn.qihangerp.module.open.wei.domain.OmsWeiGoodsSku;
 import cn.qihangerp.module.open.wei.service.OmsWeiGoodsSkuService;

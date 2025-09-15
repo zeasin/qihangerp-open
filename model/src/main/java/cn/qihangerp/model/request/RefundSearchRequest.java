@@ -1,4 +1,4 @@
-package cn.qihangerp.request;
+package cn.qihangerp.model.request;
 
 import lombok.Data;
 

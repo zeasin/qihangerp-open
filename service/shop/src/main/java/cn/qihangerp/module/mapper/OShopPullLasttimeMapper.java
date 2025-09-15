@@ -1,6 +1,6 @@
 package cn.qihangerp.module.mapper;
 
-import cn.qihangerp.domain.OShopPullLasttime;
+import cn.qihangerp.model.entity.OShopPullLasttime;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**

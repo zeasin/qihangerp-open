@@ -4,7 +4,7 @@ import cn.qihangerp.common.PageQuery;
 import cn.qihangerp.common.PageResult;
 
 import cn.qihangerp.module.order.domain.OfflineRefund;
-import cn.qihangerp.request.RefundSearchRequest;
+import cn.qihangerp.model.request.RefundSearchRequest;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**

@@ -15,6 +15,7 @@
     <module>service</module>
     <module>microservices</module>
     <module>model</module>
+      <module>interfaces</module>
   </modules>
 
   <properties>

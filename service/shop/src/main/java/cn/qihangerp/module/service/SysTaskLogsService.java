@@ -1,9 +1,8 @@
 package cn.qihangerp.module.service;
 
-
 import cn.qihangerp.common.PageQuery;
 import cn.qihangerp.common.PageResult;
-import cn.qihangerp.domain.SysTaskLogs;
+import cn.qihangerp.model.entity.SysTaskLogs;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**

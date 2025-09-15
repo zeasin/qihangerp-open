@@ -1,6 +1,6 @@
 package cn.qihangerp.module.mapper;
 
-import cn.qihangerp.domain.OShopPullLogs;
+import cn.qihangerp.model.entity.OShopPullLogs;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**

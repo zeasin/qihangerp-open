@@ -1,8 +1,6 @@
 package cn.qihangerp.module.service;
 
-
-
-import cn.qihangerp.domain.SysUser;
+import cn.qihangerp.model.entity.SysUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

@@ -1,18 +1,15 @@
 package cn.qihangerp.module.service.impl;
 
-
 import cn.qihangerp.common.ServiceException;
 import cn.qihangerp.common.constant.UserConstants;
 import cn.qihangerp.common.utils.StringUtils;
-
-
-import cn.qihangerp.domain.SysRole;
-import cn.qihangerp.domain.SysUser;
+import cn.qihangerp.interfaces.ISysUserService;
+import cn.qihangerp.model.entity.SysRole;
+import cn.qihangerp.model.entity.SysUser;
 import cn.qihangerp.module.domain.SysUserRole;
 import cn.qihangerp.module.mapper.SysRoleMapper;
 import cn.qihangerp.module.mapper.SysUserMapper;
 import cn.qihangerp.module.mapper.SysUserRoleMapper;
-import cn.qihangerp.service.ISysUserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,7 +1,6 @@
 package cn.qihangerp.module.mapper;
 
-
-import cn.qihangerp.domain.SysUser;
+import cn.qihangerp.model.entity.SysUser;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 

@@ -1,7 +1,6 @@
-package cn.qihangerp.domain.vo;
+package cn.qihangerp.model.vo;
 
-
-import cn.qihangerp.common.utils.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 
 /**
  * 路由显示信息
@@ -10,6 +9,7 @@ import cn.qihangerp.common.utils.StringUtils;
  */
 public class MetaVo
 {
+
     /**
      * 设置该路由在侧边栏和面包屑中展示的名字
      */
@@ -61,12 +61,21 @@ public class MetaVo
         this.title = title;
         this.icon = icon;
         this.noCache = noCache;
-        if (StringUtils.ishttp(link))
+        if (ishttp(link))
         {
             this.link = link;
         }
     }
-
+    /**
+     * 是否为http(s)://开头
+     *
+     * @param link 链接
+     * @return 结果
+     */
+    public static boolean ishttp(String link)
+    {
+        return org.apache.commons.lang3.StringUtils.startsWithAny(link, "http://", "https://");
+    }
     public boolean isNoCache()
     {
         return noCache;

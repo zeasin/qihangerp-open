@@ -18,7 +18,7 @@ import cn.qihangerp.common.mq.MqMessage;
 import cn.qihangerp.common.mq.MqType;
 import cn.qihangerp.common.mq.MqUtils;
 
-import cn.qihangerp.request.OrderSearchRequest;
+import cn.qihangerp.model.request.OrderSearchRequest;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;

@@ -3,7 +3,7 @@ package cn.qihangerp.api.order.controller;
 import cn.qihangerp.common.PageQuery;
 import cn.qihangerp.common.TableDataInfo;
 import cn.qihangerp.module.order.service.OfflineRefundService;
-import cn.qihangerp.request.RefundSearchRequest;
+import cn.qihangerp.model.request.RefundSearchRequest;
 import cn.qihangerp.security.common.BaseController;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;

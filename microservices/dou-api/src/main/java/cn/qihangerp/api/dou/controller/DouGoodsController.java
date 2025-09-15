@@ -2,7 +2,7 @@ package cn.qihangerp.api.dou.controller;
 
 
 import cn.qihangerp.common.*;
-import cn.qihangerp.domain.bo.LinkErpGoodsSkuBo;
+import cn.qihangerp.model.bo.LinkErpGoodsSkuBo;
 import cn.qihangerp.module.goods.service.OGoodsSkuService;
 import cn.qihangerp.module.open.dou.domain.DouGoods;
 import cn.qihangerp.module.open.dou.domain.DouGoodsSku;

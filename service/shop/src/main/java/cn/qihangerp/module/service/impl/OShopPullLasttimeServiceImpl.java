@@ -1,11 +1,10 @@
 package cn.qihangerp.module.service.impl;
 
+import cn.qihangerp.model.entity.OShopPullLasttime;
 import cn.qihangerp.module.mapper.OShopPullLasttimeMapper;
 import cn.qihangerp.module.service.OShopPullLasttimeService;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import cn.qihangerp.domain.OShopPullLasttime;
-
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 

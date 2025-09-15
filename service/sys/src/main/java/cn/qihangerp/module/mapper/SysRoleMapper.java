@@ -1,9 +1,6 @@
 package cn.qihangerp.module.mapper;
 
-
-
-
-import cn.qihangerp.domain.SysRole;
+import cn.qihangerp.model.entity.SysRole;
 
 import java.util.List;
 

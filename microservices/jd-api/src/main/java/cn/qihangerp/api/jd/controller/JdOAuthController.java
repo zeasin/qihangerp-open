@@ -1,7 +1,7 @@
 package cn.qihangerp.api.jd.controller;
 
 import cn.qihangerp.common.AjaxResult;
-import cn.qihangerp.domain.OShopPlatform;
+import cn.qihangerp.model.entity.OShopPlatform;
 import cn.qihangerp.module.open.jd.domain.bo.JdTokenCreateBo;
 import cn.qihangerp.module.service.OShopPlatformService;
 import cn.qihangerp.module.service.OShopService;

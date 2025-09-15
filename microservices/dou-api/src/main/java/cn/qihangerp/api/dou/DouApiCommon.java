@@ -4,7 +4,7 @@ import cn.qihangerp.common.ResultVo;
 import cn.qihangerp.common.api.ShopApiParams;
 import cn.qihangerp.common.enums.EnumShopType;
 import cn.qihangerp.common.enums.HttpStatus;
-import cn.qihangerp.domain.OShopPlatform;
+import cn.qihangerp.model.entity.OShopPlatform;
 import cn.qihangerp.module.service.OShopPlatformService;
 import cn.qihangerp.module.service.OShopService;
 import lombok.AllArgsConstructor;

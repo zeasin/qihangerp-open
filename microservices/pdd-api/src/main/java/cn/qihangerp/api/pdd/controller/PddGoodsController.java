@@ -1,7 +1,7 @@
 package cn.qihangerp.api.pdd.controller;
 
 import cn.qihangerp.common.*;
-import cn.qihangerp.domain.bo.LinkErpGoodsSkuBo;
+import cn.qihangerp.model.bo.LinkErpGoodsSkuBo;
 import cn.qihangerp.module.goods.service.OGoodsSkuService;
 import cn.qihangerp.module.open.pdd.domain.PddGoods;
 import cn.qihangerp.module.open.pdd.domain.PddGoodsSku;

@@ -1,13 +1,13 @@
 package cn.qihangerp.module.mapper;
 
-import cn.qihangerp.domain.OShopPlatform;
+import cn.qihangerp.model.entity.OShopPlatform;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**
 * @author qilip
 * @description 针对表【o_shop_platform(店铺平台配置表)】的数据库操作Mapper
 * @createDate 2024-07-27 18:06:22
-* @Entity cn.qihangerp.domain.OShopPlatform
+* @Entity cn.qihangerp.model.entity.OShopPlatform
 */
 public interface OShopPlatformMapper extends BaseMapper<OShopPlatform> {
 

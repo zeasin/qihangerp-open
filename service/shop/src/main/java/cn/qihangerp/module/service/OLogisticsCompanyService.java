@@ -2,7 +2,7 @@ package cn.qihangerp.module.service;
 
 import cn.qihangerp.common.PageQuery;
 import cn.qihangerp.common.PageResult;
-import cn.qihangerp.domain.OLogisticsCompany;
+import cn.qihangerp.model.entity.OLogisticsCompany;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 import java.util.List;

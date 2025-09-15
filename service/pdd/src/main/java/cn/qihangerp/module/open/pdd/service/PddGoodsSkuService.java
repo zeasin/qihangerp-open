@@ -3,10 +3,8 @@ package cn.qihangerp.module.open.pdd.service;
 import cn.qihangerp.common.PageQuery;
 import cn.qihangerp.common.PageResult;
 import cn.qihangerp.common.ResultVo;
-import cn.qihangerp.domain.bo.LinkErpGoodsSkuBo;
+import cn.qihangerp.model.bo.LinkErpGoodsSkuBo;
 import cn.qihangerp.module.open.pdd.domain.PddGoodsSku;
-import cn.qihangerp.module.open.pdd.domain.bo.PddGoodsBo;
-import cn.qihangerp.module.open.pdd.domain.vo.PddGoodsSkuListVo;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 

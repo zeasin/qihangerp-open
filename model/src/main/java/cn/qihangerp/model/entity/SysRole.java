@@ -1,4 +1,4 @@
-package cn.qihangerp.domain;
+package cn.qihangerp.model.entity;
 
 import java.util.Date;
 import java.util.Map;

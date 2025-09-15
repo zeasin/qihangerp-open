@@ -1,14 +1,12 @@
 package cn.qihangerp.module.service.impl;
 
-
 import cn.qihangerp.common.constant.Constants;
 import cn.qihangerp.common.constant.UserConstants;
 import cn.qihangerp.common.utils.StringUtils;
-
-import cn.qihangerp.domain.SysRole;
-import cn.qihangerp.domain.SysUser;
-import cn.qihangerp.domain.vo.MetaVo;
-import cn.qihangerp.domain.vo.RouterVo;
+import cn.qihangerp.model.entity.SysRole;
+import cn.qihangerp.model.entity.SysUser;
+import cn.qihangerp.model.vo.MetaVo;
+import cn.qihangerp.model.vo.RouterVo;
 import cn.qihangerp.module.domain.SysMenu;
 import cn.qihangerp.module.domain.vo.TreeSelect;
 import cn.qihangerp.module.mapper.SysMenuMapper;

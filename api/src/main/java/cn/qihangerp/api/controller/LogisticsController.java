@@ -4,7 +4,7 @@
 //import cn.qihangerp.common.PageQuery;
 //import cn.qihangerp.common.PageResult;
 //import cn.qihangerp.common.TableDataInfo;
-//import cn.qihangerp.domain.OLogisticsCompany;
+//import cn.qihangerp.model.entity.OLogisticsCompany;
 //import cn.qihangerp.module.service.OLogisticsCompanyService;
 //import cn.qihangerp.module.service.OShopPlatformService;
 //import cn.qihangerp.module.service.OShopService;

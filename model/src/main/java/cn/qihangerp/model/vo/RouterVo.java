@@ -1,4 +1,4 @@
-package cn.qihangerp.domain.vo;
+package cn.qihangerp.model.vo;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 

@@ -1,6 +1,6 @@
 package cn.qihangerp.security;
 
-import cn.qihangerp.domain.SysUser;
+import cn.qihangerp.model.entity.SysUser;
 import com.alibaba.fastjson2.annotation.JSONField;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;

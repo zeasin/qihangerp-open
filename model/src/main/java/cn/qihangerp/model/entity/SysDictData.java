@@ -1,7 +1,5 @@
-package cn.qihangerp.domain;
+package cn.qihangerp.model.entity;
 
-
-import cn.qihangerp.common.constant.UserConstants;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
@@ -115,7 +113,7 @@ public class SysDictData extends BaseEntity
 
     public boolean getDefault()
     {
-        return UserConstants.YES.equals(this.isDefault);
+        return "Y".equals(this.isDefault);
     }
 
     public String getIsDefault()
@@ -137,24 +135,5 @@ public class SysDictData extends BaseEntity
     {
         this.status = status;
     }
-    
-    @Override
-    public String toString() {
-        return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
-            .append("dictCode", getDictCode())
-            .append("dictSort", getDictSort())
-            .append("dictLabel", getDictLabel())
-            .append("dictValue", getDictValue())
-            .append("dictType", getDictType())
-            .append("cssClass", getCssClass())
-            .append("listClass", getListClass())
-            .append("isDefault", getIsDefault())
-            .append("status", getStatus())
-            .append("createBy", getCreateBy())
-            .append("createTime", getCreateTime())
-            .append("updateBy", getUpdateBy())
-            .append("updateTime", getUpdateTime())
-            .append("remark", getRemark())
-            .toString();
-    }
+
 }

@@ -1,8 +1,6 @@
 package cn.qihangerp.module.service.impl;
 
-
-import cn.qihangerp.domain.SysTaskLogs;
-
+import cn.qihangerp.model.entity.SysTaskLogs;
 import cn.qihangerp.module.mapper.SysTaskLogsMapper;
 import cn.qihangerp.module.service.SysTaskLogsService;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;

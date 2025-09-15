@@ -5,7 +5,7 @@ import cn.qihangerp.common.PageResult;
 import cn.qihangerp.module.order.domain.OfflineRefund;
 import cn.qihangerp.module.order.mapper.OfflineRefundMapper;
 import cn.qihangerp.module.order.service.OfflineRefundService;
-import cn.qihangerp.request.RefundSearchRequest;
+import cn.qihangerp.model.request.RefundSearchRequest;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;

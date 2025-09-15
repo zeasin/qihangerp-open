@@ -1,4 +1,4 @@
-package cn.qihangerp.domain;
+package cn.qihangerp.model.entity;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;

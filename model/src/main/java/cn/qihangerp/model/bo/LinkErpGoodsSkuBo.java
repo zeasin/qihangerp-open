@@ -1,4 +1,4 @@
-package cn.qihangerp.domain.bo;
+package cn.qihangerp.model.bo;
 
 import lombok.Data;
 

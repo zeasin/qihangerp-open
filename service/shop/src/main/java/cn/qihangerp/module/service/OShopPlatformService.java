@@ -1,6 +1,6 @@
 package cn.qihangerp.module.service;
 
-import cn.qihangerp.domain.OShopPlatform;
+import cn.qihangerp.model.entity.OShopPlatform;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**

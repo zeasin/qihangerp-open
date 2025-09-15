@@ -1,7 +1,6 @@
-package cn.qihangerp.service;
+package cn.qihangerp.interfaces;
 
-
-import cn.qihangerp.domain.SysUser;
+import cn.qihangerp.model.entity.SysUser;
 
 import java.util.List;
 

@@ -1,25 +1,19 @@
 package cn.qihangerp.api.sys.controller;
 
-
-import cn.qihangerp.domain.SysUser;
+import cn.qihangerp.model.entity.SysUser;
 import cn.qihangerp.module.domain.LoginBody;
 import cn.qihangerp.module.domain.SysMenu;
 import cn.qihangerp.module.service.ISysMenuService;
 import cn.qihangerp.module.service.SysPermissionService;
 import cn.qihangerp.security.common.Constants;
-
-
 import cn.qihangerp.common.AjaxResult;
 import cn.qihangerp.security.common.SecurityUtils;
 import cn.qihangerp.security.service.SysLoginService;
-
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;

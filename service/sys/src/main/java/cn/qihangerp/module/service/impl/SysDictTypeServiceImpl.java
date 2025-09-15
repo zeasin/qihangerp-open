@@ -1,13 +1,10 @@
 package cn.qihangerp.module.service.impl;
 
-
-
-import cn.qihangerp.common.DictUtils;
 import cn.qihangerp.common.ServiceException;
 import cn.qihangerp.common.constant.UserConstants;
 import cn.qihangerp.common.utils.StringUtils;
-
-import cn.qihangerp.domain.SysDictData;
+import cn.qihangerp.model.entity.SysDictData;
+import cn.qihangerp.module.DictUtils;
 import cn.qihangerp.module.domain.SysDictType;
 import cn.qihangerp.module.mapper.SysDictDataMapper;
 import cn.qihangerp.module.mapper.SysDictTypeMapper;
