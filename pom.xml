@@ -12,7 +12,7 @@
   <modules>
     <module>core</module>
     <module>api</module>
-    <module>module</module>
+    <module>service</module>
     <module>microservices</module>
   </modules>
 
