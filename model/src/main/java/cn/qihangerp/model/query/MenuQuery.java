@@ -1,4 +1,4 @@
-package cn.qihangerp.api.model.query;
+package cn.qihangerp.model.query;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;

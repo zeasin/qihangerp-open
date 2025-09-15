@@ -26,7 +26,7 @@
             <systemPath>${project.basedir}/libs/open-sdk-1.4.20.jar</systemPath>
         </dependency>
         <dependency>
-            <groupId>cn.qihangerp.module</groupId>
+            <groupId>cn.qihangerp.service</groupId>
             <artifactId>wei</artifactId>
             <version>1.0</version>
         </dependency>

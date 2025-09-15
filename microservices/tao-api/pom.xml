@@ -26,12 +26,12 @@
             <systemPath>${project.basedir}/libs/open-sdk-1.4.20.jar</systemPath>
         </dependency>
         <dependency>
-            <groupId>cn.qihangerp.module</groupId>
+            <groupId>cn.qihangerp.service</groupId>
             <artifactId>tao</artifactId>
             <version>1.0</version>
         </dependency>
         <dependency>
-            <groupId>cn.qihangerp.module</groupId>
+            <groupId>cn.qihangerp.service</groupId>
             <artifactId>shop</artifactId>
             <version>1.0</version>
         </dependency>

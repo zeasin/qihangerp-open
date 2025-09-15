@@ -106,7 +106,7 @@
         </dependency>
 
         <dependency>
-            <groupId>cn.qihangerp.module</groupId>
+            <groupId>cn.qihangerp.service</groupId>
             <artifactId>erp</artifactId>
             <version>1.0</version>
         </dependency>
@@ -153,7 +153,7 @@
 
 
         <dependency>
-            <groupId>cn.qihangerp.module</groupId>
+            <groupId>cn.qihangerp.service</groupId>
             <artifactId>sys</artifactId>
             <version>1.0</version>
         </dependency>
@@ -164,63 +164,63 @@
 <!--
       </dependency>-->
         <dependency>
-            <groupId>cn.qihangerp.module</groupId>
+            <groupId>cn.qihangerp.service</groupId>
             <artifactId>shop</artifactId>
             <version>1.0</version>
         </dependency>
 <!--        <dependency>-->
-<!--            <groupId>cn.qihangerp.module</groupId>-->
+<!--            <groupId>cn.qihangerp.service</groupId>-->
 <!--            <artifactId>goods</artifactId>-->
 <!--            <version>1.0</version>-->
 <!--        </dependency>-->
 
 <!--        <dependency>-->
-<!--            <groupId>cn.qihangerp.module</groupId>-->
+<!--            <groupId>cn.qihangerp.service</groupId>-->
 <!--            <artifactId>order</artifactId>-->
 <!--            <version>1.0</version>-->
 <!--        </dependency>-->
 <!--        <dependency>-->
-<!--            <groupId>cn.qihangerp.module</groupId>-->
+<!--            <groupId>cn.qihangerp.service</groupId>-->
 <!--            <artifactId>scm</artifactId>-->
 <!--            <version>1.0</version>-->
 <!--        </dependency>-->
         <dependency>
-            <groupId>cn.qihangerp.module</groupId>
+            <groupId>cn.qihangerp.service</groupId>
             <artifactId>stock</artifactId>
             <version>1.0</version>
         </dependency>
         <dependency>
-            <groupId>cn.qihangerp.module</groupId>
+            <groupId>cn.qihangerp.service</groupId>
             <artifactId>tao</artifactId>
             <version>1.0</version>
         </dependency>
         <dependency>
-            <groupId>cn.qihangerp.module</groupId>
+            <groupId>cn.qihangerp.service</groupId>
             <artifactId>jd</artifactId>
             <version>1.0</version>
         </dependency>
         <dependency>
-            <groupId>cn.qihangerp.module</groupId>
+            <groupId>cn.qihangerp.service</groupId>
             <artifactId>pdd</artifactId>
             <version>1.0</version>
         </dependency>
         <dependency>
-            <groupId>cn.qihangerp.module</groupId>
+            <groupId>cn.qihangerp.service</groupId>
             <artifactId>dou</artifactId>
             <version>1.0</version>
         </dependency>
         <dependency>
-            <groupId>cn.qihangerp.module</groupId>
+            <groupId>cn.qihangerp.service</groupId>
             <artifactId>wei</artifactId>
             <version>1.0</version>
         </dependency>
         <dependency>
-            <groupId>cn.qihangerp.module</groupId>
+            <groupId>cn.qihangerp.service</groupId>
             <artifactId>goods</artifactId>
             <version>1.0</version>
         </dependency>
         <dependency>
-            <groupId>cn.qihangerp.module</groupId>
+            <groupId>cn.qihangerp.service</groupId>
             <artifactId>order</artifactId>
             <version>1.0</version>
         </dependency>

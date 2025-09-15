@@ -1,7 +1,8 @@
-package cn.qihangerp.api.model.form;
+package cn.qihangerp.model.form;
 
 
-import cn.qihangerp.api.model.KeyValue;
+
+import cn.qihangerp.model.KeyValue;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import org.hibernate.validator.constraints.Range;

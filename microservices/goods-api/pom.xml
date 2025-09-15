@@ -20,7 +20,7 @@
 
     <dependencies>
         <dependency>
-            <groupId>cn.qihangerp.module</groupId>
+            <groupId>cn.qihangerp.service</groupId>
             <artifactId>goods</artifactId>
             <version>1.0</version>
         </dependency>

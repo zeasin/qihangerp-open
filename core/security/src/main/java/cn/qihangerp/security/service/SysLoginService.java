@@ -1,7 +1,6 @@
 package cn.qihangerp.security.service;
 
 
-
 import cn.qihangerp.common.ServiceException;
 import cn.qihangerp.common.config.RedisCache;
 import cn.qihangerp.common.constant.CacheConstants;
@@ -11,7 +10,6 @@ import cn.qihangerp.common.exception.CaptchaExpireException;
 import cn.qihangerp.common.exception.UserNotExistsException;
 import cn.qihangerp.common.utils.DateUtils;
 import cn.qihangerp.common.utils.StringUtils;
-import cn.qihangerp.module.service.SysConfigService;
 import cn.qihangerp.security.AuthenticationContextHolder;
 import cn.qihangerp.security.LoginUser;
 import cn.qihangerp.security.TokenService;
@@ -48,8 +46,8 @@ public class SysLoginService
     @Autowired
     private ISysUserService userService;
 
-    @Autowired
-    private SysConfigService configService;
+//    @Autowired
+//    private SysConfigService configService;
 
     /**
      * 登录验证
@@ -147,8 +145,8 @@ public class SysLoginService
      */
     public void validateCaptcha(String username, String code, String uuid)
     {
-        boolean captchaEnabled = configService.selectCaptchaEnabled();
-//        boolean captchaEnabled = true;
+//        boolean captchaEnabled = configService.selectCaptchaEnabled();
+        boolean captchaEnabled = false;
         if (captchaEnabled)
         {
             String verifyKey = CacheConstants.CAPTCHA_CODE_KEY + StringUtils.nvl(uuid, "");

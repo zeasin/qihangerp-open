@@ -1,9 +1,8 @@
-package cn.qihangerp.api.converter;
+package cn.qihangerp.model.converter;
 
-
-import cn.qihangerp.api.model.entity.Menu;
-import cn.qihangerp.api.model.form.MenuForm;
-import cn.qihangerp.api.model.vo.MenuVO;
+import cn.qihangerp.model.entity.Menu;
+import cn.qihangerp.model.form.MenuForm;
+import cn.qihangerp.model.vo.MenuVO;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 

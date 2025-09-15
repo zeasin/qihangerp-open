@@ -1,4 +1,4 @@
-package cn.qihangerp.api.model.entity;
+package cn.qihangerp.model.entity;
 
 import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.IdType;
