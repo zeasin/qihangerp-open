@@ -2,10 +2,10 @@ package cn.qihangerp.module.erp.service;
 
 import cn.qihangerp.common.PageQuery;
 import cn.qihangerp.common.PageResult;
-import cn.qihangerp.module.erp.bo.PurchaseOrderAddBo;
-import cn.qihangerp.module.erp.bo.PurchaseOrderOptionBo;
-import cn.qihangerp.module.erp.bo.SearchBo;
-import cn.qihangerp.module.erp.domain.ErpPurchaseOrder;
+import cn.qihangerp.model.bo.PurchaseOrderAddBo;
+import cn.qihangerp.model.bo.PurchaseOrderOptionBo;
+import cn.qihangerp.model.entity.ErpPurchaseOrder;
+import cn.qihangerp.model.query.SearchBo;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**

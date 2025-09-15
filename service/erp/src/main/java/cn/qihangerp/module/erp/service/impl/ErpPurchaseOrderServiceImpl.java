@@ -3,18 +3,20 @@ package cn.qihangerp.module.erp.service.impl;
 import cn.qihangerp.common.PageQuery;
 import cn.qihangerp.common.PageResult;
 import cn.qihangerp.common.utils.DateUtils;
-import cn.qihangerp.module.erp.bo.PurchaseOrderAddItemBo;
-import cn.qihangerp.module.erp.bo.PurchaseOrderAddBo;
-import cn.qihangerp.module.erp.bo.PurchaseOrderOptionBo;
-import cn.qihangerp.module.erp.bo.SearchBo;
-import cn.qihangerp.module.erp.domain.ErpPurchaseOrderItem;
-import cn.qihangerp.module.erp.domain.ErpPurchaseOrderShip;
+
+import cn.qihangerp.model.bo.PurchaseOrderAddBo;
+import cn.qihangerp.model.bo.PurchaseOrderAddItemBo;
+import cn.qihangerp.model.bo.PurchaseOrderOptionBo;
+import cn.qihangerp.model.entity.ErpPurchaseOrder;
+import cn.qihangerp.model.entity.ErpPurchaseOrderItem;
+import cn.qihangerp.model.entity.ErpPurchaseOrderShip;
+import cn.qihangerp.model.query.SearchBo;
 import cn.qihangerp.module.erp.mapper.ErpPurchaseOrderItemMapper;
 import cn.qihangerp.module.erp.mapper.ErpPurchaseOrderShipMapper;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import cn.qihangerp.module.erp.domain.ErpPurchaseOrder;
+
 import cn.qihangerp.module.erp.service.ErpPurchaseOrderService;
 import cn.qihangerp.module.erp.mapper.ErpPurchaseOrderMapper;
 import lombok.AllArgsConstructor;

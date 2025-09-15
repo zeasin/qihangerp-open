@@ -1,4 +1,4 @@
-package cn.qihangerp.module.erp.bo;
+package cn.qihangerp.model.bo;
 
 
 

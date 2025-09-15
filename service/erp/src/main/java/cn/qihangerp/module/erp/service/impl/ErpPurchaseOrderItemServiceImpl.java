@@ -1,7 +1,7 @@
 package cn.qihangerp.module.erp.service.impl;
 
+import cn.qihangerp.model.entity.ErpPurchaseOrderItem;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import cn.qihangerp.module.erp.domain.ErpPurchaseOrderItem;
 import cn.qihangerp.module.erp.service.ErpPurchaseOrderItemService;
 import cn.qihangerp.module.erp.mapper.ErpPurchaseOrderItemMapper;
 import org.springframework.stereotype.Service;
