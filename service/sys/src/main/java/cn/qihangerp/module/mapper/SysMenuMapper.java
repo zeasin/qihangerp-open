@@ -2,7 +2,7 @@ package cn.qihangerp.module.mapper;
 
 
 
-import cn.qihangerp.module.domain.SysMenu;
+import cn.qihangerp.model.entity.SysMenu;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;

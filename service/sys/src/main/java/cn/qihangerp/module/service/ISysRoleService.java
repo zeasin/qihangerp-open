@@ -1,7 +1,7 @@
 package cn.qihangerp.module.service;
 
 import cn.qihangerp.model.entity.SysRole;
-import cn.qihangerp.module.domain.SysUserRole;
+import cn.qihangerp.model.entity.SysUserRole;
 
 import java.util.List;
 import java.util.Set;

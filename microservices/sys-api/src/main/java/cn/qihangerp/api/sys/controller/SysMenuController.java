@@ -6,7 +6,7 @@ package cn.qihangerp.api.sys.controller;
 import cn.qihangerp.common.AjaxResult;
 import cn.qihangerp.common.constant.UserConstants;
 import cn.qihangerp.common.utils.StringUtils;
-import cn.qihangerp.module.domain.SysMenu;
+import cn.qihangerp.model.entity.SysMenu;
 import cn.qihangerp.module.service.ISysMenuService;
 import cn.qihangerp.security.common.BaseController;
 import org.springframework.beans.factory.annotation.Autowired;

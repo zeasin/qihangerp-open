@@ -5,7 +5,7 @@ import cn.qihangerp.common.constant.UserConstants;
 import cn.qihangerp.common.utils.StringUtils;
 import cn.qihangerp.model.entity.SysDictData;
 import cn.qihangerp.module.DictUtils;
-import cn.qihangerp.module.domain.SysDictType;
+import cn.qihangerp.model.entity.SysDictType;
 import cn.qihangerp.module.mapper.SysDictDataMapper;
 import cn.qihangerp.module.mapper.SysDictTypeMapper;
 import cn.qihangerp.module.service.ISysDictTypeService;

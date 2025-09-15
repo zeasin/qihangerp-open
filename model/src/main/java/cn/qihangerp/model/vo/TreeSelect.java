@@ -1,8 +1,7 @@
-package cn.qihangerp.module.domain.vo;
+package cn.qihangerp.model.vo;
 
-
-import cn.qihangerp.module.domain.SysDept;
-import cn.qihangerp.module.domain.SysMenu;
+import cn.qihangerp.model.entity.SysDept;
+import cn.qihangerp.model.entity.SysMenu;
 
 import java.io.Serializable;
 import java.util.List;

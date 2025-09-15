@@ -1,7 +1,7 @@
 package cn.qihangerp.module.mapper;
 
 
-import cn.qihangerp.module.domain.SysUserRole;
+import cn.qihangerp.model.entity.SysUserRole;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;

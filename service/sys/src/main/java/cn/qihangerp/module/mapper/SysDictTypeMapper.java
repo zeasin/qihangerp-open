@@ -3,7 +3,7 @@ package cn.qihangerp.module.mapper;
 
 
 
-import cn.qihangerp.module.domain.SysDictType;
+import cn.qihangerp.model.entity.SysDictType;
 
 import java.util.List;
 

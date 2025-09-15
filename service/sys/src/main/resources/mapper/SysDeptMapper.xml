@@ -4,7 +4,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.qihangerp.module.mapper.SysDeptMapper">
 
-	<resultMap type="cn.qihangerp.module.domain.SysDept" id="SysDeptResult">
+	<resultMap type="cn.qihangerp.model.entity.SysDept" id="SysDeptResult">
 		<id     property="deptId"     column="dept_id"     />
 		<result property="parentId"   column="parent_id"   />
 		<result property="ancestors"  column="ancestors"   />
@@ -27,7 +27,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         from sys_dept d
     </sql>
     
-	<select id="selectDeptList" parameterType="cn.qihangerp.module.domain.SysDept" resultMap="SysDeptResult">
+	<select id="selectDeptList" parameterType="cn.qihangerp.model.entity.SysDept" resultMap="SysDeptResult">
         <include refid="selectDeptVo"/>
         where d.del_flag = '0'
 		<if test="deptId != null and deptId != 0">
@@ -87,7 +87,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where dept_name=#{deptName} and parent_id = #{parentId} and del_flag = '0' limit 1
 	</select>
     
-    <insert id="insertDept" parameterType="cn.qihangerp.module.domain.SysDept">
+    <insert id="insertDept" parameterType="cn.qihangerp.model.entity.SysDept">
  		insert into sys_dept(
  			<if test="deptId != null and deptId != 0">dept_id,</if>
  			<if test="parentId != null and parentId != 0">parent_id,</if>
@@ -115,7 +115,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  		)
 	</insert>
 	
-	<update id="updateDept" parameterType="cn.qihangerp.module.domain.SysDept">
+	<update id="updateDept" parameterType="cn.qihangerp.model.entity.SysDept">
  		update sys_dept
  		<set>
  			<if test="parentId != null and parentId != 0">parent_id = #{parentId},</if>

@@ -6,7 +6,7 @@ import cn.qihangerp.common.utils.StringUtils;
 import cn.qihangerp.interfaces.ISysUserService;
 import cn.qihangerp.model.entity.SysRole;
 import cn.qihangerp.model.entity.SysUser;
-import cn.qihangerp.module.domain.SysDept;
+import cn.qihangerp.model.entity.SysDept;
 import cn.qihangerp.module.service.ISysDeptService;
 import cn.qihangerp.module.service.ISysRoleService;
 import cn.qihangerp.security.common.BaseController;

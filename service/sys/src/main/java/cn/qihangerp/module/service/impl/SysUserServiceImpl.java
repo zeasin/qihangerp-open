@@ -6,7 +6,7 @@ import cn.qihangerp.common.utils.StringUtils;
 import cn.qihangerp.interfaces.ISysUserService;
 import cn.qihangerp.model.entity.SysRole;
 import cn.qihangerp.model.entity.SysUser;
-import cn.qihangerp.module.domain.SysUserRole;
+import cn.qihangerp.model.entity.SysUserRole;
 import cn.qihangerp.module.mapper.SysRoleMapper;
 import cn.qihangerp.module.mapper.SysUserMapper;
 import cn.qihangerp.module.mapper.SysUserRoleMapper;

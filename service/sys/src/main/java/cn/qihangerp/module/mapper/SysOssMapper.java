@@ -1,7 +1,7 @@
 package cn.qihangerp.module.mapper;
 
 
-import cn.qihangerp.module.domain.SysOss;
+import cn.qihangerp.model.entity.SysOss;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**

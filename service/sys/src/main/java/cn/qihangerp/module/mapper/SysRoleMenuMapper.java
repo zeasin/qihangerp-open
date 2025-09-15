@@ -3,7 +3,7 @@ package cn.qihangerp.module.mapper;
 
 
 
-import cn.qihangerp.module.domain.SysRoleMenu;
+import cn.qihangerp.model.entity.SysRoleMenu;
 
 import java.util.List;
 

@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.qihangerp.module.mapper.SysOssMapper">
 
-    <resultMap id="BaseResultMap" type="cn.qihangerp.module.domain.SysOss">
+    <resultMap id="BaseResultMap" type="cn.qihangerp.model.entity.SysOss">
             <id property="ossId" column="oss_id" jdbcType="BIGINT"/>
             <result property="fileName" column="file_name" jdbcType="VARCHAR"/>
             <result property="originalName" column="original_name" jdbcType="VARCHAR"/>

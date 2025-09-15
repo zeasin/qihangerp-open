@@ -1,7 +1,7 @@
 package cn.qihangerp.module.service;
 
 
-import cn.qihangerp.module.domain.SysOss;
+import cn.qihangerp.model.entity.SysOss;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**

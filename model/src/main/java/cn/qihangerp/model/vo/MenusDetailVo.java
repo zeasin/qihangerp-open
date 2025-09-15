@@ -1,6 +1,4 @@
-package cn.qihangerp.module.domain.vo;
-
-import java.util.List;
+package cn.qihangerp.model.vo;
 
 public class MenusDetailVo {
     private String title;

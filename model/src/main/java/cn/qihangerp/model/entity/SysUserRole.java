@@ -1,4 +1,4 @@
-package cn.qihangerp.module.domain;
+package cn.qihangerp.model.entity;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;

@@ -1,6 +1,6 @@
 package cn.qihangerp.module.service.impl;
 
-import cn.qihangerp.module.domain.SysOss;
+import cn.qihangerp.model.entity.SysOss;
 import cn.qihangerp.module.mapper.SysOssMapper;
 import cn.qihangerp.module.service.SysOssService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;

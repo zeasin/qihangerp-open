@@ -1,4 +1,4 @@
-package cn.qihangerp.module.domain;
+package cn.qihangerp.model.request;
 
 /**
  * 用户登录对象

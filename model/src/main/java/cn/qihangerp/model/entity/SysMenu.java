@@ -1,7 +1,6 @@
-package cn.qihangerp.module.domain;
+package cn.qihangerp.model.entity;
 
-import cn.qihangerp.domain.BaseEntity;
-import cn.qihangerp.module.domain.vo.MenusDetailVo;
+import cn.qihangerp.model.vo.MenusDetailVo;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 

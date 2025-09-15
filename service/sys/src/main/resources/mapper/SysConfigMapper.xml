@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.qihangerp.module.mapper.SysConfigMapper">
 
-    <resultMap id="BaseResultMap" type="cn.qihangerp.module.domain.SysConfig">
+    <resultMap id="BaseResultMap" type="cn.qihangerp.model.entity.SysConfig">
             <id property="configId" column="config_id" jdbcType="INTEGER"/>
             <result property="configName" column="config_name" jdbcType="VARCHAR"/>
             <result property="configKey" column="config_key" jdbcType="VARCHAR"/>

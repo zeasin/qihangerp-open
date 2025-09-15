@@ -1,8 +1,8 @@
 package cn.qihangerp.module.service;
 
 import cn.qihangerp.model.vo.RouterVo;
-import cn.qihangerp.module.domain.SysMenu;
-import cn.qihangerp.module.domain.vo.TreeSelect;
+import cn.qihangerp.model.entity.SysMenu;
+import cn.qihangerp.model.vo.TreeSelect;
 
 import java.util.List;
 import java.util.Set;

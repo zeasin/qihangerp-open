@@ -4,7 +4,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.qihangerp.module.mapper.SysUserRoleMapper">
 
-	<resultMap type="cn.qihangerp.module.domain.SysUserRole" id="SysUserRoleResult">
+	<resultMap type="cn.qihangerp.model.entity.SysUserRole" id="SysUserRoleResult">
 		<result property="userId"     column="user_id"      />
 		<result property="roleId"     column="role_id"      />
 	</resultMap>
@@ -31,7 +31,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</foreach>
 	</insert>
 	
-	<delete id="deleteUserRoleInfo" parameterType="cn.qihangerp.module.domain.SysUserRole">
+	<delete id="deleteUserRoleInfo" parameterType="cn.qihangerp.model.entity.SysUserRole">
 		delete from sys_user_role where user_id=#{userId} and role_id=#{roleId}
 	</delete>
 	
