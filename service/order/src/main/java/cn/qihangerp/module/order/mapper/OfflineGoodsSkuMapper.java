@@ -1,7 +1,7 @@
 package cn.qihangerp.module.order.mapper;
 
 
-import cn.qihangerp.module.order.domain.OfflineGoodsSku;
+import cn.qihangerp.model.entity.OfflineGoodsSku;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**

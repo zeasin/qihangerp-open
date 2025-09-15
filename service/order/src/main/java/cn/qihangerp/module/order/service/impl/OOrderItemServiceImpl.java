@@ -1,10 +1,10 @@
 package cn.qihangerp.module.order.service.impl;
 
 
-import cn.qihangerp.module.order.domain.OOrderItem;
-import cn.qihangerp.module.order.domain.bo.OrderItemListBo;
-import cn.qihangerp.module.order.domain.vo.OrderItemListVo;
-import cn.qihangerp.module.order.domain.vo.SalesTopSkuVo;
+import cn.qihangerp.model.entity.OOrderItem;
+import cn.qihangerp.model.bo.OrderItemListBo;
+import cn.qihangerp.model.vo.OrderItemListVo;
+import cn.qihangerp.model.vo.SalesTopSkuVo;
 import cn.qihangerp.module.order.mapper.OOrderItemMapper;
 import cn.qihangerp.module.order.service.OOrderItemService;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;

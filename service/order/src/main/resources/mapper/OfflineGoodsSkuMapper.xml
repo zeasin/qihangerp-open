@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.qihangerp.module.order.mapper.OfflineGoodsSkuMapper">
 
-    <resultMap id="BaseResultMap" type="cn.qihangerp.module.order.domain.OfflineGoodsSku">
+    <resultMap id="BaseResultMap" type="cn.qihangerp.model.entity.OfflineGoodsSku">
             <id property="id" column="id" jdbcType="BIGINT"/>
             <id property="shopId" column="shop_id" jdbcType="BIGINT"/>
             <result property="oGoodsId" column="o_goods_id" jdbcType="VARCHAR"/>

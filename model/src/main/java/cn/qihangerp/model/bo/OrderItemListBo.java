@@ -1,9 +1,8 @@
-package cn.qihangerp.module.order.domain.bo;
+package cn.qihangerp.model.bo;
 
 import lombok.Data;
 
 import java.io.Serializable;
-import java.util.Date;
 
 /**
  * 订单明细表

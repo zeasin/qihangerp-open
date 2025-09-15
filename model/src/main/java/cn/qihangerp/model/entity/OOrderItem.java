@@ -1,19 +1,35 @@
-package cn.qihangerp.module.order.domain;
+package cn.qihangerp.model.entity;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
 import java.util.Date;
 import lombok.Data;
 
 /**
- * 渠道订单明细表
- * @TableName offline_order_item
+ * OMS订单明细表
+ * @TableName o_order_item
  */
+@TableName(value ="o_order_item")
 @Data
-public class OfflineOrderItem implements Serializable {
+public class OOrderItem implements Serializable {
     /**
      * id，自增
      */
-    private Long id;
+    @TableId(type = IdType.AUTO)
+    private String id;
+
+    /**
+     * 店铺ID
+     */
+    private Long shopId;
+
+    /**
+     * 店铺类型
+     */
+    private Integer shopType;
 
     /**
      * 订单ID（o_order外键）
@@ -81,6 +97,11 @@ public class OfflineOrderItem implements Serializable {
     private Double itemAmount;
 
     /**
+     * 子订单优惠金额
+     */
+    private Double discountAmount;
+
+    /**
      * 实际支付金额
      */
     private Double payment;
@@ -110,10 +131,14 @@ public class OfflineOrderItem implements Serializable {
      */
     private Integer orderStatus;
 
+    //发货方式 0 自己发货1联合发货2供应商发货
+    private Integer shipper;
+    private Integer shipType;//发货方式1电子面单发货2手动发货
+
     /**
-     * 是否推送到ERP
+     * 发货状态 0 待发货 1 已发货
      */
-    private Integer hasPushErp;
+    private Integer shipStatus;
 
     /**
      * 创建时间
@@ -135,5 +160,6 @@ public class OfflineOrderItem implements Serializable {
      */
     private String updateBy;
 
+    @TableField(exist = false)
     private static final long serialVersionUID = 1L;
 }

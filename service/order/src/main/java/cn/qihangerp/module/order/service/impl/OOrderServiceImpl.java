@@ -1,18 +1,14 @@
 package cn.qihangerp.module.order.service.impl;
 
-import cn.qihangerp.model.entity.OLogisticsCompany;
-import cn.qihangerp.model.entity.OGoods;
-import cn.qihangerp.model.entity.OGoodsSku;
-import cn.qihangerp.model.entity.OGoodsSupplier;
+import cn.qihangerp.model.entity.*;
 import cn.qihangerp.module.goods.mapper.OGoodsMapper;
 import cn.qihangerp.module.goods.mapper.OGoodsSkuMapper;
 import cn.qihangerp.module.goods.mapper.OGoodsSupplierMapper;
 import cn.qihangerp.module.mapper.OLogisticsCompanyMapper;
-import cn.qihangerp.module.order.domain.*;
-import cn.qihangerp.module.order.domain.bo.OrderAllocateShipRequest;
-import cn.qihangerp.module.order.domain.bo.OrderShipRequest;
-import cn.qihangerp.module.order.domain.vo.OrderDiscountVo;
-import cn.qihangerp.module.order.domain.vo.SalesDailyVo;
+import cn.qihangerp.model.bo.OrderAllocateShipRequest;
+import cn.qihangerp.model.bo.OrderShipRequest;
+import cn.qihangerp.model.vo.OrderDiscountVo;
+import cn.qihangerp.model.vo.SalesDailyVo;
 import cn.qihangerp.module.order.mapper.*;
 import cn.qihangerp.module.order.service.OOrderService;
 import cn.qihangerp.model.request.OrderSearchRequest;

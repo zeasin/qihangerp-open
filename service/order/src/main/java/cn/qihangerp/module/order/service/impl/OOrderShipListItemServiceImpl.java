@@ -2,12 +2,12 @@ package cn.qihangerp.module.order.service.impl;
 
 import cn.qihangerp.common.PageQuery;
 import cn.qihangerp.common.PageResult;
-import cn.qihangerp.module.order.domain.bo.ShipStockUpBo;
-import cn.qihangerp.module.order.domain.bo.ShipStockUpCompleteBo;
+import cn.qihangerp.model.bo.ShipStockUpBo;
+import cn.qihangerp.model.bo.ShipStockUpCompleteBo;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import cn.qihangerp.module.order.domain.OOrderShipListItem;
+import cn.qihangerp.model.entity.OOrderShipListItem;
 import cn.qihangerp.module.order.service.OOrderShipListItemService;
 import cn.qihangerp.module.order.mapper.OOrderShipListItemMapper;
 import org.springframework.stereotype.Service;

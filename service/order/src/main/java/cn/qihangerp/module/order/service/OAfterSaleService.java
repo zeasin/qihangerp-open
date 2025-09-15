@@ -3,7 +3,7 @@ package cn.qihangerp.module.order.service;
 import cn.qihangerp.common.PageQuery;
 import cn.qihangerp.common.PageResult;
 
-import cn.qihangerp.module.order.domain.OAfterSale;
+import cn.qihangerp.model.entity.OAfterSale;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**

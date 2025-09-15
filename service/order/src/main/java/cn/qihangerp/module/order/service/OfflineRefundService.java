@@ -3,7 +3,7 @@ package cn.qihangerp.module.order.service;
 import cn.qihangerp.common.PageQuery;
 import cn.qihangerp.common.PageResult;
 
-import cn.qihangerp.module.order.domain.OfflineRefund;
+import cn.qihangerp.model.entity.OfflineRefund;
 import cn.qihangerp.model.request.RefundSearchRequest;
 import com.baomidou.mybatisplus.extension.service.IService;
 

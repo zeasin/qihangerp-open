@@ -1,7 +1,7 @@
 package cn.qihangerp.module.order.mapper;
 
 
-import cn.qihangerp.module.order.domain.OfflineRefund;
+import cn.qihangerp.model.entity.OfflineRefund;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**

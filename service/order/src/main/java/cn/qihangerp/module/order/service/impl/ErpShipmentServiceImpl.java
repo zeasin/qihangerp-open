@@ -2,12 +2,12 @@ package cn.qihangerp.module.order.service.impl;
 
 import cn.qihangerp.common.PageQuery;
 import cn.qihangerp.common.PageResult;
-import cn.qihangerp.module.order.domain.ErpShipmentItem;
+import cn.qihangerp.model.entity.ErpShipmentItem;
 import cn.qihangerp.module.order.mapper.ErpShipmentItemMapper;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import cn.qihangerp.module.order.domain.ErpShipment;
+import cn.qihangerp.model.entity.ErpShipment;
 import cn.qihangerp.module.order.service.ErpShipmentService;
 import cn.qihangerp.module.order.mapper.ErpShipmentMapper;
 import lombok.AllArgsConstructor;

@@ -4,7 +4,7 @@ package cn.qihangerp.api.order.controller;
 
 import cn.qihangerp.common.PageQuery;
 import cn.qihangerp.common.TableDataInfo;
-import cn.qihangerp.module.order.domain.bo.OrderItemListBo;
+import cn.qihangerp.model.bo.OrderItemListBo;
 import cn.qihangerp.module.order.service.OOrderItemService;
 import cn.qihangerp.module.order.service.OOrderService;
 import cn.qihangerp.security.common.BaseController;

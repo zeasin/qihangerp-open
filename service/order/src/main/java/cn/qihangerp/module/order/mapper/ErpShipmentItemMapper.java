@@ -1,6 +1,6 @@
 package cn.qihangerp.module.order.mapper;
 
-import cn.qihangerp.module.order.domain.ErpShipmentItem;
+import cn.qihangerp.model.entity.ErpShipmentItem;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**

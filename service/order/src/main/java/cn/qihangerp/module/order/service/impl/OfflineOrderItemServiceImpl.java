@@ -1,6 +1,6 @@
 package cn.qihangerp.module.order.service.impl;
 
-import cn.qihangerp.module.order.domain.OfflineOrderItem;
+import cn.qihangerp.model.entity.OfflineOrderItem;
 import cn.qihangerp.module.order.mapper.OfflineOrderItemMapper;
 import cn.qihangerp.module.order.service.OfflineOrderItemService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;

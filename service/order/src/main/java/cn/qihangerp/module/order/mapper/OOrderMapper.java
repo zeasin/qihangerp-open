@@ -1,8 +1,8 @@
 package cn.qihangerp.module.order.mapper;
 
-import cn.qihangerp.module.order.domain.OOrder;
-import cn.qihangerp.module.order.domain.vo.OrderDiscountVo;
-import cn.qihangerp.module.order.domain.vo.SalesDailyVo;
+import cn.qihangerp.model.entity.OOrder;
+import cn.qihangerp.model.vo.OrderDiscountVo;
+import cn.qihangerp.model.vo.SalesDailyVo;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 import java.util.List;

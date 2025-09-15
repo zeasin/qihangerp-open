@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.qihangerp.module.order.mapper.OOrderMapper">
 
-    <resultMap id="BaseResultMap" type="cn.qihangerp.module.order.domain.OOrder">
+    <resultMap id="BaseResultMap" type="cn.qihangerp.model.entity.OOrder">
             <id property="id" column="id" jdbcType="BIGINT"/>
             <result property="orderNum" column="order_num" jdbcType="VARCHAR"/>
             <result property="shopType" column="shop_type" jdbcType="INTEGER"/>
@@ -53,7 +53,7 @@
         ship_time,create_time,create_by,
         update_time,update_by
     </sql>
-    <resultMap id="DiscountResultMap" type="cn.qihangerp.module.order.domain.vo.OrderDiscountVo">
+    <resultMap id="DiscountResultMap" type="cn.qihangerp.model.vo.OrderDiscountVo">
         <result property="name" column="name" jdbcType="VARCHAR"/>
         <result property="discountAmount" column="discount_amount" jdbcType="VARCHAR"/>
         <result property="description" column="description" jdbcType="VARCHAR"/>
@@ -67,7 +67,7 @@
         select coupon_type as name,coupon_price as discount_amount from oms_jd_order_coupon
         where order_id = #{orderId}
     </select>
-    <select id="salesDaily" resultType="cn.qihangerp.module.order.domain.vo.SalesDailyVo">
+    <select id="salesDaily" resultType="cn.qihangerp.model.vo.SalesDailyVo">
         SELECT
             DATE(order_time) AS date,
             COUNT(*) AS count,
@@ -84,7 +84,7 @@
             LIMIT 30
     </select>
 
-    <select id="getTodaySalesDaily" resultType="cn.qihangerp.module.order.domain.vo.SalesDailyVo">
+    <select id="getTodaySalesDaily" resultType="cn.qihangerp.model.vo.SalesDailyVo">
         SELECT
 
             COUNT(*) AS count,

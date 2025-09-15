@@ -1,11 +1,11 @@
 package cn.qihangerp.module.order.service;
 
 
-import cn.qihangerp.module.order.domain.OOrder;
-import cn.qihangerp.module.order.domain.OOrderItem;
-import cn.qihangerp.module.order.domain.bo.OrderAllocateShipRequest;
-import cn.qihangerp.module.order.domain.bo.OrderShipRequest;
-import cn.qihangerp.module.order.domain.vo.SalesDailyVo;
+import cn.qihangerp.model.entity.OOrder;
+import cn.qihangerp.model.entity.OOrderItem;
+import cn.qihangerp.model.bo.OrderAllocateShipRequest;
+import cn.qihangerp.model.bo.OrderShipRequest;
+import cn.qihangerp.model.vo.SalesDailyVo;
 import cn.qihangerp.model.request.OrderSearchRequest;
 import com.baomidou.mybatisplus.extension.service.IService;
 import cn.qihangerp.common.PageQuery;

@@ -1,4 +1,4 @@
-package cn.qihangerp.module.order.domain;
+package cn.qihangerp.model.entity;
 
 import java.io.Serializable;
 import java.math.BigDecimal;

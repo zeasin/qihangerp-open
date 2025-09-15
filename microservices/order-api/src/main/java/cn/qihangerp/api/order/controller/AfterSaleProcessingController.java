@@ -4,7 +4,7 @@ package cn.qihangerp.api.order.controller;
 import cn.qihangerp.common.PageQuery;
 import cn.qihangerp.common.PageResult;
 import cn.qihangerp.common.TableDataInfo;
-import cn.qihangerp.module.order.domain.OAfterSale;
+import cn.qihangerp.model.entity.OAfterSale;
 import cn.qihangerp.module.order.service.OAfterSaleService;
 import cn.qihangerp.security.common.BaseController;
 import lombok.AllArgsConstructor;

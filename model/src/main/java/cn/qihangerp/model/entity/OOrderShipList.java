@@ -1,4 +1,4 @@
-package cn.qihangerp.module.order.domain;
+package cn.qihangerp.model.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
@@ -9,22 +9,17 @@ import java.util.Date;
 import lombok.Data;
 
 /**
- * 发货-备货表（打单加入备货清单）
- * @TableName o_order_ship_list_item
+ * 发货-备货表（取号发货加入备货清单、分配供应商发货加入备货清单）
+ * @TableName o_order_ship_list
  */
-@TableName(value ="o_order_ship_list_item")
+@TableName(value ="o_order_ship_list")
 @Data
-public class OOrderShipListItem implements Serializable {
+public class OOrderShipList implements Serializable {
     /**
      * 
      */
     @TableId(type = IdType.AUTO)
     private Long id;
-
-    /**
-     * 外键id
-     */
-    private Long listId;
 
     /**
      * 店铺id
@@ -57,59 +52,74 @@ public class OOrderShipListItem implements Serializable {
     private Long orderId;
 
     /**
-     * erp订单itemid
-     */
-    private Long orderItemId;
-
-    /**
      * 订单编号
      */
     private String orderNum;
 
     /**
-     * 原始订单skuid
+     * 收件人姓名
      */
-    private String originalSkuId;
+    private String receiverName;
 
     /**
-     * erp系统商品id
+     * 收件人手机号
      */
-    private Long goodsId;
+    private String receiverMobile;
 
     /**
-     * erp系统商品规格id
+     * 收件人地址
      */
-    private Long skuId;
+    private String address;
 
     /**
-     * 商品标题
+     * 省
      */
-    private String goodsTitle;
+    private String province;
 
     /**
-     * 商品图片
+     * 市
      */
-    private String goodsImg;
+    private String city;
 
     /**
-     * 商品编码
+     * 区
      */
-    private String goodsNum;
+    private String town;
 
     /**
-     * 商品规格
+     * 备注
      */
-    private String skuName;
+    private String remark;
 
     /**
-     * 商品规格编码
+     * 买家留言信息
      */
-    private String skuNum;
+    private String buyerMemo;
 
     /**
-     * 商品数量
+     * 卖家留言信息
      */
-    private Integer quantity;
+    private String sellerMemo;
+
+    /**
+     * 物流公司
+     */
+    private String shipLogisticsCompany;
+
+    /**
+     * 物流公司code
+     */
+    private String shipLogisticsCompanyCode;
+
+    /**
+     * 物流单号
+     */
+    private String shipLogisticsCode;
+
+    /**
+     * 发货状态1：待发货，2：已发货，3已推送
+     */
+    private Integer shipStatus;
 
     /**
      * 状态0待备货1备货中2备货完成3已发货

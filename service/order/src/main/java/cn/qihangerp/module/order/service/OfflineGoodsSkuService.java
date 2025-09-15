@@ -4,7 +4,7 @@ import cn.qihangerp.common.PageQuery;
 import cn.qihangerp.common.PageResult;
 import cn.qihangerp.common.ResultVo;
 
-import cn.qihangerp.module.order.domain.OfflineGoodsSku;
+import cn.qihangerp.model.entity.OfflineGoodsSku;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 import java.util.List;

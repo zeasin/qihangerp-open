@@ -1,4 +1,4 @@
-package cn.qihangerp.module.order.domain.vo;
+package cn.qihangerp.model.vo;
 
 import lombok.Data;
 

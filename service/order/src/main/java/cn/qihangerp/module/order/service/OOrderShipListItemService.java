@@ -2,9 +2,9 @@ package cn.qihangerp.module.order.service;
 
 import cn.qihangerp.common.PageQuery;
 import cn.qihangerp.common.PageResult;
-import cn.qihangerp.module.order.domain.OOrderShipListItem;
-import cn.qihangerp.module.order.domain.bo.ShipStockUpBo;
-import cn.qihangerp.module.order.domain.bo.ShipStockUpCompleteBo;
+import cn.qihangerp.model.entity.OOrderShipListItem;
+import cn.qihangerp.model.bo.ShipStockUpBo;
+import cn.qihangerp.model.bo.ShipStockUpCompleteBo;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**

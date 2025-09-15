@@ -1,7 +1,7 @@
 package cn.qihangerp.module.order.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import cn.qihangerp.module.order.domain.OOrderShipList;
+import cn.qihangerp.model.entity.OOrderShipList;
 import cn.qihangerp.module.order.service.OOrderShipListService;
 import cn.qihangerp.module.order.mapper.OOrderShipListMapper;
 import org.springframework.stereotype.Service;

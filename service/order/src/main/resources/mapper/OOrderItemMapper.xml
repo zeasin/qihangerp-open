@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.qihangerp.module.order.mapper.OOrderItemMapper">
 
-    <resultMap id="BaseResultMap" type="cn.qihangerp.module.order.domain.OOrderItem">
+    <resultMap id="BaseResultMap" type="cn.qihangerp.model.entity.OOrderItem">
             <id property="id" column="id" jdbcType="BIGINT"/>
             <result property="shopId" column="shop_id" jdbcType="BIGINT"/>
             <result property="shopType" column="shop_type" jdbcType="INTEGER"/>
@@ -50,7 +50,7 @@
         update_time,update_by
     </sql>
 
-    <select id="selectPageVo" parameterType="cn.qihangerp.module.order.domain.bo.OrderItemListBo" resultType="cn.qihangerp.module.order.domain.vo.OrderItemListVo">
+    <select id="selectPageVo" parameterType="cn.qihangerp.model.bo.OrderItemListBo" resultType="cn.qihangerp.model.vo.OrderItemListVo">
         SELECT
         oi.*,o.shop_id,o.order_time,gs.outer_erp_sku_id
         FROM o_order_item as oi
@@ -84,7 +84,7 @@
 
     </select>
 
-    <select id="selectOrderItemListByOrderId" parameterType="Long" resultType="cn.qihangerp.module.order.domain.vo.OrderItemListVo">
+    <select id="selectOrderItemListByOrderId" parameterType="Long" resultType="cn.qihangerp.model.vo.OrderItemListVo">
         SELECT
             oi.*,o.shop_id,o.order_time,gs.outer_erp_sku_id
         FROM o_order_item as oi
@@ -93,7 +93,7 @@
         WHERE oi.order_id = #{orderId}
 
     </select>
-    <select id="selectTopSku" resultType="cn.qihangerp.module.order.domain.vo.SalesTopSkuVo">
+    <select id="selectTopSku" resultType="cn.qihangerp.model.vo.SalesTopSkuVo">
         SELECT
             sku_num as `name`,
             SUM(quantity) AS `value`

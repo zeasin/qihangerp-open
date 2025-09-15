@@ -2,8 +2,8 @@ package cn.qihangerp.api.controller;
 
 import cn.qihangerp.common.AjaxResult;
 import cn.qihangerp.module.goods.service.OGoodsInventoryService;
-import cn.qihangerp.module.order.domain.vo.SalesDailyVo;
-import cn.qihangerp.module.order.domain.vo.SalesTopSkuVo;
+import cn.qihangerp.model.vo.SalesDailyVo;
+import cn.qihangerp.model.vo.SalesTopSkuVo;
 import cn.qihangerp.module.order.service.OOrderItemService;
 import cn.qihangerp.module.order.service.OOrderService;
 import cn.qihangerp.module.service.OShopService;

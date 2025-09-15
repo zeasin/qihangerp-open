@@ -3,7 +3,7 @@ package cn.qihangerp.api.order.controller;
 import cn.qihangerp.common.AjaxResult;
 import cn.qihangerp.common.PageQuery;
 import cn.qihangerp.common.TableDataInfo;
-import cn.qihangerp.module.order.domain.ErpShipment;
+import cn.qihangerp.model.entity.ErpShipment;
 import cn.qihangerp.module.order.service.ErpShipmentService;
 import cn.qihangerp.module.order.service.OOrderService;
 import cn.qihangerp.security.common.BaseController;

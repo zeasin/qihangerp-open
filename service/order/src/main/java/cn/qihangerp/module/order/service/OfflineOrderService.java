@@ -3,9 +3,9 @@ package cn.qihangerp.module.order.service;
 import cn.qihangerp.common.PageQuery;
 import cn.qihangerp.common.PageResult;
 
-import cn.qihangerp.module.order.domain.OfflineOrder;
-import cn.qihangerp.module.order.domain.bo.OfflineOrderCreateBo;
-import cn.qihangerp.module.order.domain.bo.OfflineOrderShipBo;
+import cn.qihangerp.model.entity.OfflineOrder;
+import cn.qihangerp.model.bo.OfflineOrderCreateBo;
+import cn.qihangerp.model.bo.OfflineOrderShipBo;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 import cn.qihangerp.model.request.OrderSearchRequest;

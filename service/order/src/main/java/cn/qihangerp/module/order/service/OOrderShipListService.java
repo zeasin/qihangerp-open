@@ -1,6 +1,6 @@
 package cn.qihangerp.module.order.service;
 
-import cn.qihangerp.module.order.domain.OOrderShipList;
+import cn.qihangerp.model.entity.OOrderShipList;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**

@@ -1,7 +1,7 @@
-package cn.qihangerp.module.order.domain;
+package cn.qihangerp.model.entity;
 
-import cn.qihangerp.module.order.domain.vo.OrderDiscountVo;
-import cn.qihangerp.module.order.domain.vo.OrderItemListVo;
+import cn.qihangerp.model.vo.OrderDiscountVo;
+import cn.qihangerp.model.vo.OrderItemListVo;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;

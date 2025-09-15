@@ -1,7 +1,7 @@
 package cn.qihangerp.module.order.mapper;
 
 
-import cn.qihangerp.module.order.domain.OAfterSale;
+import cn.qihangerp.model.entity.OAfterSale;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**

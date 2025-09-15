@@ -1,10 +1,10 @@
 package cn.qihangerp.module.order.service.impl;
 
-import cn.qihangerp.module.order.domain.OfflineOrder;
-import cn.qihangerp.module.order.domain.OfflineOrderItem;
-import cn.qihangerp.module.order.domain.bo.OfflineOrderCreateBo;
-import cn.qihangerp.module.order.domain.bo.OfflineOrderCreateItemBo;
-import cn.qihangerp.module.order.domain.bo.OfflineOrderShipBo;
+import cn.qihangerp.model.entity.OfflineOrder;
+import cn.qihangerp.model.entity.OfflineOrderItem;
+import cn.qihangerp.model.bo.OfflineOrderCreateBo;
+import cn.qihangerp.model.bo.OfflineOrderCreateItemBo;
+import cn.qihangerp.model.bo.OfflineOrderShipBo;
 import cn.qihangerp.module.order.mapper.OfflineOrderItemMapper;
 import cn.qihangerp.module.order.mapper.OfflineOrderMapper;
 import cn.qihangerp.module.order.service.OfflineOrderService;

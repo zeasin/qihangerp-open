@@ -1,6 +1,6 @@
 package cn.qihangerp.module.order.service;
 
-import cn.qihangerp.module.order.domain.OShipWaybill;
+import cn.qihangerp.model.entity.OShipWaybill;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**
