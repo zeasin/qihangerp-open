@@ -1,4 +1,4 @@
-package cn.qihangerp.module.stock.domain;
+package cn.qihangerp.model.entity;
 
 import java.io.Serializable;
 import java.util.Date;

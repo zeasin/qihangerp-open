@@ -1,6 +1,6 @@
 package cn.qihangerp.module.stock.service.impl;
 
-import cn.qihangerp.module.stock.domain.ErpStockOutItemPosition;
+import cn.qihangerp.model.entity.ErpStockOutItemPosition;
 import cn.qihangerp.module.stock.mapper.ErpStockOutItemPositionMapper;
 import cn.qihangerp.module.stock.service.ErpStockOutItemPositionService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;

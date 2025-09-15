@@ -4,9 +4,9 @@ import cn.qihangerp.common.PageQuery;
 import cn.qihangerp.common.PageResult;
 import cn.qihangerp.common.ResultVo;
 
-import cn.qihangerp.module.stock.domain.ErpStockIn;
-import cn.qihangerp.module.stock.request.StockInCreateRequest;
-import cn.qihangerp.module.stock.request.StockInRequest;
+import cn.qihangerp.model.entity.ErpStockIn;
+import cn.qihangerp.model.request.StockInCreateRequest;
+import cn.qihangerp.model.request.StockInRequest;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**

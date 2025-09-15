@@ -1,4 +1,4 @@
-package cn.qihangerp.module.stock.domain;
+package cn.qihangerp.model.entity;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -8,11 +8,11 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import lombok.Data;
 
 /**
- * 仓库表
- * @TableName wms_warehouse
+ * 仓库仓位表
+ * @TableName wms_warehouse_position
  */
 @Data
-public class ErpWarehouse implements Serializable {
+public class ErpWarehousePosition implements Serializable {
     /**
      * 
      */
@@ -20,34 +20,39 @@ public class ErpWarehouse implements Serializable {
     private Integer id;
 
     /**
-     * 仓库编号
+     * 仓库id
+     */
+    private Integer warehouseId;
+
+    /**
+     * 仓库/货架编号
      */
     private String number;
 
     /**
-     * 仓库名称
+     * 仓位/货架名称
      */
     private String name;
 
     /**
-     * 省
+     * 上级id
      */
-    private String province;
+    private Integer parentId;
 
     /**
-     * 市
+     * 层级深度1级2级3级
      */
-    private String city;
+    private Integer depth;
 
     /**
-     * 区
+     * 一级类目id
      */
-    private String district;
+    private Integer parentId1;
 
     /**
-     * 街道
+     * 二级类目id
      */
-    private String street;
+    private Integer parentId2;
 
     /**
      * 地址
@@ -60,9 +65,9 @@ public class ErpWarehouse implements Serializable {
     private String remark;
 
     /**
-     * 状态0禁用  1正常
+     * 0正常  1删除
      */
-    private Integer status;
+    private Integer isDelete;
 
     /**
      * 创建人

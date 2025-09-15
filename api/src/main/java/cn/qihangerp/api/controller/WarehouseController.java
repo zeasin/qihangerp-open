@@ -2,8 +2,8 @@ package cn.qihangerp.api.controller;
 
 import cn.qihangerp.common.AjaxResult;
 import cn.qihangerp.common.TableDataInfo;
-import cn.qihangerp.module.stock.domain.ErpWarehouse;
-import cn.qihangerp.module.stock.domain.ErpWarehousePosition;
+import cn.qihangerp.model.entity.ErpWarehouse;
+import cn.qihangerp.model.entity.ErpWarehousePosition;
 import cn.qihangerp.module.stock.service.ErpWarehousePositionService;
 import cn.qihangerp.module.stock.service.ErpWarehouseService;
 import cn.qihangerp.security.common.BaseController;

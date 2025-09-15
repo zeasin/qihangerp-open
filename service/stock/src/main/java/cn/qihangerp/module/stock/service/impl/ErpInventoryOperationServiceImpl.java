@@ -1,6 +1,6 @@
 package cn.qihangerp.module.stock.service.impl;
 
-import cn.qihangerp.module.stock.domain.ErpInventoryOperation;
+import cn.qihangerp.model.entity.ErpInventoryOperation;
 import cn.qihangerp.module.stock.mapper.ErpInventoryOperationMapper;
 import cn.qihangerp.module.stock.service.ErpInventoryOperationService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;

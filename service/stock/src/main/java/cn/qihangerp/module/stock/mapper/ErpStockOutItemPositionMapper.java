@@ -1,7 +1,7 @@
 package cn.qihangerp.module.stock.mapper;
 
 
-import cn.qihangerp.module.stock.domain.ErpStockOutItemPosition;
+import cn.qihangerp.model.entity.ErpStockOutItemPosition;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**

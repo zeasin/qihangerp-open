@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.qihangerp.module.stock.mapper.ErpStockInMapper">
 
-    <resultMap id="BaseResultMap" type="cn.qihangerp.module.stock.domain.ErpStockIn">
+    <resultMap id="BaseResultMap" type="cn.qihangerp.model.entity.ErpStockIn">
             <id property="id" column="id" jdbcType="BIGINT"/>
             <result property="stockInNum" column="stock_in_num" jdbcType="VARCHAR"/>
             <result property="stockInType" column="stock_in_type" jdbcType="INTEGER"/>
