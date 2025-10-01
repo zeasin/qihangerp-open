@@ -32,7 +32,7 @@ public class ShopPlatformController extends BaseController {
         LambdaQueryWrapper<OShopPlatform> qw = new LambdaQueryWrapper<>();
         qw.eq(StringUtils.hasText(bo.getStatus()),OShopPlatform::getStatus,bo.getStatus());
         if(StringUtils.hasText(bo.getStatus())) {
-            qw.last(" ORDER BY sort desc");
+            qw.last(" ORDER BY sort asc");
         }
         List<OShopPlatform> list = shopPlatformService.list(qw);
         return getDataTable(list);
