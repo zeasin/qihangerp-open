@@ -1,6 +1,8 @@
 package cn.qihangerp.module.open.dou.domain;
 
+import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
@@ -18,6 +20,7 @@ public class DouOrder implements Serializable {
     /**
      * 
      */
+    @TableId(type = IdType.AUTO)
     private String id;
 
     /**
@@ -28,7 +31,7 @@ public class DouOrder implements Serializable {
     /**
      * 订单层级，主订单是2级
      */
-    private Long orderLevel;
+    private Integer orderLevel;
 
     /**
      * 定金预售阶段单json
@@ -46,15 +49,14 @@ public class DouOrder implements Serializable {
     private String orderStatusDesc;
 
     /**
-     * 
-订单的一些c端标签json
+     *订单的一些c端标签json
      */
     private String orderTag;
 
     /**
      * 【订单类型】 0、普通订单 2、虚拟商品订单 4、电子券（poi核销） 5、三方核销
      */
-    private Long orderType;
+    private Integer orderType;
 
     /**
      * 订单类型描述
@@ -64,7 +66,7 @@ public class DouOrder implements Serializable {
     /**
      * 具体某个小程序的ID
      */
-    private Long appId;
+    private Integer appId;
 
     /**
      * 抖音小程序ID
@@ -74,7 +76,7 @@ public class DouOrder implements Serializable {
     /**
      * 小时达订单的接单状态 0-未接单；1-已接单；2-超时取消，或商家取消
      */
-    private Long acceptOrderStatus;
+    private Integer acceptOrderStatus;
 
     /**
      * 预约发货时间
@@ -84,7 +86,7 @@ public class DouOrder implements Serializable {
     /**
      * 作者（达人）承担金额（单位：分），订单参与活动和优惠中作者（达人）承担部分的总金额
      */
-    private Long authorCostAmount;
+    private Integer authorCostAmount;
 
     /**
      * 达人抖音号，样品订单场景下才会返回的申样达人信息；
@@ -94,7 +96,7 @@ public class DouOrder implements Serializable {
     /**
      * 【下单端】 0、站外 1、火山 2、抖音 3、头条 4、西瓜 5、微信 6、值点app 7、头条lite 8、懂车帝 9、皮皮虾 11、抖音极速版 12、TikTok 13、musically 14、穿山甲 15、火山极速版 16、服务市场 26、番茄小说 27、UG教育营销电商平台 28、Jumanji 29、电商SDK
      */
-    private Long bType;
+    private Integer bType;
 
     /**
      * 下单端描述
@@ -104,7 +106,7 @@ public class DouOrder implements Serializable {
     /**
      * 【下单场景】 0、未知 1、app内-原生 2、app内-小程序 3、H5 13、电商SDK-头条 35、电商SDK-头条lite
      */
-    private Long subBType;
+    private Integer subBType;
 
     /**
      * 下单场景描述
@@ -114,7 +116,7 @@ public class DouOrder implements Serializable {
     /**
      * 【业务来源】 1 -鲁班 2 -小店 3 -好好学习 4 -ev 5 -虚拟 6 -建站 7 -核销 8 -玉石 9 -ez 10 -ep 11 -虚拟卡券 12 -服务市场 13 - EP 视频课 14 - EP 直播课 21 -跨境BBC 22 -跨境BC 23 -跨境CC|UPU 24 -手机充值 25 -拍卖保证金 26 -懂车帝抵扣券 27 -懂车帝返现券 28 -离岛免税 29 -海南会员购 30 -抽奖 31 -清北-企业代付 32 -抖+券 33 -联盟寄样 49 -刀剑 53 -通信卡 66 -加油包 76 -大闸蟹 99 -保险 102-小店海外 108-上门取件收款
      */
-    private Long biz;
+    private Integer biz;
 
     /**
      * 业务来源描述
@@ -134,7 +136,7 @@ public class DouOrder implements Serializable {
     /**
      * 插旗信息：0-灰 1-紫 2-青 3-绿 4-橙 5-红
      */
-    private Long sellerRemarkStars;
+    private Integer sellerRemarkStars;
 
     /**
      * 取消原因
@@ -200,7 +202,7 @@ public class DouOrder implements Serializable {
     /**
      * 主流程状态，1 待确认/待支付（订单创建完毕）103 部分支付105 已支付2 备货中101 部分发货3 已发货（全部发货）4 已取消5 已完成（已收货）21 发货前退款完结22 发货后退款完结39 收货后退款完结
      */
-    private Long mainStatus;
+    private Integer mainStatus;
 
     /**
      * 主流程状态描述
@@ -295,7 +297,7 @@ public class DouOrder implements Serializable {
     /**
      * 7=无需支付（0元单）；8=DOU分期（信用支付）；9=新卡支付；12=先用后付；16=收银台支付
      */
-    private Long payType;
+    private Integer payType;
 
     /**
      * 快递费（单位：分）
@@ -395,7 +397,7 @@ public class DouOrder implements Serializable {
     /**
      * 系统店铺id
      */
-    private Integer sShopId;
+    private Long sShopId;
 
     /**
      * 第一次拉取时间

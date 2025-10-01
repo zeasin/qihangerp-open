@@ -1,7 +1,7 @@
 package cn.qihangerp.api.jd.controller;
 
-
 import cn.qihangerp.api.jd.JdApiCommon;
+import cn.qihangerp.api.jd.JdPullRequest;
 import cn.qihangerp.common.AjaxResult;
 import cn.qihangerp.common.ResultVoEnum;
 import cn.qihangerp.common.enums.EnumShopType;
@@ -16,12 +16,10 @@ import cn.qihangerp.module.open.jd.domain.JdOrderItem;
 import cn.qihangerp.module.open.jd.service.JdOrderService;
 import cn.qihangerp.interfaces.OShopPullLasttimeService;
 import cn.qihangerp.interfaces.OShopPullLogsService;
-
 import cn.qihangerp.open.common.ApiResultVo;
 import cn.qihangerp.open.jd.JdOrderApiHelper;
 import cn.qihangerp.open.jd.response.JdOrderDetailResponse;
 import cn.qihangerp.open.jd.response.JdOrderListResponse;
-import cn.qihangerp.sdk.jd.PullRequest;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.BeanUtils;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -48,7 +46,7 @@ public class JdOrderApiController {
     private final OShopPullLogsService pullLogsService;
 
     @RequestMapping(value = "/pull_order_jd", method = RequestMethod.POST)
-    public AjaxResult pullList(@RequestBody PullRequest params) throws Exception {
+    public AjaxResult pullList(@RequestBody JdPullRequest params) throws Exception {
         if (params.getShopId() == null || params.getShopId() <= 0) {
             return AjaxResult.error(HttpStatus.PARAMS_ERROR, "参数错误，没有店铺Id");
         }
@@ -175,7 +173,7 @@ public class JdOrderApiController {
      * @throws Exception
      */
     @RequestMapping(value = "/pull_order_detail", method = RequestMethod.POST)
-    public AjaxResult pullDetail(@RequestBody PullRequest params) throws Exception {
+    public AjaxResult pullDetail(@RequestBody JdPullRequest params) throws Exception {
         if (params.getShopId() == null || params.getShopId() <= 0) {
             return AjaxResult.error(HttpStatus.PARAMS_ERROR, "参数错误，没有店铺Id");
         }

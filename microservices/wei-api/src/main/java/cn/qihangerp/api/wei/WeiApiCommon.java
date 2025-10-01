@@ -9,7 +9,7 @@ import cn.qihangerp.model.entity.OShop;
 import cn.qihangerp.interfaces.OShopService;
 import cn.qihangerp.open.common.ApiResultVo;
 import cn.qihangerp.open.wei.WeiTokenApiHelper;
-import cn.qihangerp.open.wei.WeiTokenResponse;
+import cn.qihangerp.open.wei.response.WeiTokenResponse;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;

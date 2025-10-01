@@ -29,6 +29,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -56,7 +57,7 @@ public class TaoOrderApiController {
      */
     @PostMapping("/pull_order_tao")
     @ResponseBody
-    public AjaxResult pullIncrementOrder(@RequestBody TaoRequest req)  {
+    public AjaxResult pullIncrementOrder(@RequestBody TaoRequest req) throws IOException {
         log.info("/**************增量拉取tao订单****************/");
         if (req.getShopId() == null || req.getShopId() <= 0) {
             return AjaxResult.error(HttpStatus.PARAMS_ERROR, "参数错误，没有店铺Id");
@@ -184,7 +185,7 @@ public class TaoOrderApiController {
      */
     @RequestMapping("/pull_order_detail")
     @ResponseBody
-    public AjaxResult getOrderPullDetail(@RequestBody TaoRequest taoRequest)  {
+    public AjaxResult getOrderPullDetail(@RequestBody TaoRequest taoRequest) throws IOException {
         log.info("/**************主动更新tao订单by number****************/");
         if (taoRequest.getShopId() == null || taoRequest.getShopId() <= 0) {
             return AjaxResult.error(HttpStatus.PARAMS_ERROR, "参数错误，没有店铺Id");

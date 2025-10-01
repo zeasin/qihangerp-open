@@ -1,5 +1,7 @@
 package cn.qihangerp.module.open.dou.domain;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
@@ -15,6 +17,7 @@ public class DouOrderItem implements Serializable {
     /**
      * 
      */
+    @TableId(type = IdType.AUTO)
     private String id;
 
     /**

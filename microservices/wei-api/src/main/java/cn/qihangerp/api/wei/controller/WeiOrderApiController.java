@@ -56,7 +56,7 @@ public class WeiOrderApiController extends BaseController {
 //        String appSecret = checkResult.getData().getAppSecret();
         LocalDateTime  endTime = LocalDateTime.now();
         LocalDateTime startTime = endTime.minusHours(1);
-        ApiResultVo<Order> orderApiResultVo = WeiOrderApiHelper.pullOrderList(startTime, endTime, accessToken);
+        ApiResultVo<Order> orderApiResultVo = WeiOrderApiHelper.pullOrderList(startTime, endTime, accessToken,1,100);
 
 //        ApiResultVo<Order> apiResultVo = OrderApiHelper.pullOrderList(startTime, endTime, accessToken);
         int insertSuccess = 0;//新增成功的订单

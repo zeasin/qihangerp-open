@@ -1,15 +1,6 @@
 package cn.qihangerp.api.controller;
 
 import cn.qihangerp.common.AjaxResult;
-import cn.qihangerp.open.common.ApiResultVo;
-import cn.qihangerp.open.pdd.PddLogisticsApiHelper;
-import cn.qihangerp.open.pdd.PddWaybillAccountApiHelper;
-import cn.qihangerp.open.pdd.PddWaybillApiHelper;
-import cn.qihangerp.open.pdd.model.WaybillAccount;
-import cn.qihangerp.open.pdd.model.WaybillCodeModule;
-import cn.qihangerp.open.pdd.request.*;
-import cn.qihangerp.open.wei.WeiWaybillAccountApiHelper;
-import cn.qihangerp.open.wei.vo.ewaybill.AccountVo;
 import cn.qihangerp.security.common.BaseController;
 import com.alibaba.fastjson2.JSONObject;
 import lombok.AllArgsConstructor;

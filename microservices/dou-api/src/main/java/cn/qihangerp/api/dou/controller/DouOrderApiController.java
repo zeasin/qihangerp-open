@@ -1,7 +1,7 @@
 package cn.qihangerp.api.dou.controller;
 
-
 import cn.qihangerp.api.dou.DouApiCommon;
+import cn.qihangerp.api.dou.DouPullRequest;
 import cn.qihangerp.common.AjaxResult;
 import cn.qihangerp.common.ResultVoEnum;
 import cn.qihangerp.common.enums.EnumShopType;
@@ -21,7 +21,6 @@ import cn.qihangerp.open.dou.DouOrderApiHelper;
 import cn.qihangerp.open.dou.DouTokenApiHelper;
 import cn.qihangerp.open.dou.model.Token;
 import cn.qihangerp.open.dou.model.order.Order;
-import cn.qihangerp.sdk.dou.PullRequest;
 import com.alibaba.fastjson2.JSONObject;
 import lombok.AllArgsConstructor;
 import org.slf4j.Logger;
@@ -59,7 +58,7 @@ public class DouOrderApiController {
      */
     @PostMapping("/pull_order")
     @ResponseBody
-    public AjaxResult pullOrder(@RequestBody PullRequest req)   {
+    public AjaxResult pullOrder(@RequestBody DouPullRequest req)   {
         log.info("/**************增量拉取dou订单****************/");
         if (req.getShopId() == null || req.getShopId() <= 0) {
             return AjaxResult.error(HttpStatus.PARAMS_ERROR, "参数错误，没有店铺Id");
@@ -230,52 +229,53 @@ public class DouOrderApiController {
      * @return
      * @throws
      */
-//    @RequestMapping("/pull_order_detail")
-//    @ResponseBody
-//    public AjaxResult getOrderPullDetail(@RequestBody PullRequest req)  {
-//        log.info("/**************主动更新dou订单by number****************/");
-//        if (req.getShopId() == null || req.getShopId() <= 0) {
-//            return AjaxResult.error(HttpStatus.PARAMS_ERROR, "参数错误，没有店铺Id");
-//        }
-//        if (req.getOrderId()==null) {
-//            return AjaxResult.error(HttpStatus.PARAMS_ERROR, "参数错误，缺少orderId");
-//        }
-//
-//        var checkResult = douApiCommon.checkBefore(req.getShopId());
-//        if (checkResult.getCode() != HttpStatus.SUCCESS) {
-//            return AjaxResult.error(checkResult.getCode(), checkResult.getMsg(), checkResult.getData());
-//        }
-//
-//        String appKey = checkResult.getData().getAppKey();
-//        String appSecret = checkResult.getData().getAppSecret();
-//        Long douShopId = checkResult.getData().getSellerId();
-//
-//        ApiResultVo<DouOrderResponse> resultVo = OrderApiHelper.pullOrderDetail( appKey, appSecret, douShopId,req.getOrderId());
-//        if (resultVo.getCode() == ResultVoEnum.SUCCESS.getIndex() && resultVo.getData()!=null) {
-//            DouOrder douOrder = new DouOrder();
-//            BeanUtils.copyProperties(resultVo.getData(),douOrder);
-//            List<DouOrderItem> items = new ArrayList<>();
-//            if(resultVo.getData().getItems()!=null && resultVo.getData().getItems().size()>0){
-//                for (var item : resultVo.getData().getItems()) {
-//                    DouOrderItem douOrderItem = new DouOrderItem();
-//                    BeanUtils.copyProperties(item,douOrderItem);
-//                    items.add(douOrderItem);
-//                }
-//            }
-//            douOrder.setItems(items);
-//
-//            var result = orderService.saveOrder(req.getShopId(), douOrder);
-//            if (result.getCode() == ResultVoEnum.DataExist.getIndex()) {
-//                //已经存在
-//                log.info("/**************主动更新dou订单：开始更新数据库：" + resultVo.getData().getId() + "存在、更新****************/");
-//                mqUtils.sendApiMessage(MqMessage.build(EnumShopType.DOU, MqType.ORDER_MESSAGE,resultVo.getData().getOrderId()));
-//            } else if (result.getCode() == ResultVoEnum.SUCCESS.getIndex()) {
-//                log.info("/**************主动更新dou订单：开始更新数据库：" + resultVo.getData().getId() + "不存在、新增****************/");
-//                mqUtils.sendApiMessage(MqMessage.build(EnumShopType.DOU,MqType.ORDER_MESSAGE,resultVo.getData().getOrderId()));
-//            }
-//            return AjaxResult.success();
-//        } else {
-//            return AjaxResult.error(resultVo.getCode(), resultVo.getMsg());
-//        }
-//    }
+    @PostMapping("/pull_order_detail")
+    @ResponseBody
+    public AjaxResult getOrderPullDetail(@RequestBody DouPullRequest req)  {
+        log.info("/**************主动更新dou订单by number****************/");
+        if (req.getShopId() == null || req.getShopId() <= 0) {
+            return AjaxResult.error(HttpStatus.PARAMS_ERROR, "参数错误，没有店铺Id");
+        }
+        if (req.getOrderId()==null) {
+            return AjaxResult.error(HttpStatus.PARAMS_ERROR, "参数错误，缺少orderId");
+        }
+
+        var checkResult = douApiCommon.checkBefore(req.getShopId());
+        if (checkResult.getCode() != HttpStatus.SUCCESS) {
+            return AjaxResult.error(checkResult.getCode(), checkResult.getMsg(), checkResult.getData());
+        }
+
+        String appKey = checkResult.getData().getAppKey();
+        String appSecret = checkResult.getData().getAppSecret();
+        Long douShopId = checkResult.getData().getSellerId();
+        String accessToken = checkResult.getData().getAccessToken();
+        ApiResultVo<Order> resultVo = DouOrderApiHelper.pullOrderDetail( appKey, appSecret,accessToken,req.getOrderId());
+        if (resultVo.getCode() == ResultVoEnum.SUCCESS.getIndex() && resultVo.getData()!=null) {
+            DouOrder douOrder = new DouOrder();
+            BeanUtils.copyProperties(resultVo.getData(),douOrder);
+            List<DouOrderItem> items = new ArrayList<>();
+            if(resultVo.getData().getSkuOrderList()!=null && resultVo.getData().getSkuOrderList().size()>0){
+                for (var item : resultVo.getData().getSkuOrderList()) {
+                    DouOrderItem douOrderItem = new DouOrderItem();
+                    BeanUtils.copyProperties(item,douOrderItem);
+                    items.add(douOrderItem);
+                }
+            }
+            douOrder.setItems(items);
+
+            var result = orderService.saveOrder(req.getShopId(), douOrder);
+            if (result.getCode() == ResultVoEnum.DataExist.getIndex()) {
+                //已经存在
+                log.info("/**************主动更新dou订单：开始更新数据库：" + resultVo.getData().getOrderId() + "存在、更新****************/");
+                mqUtils.sendApiMessage(MqMessage.build(EnumShopType.DOU, MqType.ORDER_MESSAGE,resultVo.getData().getOrderId()));
+            } else if (result.getCode() == ResultVoEnum.SUCCESS.getIndex()) {
+                log.info("/**************主动更新dou订单：开始更新数据库：" + resultVo.getData().getOrderId() + "不存在、新增****************/");
+                mqUtils.sendApiMessage(MqMessage.build(EnumShopType.DOU,MqType.ORDER_MESSAGE,resultVo.getData().getOrderId()));
+            }
+            return AjaxResult.success();
+        } else {
+            return AjaxResult.error(resultVo.getCode(), resultVo.getMsg());
+        }
+    }
+
 }

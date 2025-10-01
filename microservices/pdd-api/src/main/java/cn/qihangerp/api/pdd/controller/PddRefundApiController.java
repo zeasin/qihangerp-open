@@ -1,7 +1,7 @@
 package cn.qihangerp.api.pdd.controller;
 
-
 import cn.qihangerp.api.pdd.PddApiCommon;
+import cn.qihangerp.api.pdd.PddPullRequest;
 import cn.qihangerp.common.AjaxResult;
 import cn.qihangerp.common.ResultVoEnum;
 import cn.qihangerp.common.enums.EnumShopType;
@@ -15,12 +15,9 @@ import cn.qihangerp.module.open.pdd.domain.PddRefund;
 import cn.qihangerp.module.open.pdd.service.PddRefundService;
 import cn.qihangerp.interfaces.OShopPullLasttimeService;
 import cn.qihangerp.interfaces.OShopPullLogsService;
-
 import cn.qihangerp.open.common.ApiResultVo;
-
 import cn.qihangerp.open.pdd.PddRefundApiHelper;
 import cn.qihangerp.open.pdd.model.AfterSale;
-import cn.qihangerp.sdk.pdd.PullRequest;
 import lombok.AllArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -53,7 +50,7 @@ public class PddRefundApiController {
      */
     @PostMapping("/pull_list")
     @ResponseBody
-    public AjaxResult pullRefundList(@RequestBody PullRequest req) throws Exception {
+    public AjaxResult pullRefundList(@RequestBody PddPullRequest req) throws Exception {
         log.info("/**************增量拉取pdd退款****************/");
         if (req.getShopId() == null || req.getShopId() <= 0) {
             return AjaxResult.error(HttpStatus.PARAMS_ERROR, "参数错误，没有店铺Id");

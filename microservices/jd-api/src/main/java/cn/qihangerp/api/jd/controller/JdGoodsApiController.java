@@ -1,7 +1,7 @@
 package cn.qihangerp.api.jd.controller;
 
-
 import cn.qihangerp.api.jd.JdApiCommon;
+import cn.qihangerp.api.jd.JdPullRequest;
 import cn.qihangerp.common.AjaxResult;
 import cn.qihangerp.common.enums.EnumShopType;
 import cn.qihangerp.common.enums.HttpStatus;
@@ -14,14 +14,12 @@ import cn.qihangerp.interfaces.OShopPullLogsService;
 import cn.qihangerp.open.common.ApiResultVo;
 import cn.qihangerp.open.jd.JdGoodsApiHelper;
 import cn.qihangerp.open.jd.response.JdGoodsSkuListResponse;
-import cn.qihangerp.sdk.jd.PullRequest;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.BeanUtils;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-
 import java.time.LocalDateTime;
 import java.util.Date;
 
@@ -34,8 +32,6 @@ public class JdGoodsApiController {
     private final OShopPullLogsService pullLogsService;
     private final OShopPullLasttimeService pullLasttimeService;
 
-
-
     /**
      * 拉取商品列表（包含sku）
      * @param params
@@ -43,7 +39,7 @@ public class JdGoodsApiController {
      * @throws Exception
      */
     @RequestMapping(value = "/pull_goods", method = RequestMethod.POST)
-    public AjaxResult pullSkuList(@RequestBody PullRequest params) throws Exception {
+    public AjaxResult pullSkuList(@RequestBody JdPullRequest params) throws Exception {
         if (params.getShopId() == null || params.getShopId() <= 0) {
             return AjaxResult.error(HttpStatus.PARAMS_ERROR, "参数错误，没有店铺Id");
         }

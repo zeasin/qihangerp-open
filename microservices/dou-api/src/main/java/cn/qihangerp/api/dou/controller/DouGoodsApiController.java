@@ -2,6 +2,7 @@ package cn.qihangerp.api.dou.controller;
 
 
 import cn.qihangerp.api.dou.DouApiCommon;
+import cn.qihangerp.api.dou.DouPullRequest;
 import cn.qihangerp.common.AjaxResult;
 import cn.qihangerp.common.enums.EnumShopType;
 import cn.qihangerp.common.enums.HttpStatus;
@@ -17,7 +18,6 @@ import cn.qihangerp.open.common.ApiResultVo;
 
 import cn.qihangerp.open.dou.DouGoodsApiHelper;
 import cn.qihangerp.open.dou.model.GoodsListResultVo;
-import cn.qihangerp.sdk.dou.PullRequest;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.BeanUtils;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -49,7 +49,7 @@ public class DouGoodsApiController {
      * @throws Exception
      */
     @RequestMapping(value = "/pull_goods", method = RequestMethod.POST)
-    public AjaxResult pullSkuList(@RequestBody PullRequest params) throws Exception {
+    public AjaxResult pullSkuList(@RequestBody DouPullRequest params) throws Exception {
         if (params.getShopId() == null || params.getShopId() <= 0) {
             return AjaxResult.error(HttpStatus.PARAMS_ERROR, "参数错误，没有店铺Id");
         }

@@ -30,6 +30,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.io.IOException;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.Date;
@@ -52,7 +53,7 @@ public class TaoRefundApiController {
      */
     @RequestMapping("/pull_refund")
     @ResponseBody
-    public AjaxResult refundOrderPull(@RequestBody TaoRequest taoRequest)  {
+    public AjaxResult refundOrderPull(@RequestBody TaoRequest taoRequest) throws IOException {
         log.info("/**************主动更新tao退货订单****************/");
         if (taoRequest.getShopId() == null || taoRequest.getShopId() <= 0) {
 //            return new ApiResult<>(EnumResultVo.ParamsError.getIndex(), "参数错误，没有店铺Id");
@@ -172,7 +173,7 @@ public class TaoRefundApiController {
 
     @RequestMapping("/pull_refund_detail")
     @ResponseBody
-    public AjaxResult refundDetailPull(@RequestBody TaoRequest taoRequest)  {
+    public AjaxResult refundDetailPull(@RequestBody TaoRequest taoRequest) throws IOException {
         log.info("/**************主动更新tao退货订单****************/");
         if (taoRequest.getShopId() == null || taoRequest.getShopId() <= 0) {
             return AjaxResult.error(HttpStatus.PARAMS_ERROR, "参数错误，没有店铺Id");
