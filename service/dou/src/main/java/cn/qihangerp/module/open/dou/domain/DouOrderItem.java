@@ -123,7 +123,7 @@ public class DouOrderItem implements Serializable {
     /**
      * 订单商品数量
      */
-    private Long itemNum;
+    private Integer itemNum;
 
     /**
      * 物流收货时间 
