@@ -279,6 +279,7 @@ export default {
     // 表单重置
     reset() {
       this.form = {
+        status:'1'
       };
       this.resetForm("form");
     },

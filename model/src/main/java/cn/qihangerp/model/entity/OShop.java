@@ -47,6 +47,7 @@ public class OShop implements Serializable {
      * 更新时间
      */
     private Long modifyOn;
+    private Long createOn;
 
     /**
      * 描述

@@ -304,6 +304,7 @@ export default {
     },
     /** 搜索按钮操作 */
     handleQuery() {
+      this.pullLoading = false
       this.queryParams.pageNum = 1;
       this.getList();
     },

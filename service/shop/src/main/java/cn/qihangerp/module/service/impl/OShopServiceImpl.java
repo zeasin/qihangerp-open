@@ -42,6 +42,8 @@ public class OShopServiceImpl extends ServiceImpl<OShopMapper, OShop>
 
     @Override
     public int insertShop(OShop shop) {
+        shop.setModifyOn(System.currentTimeMillis()/1000);
+        shop.setCreateOn(System.currentTimeMillis()/1000);
         return mapper.insert(shop);
     }
 

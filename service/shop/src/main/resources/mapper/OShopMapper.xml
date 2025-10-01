@@ -12,6 +12,7 @@
             <result property="sort" column="sort" jdbcType="INTEGER"/>
             <result property="status" column="status" jdbcType="INTEGER"/>
             <result property="modifyOn" column="modify_on" jdbcType="BIGINT"/>
+            <result property="createOn" column="create_on" jdbcType="BIGINT"/>
             <result property="remark" column="remark" jdbcType="VARCHAR"/>
             <result property="sellerId" column="seller_id" jdbcType="BIGINT"/>
             <result property="appKey" column="app_key" jdbcType="VARCHAR"/>
@@ -30,6 +31,6 @@
         modify_on,remark,seller_id,
         app_key,app_secret,access_token,
         expires_in,access_token_begin,refresh_token,
-        refresh_token_timeout,api_request_url
+        refresh_token_timeout,api_request_url,create_on
     </sql>
 </mapper>
