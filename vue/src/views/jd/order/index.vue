@@ -174,6 +174,14 @@
       <el-table-column label="下单时间" align="center" prop="orderStartTime" />
       <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
         <template slot-scope="scope">
+          <el-button style="padding-right: 6px;padding-left: 6px"
+                     v-if="scope.row.auditStatus === 0"
+                     size="mini"
+                     type="success" plain
+                     icon="el-icon-success"
+                     @click="handleConfirm(scope.row)"
+                     v-hasPermi="['dou:order:edit']"
+          >确认订单</el-button>
           <el-button
             size="mini"
             :loading="pullLoading"
@@ -366,7 +374,49 @@ export default {
         this.$modal.msgSuccess(JSON.stringify(response));
         this.pullLoading = false
       })
-    }
+    },
+    handleConfirm(row) {
+      this.reset();
+      const id = row.id || this.ids
+      getOrder(id).then(response => {
+        this.form = response.data;
+        this.form.provinces = []
+        this.form.provinces.push(response.data.provinceName)
+        this.form.provinces.push(response.data.cityName)
+        this.form.provinces.push(response.data.townName)
+        this.detailOpen = true;
+        this.detailTitle = "确认订单";
+        this.isAudit = true
+      });
+    },
+    submitConfirmForm(){
+      this.$refs["form"].validate(valid => {
+        if (valid) {
+          const form = {
+            orderId:this.form.id,
+            province:this.form.provinces[0],
+            city:this.form.provinces[1],
+            town:this.form.provinces[2],
+            address:this.form.maskPostAddress,
+            receiver:this.form.maskPostReceiver,
+            mobile:this.form.maskPostTel
+          }
+
+          confirmOrder(form).then(response => {
+            if(response.code===200){
+              this.$modal.msgSuccess("订单确认成功");
+              this.detailOpen = false;
+              this.isAudit = false
+              this.getList();
+            }else{
+              this.$modal.msgError(response.msg);
+            }
+
+          });
+
+        }
+      })
+    },
   }
 };
 </script>

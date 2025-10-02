@@ -405,6 +405,9 @@ public class TaoOrder implements Serializable {
     // 天猫商家订单使用的红包金额
     private Long tmallCouponFee;
 
+    private Integer auditStatus;
+    private Date auditTime;
+
     @TableField(exist = false)
     private List<TaoOrderItem> items;
 

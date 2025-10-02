@@ -168,12 +168,20 @@
           <el-tag v-if="scope.row.status === 30 " size="small">待收货</el-tag>
           <el-tag v-if="scope.row.status === 100 " size="small">完成</el-tag>
           <br/>
-          <el-tag style="margin-top: 5px" type="warning" v-if="!scope.row.confirmStatus || scope.row.confirmStatus === 0 " size="small">待确认</el-tag>
+          <el-tag style="margin-top: 5px" type="warning" v-if="scope.row.auditStatus === 0 " size="small">待确认</el-tag>
         </template>
       </el-table-column>
 <!--      <el-table-column label="快递单号" align="center" prop="logisticsCode" />-->
       <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
         <template slot-scope="scope">
+          <el-button style="padding-right: 6px;padding-left: 6px"
+                     v-if="scope.row.auditStatus === 0 "
+                     size="mini"
+                     type="success" plain
+                     icon="el-icon-success"
+                     @click="handleConfirm(scope.row)"
+                     v-hasPermi="['dou:order:edit']"
+          >确认订单</el-button>
           <el-button
             size="mini"
             type="text"
@@ -279,7 +287,7 @@
             <el-button type="danger" icon="el-icon-delete" size="mini" @click="handleDeleteXhsOrderItem">删除</el-button>
           </el-col>
         </el-row>
-        <el-table :data="xhsOrderItemList" :row-class-name="rowXhsOrderItemIndex" @selection-change="handleXhsOrderItemSelectionChange" ref="xhsOrderItem" style="margin-bottom: 10px;">
+        <el-table :data="xhsOrderItemList"  ref="xhsOrderItem" style="margin-bottom: 10px;">
           <el-table-column type="selection" width="50" align="center" />
           <el-table-column label="序号" align="center" prop="index" width="50"/>
           <el-table-column label="商品" prop="erpGoodsId" width="350" >
@@ -331,7 +339,10 @@
         </el-form-item>
 
       </el-form>
-
+      <div slot="footer" class="dialog-footer" v-if="isAudit">
+        <el-button type="primary" @click="submitConfirmForm" >确认发货</el-button>
+        <el-button @click="cancel">取 消</el-button>
+      </div>
     </el-dialog>
 
   </div>
@@ -340,7 +351,7 @@
 <script>
 
 import { listShop } from "@/api/shop/shop";
-import {listOrder,getOrder,pushOms,pullOrder,pullOrderDetail} from "@/api/wei/order";
+import {listOrder,getOrder,pushOms,pullOrder,pullOrderDetail,confirmOrder} from "@/api/wei/order";
 import {pcaTextArr} from "element-china-area-data";
 import Clipboard from "clipboard";
 
@@ -502,8 +513,48 @@ export default {
         this.$modal.msgSuccess("推送成功");
       }).catch(() => {});
     },
+    handleConfirm(row) {
+      this.reset();
+      const id = row.id || this.ids
+      getOrder(id).then(response => {
+        this.form = response.data;
+        this.form.provinces = []
+        this.form.provinces.push(response.data.provinceName)
+        this.form.provinces.push(response.data.cityName)
+        this.form.provinces.push(response.data.townName)
+        this.detailOpen = true;
+        this.detailTitle = "确认订单";
+        this.isAudit = true
+      });
+    },
+    submitConfirmForm(){
+      this.$refs["form"].validate(valid => {
+        if (valid) {
+          const form = {
+            orderId:this.form.id,
+            province:this.form.provinces[0],
+            city:this.form.provinces[1],
+            town:this.form.provinces[2],
+            address:this.form.maskPostAddress,
+            receiver:this.form.maskPostReceiver,
+            mobile:this.form.maskPostTel
+          }
 
+          confirmOrder(form).then(response => {
+            if(response.code===200){
+              this.$modal.msgSuccess("订单确认成功");
+              this.detailOpen = false;
+              this.isAudit = false
+              this.getList();
+            }else{
+              this.$modal.msgError(response.msg);
+            }
 
+          });
+
+        }
+      })
+    },
   }
 };
 </script>

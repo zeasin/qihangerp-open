@@ -63,36 +63,36 @@
           @click="handlePull"
         >API拉取订单</el-button>
       </el-col>
-      <el-col :span="1.5">
-        <el-button
-          :loading="pullLoading"
-          type="primary"
-          plain
-          icon="el-icon-download"
-          size="mini"
-          @click="handlePullDetailByTid"
-        >API拉取单个订单</el-button>
-      </el-col>
-      <el-col :span="1.5">
-        <el-button
-          type="primary"
-          plain
-          icon="el-icon-top-right"
-          size="mini"
-          :disabled="multiple"
-          @click="handlePushOms"
-        >重新推送选中订单到订单库</el-button>
-      </el-col>
-      <el-col :span="1.5">
-        <el-button
-          type="danger"
-          plain
-          icon="el-icon-refresh"
-          size="mini"
-          :disabled="single"
-          @click="handlePullUpdate"
-        >手动更新订单</el-button>
-      </el-col>
+<!--      <el-col :span="1.5">-->
+<!--        <el-button-->
+<!--          :loading="pullLoading"-->
+<!--          type="primary"-->
+<!--          plain-->
+<!--          icon="el-icon-download"-->
+<!--          size="mini"-->
+<!--          @click="handlePullDetailByTid"-->
+<!--        >API拉取单个订单</el-button>-->
+<!--      </el-col>-->
+<!--      <el-col :span="1.5">-->
+<!--        <el-button-->
+<!--          type="primary"-->
+<!--          plain-->
+<!--          icon="el-icon-top-right"-->
+<!--          size="mini"-->
+<!--          :disabled="multiple"-->
+<!--          @click="handlePushOms"-->
+<!--        >重新推送选中订单到订单库</el-button>-->
+<!--      </el-col>-->
+<!--      <el-col :span="1.5">-->
+<!--        <el-button-->
+<!--          type="danger"-->
+<!--          plain-->
+<!--          icon="el-icon-refresh"-->
+<!--          size="mini"-->
+<!--          :disabled="single"-->
+<!--          @click="handlePullUpdate"-->
+<!--        >手动更新订单</el-button>-->
+<!--      </el-col>-->
       <right-toolbar :showSearch.sync="showSearch" @queryTable="getList"></right-toolbar>
     </el-row>
 
@@ -186,16 +186,24 @@
           <el-tag v-if="scope.row.status === 'PAID_FORBID_CONSIGN'">禁止发货</el-tag>
         </template>
       </el-table-column>
-<!--      <el-table-column label="操作" align="center" class-name="small-padding fixed-width">-->
-<!--        <template slot-scope="scope">-->
-<!--          <el-button-->
-<!--            :loading="pullLoading"-->
-<!--            size="mini"-->
-<!--            icon="el-icon-refresh"-->
-<!--            @click="handlePullUpdate(scope.row)"-->
-<!--          >更新订单</el-button>-->
-<!--        </template>-->
-<!--      </el-table-column>-->
+      <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
+        <template slot-scope="scope">
+          <el-button style="padding-right: 6px;padding-left: 6px"
+                     v-if="scope.row.auditStatus === 0"
+                     size="mini"
+                     type="success" plain
+                     icon="el-icon-success"
+                     @click="handleConfirm(scope.row)"
+                     v-hasPermi="['dou:order:edit']"
+          >确认订单</el-button>
+          <el-button style="padding-right: 6px;padding-left: 6px"
+            :loading="pullLoading"
+            size="mini"
+            icon="el-icon-refresh"
+            @click="handlePullUpdate(scope.row)"
+          >更新订单</el-button>
+        </template>
+      </el-table-column>
     </el-table>
 
     <pagination
@@ -205,23 +213,136 @@
       :limit.sync="queryParams.pageSize"
       @pagination="getList"
     />
+    <!-- 订单审核、订单详情对话框 -->
+    <el-dialog :title="detailTitle" :visible.sync="detailOpen" width="1000px" append-to-body >
+      <el-form ref="form" :model="form" :rules="rules" label-width="100px" inline>
+        <el-descriptions title="订单信息">
+          <el-descriptions-item label="ID">{{form.id}}</el-descriptions-item>
+          <el-descriptions-item label="订单号">{{form.orderId}}</el-descriptions-item>
+          <el-descriptions-item label="店铺">
+            {{ shopList.find(x=>x.id === form.shopId)?shopList.find(x=>x.id === form.shopId).name:'' }}
+          </el-descriptions-item>
+          <el-descriptions-item label="订单来源">
+            <el-tag size="small" >{{form.btypeDesc}}</el-tag>
+          </el-descriptions-item>
+          <el-descriptions-item label="订单状态">
+            <el-tag size="small" >{{ form.orderStatusDesc }}</el-tag>
+          </el-descriptions-item>
+          <el-descriptions-item label="主状态">
+            <el-tag size="small" >{{ form.mainStatusDesc }}</el-tag>
+          </el-descriptions-item>
+          <!--          <el-descriptions-item label="成团状态">-->
+          <!--            <el-tag size="small" v-if="form.groupStatus ===0 ">拼团中</el-tag>-->
+          <!--            <el-tag size="small" v-if="form.groupStatus ===1 ">已成团</el-tag>-->
+          <!--            <el-tag size="small" v-if="form.groupStatus ===2 ">团失败</el-tag>-->
+          <!--          </el-descriptions-item>-->
 
+
+          <el-descriptions-item label="买家备注">
+            {{form.buyerWords}}
+          </el-descriptions-item>
+          <el-descriptions-item label="卖家备注">
+            {{form.sellerWords}}
+          </el-descriptions-item>
+          <el-descriptions-item label="取消原因">
+            {{form.cancelReason}}
+          </el-descriptions-item>
+          <el-descriptions-item label="创建时间">
+            {{ parseTime(form.createTime*1000) }}
+          </el-descriptions-item>
+          <el-descriptions-item label="支付时间"> {{ parseTime(form.payTime*1000) }}</el-descriptions-item>
+          <el-descriptions-item label="更新时间"> {{ parseTime(form.updateTime*1000) }}</el-descriptions-item>
+        </el-descriptions>
+        <el-descriptions title="付款信息">
+          <!--          <el-descriptions-item label="商品总额">{{form.goodsAmount}}</el-descriptions-item>-->
+          <!--          <el-descriptions-item label="团长免单金额">{{form.capitalFreeDiscount}}</el-descriptions-item>-->
+          <el-descriptions-item label="商家优惠金额">{{form.promotionShopAmount}}</el-descriptions-item>
+          <el-descriptions-item label="平台优惠金额">{{form.promotionTalentAmount}}</el-descriptions-item>
+          <el-descriptions-item label="运费">{{form.postAmount}}</el-descriptions-item>
+          <el-descriptions-item label="实际支付金额">{{form.orderAmount}}</el-descriptions-item>
+          <el-descriptions-item label="支付方式"> {{ form.payAmount }}</el-descriptions-item>
+        </el-descriptions>
+
+
+        <el-descriptions title="收货信息">
+          <el-descriptions-item label="收件人姓名">{{form.maskPostReceiver}}</el-descriptions-item>
+          <el-descriptions-item label="收件人手机号">{{form.maskPostTel}}</el-descriptions-item>
+          <el-descriptions-item label="省市区">{{form.provinceName}}{{form.cityName}}{{form.townName}}</el-descriptions-item>
+          <el-descriptions-item label="详细地址">{{form.maskPostAddress}}</el-descriptions-item>
+        </el-descriptions>
+        <!--        <el-descriptions title="发货信息">-->
+        <!--          &lt;!&ndash; <el-descriptions-item label="发货方式">-->
+        <!--            <el-tag v-if="form.shipType === 1"  type="danger">供应商代发</el-tag>-->
+        <!--              <el-tag v-if="form.shipType === 0" type="danger">仓库发货</el-tag>-->
+        <!--          </el-descriptions-item> &ndash;&gt;-->
+        <!--          <el-descriptions-item label="物流公司">{{form.logisticsCompany}}</el-descriptions-item>-->
+        <!--          <el-descriptions-item label="物流单号">{{form.logisticsCode}}</el-descriptions-item>-->
+        <!--          <el-descriptions-item label="发货时间">{{form.logisticsTime}}</el-descriptions-item>-->
+        <!--        </el-descriptions>-->
+        <el-divider content-position="center">订单商品</el-divider>
+        <el-table :data="form.items"  style="margin-bottom: 10px;">
+          <el-table-column label="序号" align="center" type="index" width="50"/>
+
+          <el-table-column label="商品图片" width="80">
+            <template slot-scope="scope">
+              <el-image style="width: 70px; height: 70px" :src="scope.row.productPic"></el-image>
+            </template>
+          </el-table-column>
+          <el-table-column label="商品标题" prop="productName" ></el-table-column>
+          <el-table-column label="SKU" prop="goodsSpec" width="150"></el-table-column>
+          <el-table-column label="sku编码" prop="specNum"></el-table-column>
+          <el-table-column label="单价" prop="goodsPrice"></el-table-column>
+          <el-table-column label="数量" prop="comboNum"></el-table-column>
+          <el-table-column label="商品金额" prop="totalAmount"></el-table-column>
+        </el-table>
+
+        <el-divider content-position="center"  v-if="isAudit" >收件人</el-divider>
+
+        <el-form-item label="收件人姓名" prop="maskPostReceiver" v-if="isAudit">
+          <el-input v-model="form.maskPostReceiver" placeholder="请输入收件人姓名" style="width:350px" />
+        </el-form-item>
+        <el-form-item label="收件人电话" prop="maskPostTel" v-if="isAudit">
+          <el-input v-model="form.maskPostTel" placeholder="请输入收件人电话" style="width:350px" />
+        </el-form-item>
+        <el-form-item label="省市区" prop="provinces" v-if="isAudit">
+          <el-cascader style="width:350px"
+                       size="large"
+                       :options="pcaTextArr"
+                       v-model="form.provinces">
+          </el-cascader>
+        </el-form-item>
+        <el-form-item label="详细地址" prop="maskPostAddress" v-if="isAudit">
+          <el-input v-model="form.maskPostAddress" placeholder="请输入收件地址" style="width:350px" />
+        </el-form-item>
+        <!--        <el-form-item label="发货方式" prop="shipType" v-if="isAudit">-->
+        <!--          <el-select v-model="form.shipType" placeholder="发货类型" style="width:350px">-->
+        <!--            <el-option label="供应商代发" value="1"></el-option>-->
+        <!--            <el-option label="仓库发货" value="0"></el-option>-->
+        <!--          </el-select>-->
+        <!--        </el-form-item>-->
+
+      </el-form>
+      <div slot="footer" class="dialog-footer" v-if="isAudit">
+        <el-button type="primary" @click="submitConfirmForm" v-if="form.auditStatus===0">确认发货</el-button>
+        <el-button @click="cancel">取 消</el-button>
+      </div>
+    </el-dialog>
 
   </div>
 </template>
 
 <script>
-import {listOrder, pullOrder, getOrder, pushOms, pullOrderDetail} from "@/api/tao/order";
+import {listOrder, pullOrder, getOrder, pushOms, pullOrderDetail,confirmOrder} from "@/api/tao/order";
 import { listShop } from "@/api/shop/shop";
-import { searchSku } from "@/api/goods/goods";
 import {MessageBox} from "element-ui";
 import {isRelogin} from "../../../utils/request";
 import Clipboard from "clipboard";
-
+import {pcaTextArr} from "element-china-area-data";
 export default {
   name: "OrderTao",
   data() {
     return {
+      pcaTextArr,
       // 遮罩层
       loading: true,
       // 显示搜索条件
@@ -233,6 +354,8 @@ export default {
       single: true,
       detailOpen: false,
       multiple: true,
+      isAudit: false,
+      detailTitle:'',
       // 总条数
       total: 0,
       // 淘宝订单表格数据
@@ -318,6 +441,7 @@ export default {
     },
     /** 搜索按钮操作 */
     handleQuery() {
+      this.pullLoading = false
       this.queryParams.pageNum = 1;
       this.getList();
     },
@@ -415,6 +539,48 @@ export default {
         // this.getList();
         this.$modal.msgSuccess("推送成功");
       }).catch(() => {});
+    },
+    handleConfirm(row) {
+      this.reset();
+      const id = row.id || this.ids
+      getOrder(id).then(response => {
+        this.form = response.data;
+        this.form.provinces = []
+        this.form.provinces.push(response.data.provinceName)
+        this.form.provinces.push(response.data.cityName)
+        this.form.provinces.push(response.data.townName)
+        this.detailOpen = true;
+        this.detailTitle = "确认订单";
+        this.isAudit = true
+      });
+    },
+    submitConfirmForm(){
+      this.$refs["form"].validate(valid => {
+        if (valid) {
+          const form = {
+            orderId:this.form.id,
+            province:this.form.provinces[0],
+            city:this.form.provinces[1],
+            town:this.form.provinces[2],
+            address:this.form.maskPostAddress,
+            receiver:this.form.maskPostReceiver,
+            mobile:this.form.maskPostTel
+          }
+
+          confirmOrder(form).then(response => {
+            if(response.code===200){
+              this.$modal.msgSuccess("订单确认成功");
+              this.detailOpen = false;
+              this.isAudit = false
+              this.getList();
+            }else{
+              this.$modal.msgError(response.msg);
+            }
+
+          });
+
+        }
+      })
     },
   }
 };

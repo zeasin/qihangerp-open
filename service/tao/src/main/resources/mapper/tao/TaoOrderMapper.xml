@@ -84,6 +84,8 @@
             <result property="isPartConsign" column="is_part_consign" jdbcType="VARCHAR"/>
             <result property="sid" column="sid" jdbcType="VARCHAR"/>
             <result property="hasYfx" column="has_yfx" jdbcType="VARCHAR"/>
+        <result property="auditStatus" column="audit_status" jdbcType="INTEGER"/>
+        <result property="auditTime" column="audit_time" jdbcType="TIMESTAMP"/>
     </resultMap>
 
     <sql id="Base_Column_List">
@@ -112,6 +114,6 @@
         alipay_no,buyer_alipay_no,buyer_email,
         seller_alipay_no,has_post_fee,timeout_action_time,
         snapshot_url,promotion,yfx_fee,has_yfx,sid,
-        send_time,is_part_consign
+        send_time,is_part_consign,audit_status,audit_time
     </sql>
 </mapper>
