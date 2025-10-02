@@ -11,7 +11,7 @@
  Target Server Version : 80043 (8.0.43)
  File Encoding         : 65001
 
- Date: 02/10/2025 00:08:50
+ Date: 02/10/2025 08:24:59
 */
 
 SET NAMES utf8mb4;
@@ -963,7 +963,7 @@ CREATE TABLE `o_order`  (
 -- ----------------------------
 -- Records of o_order
 -- ----------------------------
-INSERT INTO `o_order` VALUES (40, '6946634625004279575', 400, 1007, NULL, '', '', NULL, 1, 1, 0, 0, 0, 0, 0, 20, '彭先生', '15818590119', '自由路122号大院', '四川省', '成都市', '武侯区', '2025-09-30 11:01:09', -1, 0, 0, '0', NULL, NULL, '2025-10-01 23:17:28', '手动确认订单', NULL, NULL, NULL);
+INSERT INTO `o_order` VALUES (40, '6946634625004279575', 400, 1007, NULL, '', '', NULL, 1, 11, 0, 0, 0, 0, 0, 20, '彭先生', '15818590119', '自由路122号大院', '四川省', '成都市', '武侯区', '2025-09-30 11:01:09', -1, 0, 0, '0', NULL, NULL, '2025-10-01 23:17:28', '手动确认订单', '2025-10-02 00:09:02', 'admin 操作取消订单', 'aaa');
 INSERT INTO `o_order` VALUES (41, '6921344645306088915', 400, 1007, NULL, '', '', NULL, 1, 1, 0, 0, 0, 0, 0, 0.02, '仇*', '1**********', '*************', '山东省', '威海市', '环翠区', '2025-09-23 10:52:56', -1, 0, 0, '0', NULL, NULL, '2025-10-01 23:19:13', '手动确认订单', NULL, NULL, NULL);
 INSERT INTO `o_order` VALUES (42, '6946198576192755115', 400, 1007, NULL, '', '', NULL, 1, 1, 0, 0, 0, 0, 0, 0.2, '雨*', '1**********', '**************', '浙江省', '杭州市', '余杭区', '2025-09-17 09:52:51', -1, 0, 0, '0', NULL, NULL, '2025-10-01 23:19:51', '手动确认订单', NULL, NULL, NULL);
 
@@ -1011,7 +1011,7 @@ CREATE TABLE `o_order_item`  (
 -- ----------------------------
 -- Records of o_order_item
 -- ----------------------------
-INSERT INTO `o_order_item` VALUES (45, 1007, 400, 40, '6946634625004279575', '6946634625004279575', '3553739561195010', 0, 0, '酒店一次性棉麻拖鞋居家待客便携加厚防滑半包全包客人拖鞋定 制', 'https://p3-aio.ecombdimg.com/obj/ecom-shop-material/jpeg_m_de9e0dd4d97fb13808d817386b96be7e_sx_188032_www800-800', '0', NULL, '', 0, 0, 0, 0, 1, NULL, 0, 1, NULL, -1, 0, 0, '2025-10-01 23:17:28', '手动确认订单', NULL, NULL);
+INSERT INTO `o_order_item` VALUES (45, 1007, 400, 40, '6946634625004279575', '6946634625004279575', '3553739561195010', 0, 0, '酒店一次性棉麻拖鞋居家待客便携加厚防滑半包全包客人拖鞋定 制', 'https://p3-aio.ecombdimg.com/obj/ecom-shop-material/jpeg_m_de9e0dd4d97fb13808d817386b96be7e_sx_188032_www800-800', '0', NULL, '', 0, 0, 0, 0, 1, NULL, 0, 1, 11, -1, 0, 0, '2025-10-01 23:17:28', '手动确认订单', '2025-10-02 00:09:02', 'admin 操作取消订单');
 INSERT INTO `o_order_item` VALUES (46, 1007, 400, 41, '6921344645306088915', '6921344645306088915', '3415147054563586', 0, 0, '通用气质针织春夏收腰欧美法式潮流短款外套', 'https://p3-aio.ecombdimg.com/obj/ecom-shop-material/ALSUvYM_m_6b2c63f75ace689f2e1b03224ce5fd7e_sx_27680_www600-600', '0', NULL, '', 0, 0, 0, 0, 2, NULL, 0, 1, NULL, -1, 0, 0, '2025-10-01 23:19:13', '手动确认订单', NULL, NULL);
 INSERT INTO `o_order_item` VALUES (47, 1007, 400, 42, '6946198576192755115', '6946198576192755115', '3553832070819586', 0, 0, '【测试商品勿拍】养车式_粉色波点吊带连衣裙子组合商品2', 'https://p3-aio.ecombdimg.com/obj/ecom-shop-material/jpeg_m_6e81220e4cc8108c6619174f5ae353e3_sx_979970_www1440-1440', '0', NULL, '', 0, 0, 0, 0, 1, NULL, 0, 1, NULL, -1, 0, 0, '2025-10-01 23:19:51', '手动确认订单', NULL, NULL);
 INSERT INTO `o_order_item` VALUES (48, 1007, 400, 42, '6946198576192755115', '6946198576192820651', '3553850395099138', 0, 0, '【测试商品勿拍】养车式_粉色波点吊带连衣裙子舒淇轮胎', 'https://p3-aio.ecombdimg.com/obj/ecom-shop-material/jpeg_m_6e81220e4cc8108c6619174f5ae353e3_sx_979970_www1440-1440', '0', NULL, '', 0, 0, 0, 0, 1, NULL, 0, 1, NULL, -1, 0, 0, '2025-10-01 23:19:51', '手动确认订单', NULL, NULL);
@@ -3549,7 +3549,7 @@ INSERT INTO `sys_menu` VALUES (2115, '商品库存管理', 7, 0, 'goods_inventor
 INSERT INTO `sys_menu` VALUES (2116, '商品出库管理', 7, 20, 'stock_out', 'stock/stockOut/index', NULL, 1, 0, 'C', '0', '0', '', 'guide', 'admin', '2024-09-21 20:44:46', 'admin', '2025-03-24 13:46:42', '');
 INSERT INTO `sys_menu` VALUES (2117, '仓位管理', 7, 91, 'position', 'stock/warehouse/position', NULL, 1, 0, 'C', '1', '0', '', '404', 'admin', '2024-09-22 11:52:18', 'admin', '2025-03-24 13:47:04', '');
 INSERT INTO `sys_menu` VALUES (2118, '新建商品入库单', 7, 11, 'stock_in/create', 'stock/stockIn/create.vue', NULL, 1, 0, 'C', '1', '0', '', '404', 'admin', '2024-09-22 14:49:40', 'admin', '2025-03-24 13:35:30', '');
-INSERT INTO `sys_menu` VALUES (2129, '发货&分配发货', 6, 0, 'manual_shipment', 'shipping/shipment/index', NULL, 1, 0, 'C', '0', '0', '', 'checkbox', 'admin', '2025-06-01 13:36:57', 'admin', '2025-06-01 13:39:59', '');
+INSERT INTO `sys_menu` VALUES (2129, '订单发货', 6, 0, 'manual_shipment', 'shipping/shipment/index', NULL, 1, 0, 'C', '0', '0', '', 'checkbox', 'admin', '2025-06-01 13:36:57', 'admin', '2025-10-02 00:15:02', '');
 
 -- ----------------------------
 -- Table structure for sys_menu2
@@ -4003,7 +4003,7 @@ CREATE TABLE `sys_user`  (
 -- ----------------------------
 -- Records of sys_user
 -- ----------------------------
-INSERT INTO `sys_user` VALUES (1, NULL, 'admin', '启航老齐A', '00', '280645618@qq.com', '18123879144', '1', '', '$2a$10$7JB720yubVSZvUI0rEqK/.VqGOZTH.ulu33dHOiBE8ByOhJIrdAu2', '0', '0', '127.0.0.1', '2025-10-01 23:07:36', 'admin', '2023-08-07 19:31:37', '', '2025-10-01 15:07:36', '管理员');
+INSERT INTO `sys_user` VALUES (1, NULL, 'admin', '启航老齐A', '00', '280645618@qq.com', '18123879144', '1', '', '$2a$10$7JB720yubVSZvUI0rEqK/.VqGOZTH.ulu33dHOiBE8ByOhJIrdAu2', '0', '0', '127.0.0.1', '2025-10-02 08:10:28', 'admin', '2023-08-07 19:31:37', '', '2025-10-02 00:10:27', '管理员');
 INSERT INTO `sys_user` VALUES (2, NULL, 'openapi', 'openApi接口专用', '00', '2806456181@qq.com', '15818590000', '0', '', '$2a$10$fHkhoqbMiyracAsTzl38H.55bu.M.of1FXk2EK7RQBjfic3tLU0Ue', '0', '0', '127.0.0.1', '2024-06-24 10:23:35', 'admin', '2024-03-17 14:55:22', 'admin', '2024-06-24 10:23:35', NULL);
 INSERT INTO `sys_user` VALUES (101, 101, '15818590119', 'aaa123', '00', '', '', '0', '', '$2a$10$pXcT6cHaObMeKuYd9vZb5uEb8PyUdF2AcqqRN1cBqiA9rV4qYQW7G', '0', '2', '', NULL, 'admin', '2024-08-15 13:45:25', '', NULL, NULL);
 INSERT INTO `sys_user` VALUES (102, 101, '15818590119', '老齐', '00', '', '', '0', '', '$2a$10$ysk.zgJ8wh25c7vOjKyZ8uarM2hkG0S51j8GYdJSo2kZmc3f8HdKe', '0', '0', '', NULL, 'admin', '2024-08-15 13:49:59', 'admin', '2025-02-10 16:26:20', NULL);

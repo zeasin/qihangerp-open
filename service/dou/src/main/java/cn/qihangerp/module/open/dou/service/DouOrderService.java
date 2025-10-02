@@ -3,6 +3,7 @@ package cn.qihangerp.module.open.dou.service;
 import cn.qihangerp.common.PageQuery;
 import cn.qihangerp.common.PageResult;
 import cn.qihangerp.common.ResultVo;
+import cn.qihangerp.model.bo.DouOrderConfirmBo;
 import cn.qihangerp.module.open.dou.domain.DouOrder;
 import cn.qihangerp.module.open.dou.domain.bo.DouOrderBo;
 import com.baomidou.mybatisplus.extension.service.IService;
@@ -25,4 +26,5 @@ public interface DouOrderService extends IService<DouOrder> {
      * @return
      */
     ResultVo<Integer> saveOrder(Long shopId, DouOrder order);
+    ResultVo<Long> confirmOrder(DouOrderConfirmBo confirmBo);
 }

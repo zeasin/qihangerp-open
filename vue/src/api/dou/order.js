@@ -43,3 +43,11 @@ export function pullOrderDetail(data) {
     data: data
   })
 }
+// 确认抖店订单
+export function confirmOrder(data) {
+  return request({
+    url: '/dou/order/confirmOrder',
+    method: 'post',
+    data: data
+  })
+}

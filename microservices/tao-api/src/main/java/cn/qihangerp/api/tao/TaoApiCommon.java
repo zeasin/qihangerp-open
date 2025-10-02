@@ -43,13 +43,13 @@ public class TaoApiCommon {
             return ResultVo.error(HttpStatus.PARAMS_ERROR, "平台配置错误，没有找到AppKey");
         }
         if(!StringUtils.hasText(platform.getAppSecret())) {
-            return ResultVo.error(HttpStatus.PARAMS_ERROR, "第三方平台配置错误，没有找到AppSercet");
+            return ResultVo.error(HttpStatus.PARAMS_ERROR, "平台配置错误，没有找到AppSercet");
         }
-        if(!StringUtils.hasText(platform.getServerUrl())) {
-            return ResultVo.error(HttpStatus.PARAMS_ERROR, "第三方平台配置错误，没有找到ServerUrl");
-        }
+//        if(!StringUtils.hasText(platform.getServerUrl())) {
+//            return ResultVo.error(HttpStatus.PARAMS_ERROR, "第三方平台配置错误，没有找到ServerUrl");
+//        }
         if(shop.getSellerId() == null || shop.getSellerId() <= 0) {
-            return ResultVo.error(HttpStatus.PARAMS_ERROR,  "第三方平台配置错误，没有找到SellerUserId");
+            return ResultVo.error(HttpStatus.PARAMS_ERROR,  "店铺台配置错误，没有找到SellerUserId");
         }
 
         ShopApiParams params = new ShopApiParams();
