@@ -8,10 +8,10 @@ import cn.qihangerp.model.entity.OGoods;
 import cn.qihangerp.model.entity.OGoodsSku;
 import cn.qihangerp.module.goods.service.OGoodsService;
 import cn.qihangerp.module.goods.service.OGoodsSkuService;
-import cn.qihangerp.module.open.wei.domain.OmsWeiGoods;
-import cn.qihangerp.module.open.wei.domain.OmsWeiGoodsSku;
-import cn.qihangerp.module.open.wei.mapper.OmsWeiGoodsMapper;
-import cn.qihangerp.module.open.wei.mapper.OmsWeiGoodsSkuMapper;
+import cn.qihangerp.module.open.wei.domain.WeiGoods;
+import cn.qihangerp.module.open.wei.domain.WeiGoodsSku;
+import cn.qihangerp.module.open.wei.mapper.WeiGoodsMapper;
+import cn.qihangerp.module.open.wei.mapper.WeiGoodsSkuMapper;
 import cn.qihangerp.module.open.wei.service.OmsWeiGoodsSkuService;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -30,20 +30,20 @@ import java.util.List;
 */
 @AllArgsConstructor
 @Service
-public class OmsWeiGoodsSkuServiceImpl extends ServiceImpl<OmsWeiGoodsSkuMapper, OmsWeiGoodsSku>
+public class OmsWeiGoodsSkuServiceImpl extends ServiceImpl<WeiGoodsSkuMapper, WeiGoodsSku>
     implements OmsWeiGoodsSkuService {
-    private final  OmsWeiGoodsSkuMapper mapper;
-    private final OmsWeiGoodsMapper weiGoodsMapper;
+    private final WeiGoodsSkuMapper mapper;
+    private final WeiGoodsMapper weiGoodsMapper;
     private final OGoodsSkuService oGoodsSkuService;
     private final OGoodsService oGoodsService;
 
     @Override
-    public PageResult<OmsWeiGoodsSku> queryPageList(OmsWeiGoodsSku bo, PageQuery pageQuery) {
-        LambdaQueryWrapper<OmsWeiGoodsSku> queryWrapper = new LambdaQueryWrapper<OmsWeiGoodsSku>()
-                .eq(bo.getShopId()!=null,OmsWeiGoodsSku::getShopId,bo.getShopId())
+    public PageResult<WeiGoodsSku> queryPageList(WeiGoodsSku bo, PageQuery pageQuery) {
+        LambdaQueryWrapper<WeiGoodsSku> queryWrapper = new LambdaQueryWrapper<WeiGoodsSku>()
+                .eq(bo.getShopId()!=null, WeiGoodsSku::getShopId,bo.getShopId())
                 ;
 
-        Page<OmsWeiGoodsSku> page = mapper.selectPage(pageQuery.build(), queryWrapper);
+        Page<WeiGoodsSku> page = mapper.selectPage(pageQuery.build(), queryWrapper);
 
         return PageResult.build(page);
     }
@@ -60,23 +60,23 @@ public class OmsWeiGoodsSkuServiceImpl extends ServiceImpl<OmsWeiGoodsSkuMapper,
             return ResultVo.error("未找到系统商品");
         }
 
-        OmsWeiGoodsSku taoGoodsSku = mapper.selectById(bo.getId());
+        WeiGoodsSku taoGoodsSku = mapper.selectById(bo.getId());
         if(taoGoodsSku == null) {
             return ResultVo.error("WEI商品sku数据不存在");
         }
-        List<OmsWeiGoods> jdGoods = weiGoodsMapper.selectList(new LambdaQueryWrapper<OmsWeiGoods>()
-                .eq(OmsWeiGoods::getProductId, taoGoodsSku.getProductId()));
+        List<WeiGoods> jdGoods = weiGoodsMapper.selectList(new LambdaQueryWrapper<WeiGoods>()
+                .eq(WeiGoods::getProductId, taoGoodsSku.getProductId()));
         if(jdGoods==null||jdGoods.size()==0){
             return ResultVo.error("WEI商品数据不存在");
         }
 
-        OmsWeiGoodsSku sku = new OmsWeiGoodsSku();
+        WeiGoodsSku sku = new WeiGoodsSku();
         sku.setId(Long.parseLong(bo.getId()));
         sku.setErpGoodsId(Long.parseLong(oGoodsSku.getGoodsId()));
         sku.setErpGoodsSkuId(Long.parseLong(oGoodsSku.getId()));
         mapper.updateById(sku);
 
-        OmsWeiGoods goodsUp=new OmsWeiGoods();
+        WeiGoods goodsUp=new WeiGoods();
         goodsUp.setId(jdGoods.get(0).getId());
         goodsUp.setErpGoodsId(Long.parseLong(oGoodsSku.getGoodsId()));
         weiGoodsMapper.updateById(goodsUp);

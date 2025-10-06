@@ -43,3 +43,11 @@ export function pushOms(data) {
     data: data
   })
 }
+// 确认订单
+export function confirmOrder(data) {
+  return request({
+    url: '/wei/order/confirmOrder',
+    method: 'post',
+    data: data
+  })
+}

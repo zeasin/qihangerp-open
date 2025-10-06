@@ -2,8 +2,8 @@ package cn.qihangerp.module.open.wei.service.impl;
 
 import cn.qihangerp.module.open.wei.service.OmsWeiOrderItemService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import cn.qihangerp.module.open.wei.domain.OmsWeiOrderItem;
-import cn.qihangerp.module.open.wei.mapper.OmsWeiOrderItemMapper;
+import cn.qihangerp.module.open.wei.domain.WeiOrderItem;
+import cn.qihangerp.module.open.wei.mapper.WeiOrderItemMapper;
 import org.springframework.stereotype.Service;
 
 /**
@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 * @createDate 2024-09-21 15:09:54
 */
 @Service
-public class OmsWeiOrderItemServiceImpl extends ServiceImpl<OmsWeiOrderItemMapper, OmsWeiOrderItem>
+public class OmsWeiOrderItemServiceImpl extends ServiceImpl<WeiOrderItemMapper, WeiOrderItem>
     implements OmsWeiOrderItemService {
 
 }

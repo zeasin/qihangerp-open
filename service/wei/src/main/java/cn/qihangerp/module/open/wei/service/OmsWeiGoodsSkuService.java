@@ -4,7 +4,7 @@ import cn.qihangerp.common.PageQuery;
 import cn.qihangerp.common.PageResult;
 import cn.qihangerp.common.ResultVo;
 import cn.qihangerp.model.bo.LinkErpGoodsSkuBo;
-import cn.qihangerp.module.open.wei.domain.OmsWeiGoodsSku;
+import cn.qihangerp.module.open.wei.domain.WeiGoodsSku;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**
@@ -12,8 +12,8 @@ import com.baomidou.mybatisplus.extension.service.IService;
 * @description 针对表【oms_wei_goods_sku】的数据库操作Service
 * @createDate 2024-06-03 16:51:29
 */
-public interface OmsWeiGoodsSkuService extends IService<OmsWeiGoodsSku> {
-    PageResult<OmsWeiGoodsSku> queryPageList(OmsWeiGoodsSku bo, PageQuery pageQuery);
+public interface OmsWeiGoodsSkuService extends IService<WeiGoodsSku> {
+    PageResult<WeiGoodsSku> queryPageList(WeiGoodsSku bo, PageQuery pageQuery);
 
     ResultVo linkErpGoodsSku(LinkErpGoodsSkuBo bo);
 }

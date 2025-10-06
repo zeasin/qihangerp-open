@@ -1,6 +1,6 @@
 package cn.qihangerp.module.open.wei.mapper;
 
-import cn.qihangerp.module.open.wei.domain.OmsWeiOrder;
+import cn.qihangerp.module.open.wei.domain.WeiOrder;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**
@@ -9,7 +9,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 * @createDate 2024-09-21 15:09:54
 * @Entity cn.qihangerp.wei.domain.OmsWeiOrder
 */
-public interface OmsWeiOrderMapper extends BaseMapper<OmsWeiOrder> {
+public interface WeiOrderMapper extends BaseMapper<WeiOrder> {
 
 }
 

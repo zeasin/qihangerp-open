@@ -14,7 +14,7 @@ import lombok.Data;
  */
 @TableName(value ="oms_wei_goods_sku")
 @Data
-public class OmsWeiGoodsSku implements Serializable {
+public class WeiGoodsSku implements Serializable {
     /**
      * 
      */

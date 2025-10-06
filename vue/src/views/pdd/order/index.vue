@@ -64,16 +64,16 @@
         >API拉取订单</el-button>
       </el-col>
 
-      <el-col :span="1.5">
-        <el-button
-          type="primary"
-          plain
-          icon="el-icon-refresh"
-          size="mini"
-          :disabled="multiple"
-          @click="handlePushOms"
-        >重新推送选中订单到订单库</el-button>
-      </el-col>
+<!--      <el-col :span="1.5">-->
+<!--        <el-button-->
+<!--          type="primary"-->
+<!--          plain-->
+<!--          icon="el-icon-refresh"-->
+<!--          size="mini"-->
+<!--          :disabled="multiple"-->
+<!--          @click="handlePushOms"-->
+<!--        >重新推送选中订单到订单库</el-button>-->
+<!--      </el-col>-->
 
       <right-toolbar :showSearch.sync="showSearch" @queryTable="getList"></right-toolbar>
     </el-row>
@@ -203,57 +203,56 @@
       <el-form ref="form" :model="form" :rules="rules" label-width="100px" inline>
         <el-descriptions title="订单信息">
           <el-descriptions-item label="ID">{{form.id}}</el-descriptions-item>
-          <el-descriptions-item label="订单号">{{form.orderId}}</el-descriptions-item>
+          <el-descriptions-item label="订单号">{{form.orderSn}}</el-descriptions-item>
           <el-descriptions-item label="店铺">
             {{ shopList.find(x=>x.id === form.shopId)?shopList.find(x=>x.id === form.shopId).name:'' }}
           </el-descriptions-item>
-          <el-descriptions-item label="订单来源">
-            <el-tag size="small" >{{form.btypeDesc}}</el-tag>
+
+          <el-descriptions-item label="成团状态">
+            <el-tag size="small" v-if="form.groupStatus ===0 ">拼团中</el-tag>
+            <el-tag size="small" v-if="form.groupStatus ===1 ">已成团</el-tag>
+            <el-tag size="small" v-if="form.groupStatus ===2 ">团失败</el-tag>
+          </el-descriptions-item>
+          <el-descriptions-item label="退款状态">
+            <el-tag size="small" v-if="form.refundStatus ===1 ">无售后或售后关闭</el-tag>
+            <el-tag size="small" v-if="form.refundStatus ===2 ">售后处理中</el-tag>
+            <el-tag size="small" v-if="form.refundStatus ===3 ">退款中</el-tag>
+            <el-tag size="small" v-if="form.refundStatus ===4 ">退款成功</el-tag>
           </el-descriptions-item>
           <el-descriptions-item label="订单状态">
-            <el-tag size="small" >{{ form.orderStatusDesc }}</el-tag>
+            <el-tag size="small" v-if="form.orderStatus ===1 ">待发货</el-tag>
+            <el-tag size="small" v-if="form.orderStatus ===2 ">已发货待签收</el-tag>
+            <el-tag size="small" v-if="form.orderStatus ===3 ">已签收</el-tag>
           </el-descriptions-item>
-          <el-descriptions-item label="主状态">
-            <el-tag size="small" >{{ form.mainStatusDesc }}</el-tag>
-          </el-descriptions-item>
-          <!--          <el-descriptions-item label="成团状态">-->
-          <!--            <el-tag size="small" v-if="form.groupStatus ===0 ">拼团中</el-tag>-->
-          <!--            <el-tag size="small" v-if="form.groupStatus ===1 ">已成团</el-tag>-->
-          <!--            <el-tag size="small" v-if="form.groupStatus ===2 ">团失败</el-tag>-->
-          <!--          </el-descriptions-item>-->
-
 
           <el-descriptions-item label="买家备注">
-            {{form.buyerWords}}
+            {{form.buyerMemo}}
           </el-descriptions-item>
-          <el-descriptions-item label="卖家备注">
-            {{form.sellerWords}}
-          </el-descriptions-item>
-          <el-descriptions-item label="取消原因">
-            {{form.cancelReason}}
+          <el-descriptions-item label="备注">
+            {{form.remark}}
           </el-descriptions-item>
           <el-descriptions-item label="创建时间">
-            {{ parseTime(form.createTime*1000) }}
+            {{form.createdTime}}
           </el-descriptions-item>
-          <el-descriptions-item label="支付时间"> {{ parseTime(form.payTime*1000) }}</el-descriptions-item>
-          <el-descriptions-item label="更新时间"> {{ parseTime(form.updateTime*1000) }}</el-descriptions-item>
+          <el-descriptions-item label="支付时间"> {{ form.payTime }}</el-descriptions-item>
+          <el-descriptions-item label="更新时间"> {{ form.updatedAt }}</el-descriptions-item>
+          <el-descriptions-item label="最后发货时间"> {{ form.lastShipTime }}</el-descriptions-item>
         </el-descriptions>
         <el-descriptions title="付款信息">
-          <!--          <el-descriptions-item label="商品总额">{{form.goodsAmount}}</el-descriptions-item>-->
-          <!--          <el-descriptions-item label="团长免单金额">{{form.capitalFreeDiscount}}</el-descriptions-item>-->
-          <el-descriptions-item label="商家优惠金额">{{form.promotionShopAmount}}</el-descriptions-item>
-          <el-descriptions-item label="平台优惠金额">{{form.promotionTalentAmount}}</el-descriptions-item>
-          <el-descriptions-item label="运费">{{form.postAmount}}</el-descriptions-item>
-          <el-descriptions-item label="实际支付金额">{{form.orderAmount}}</el-descriptions-item>
-          <el-descriptions-item label="支付方式"> {{ form.payAmount }}</el-descriptions-item>
+          <el-descriptions-item label="商品总额">{{form.goodsAmount}}</el-descriptions-item>
+          <el-descriptions-item label="团长免单金额">{{form.capitalFreeDiscount}}</el-descriptions-item>
+          <el-descriptions-item label="优惠金额">{{form.discountAmount}}</el-descriptions-item>
+          <el-descriptions-item label="运费">{{form.postage}}</el-descriptions-item>
+          <el-descriptions-item label="卖家优惠">{{form.sellerDiscount}}</el-descriptions-item>
+          <el-descriptions-item label="实际支付金额">{{form.payAmount}}</el-descriptions-item>
         </el-descriptions>
 
 
         <el-descriptions title="收货信息">
-          <el-descriptions-item label="收件人姓名">{{form.maskPostReceiver}}</el-descriptions-item>
-          <el-descriptions-item label="收件人手机号">{{form.maskPostTel}}</el-descriptions-item>
-          <el-descriptions-item label="省市区">{{form.provinceName}}{{form.cityName}}{{form.townName}}</el-descriptions-item>
-          <el-descriptions-item label="详细地址">{{form.maskPostAddress}}</el-descriptions-item>
+          <el-descriptions-item label="收件人姓名">{{form.receiverNameMask}}</el-descriptions-item>
+          <el-descriptions-item label="收件人手机号">{{form.receiverPhoneMask}}</el-descriptions-item>
+          <el-descriptions-item label="省市区">{{form.province}}{{form.city}}{{form.town}}</el-descriptions-item>
+          <el-descriptions-item label="详细地址">{{form.receiverAddressMask}}</el-descriptions-item>
         </el-descriptions>
         <!--        <el-descriptions title="发货信息">-->
         <!--          &lt;!&ndash; <el-descriptions-item label="发货方式">-->
@@ -267,27 +266,26 @@
         <el-divider content-position="center">订单商品</el-divider>
         <el-table :data="form.items"  style="margin-bottom: 10px;">
           <el-table-column label="序号" align="center" type="index" width="50"/>
-
-          <el-table-column label="商品图片" width="80">
+          <el-table-column label="图片" width="60">
             <template slot-scope="scope">
-              <el-image style="width: 70px; height: 70px" :src="scope.row.productPic"></el-image>
+              <el-image style="width: 40px; height: 40px" :src="scope.row.goodsImg"></el-image>
             </template>
           </el-table-column>
-          <el-table-column label="商品标题" prop="productName" ></el-table-column>
-          <el-table-column label="SKU" prop="goodsSpec" width="150"></el-table-column>
-          <el-table-column label="sku编码" prop="specNum"></el-table-column>
+          <el-table-column label="标题" prop="goodsName" ></el-table-column>
+          <el-table-column label="规格" prop="goodsSpec" width="150"></el-table-column>
+          <el-table-column label="sku编码" prop="outerId"></el-table-column>
           <el-table-column label="单价" prop="goodsPrice"></el-table-column>
-          <el-table-column label="数量" prop="comboNum"></el-table-column>
-          <el-table-column label="商品金额" prop="totalAmount"></el-table-column>
+          <el-table-column label="数量" prop="goodsCount"></el-table-column>
+
         </el-table>
 
         <el-divider content-position="center"  v-if="isAudit" >收件人</el-divider>
 
-        <el-form-item label="收件人姓名" prop="maskPostReceiver" v-if="isAudit">
-          <el-input v-model="form.maskPostReceiver" placeholder="请输入收件人姓名" style="width:350px" />
+        <el-form-item label="收件人姓名" prop="receiverNameMask" v-if="isAudit">
+          <el-input v-model="form.receiverNameMask" placeholder="请输入收件人姓名" style="width:350px" />
         </el-form-item>
-        <el-form-item label="收件人电话" prop="maskPostTel" v-if="isAudit">
-          <el-input v-model="form.maskPostTel" placeholder="请输入收件人电话" style="width:350px" />
+        <el-form-item label="收件人电话" prop="receiverPhoneMask" v-if="isAudit">
+          <el-input v-model="form.receiverPhoneMask" placeholder="请输入收件人电话" style="width:350px" />
         </el-form-item>
         <el-form-item label="省市区" prop="provinces" v-if="isAudit">
           <el-cascader style="width:350px"
@@ -296,8 +294,8 @@
                        v-model="form.provinces">
           </el-cascader>
         </el-form-item>
-        <el-form-item label="详细地址" prop="maskPostAddress" v-if="isAudit">
-          <el-input v-model="form.maskPostAddress" placeholder="请输入收件地址" style="width:350px" />
+        <el-form-item label="详细地址" prop="receiverAddressMask" v-if="isAudit">
+          <el-input v-model="form.receiverAddressMask" placeholder="请输入收件地址" style="width:350px" />
         </el-form-item>
         <!--        <el-form-item label="发货方式" prop="shipType" v-if="isAudit">-->
         <!--          <el-select v-model="form.shipType" placeholder="发货类型" style="width:350px">-->
@@ -362,6 +360,10 @@ export default {
       form: {
       },
       rules: {
+        receiverNameMask:[{ required: true, message: '不能为空' }],
+        receiverPhoneMask:[{ required: true, message: '不能为空' }],
+        provinces: [{ required: true, message: '不能为空' }],
+        receiverAddressMask: [{ required: true, message: '不能为空' }],
       }
     };
   },
@@ -530,9 +532,9 @@ export default {
       getOrder(id).then(response => {
         this.form = response.data;
         this.form.provinces = []
-        this.form.provinces.push(response.data.provinceName)
-        this.form.provinces.push(response.data.cityName)
-        this.form.provinces.push(response.data.townName)
+        this.form.provinces.push(response.data.province)
+        this.form.provinces.push(response.data.city)
+        this.form.provinces.push(response.data.town)
         this.detailOpen = true;
         this.detailTitle = "确认订单";
         this.isAudit = true
@@ -546,9 +548,9 @@ export default {
             province:this.form.provinces[0],
             city:this.form.provinces[1],
             town:this.form.provinces[2],
-            address:this.form.maskPostAddress,
-            receiver:this.form.maskPostReceiver,
-            mobile:this.form.maskPostTel
+            address:this.form.receiverAddressMask,
+            receiver:this.form.receiverNameMask,
+            mobile:this.form.receiverPhoneMask
           }
 
           confirmOrder(form).then(response => {

@@ -4,10 +4,10 @@ import cn.qihangerp.common.PageQuery;
 import cn.qihangerp.common.PageResult;
 import cn.qihangerp.common.ResultVo;
 import cn.qihangerp.common.ResultVoEnum;
-import cn.qihangerp.module.open.wei.domain.OmsWeiGoodsSku;
+import cn.qihangerp.module.open.wei.domain.WeiGoodsSku;
 import cn.qihangerp.module.open.wei.domain.OmsWeiRefund;
-import cn.qihangerp.module.open.wei.mapper.OmsWeiGoodsSkuMapper;
-import cn.qihangerp.module.open.wei.mapper.OmsWeiOrderItemMapper;
+import cn.qihangerp.module.open.wei.mapper.WeiGoodsSkuMapper;
+import cn.qihangerp.module.open.wei.mapper.WeiOrderItemMapper;
 import cn.qihangerp.module.open.wei.mapper.OmsWeiRefundMapper;
 import cn.qihangerp.module.open.wei.service.OmsWeiRefundService;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
@@ -32,8 +32,8 @@ import java.util.List;
 public class OmsWeiRefundServiceImpl extends ServiceImpl<OmsWeiRefundMapper, OmsWeiRefund>
     implements OmsWeiRefundService {
     private final OmsWeiRefundMapper mapper;
-    private final OmsWeiGoodsSkuMapper goodsSkuMapper;
-    private final OmsWeiOrderItemMapper orderItemMapper;
+    private final WeiGoodsSkuMapper goodsSkuMapper;
+    private final WeiOrderItemMapper orderItemMapper;
 //    private final MQClientService mqClientService;
 
     @Override
@@ -67,7 +67,7 @@ public class OmsWeiRefundServiceImpl extends ServiceImpl<OmsWeiRefundMapper, Oms
                 update.setReturnDeliveryId(refund.getReturnDeliveryId());
                 update.setComplaintId(refund.getComplaintId());
                 if(refund.getSkuId()!=null) {
-                    List<OmsWeiGoodsSku> pddGoodsSku = goodsSkuMapper.selectList(new LambdaQueryWrapper<OmsWeiGoodsSku>().eq(OmsWeiGoodsSku::getSkuId, refund.getSkuId()));
+                    List<WeiGoodsSku> pddGoodsSku = goodsSkuMapper.selectList(new LambdaQueryWrapper<WeiGoodsSku>().eq(WeiGoodsSku::getSkuId, refund.getSkuId()));
                     if (pddGoodsSku != null && !pddGoodsSku.isEmpty()) {
                         update.setOGoodsId(pddGoodsSku.get(0).getErpGoodsId());
                         update.setOGoodsSkuId(pddGoodsSku.get(0).getErpGoodsSkuId());
@@ -80,7 +80,7 @@ public class OmsWeiRefundServiceImpl extends ServiceImpl<OmsWeiRefundMapper, Oms
                 newRefund = refund;
                 // 不存在，新增
                 if(refund.getSkuId()!=null) {
-                    List<OmsWeiGoodsSku> pddGoodsSku = goodsSkuMapper.selectList(new LambdaQueryWrapper<OmsWeiGoodsSku>().eq(OmsWeiGoodsSku::getSkuId, refund.getSkuId()));
+                    List<WeiGoodsSku> pddGoodsSku = goodsSkuMapper.selectList(new LambdaQueryWrapper<WeiGoodsSku>().eq(WeiGoodsSku::getSkuId, refund.getSkuId()));
                     if (pddGoodsSku != null && !pddGoodsSku.isEmpty()) {
                         refund.setOGoodsId(pddGoodsSku.get(0).getErpGoodsId());
                         refund.setOGoodsSkuId(pddGoodsSku.get(0).getErpGoodsSkuId());

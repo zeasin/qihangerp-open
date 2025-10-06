@@ -54,16 +54,16 @@
           @click="handlePull"
         >API拉取订单</el-button>
       </el-col>
-      <el-col :span="1.5">
-        <el-button
-          type="primary"
-          plain
-          icon="el-icon-refresh"
-          size="mini"
-          :disabled="multiple"
-          @click="handlePushOms"
-        >重新推送选中订单到订单库</el-button>
-      </el-col>
+<!--      <el-col :span="1.5">-->
+<!--        <el-button-->
+<!--          type="primary"-->
+<!--          plain-->
+<!--          icon="el-icon-refresh"-->
+<!--          size="mini"-->
+<!--          :disabled="multiple"-->
+<!--          @click="handlePushOms"-->
+<!--        >重新推送选中订单到订单库</el-button>-->
+<!--      </el-col>-->
 
       <right-toolbar :showSearch.sync="showSearch" @queryTable="getList"></right-toolbar>
     </el-row>
@@ -128,7 +128,11 @@
               </template>
             </el-table-column>
             <el-table-column label="商品名" align="left" width="240px" prop="title" />
-            <el-table-column label="SKU名" align="left" prop="skuAttrs" width="150"  :show-overflow-tooltip="true"/>
+            <el-table-column label="规格" align="left" prop="skuAttrs" width="150"  :show-overflow-tooltip="true">
+              <template slot-scope="scope">
+                {{getSkuValues(scope.row.skuAttrs)}}
+              </template>
+            </el-table-column>
             <el-table-column label="Sku编码" align="left" prop="outerSkuId" width="200"/>
             <el-table-column label="平台SkuId" align="left" prop="skuId" width="150"/>
             <el-table-column label="商品数量" align="center" prop="skuCnt" width="60px">
@@ -146,7 +150,7 @@
       </el-table-column>
       <el-table-column label="订单创建时间" align="center" prop="createTime" width="180">
         <template slot-scope="scope">
-          <span>{{ parseTime(scope.row.createTime, '{y}-{m}-{d} {h}:{m}:{s}') }}</span>
+          <span>{{ parseTime(scope.row.createTime) }}</span>
         </template>
       </el-table-column>
 
@@ -250,92 +254,59 @@
           <el-descriptions-item label="省市区">{{form.provinceName}}{{form.cityName}}{{form.countyName}}</el-descriptions-item>
           <el-descriptions-item label="详细地址">{{form.detailInfo}}</el-descriptions-item>
         </el-descriptions>
-        <el-descriptions title="发货信息">
-          <!-- <el-descriptions-item label="发货方式">
-            <el-tag v-if="form.shipType === 1"  type="danger">供应商代发</el-tag>
-              <el-tag v-if="form.shipType === 0" type="danger">仓库发货</el-tag>
-          </el-descriptions-item> -->
-          <el-descriptions-item label="物流公司">{{form.expressCompanyCode}}</el-descriptions-item>
-          <el-descriptions-item label="物流单号">{{form.expressTrackingNo}}</el-descriptions-item>
-          <el-descriptions-item label="发货时间"></el-descriptions-item>
-        </el-descriptions>
+<!--        <el-descriptions title="发货信息">-->
+<!--          &lt;!&ndash; <el-descriptions-item label="发货方式">-->
+<!--            <el-tag v-if="form.shipType === 1"  type="danger">供应商代发</el-tag>-->
+<!--              <el-tag v-if="form.shipType === 0" type="danger">仓库发货</el-tag>-->
+<!--          </el-descriptions-item> &ndash;&gt;-->
+<!--          <el-descriptions-item label="物流公司">{{form.expressCompanyCode}}</el-descriptions-item>-->
+<!--          <el-descriptions-item label="物流单号">{{form.expressTrackingNo}}</el-descriptions-item>-->
+<!--          <el-descriptions-item label="发货时间"></el-descriptions-item>-->
+<!--        </el-descriptions>-->
         <el-divider content-position="center">订单商品</el-divider>
-        <el-table :data="goodsList"  style="margin-bottom: 10px;">
+        <el-table :data="form.items"  style="margin-bottom: 10px;">
           <el-table-column label="序号" align="center" type="index" width="50"/>
 
-          <el-table-column label="商品图片" width="80">
+          <el-table-column label="图片" width="50">
             <template slot-scope="scope">
-              <el-image style="width: 70px; height: 70px" :src="scope.row.thumbImg"></el-image>
+              <el-image style="width: 45px; height: 45px" :src="scope.row.thumbImg"></el-image>
             </template>
           </el-table-column>
-          <el-table-column label="商品标题" prop="title" ></el-table-column>
-          <el-table-column label="SKU属性" prop="skuAttrs" ></el-table-column>
+          <el-table-column label="标题" prop="title" ></el-table-column>
+          <el-table-column label="规格" prop="skuAttrs" >
+            <template slot-scope="scope">
+            {{getSkuValues(scope.row.skuAttrs)}}
+            </template>
+          </el-table-column>
           <el-table-column label="sku编码" prop="skuCode"></el-table-column>
-          <el-table-column label="单价" prop="salePrice"></el-table-column>
+          <el-table-column label="单价" prop="salePrice">
+            <template slot-scope="scope">
+              <span>{{ amountFormatter(null,null,scope.row.salePrice/100,null) }}</span>
+            </template>
+          </el-table-column>
           <el-table-column label="数量" prop="skuCnt"></el-table-column>
-          <el-table-column label="子订单金额" prop="realPrice"></el-table-column>
-        </el-table>
-
-
-
-        <el-divider content-position="center">订单商品</el-divider>
-        <el-row :gutter="10" class="mb8">
-          <el-col :span="1.5">
-            <el-button type="primary" icon="el-icon-plus" size="mini" @click="handleAddXhsOrderItem">添加赠品</el-button>
-          </el-col>
-          <el-col :span="1.5">
-            <el-button type="danger" icon="el-icon-delete" size="mini" @click="handleDeleteXhsOrderItem">删除</el-button>
-          </el-col>
-        </el-row>
-        <el-table :data="xhsOrderItemList"  ref="xhsOrderItem" style="margin-bottom: 10px;">
-          <el-table-column type="selection" width="50" align="center" />
-          <el-table-column label="序号" align="center" prop="index" width="50"/>
-          <el-table-column label="商品" prop="erpGoodsId" width="350" >
+          <el-table-column label="总金额" prop="estimatePrice">
             <template slot-scope="scope">
-              <el-select v-model="scope.row.erpGoodsSpecId" filterable remote reserve-keyword placeholder="搜索商品" style="width: 330px;"
-                         :remote-method="searchSku" :loading="skuListLoading" @change="skuChanage(scope.row)">
-                <el-option v-for="item in skuList" :key="item.id"
-                           :label="item.name + ' - ' + item.colorValue + ' ' + item.sizeValue + ' ' + item.styleValue"
-                           :value="item.id">
-                </el-option>
-              </el-select>
-            </template>
-          </el-table-column>
-          <el-table-column label="商品图片" prop="itemImage" >
-            <template slot-scope="scope">
-              <el-image style="width: 70px; height: 70px" :src="scope.row.itemImage"></el-image>
-            </template>
-          </el-table-column>
-          <el-table-column label="SKU编码" prop="itemSpecCode" width="100">
-            <template slot-scope="scope">
-              <el-input v-model="scope.row.itemSpecCode" placeholder="请输入规格" />
-            </template>
-          </el-table-column>
-          <el-table-column label="单价" prop="price">
-            <template slot-scope="scope">
-              <el-input v-model="scope.row.price" placeholder="请输入单价" />
-            </template>
-          </el-table-column>
-          <el-table-column label="数量" prop="quantity" >
-            <template slot-scope="scope">
-              <el-input v-model="scope.row.quantity" placeholder="请输入数量"  @input="qtyChange(scope.row)" />
-            </template>
-          </el-table-column>
-          <el-table-column label="总金额" prop="itemAmount">
-            <template slot-scope="scope">
-              <el-input v-model="scope.row.itemAmount" placeholder="请输入总金额" />
+              <span>{{ amountFormatter(null,null,scope.row.estimatePrice/100,null) }}</span>
             </template>
           </el-table-column>
         </el-table>
+
         <el-form-item label="收件人姓名" prop="userName" v-if="isAudit">
-          <el-input v-model="form.userName" placeholder="请输入收件人姓名" style="width:250px" />
+          <el-input v-model="form.userName" placeholder="请输入收件人姓名" style="width:350px" />
         </el-form-item>
         <el-form-item label="收件人电话" prop="telNumber" v-if="isAudit">
-          <el-input v-model="form.telNumber" placeholder="请输入收件人电话" style="width:250px" />
+          <el-input v-model="form.telNumber" placeholder="请输入收件人电话" style="width:350px" />
         </el-form-item>
-
+        <el-form-item label="省市区" prop="provinces" v-if="isAudit">
+          <el-cascader style="width:350px"
+                       size="large"
+                       :options="pcaTextArr"
+                       v-model="form.provinces">
+          </el-cascader>
+        </el-form-item>
         <el-form-item label="详细地址" prop="detailInfo" v-if="isAudit">
-          <el-input v-model="form.detailInfo" placeholder="请输入收件地址" style="width:250px" />
+          <el-input v-model="form.detailInfo" placeholder="请输入收件地址" style="width:350px" />
         </el-form-item>
 
       </el-form>
@@ -352,9 +323,8 @@
 
 import { listShop } from "@/api/shop/shop";
 import {listOrder,getOrder,pushOms,pullOrder,pullOrderDetail,confirmOrder} from "@/api/wei/order";
-import {pcaTextArr} from "element-china-area-data";
 import Clipboard from "clipboard";
-
+import {pcaTextArr} from "element-china-area-data";
 export default {
   name: "OrderWei",
   data() {
@@ -408,6 +378,17 @@ export default {
     // this.getList();
   },
   methods: {
+    getSkuValues(spec){
+      try {
+        // 解析 JSON，返回一个数组
+        const parsedSpec = JSON.parse(spec) || [];
+
+        // 使用 map 提取所有 value，使用 join() 用逗号连接
+        return parsedSpec.map(item => item.attr_value).join(', ') || '';
+      } catch (error) {
+        return spec; // 如果 JSON 解析出错，返回空字符串
+      }
+    },
     copyActiveCode(event,queryParams) {
       console.log(queryParams)
       const clipboard = new Clipboard(".tag-copy")
@@ -521,7 +502,7 @@ export default {
         this.form.provinces = []
         this.form.provinces.push(response.data.provinceName)
         this.form.provinces.push(response.data.cityName)
-        this.form.provinces.push(response.data.townName)
+        this.form.provinces.push(response.data.countyName)
         this.detailOpen = true;
         this.detailTitle = "确认订单";
         this.isAudit = true
@@ -535,9 +516,9 @@ export default {
             province:this.form.provinces[0],
             city:this.form.provinces[1],
             town:this.form.provinces[2],
-            address:this.form.maskPostAddress,
-            receiver:this.form.maskPostReceiver,
-            mobile:this.form.maskPostTel
+            address:this.form.detailInfo,
+            receiver:this.form.userName,
+            mobile:this.form.telNumber
           }
 
           confirmOrder(form).then(response => {

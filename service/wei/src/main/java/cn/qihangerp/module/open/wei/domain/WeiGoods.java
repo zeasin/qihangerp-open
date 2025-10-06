@@ -16,7 +16,7 @@ import lombok.Data;
  */
 @TableName(value ="oms_wei_goods")
 @Data
-public class OmsWeiGoods implements Serializable {
+public class WeiGoods implements Serializable {
     /**
      * 
      */
@@ -113,7 +113,7 @@ public class OmsWeiGoods implements Serializable {
      */
     private Date updateTime;
     @TableField(exist = false)
-    private List<OmsWeiGoodsSku> skus;
+    private List<WeiGoodsSku> skus;
 
     @TableField(exist = false)
     private static final long serialVersionUID = 1L;

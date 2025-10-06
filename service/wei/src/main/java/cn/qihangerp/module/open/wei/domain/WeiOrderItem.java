@@ -1,14 +1,17 @@
 package cn.qihangerp.module.open.wei.domain;
 
 import java.io.Serializable;
+
+import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
 /**
  * 
  * @TableName oms_wei_order_item
  */
+@TableName("oms_wei_order_item")
 @Data
-public class OmsWeiOrderItem implements Serializable {
+public class WeiOrderItem implements Serializable {
     /**
      * 
      */

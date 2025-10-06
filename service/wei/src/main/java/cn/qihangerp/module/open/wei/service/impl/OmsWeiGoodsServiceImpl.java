@@ -1,13 +1,13 @@
 package cn.qihangerp.module.open.wei.service.impl;
 
 import cn.qihangerp.common.ResultVoEnum;
-import cn.qihangerp.module.open.wei.domain.OmsWeiGoodsSku;
-import cn.qihangerp.module.open.wei.mapper.OmsWeiGoodsSkuMapper;
+import cn.qihangerp.module.open.wei.domain.WeiGoodsSku;
+import cn.qihangerp.module.open.wei.mapper.WeiGoodsSkuMapper;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import cn.qihangerp.module.open.wei.domain.OmsWeiGoods;
+import cn.qihangerp.module.open.wei.domain.WeiGoods;
 import cn.qihangerp.module.open.wei.service.OmsWeiGoodsService;
-import cn.qihangerp.module.open.wei.mapper.OmsWeiGoodsMapper;
+import cn.qihangerp.module.open.wei.mapper.WeiGoodsMapper;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -20,14 +20,14 @@ import java.util.List;
 */
 @AllArgsConstructor
 @Service
-public class OmsWeiGoodsServiceImpl extends ServiceImpl<OmsWeiGoodsMapper, OmsWeiGoods>
+public class OmsWeiGoodsServiceImpl extends ServiceImpl<WeiGoodsMapper, WeiGoods>
     implements OmsWeiGoodsService{
-    private final OmsWeiGoodsMapper mapper;
-    private final OmsWeiGoodsSkuMapper skuMapper;
+    private final WeiGoodsMapper mapper;
+    private final WeiGoodsSkuMapper skuMapper;
 
     @Override
-    public int saveAndUpdateGoods(Long shopId, OmsWeiGoods goods) {
-        List<OmsWeiGoods> goodsList = mapper.selectList(new LambdaQueryWrapper<OmsWeiGoods>().eq(OmsWeiGoods::getProductId, goods.getProductId()));
+    public int saveAndUpdateGoods(Long shopId, WeiGoods goods) {
+        List<WeiGoods> goodsList = mapper.selectList(new LambdaQueryWrapper<WeiGoods>().eq(WeiGoods::getProductId, goods.getProductId()));
         if (goodsList != null && goodsList.size() > 0) {
             // 更新
             // 存在，更新
@@ -36,10 +36,10 @@ public class OmsWeiGoodsServiceImpl extends ServiceImpl<OmsWeiGoodsMapper, OmsWe
             mapper.updateById(goods);
 
             // 删除sku
-            skuMapper.delete(new LambdaQueryWrapper<OmsWeiGoodsSku>().eq(OmsWeiGoodsSku::getProductId,goods.getProductId()));
+            skuMapper.delete(new LambdaQueryWrapper<WeiGoodsSku>().eq(WeiGoodsSku::getProductId,goods.getProductId()));
             // 重新插入sku
             if(goods.getSkus()!=null) {
-                for (OmsWeiGoodsSku sku : goods.getSkus()) {
+                for (WeiGoodsSku sku : goods.getSkus()) {
                     sku.setTitle(goods.getTitle());
                     sku.setShopId(shopId);
                     // 根据OuterId查找ERP系统中的skuid
@@ -62,7 +62,7 @@ public class OmsWeiGoodsServiceImpl extends ServiceImpl<OmsWeiGoodsMapper, OmsWe
             mapper.insert(goods);
             // 插入sku
             if(goods.getSkus()!=null) {
-                for (OmsWeiGoodsSku sku : goods.getSkus()) {
+                for (WeiGoodsSku sku : goods.getSkus()) {
                     sku.setShopId(shopId);
                     sku.setTitle(goods.getTitle());
 //                    sku.setWeiGoodsId(Long.parseLong(goods.getId()));

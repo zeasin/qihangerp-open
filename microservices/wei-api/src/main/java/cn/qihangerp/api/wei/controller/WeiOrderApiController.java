@@ -7,9 +7,9 @@ import cn.qihangerp.api.wei.WeiApiCommon;
 import cn.qihangerp.common.AjaxResult;
 import cn.qihangerp.common.ResultVoEnum;
 import cn.qihangerp.common.enums.HttpStatus;
-import cn.qihangerp.module.open.wei.domain.OmsWeiOrder;
-import cn.qihangerp.module.open.wei.domain.OmsWeiOrderItem;
-import cn.qihangerp.module.open.wei.service.OmsWeiOrderService;
+import cn.qihangerp.module.open.wei.domain.WeiOrder;
+import cn.qihangerp.module.open.wei.domain.WeiOrderItem;
+import cn.qihangerp.module.open.wei.service.WeiOrderService;
 
 import cn.qihangerp.open.common.ApiResultVo;
 
@@ -33,7 +33,7 @@ import java.util.List;
 @AllArgsConstructor
 public class WeiOrderApiController extends BaseController {
     private final WeiApiCommon apiCommon;
-    private final OmsWeiOrderService weiOrderService;
+    private final WeiOrderService weiOrderService;
 
     /**
      * 拉取订单
@@ -67,7 +67,7 @@ public class WeiOrderApiController extends BaseController {
                 // 拉取到了数据 拉取详情
                 for (var orderInfo : orderApiResultVo.getList()) {
 
-                    OmsWeiOrder order = new OmsWeiOrder();
+                    WeiOrder order = new WeiOrder();
                     order.setOrderId(orderInfo.getOrder_id());
                     order.setShopId(params.getShopId());
                     order.setOpenid(orderInfo.getOpenid());
@@ -103,9 +103,9 @@ public class WeiOrderApiController extends BaseController {
 
                     order.setSettleInfo(JSONObject.toJSONString(orderInfo.getOrder_detail().getSettle_info()));
 
-                    List<OmsWeiOrderItem> itemList = new ArrayList<>();
+                    List<WeiOrderItem> itemList = new ArrayList<>();
                     for (var item:orderInfo.getOrder_detail().getProduct_infos()) {
-                        OmsWeiOrderItem oi = new OmsWeiOrderItem();
+                        WeiOrderItem oi = new WeiOrderItem();
                         oi.setOrderId(order.getOrderId());
                         oi.setShopId(params.getShopId());
                         oi.setProductId(item.getProduct_id());
@@ -176,7 +176,7 @@ public class WeiOrderApiController extends BaseController {
         if(apiResultVo.getCode() == 0) {
             if (apiResultVo.getData() != null) {
 
-                OmsWeiOrder order = new OmsWeiOrder();
+                WeiOrder order = new WeiOrder();
                 order.setOrderId(apiResultVo.getData().getOrder_id());
                 order.setShopId(params.getShopId());
                 order.setOpenid(apiResultVo.getData().getOpenid());
@@ -212,9 +212,9 @@ public class WeiOrderApiController extends BaseController {
 
                 order.setSettleInfo(JSONObject.toJSONString(apiResultVo.getData().getOrder_detail().getSettle_info()));
 
-                List<OmsWeiOrderItem> itemList = new ArrayList<>();
+                List<WeiOrderItem> itemList = new ArrayList<>();
                 for (var item : apiResultVo.getData().getOrder_detail().getProduct_infos()) {
-                    OmsWeiOrderItem oi = new OmsWeiOrderItem();
+                    WeiOrderItem oi = new WeiOrderItem();
                     oi.setOrderId(order.getOrderId());
                     oi.setShopId(params.getShopId());
                     oi.setProductId(item.getProduct_id());

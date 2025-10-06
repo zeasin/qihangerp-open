@@ -1,21 +1,26 @@
 package cn.qihangerp.module.open.wei.domain;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
+import lombok.Data;
+
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
-
-import com.baomidou.mybatisplus.annotation.TableField;
-import lombok.Data;
 
 /**
  * 
  * @TableName oms_wei_order
  */
+@TableName("oms_wei_order")
 @Data
-public class OmsWeiOrder implements Serializable {
+public class WeiOrder implements Serializable {
     /**
      * 
      */
+    @TableId(type = IdType.AUTO)
     private Long id;
 
     /**
@@ -191,7 +196,7 @@ public class OmsWeiOrder implements Serializable {
     private Integer erpSendStatus;
 
     @TableField(exist = false)
-    private List<OmsWeiOrderItem> items;
+    private List<WeiOrderItem> items;
 
     private static final long serialVersionUID = 1L;
 }

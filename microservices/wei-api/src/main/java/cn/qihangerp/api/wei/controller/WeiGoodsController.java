@@ -4,7 +4,7 @@ package cn.qihangerp.api.wei.controller;
 import cn.qihangerp.common.*;
 import cn.qihangerp.model.bo.LinkErpGoodsSkuBo;
 import cn.qihangerp.module.goods.service.OGoodsSkuService;
-import cn.qihangerp.module.open.wei.domain.OmsWeiGoodsSku;
+import cn.qihangerp.module.open.wei.domain.WeiGoodsSku;
 import cn.qihangerp.module.open.wei.service.OmsWeiGoodsSkuService;
 import cn.qihangerp.security.common.BaseController;
 import lombok.AllArgsConstructor;
@@ -19,8 +19,8 @@ public class WeiGoodsController extends BaseController {
     private final OGoodsSkuService oGoodsSkuService;
 
     @RequestMapping(value = "/skuList", method = RequestMethod.GET)
-    public TableDataInfo skuList(OmsWeiGoodsSku bo, PageQuery pageQuery) {
-        PageResult<OmsWeiGoodsSku> result = skuService.queryPageList(bo, pageQuery);
+    public TableDataInfo skuList(WeiGoodsSku bo, PageQuery pageQuery) {
+        PageResult<WeiGoodsSku> result = skuService.queryPageList(bo, pageQuery);
 
         return getDataTable(result);
     }

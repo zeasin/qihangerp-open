@@ -1,14 +1,20 @@
 package cn.qihangerp.module.open.pdd.service.impl;
 
-
 import cn.qihangerp.common.PageQuery;
 import cn.qihangerp.common.PageResult;
 import cn.qihangerp.common.ResultVo;
 import cn.qihangerp.common.ResultVoEnum;
+import cn.qihangerp.common.enums.EnumShopType;
+import cn.qihangerp.common.utils.DateUtils;
+import cn.qihangerp.mapper.ErpOrderItemMapper;
+import cn.qihangerp.mapper.ErpOrderMapper;
+import cn.qihangerp.model.entity.OOrder;
+import cn.qihangerp.model.entity.OOrderItem;
 import cn.qihangerp.module.open.pdd.domain.PddGoodsSku;
 import cn.qihangerp.module.open.pdd.domain.PddOrder;
 import cn.qihangerp.module.open.pdd.domain.PddOrderItem;
 import cn.qihangerp.module.open.pdd.domain.bo.PddOrderBo;
+import cn.qihangerp.module.open.pdd.domain.bo.PddOrderConfirmBo;
 import cn.qihangerp.module.open.pdd.mapper.PddGoodsSkuMapper;
 import cn.qihangerp.module.open.pdd.mapper.PddOrderItemMapper;
 import cn.qihangerp.module.open.pdd.mapper.PddOrderMapper;
@@ -41,6 +47,9 @@ public class PddOrderServiceImpl extends ServiceImpl<PddOrderMapper, PddOrder>
     private final PddOrderMapper mapper;
     private final PddOrderItemMapper itemMapper;
     private final PddGoodsSkuMapper goodsSkuMapper;
+    private final ErpOrderMapper erpOrderMapper;
+    private final ErpOrderItemMapper erpOrderItemMapper;
+
     private final String DATE_PATTERN =
             "^(?:(?:(?:\\d{4}-(?:0?[1-9]|1[0-2])-(?:0?[1-9]|1\\d|2[0-8]))|(?:(?:(?:\\d{2}(?:0[48]|[2468][048]|[13579][26])|(?:(?:0[48]|[2468][048]|[13579][26])00))-0?2-29))$)|(?:(?:(?:\\d{4}-(?:0?[13578]|1[02]))-(?:0?[1-9]|[12]\\d|30))$)|(?:(?:(?:\\d{4}-0?[13-9]|1[0-2])-(?:0?[1-9]|[1-2]\\d|30))$)|(?:(?:(?:\\d{2}(?:0[48]|[13579][26]|[2468][048])|(?:(?:0[48]|[13579][26]|[2468][048])00))-0?2-29))$)$";
     private final Pattern DATE_FORMAT = Pattern.compile(DATE_PATTERN);
@@ -216,6 +225,98 @@ public class PddOrderServiceImpl extends ServiceImpl<PddOrderMapper, PddOrder>
             log.info("保存订单数据错误："+e.getMessage());
             return ResultVo.error(ResultVoEnum.SystemException, "系统异常：" + e.getMessage());
         }
+    }
+
+    @Override
+    public ResultVo<Long> confirmOrder(PddOrderConfirmBo confirmBo) {
+        PddOrder pddOrder = mapper.selectById(confirmBo.getOrderId());
+        if(pddOrder==null) return ResultVo.error("订单数据不存在");
+        if(pddOrder.getAuditStatus()!=0) return ResultVo.error("已经确认过了！");
+
+        List<PddOrderItem> pddOrderItems = itemMapper.selectList(
+                new LambdaQueryWrapper<PddOrderItem>()
+                .eq(PddOrderItem::getOrderSn, pddOrder.getOrderSn()));
+        if(pddOrderItems==null || pddOrderItems.isEmpty()){
+            return ResultVo.error("找不到订单item");
+        }
+
+        OOrder erpOrder = erpOrderMapper.selectOne(new LambdaQueryWrapper<OOrder>().eq(OOrder::getOrderNum,pddOrder.getOrderSn()));
+        if(erpOrder!=null) {
+            // 已经确认过了，更新自己
+            PddOrder douOrderUpdate = new PddOrder();
+            douOrderUpdate.setId(pddOrder.getId());
+            douOrderUpdate.setAuditStatus(1);
+            douOrderUpdate.setAuditTime(new Date());
+            mapper.updateById(douOrderUpdate);
+
+            return ResultVo.error("已经确认过了");
+        }
+        OOrder order = new OOrder();
+        order.setOrderNum(pddOrder.getOrderSn());
+        order.setShopType(EnumShopType.PDD.getIndex());
+        order.setShopId(pddOrder.getShopId());
+//        order.setShipType(confirmBo.getShipType());
+        order.setShipType(0);
+        order.setBuyerMemo(pddOrder.getBuyerMemo());
+        order.setSellerMemo(pddOrder.getRemark());
+        order.setRefundStatus(1);
+        order.setOrderStatus(1);
+        order.setGoodsAmount(pddOrder.getGoodsAmount()!=null?pddOrder.getGoodsAmount():0.0);
+        order.setPostFee(pddOrder.getPostage()!=null?pddOrder.getPostage():0.0);
+        order.setSellerDiscount(pddOrder.getSellerDiscount()!=null?pddOrder.getSellerDiscount():0.0);
+        order.setPlatformDiscount(pddOrder.getPlatformDiscount()!=null?pddOrder.getPlatformDiscount():0.0);
+        order.setAmount(pddOrder.getPayAmount()!=null?pddOrder.getPayAmount():0.0);
+        order.setPayment(pddOrder.getPayAmount()!=null?pddOrder.getPayAmount():0.0);
+        order.setReceiverName(confirmBo.getReceiver());
+        order.setReceiverMobile(confirmBo.getMobile());
+        order.setAddress(confirmBo.getAddress());
+        order.setProvince(confirmBo.getProvince());
+        order.setCity(confirmBo.getCity());
+        order.setTown(confirmBo.getTown());
+        order.setOrderTime(StringUtils.hasText(pddOrder.getCreatedTime())?DateUtils.dateTime("yyyy-MM-dd HH:mm:ss",pddOrder.getCreatedTime()):new Date());
+        order.setShipper(-1);
+        order.setShipStatus(0);
+        order.setCreateTime(new Date());
+        order.setCreateBy("手动确认订单");
+        erpOrderMapper.insert(order);
+        //插入item
+        for (var item : pddOrderItems) {
+            OOrderItem oOrderItem = new OOrderItem();
+            oOrderItem.setOrderId(order.getId());
+            oOrderItem.setOrderNum(pddOrder.getOrderSn());
+            oOrderItem.setSubOrderNum(pddOrder.getOrderSn()+"-"+item.getSkuId());
+            oOrderItem.setShopType(EnumShopType.PDD.getIndex());
+            oOrderItem.setShopId(pddOrder.getShopId());
+            oOrderItem.setSkuId(item.getSkuId().toString());
+            oOrderItem.setGoodsId(StringUtils.hasText(item.getOGoodsId())?Long.parseLong(item.getOGoodsId()):0L);
+            oOrderItem.setGoodsSkuId(StringUtils.hasText(item.getOGoodsSkuId())?Long.parseLong(item.getOGoodsSkuId()):0L);
+            oOrderItem.setGoodsTitle(item.getGoodsName());
+            oOrderItem.setGoodsImg(item.getGoodsImg());
+            oOrderItem.setGoodsNum(item.getOuterGoodsId());
+            oOrderItem.setGoodsSpec(item.getGoodsSpec());
+            oOrderItem.setSkuNum(item.getOuterId());
+            oOrderItem.setGoodsPrice(item.getGoodsPrice()!=null?item.getGoodsPrice():0.0);
+            oOrderItem.setQuantity(item.getGoodsCount());
+            oOrderItem.setItemAmount(oOrderItem.getGoodsPrice()*oOrderItem.getQuantity());
+            oOrderItem.setDiscountAmount(0.0);
+            oOrderItem.setPayment(0.0);
+
+            oOrderItem.setRefundCount(0);
+            oOrderItem.setRefundStatus(1);
+            oOrderItem.setShipper(-1);
+            oOrderItem.setShipType(order.getShipType());
+            oOrderItem.setShipStatus(0);
+            oOrderItem.setCreateTime(new Date());
+            oOrderItem.setCreateBy("手动确认订单");
+            erpOrderItemMapper.insert(oOrderItem);
+        }
+        // 更新自己
+        PddOrder douOrderUpdate = new PddOrder();
+        douOrderUpdate.setId(pddOrder.getId());
+        douOrderUpdate.setAuditStatus(1);
+        douOrderUpdate.setAuditTime(new Date());
+        mapper.updateById(douOrderUpdate);
+        return ResultVo.success();
     }
 
 }

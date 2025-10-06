@@ -5,6 +5,7 @@ import cn.qihangerp.common.PageResult;
 import cn.qihangerp.common.ResultVo;
 import cn.qihangerp.module.open.pdd.domain.PddOrder;
 import cn.qihangerp.module.open.pdd.domain.bo.PddOrderBo;
+import cn.qihangerp.module.open.pdd.domain.bo.PddOrderConfirmBo;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 
@@ -25,4 +26,6 @@ public interface PddOrderService extends IService<PddOrder> {
      * @return
      */
     ResultVo<Integer> saveOrder(Long shopId, PddOrder order);
+
+    ResultVo<Long> confirmOrder(PddOrderConfirmBo confirmBo);
 }
