@@ -36,12 +36,12 @@ public class OmsWeiOrder implements Serializable {
     /**
      * 秒级时间戳
      */
-    private Integer createTime;
+    private Long createTime;
 
     /**
      * 秒级时间戳
      */
-    private Integer updateTime;
+    private Long updateTime;
 
     /**
      * 
