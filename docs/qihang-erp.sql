@@ -3216,7 +3216,7 @@ INSERT INTO `sys_menu` VALUES (2090, '角色管理', 5, 2, 'role', 'system/role/
 INSERT INTO `sys_menu` VALUES (2091, '部门管理', 5, 3, 'dept', 'system/dept/index', NULL, 1, 0, 'C', '0', '0', NULL, 'tree', 'admin', '2024-03-31 12:42:57', '', NULL, '');
 INSERT INTO `sys_menu` VALUES (2092, '售后处理记录', 2, 5, 'processing', 'afterSale/index', NULL, 1, 0, 'C', '0', '0', '', 'documentation', 'admin', '2024-04-06 17:27:03', 'admin', '2024-07-28 18:59:41', '');
 INSERT INTO `sys_menu` VALUES (2093, '发货订单商品', 1, 2, 'order_item_list', 'order/item_list', NULL, 1, 0, 'C', '1', '0', '', 'chart', 'admin', '2024-04-06 18:58:06', 'admin', '2025-10-01 08:36:11', '');
-INSERT INTO `sys_menu` VALUES (2094, '电子面单发货', 6, 1, 'print', 'shipping/ewaybillPrint/index', NULL, 1, 0, 'C', '0', '0', '', 'edit', 'admin', '2024-07-20 11:04:54', 'admin', '2025-06-01 14:26:27', '');
+INSERT INTO `sys_menu` VALUES (2094, '打单发货', 6, 1, 'print', 'shipping/ewaybillPrint/index', NULL, 1, 0, 'C', '0', '0', '', 'edit', 'admin', '2024-07-20 11:04:54', 'admin', '2025-06-01 14:26:27', '');
 INSERT INTO `sys_menu` VALUES (2096, '备货单', 6, 2, 'stockup', 'shipping/stockup', NULL, 1, 0, 'C', '0', '0', '', 'email', 'admin', '2024-07-20 11:53:24', 'admin', '2025-06-02 09:10:24', '');
 INSERT INTO `sys_menu` VALUES (2097, '物流跟踪', 6, 5, 'logistics', 'shipping/stocking/index', NULL, 1, 0, 'C', '0', '1', '', 'list', 'admin', '2024-07-20 11:54:18', 'admin', '2025-05-25 14:32:27', '');
 INSERT INTO `sys_menu` VALUES (2099, '私域订单管理', 1, 10, 'offline_order_list', 'order/private/index', NULL, 1, 0, 'C', '0', '1', '', 'checkbox', 'admin', '2024-07-27 17:33:03', 'admin', '2025-05-24 13:10:53', '');
@@ -3228,7 +3228,7 @@ INSERT INTO `sys_menu` VALUES (2115, '商品库存管理', 7, 0, 'goods_inventor
 INSERT INTO `sys_menu` VALUES (2116, '商品出库管理', 7, 20, 'stock_out', 'stock/stockOut/index', NULL, 1, 0, 'C', '0', '0', '', 'guide', 'admin', '2024-09-21 20:44:46', 'admin', '2025-03-24 13:46:42', '');
 INSERT INTO `sys_menu` VALUES (2117, '仓位管理', 7, 91, 'position', 'stock/warehouse/position', NULL, 1, 0, 'C', '1', '0', '', '404', 'admin', '2024-09-22 11:52:18', 'admin', '2025-03-24 13:47:04', '');
 INSERT INTO `sys_menu` VALUES (2118, '新建商品入库单', 7, 11, 'stock_in/create', 'stock/stockIn/create.vue', NULL, 1, 0, 'C', '1', '0', '', '404', 'admin', '2024-09-22 14:49:40', 'admin', '2025-03-24 13:35:30', '');
-INSERT INTO `sys_menu` VALUES (2129, '订单发货', 6, 0, 'manual_shipment', 'shipping/shipment/index', NULL, 1, 0, 'C', '0', '0', '', 'checkbox', 'admin', '2025-06-01 13:36:57', 'admin', '2025-10-02 00:15:02', '');
+INSERT INTO `sys_menu` VALUES (2129, '订单发货', 6, 0, 'ship_order', 'shipping/shipment/index', NULL, 1, 0, 'C', '0', '0', '', 'checkbox', 'admin', '2025-06-01 13:36:57', 'admin', '2025-10-02 00:15:02', '');
 
 -- ----------------------------
 -- Table structure for sys_menu2

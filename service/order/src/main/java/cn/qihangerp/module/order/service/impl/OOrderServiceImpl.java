@@ -684,6 +684,103 @@ public class OOrderServiceImpl extends ServiceImpl<OOrderMapper, OOrder>
 
         return ResultVo.success();
     }
+
+    @Transactional(rollbackFor = Exception.class)
+    @Override
+    public ResultVo cancelOrder(Long id, String cancelReason, String man) {
+        OOrder shopOrder = this.baseMapper.selectById(id);
+        if (shopOrder == null) return ResultVo.error("找不到订单数据");
+        else if (shopOrder.getOrderStatus().intValue() == 3) return ResultVo.error("已完成的单不可以取消");
+
+        // 取消订单
+        OOrder update = new OOrder();
+        update.setId(id.toString());
+        update.setCancelReason(cancelReason);
+        update.setUpdateBy(man + " 操作取消订单");
+        update.setUpdateTime(new Date());
+        update.setOrderStatus(11);
+        this.baseMapper.updateById(update);
+
+        // 更新子订单order_status字段值
+        OOrderItem itemUpdate = new OOrderItem();
+        itemUpdate.setOrderStatus(11);
+        itemUpdate.setUpdateBy(update.getUpdateBy());
+        itemUpdate.setUpdateTime(new Date());
+        orderItemMapper.update(itemUpdate, new LambdaQueryWrapper<OOrderItem>().eq(OOrderItem::getOrderId, id));
+
+        // 取消发货订单
+//        List<OOrderStocking> oOrderStockings = oOrderStockingMapper.selectList(new LambdaQueryWrapper<OOrderStocking>().eq(OOrderStocking::getOOrderId, oOrder.getId()));
+//        if (!oOrderStockings.isEmpty()) {
+//            for (OOrderStocking oOrderStocking : oOrderStockings) {
+//                OOrderStocking oOrderStockingUpdate = new OOrderStocking();
+//                oOrderStockingUpdate.setId(oOrderStocking.getId());
+//                oOrderStockingUpdate.setOrderStatus(11);
+//                oOrderStockingUpdate.setUpdateBy("取消订单");
+//                oOrderStockingUpdate.setUpdateTime(new Date());
+//                oOrderStockingMapper.updateById(oOrderStockingUpdate);
+//            }
+//        }
+
+        return ResultVo.success();
+    }
+
+    @Transactional(rollbackFor = Exception.class)
+    @Override
+    public ResultVo cancelOrderItem(Long orderItemId, String cancelReason, String man) {
+        OOrderItem shopOrderItem = orderItemMapper.selectById(orderItemId);
+        if(shopOrderItem==null) return ResultVo.error("找不到子订单数据");
+        else if(shopOrderItem.getRefundStatus().intValue()!=1) return ResultVo.error("售后中的子订单单不可以取消");
+
+        OOrder shopOrder = this.baseMapper.selectById(shopOrderItem.getOrderId());
+        if(shopOrder==null) return ResultVo.error("找不到订单数据");
+        else if(shopOrder.getOrderStatus().intValue()==3) return ResultVo.error("已完成的单不可以取消");
+
+        // 取消子订单
+        OOrderItem orderItemUpdate = new OOrderItem();
+        orderItemUpdate.setId(orderItemId.toString());
+        orderItemUpdate.setRefundStatus(4);//售后完成
+        orderItemUpdate.setUpdateBy("主动取消");
+        orderItemUpdate.setUpdateTime(new Date());
+        orderItemMapper.updateById(orderItemUpdate);
+
+
+        // 判断子订单是否全部取消，全部取消把该订单也取消
+        List<OOrderItem> offlineOrderItems = orderItemMapper.selectList(new LambdaQueryWrapper<OOrderItem>()
+                .eq(OOrderItem::getOrderId, shopOrder.getId())
+                .eq(OOrderItem::getRefundStatus, 1));
+
+        if(offlineOrderItems.isEmpty()) {
+            // 全部退款了  ，， 更新订单状态为已关闭
+            // 1、取消订单
+            OOrder update = new OOrder();
+            update.setId(shopOrder.getId());
+            update.setCancelReason(cancelReason);
+            update.setUpdateBy(man+" 操作取消子订单");
+            update.setUpdateTime(new Date());
+            update.setOrderStatus(11);
+            this.baseMapper.updateById(update);
+
+
+
+            // 取消发货订单
+//            List<OOrderStocking> oOrderStockings = oOrderStockingMapper.selectList(new LambdaQueryWrapper<OOrderStocking>().eq(OOrderStocking::getOOrderId, oOrderUpdate.getId()));
+//            if(!oOrderStockings.isEmpty()){
+//                for(OOrderStocking oOrderStocking : oOrderStockings){
+//                    OOrderStocking oOrderStockingUpdate = new OOrderStocking();
+//                    oOrderStockingUpdate.setId(oOrderStocking.getId());
+//                    oOrderStockingUpdate.setOrderStatus(11);
+//                    oOrderStockingUpdate.setUpdateBy("取消子订单");
+//                    oOrderStockingUpdate.setUpdateTime(new Date());
+//                    oOrderStockingMapper.updateById(oOrderStockingUpdate);
+//                }
+//            }
+
+
+        }
+
+        return ResultVo.success();
+    }
+
 //    /**
 //     * 新增订单
 //     *

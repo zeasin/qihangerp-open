@@ -247,9 +247,6 @@
 <script>
 import '@riophae/vue-treeselect/dist/vue-treeselect.css'
 import {assignedShipmentList} from "@/api/order/order";
-
-
-import {listLogisticsStatus} from "@/api/api/logistics";
 import {listShop} from "@/api/shop/shop";
 import {amountFormatter, parseTime} from "@/utils/zhijian";
 

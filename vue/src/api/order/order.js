@@ -98,3 +98,11 @@ export function addOrder(data) {
     data: data
   })
 }
+// 取消订单
+export function cancelOrder(data) {
+  return request({
+    url: '/order/cancelOrder',
+    method: 'post',
+    data: data
+  })
+}

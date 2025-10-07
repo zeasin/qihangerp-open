@@ -13,6 +13,8 @@ import cn.qihangerp.security.common.BaseController;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Arrays;
+
 /**
  * 店铺Controller
  * 
@@ -78,4 +80,9 @@ public class LogisticsController extends BaseController {
         return success(logisticsCompanyService.getById(id));
     }
 
+    @DeleteMapping("/logistics/{id}")
+    public AjaxResult remove(@PathVariable Long id)
+    {
+        return toAjax(logisticsCompanyService.removeById(id));
+    }
 }

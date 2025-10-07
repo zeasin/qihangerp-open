@@ -180,6 +180,8 @@ public class OOrder implements Serializable {
      */
     private String updateBy;
 
+    private String cancelReason;
+
     @TableField(exist = false)
     private List<OOrderItem> itemList;
 

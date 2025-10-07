@@ -78,4 +78,22 @@ public interface OOrderService extends IService<OOrder> {
      * @return
      */
     ResultVo<Integer> allocateShipmentOrder(OrderAllocateShipRequest shipBo, String createBy);
+
+    /**
+     * 取消订单
+     * @param id 店铺订单id
+     * @param cancelReason 取消原因
+     * @param man 操作人
+     * @return
+     */
+    ResultVo cancelOrder(Long id, String cancelReason, String man);
+
+    /**
+     * 取消子订单
+     * @param orderItemId
+     * @param cancelReason
+     * @param man
+     * @return
+     */
+    ResultVo cancelOrderItem(Long orderItemId, String cancelReason, String man);
 }

@@ -210,7 +210,8 @@
 </template>
 
 <script>
-import {listLogistics, listLogisticsStatus, listShop} from "@/api/shop/shop";
+import {listShop} from "@/api/shop/shop";
+import {listLogisticsStatus} from "@/api/shipping/logistics";
 import {MessageBox} from "element-ui";
 import {handShip, listShipping, searchOrderConsignee, searchOrderItemByReceiverMobile} from "@/api/order/shipping";
 

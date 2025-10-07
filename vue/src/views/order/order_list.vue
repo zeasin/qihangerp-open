@@ -17,7 +17,7 @@
             :label="item.name"
             :value="item.id">
             <span style="float: left">{{ item.name }}</span>
-           <span style="float: right; color: #8492a6; font-size: 13px"  v-if="item.type === 500">视频号小店</span>
+           <span style="float: right; color: #8492a6; font-size: 13px"  v-if="item.type === 500">微信小店</span>
            <span style="float: right; color: #8492a6; font-size: 13px"  v-if="item.type === 200">京东POP</span>
            <span style="float: right; color: #8492a6; font-size: 13px"  v-if="item.type === 280">京东自营</span>
            <span style="float: right; color: #8492a6; font-size: 13px"  v-if="item.type === 100">淘宝天猫</span>
@@ -42,6 +42,14 @@
           <el-option label="已发货" value="2"></el-option>
           <el-option label="已完成" value="3"> </el-option>
           <el-option label="已取消" value="11"></el-option>
+        </el-select>
+      </el-form-item>
+      <el-form-item label="退款状态" prop="refundStatus">
+        <el-select v-model="queryParams.refundStatus" placeholder="请选择状态" clearable @change="handleQuery">
+          <el-option label="无售后或售后关闭" value="1" ></el-option>
+          <el-option label="售后处理中" value="2"></el-option>
+          <el-option label="退款中" value="3"> </el-option>
+          <el-option label="退款成功" value="4"></el-option>
         </el-select>
       </el-form-item>
 <!--      <el-form-item label="推送ERP状态" prop="hasLink">-->
@@ -94,7 +102,9 @@
           type="text"
           icon="el-icon-view"
           @click="handleDetail(scope.row)"
-        >{{scope.row.orderNum}} </el-button><br/>
+        >{{scope.row.orderNum}} </el-button>
+          <i class="el-icon-copy-document tag-copy" :data-clipboard-text="scope.row.orderNum" @click="copyActiveCode($event,scope.row.orderNum)" ></i>
+          <br/>
           <el-tag type="info">{{ shopList.find(x=>x.id === scope.row.shopId) ? shopList.find(x=>x.id === scope.row.shopId).name : '' }}</el-tag>
         </template>>
       </el-table-column>
@@ -109,9 +119,9 @@
             <th>
               <td width="50px">图片</td>
               <td width="250px" align="left">标题</td>
-              <td width="150" align="left">SKU名</td>
-              <td width="200" align="left">Sku编码</td>
-              <td width="150" align="left">平台SkuId</td>
+              <td width="200" align="left">规格</td>
+              <td width="150" align="left">Sku编码</td>
+              <td width="150" align="left">电商平台SKUID</td>
               <td width="50" align="left">数量</td>
             </th>
           </table>
@@ -124,10 +134,24 @@
                 <image-preview :src="scope.row.goodsImg" :width="40" :height="40"/>
               </template>
             </el-table-column>
-            <el-table-column label="商品名" align="left" width="250px" prop="goodsTitle" />
-            <el-table-column label="SKU名" align="left" prop="goodsSpec" width="150"  :show-overflow-tooltip="true"/>
-            <el-table-column label="Sku编码" align="left" prop="skuNum" width="200"/>
-            <el-table-column label="平台SkuId" align="left" prop="skuId" width="150"/>
+            <el-table-column label="商品名" align="left" width="250px" prop="goodsTitle" >
+              <template slot-scope="scope">
+                {{scope.row.goodsTitle}}
+<!--                <el-tag size="small" v-if="scope.row.refundStatus === 1">无售后或售后关闭</el-tag>-->
+                <el-tag size="small" v-if="scope.row.refundStatus === 2">售后处理中</el-tag>
+                <el-tag size="small" v-if="scope.row.refundStatus === 3">退款中</el-tag>
+                <el-tag size="small" v-if="scope.row.refundStatus === 4">退款成功</el-tag>
+              </template>
+            </el-table-column>
+            <el-table-column label="SKU名" align="left" prop="goodsSpec" width="150"  :show-overflow-tooltip="true">
+              <el-table-column label="规格" align="left" prop="goodsSpec" width="200">
+                <template slot-scope="scope">
+                  {{ getSkuValues(scope.row.goodsSpec)}}
+                </template>
+              </el-table-column>
+            </el-table-column>
+            <el-table-column label="Sku编码" align="left" prop="skuNum" width="150"/>
+            <el-table-column label="电商平台SKUID" align="left" prop="skuId" width="150"/>
             <el-table-column label="商品数量" align="center" prop="quantity" width="50px">
               <template slot-scope="scope">
                 <el-tag size="small" type="danger">{{scope.row.quantity}}</el-tag>
@@ -231,24 +255,23 @@
           {{ parseTime(scope.row.orderTime) }}
         </template>
       </el-table-column>
-<!--      <el-table-column label="操作" align="center" class-name="small-padding fixed-width">-->
-<!--        <template slot-scope="scope">-->
-<!--          <el-button-->
-<!--            size="mini"-->
-<!--            type="text"-->
-<!--            icon="el-icon-view"-->
-<!--            @click="handleDetail(scope.row)"-->
-<!--          >详情</el-button>-->
-<!--&lt;!&ndash;          <div>&ndash;&gt;-->
-<!--&lt;!&ndash;            <el-button&ndash;&gt;-->
-<!--&lt;!&ndash;              size="mini"&ndash;&gt;-->
-<!--&lt;!&ndash;              type="success"&ndash;&gt;-->
-<!--&lt;!&ndash;              icon="el-icon-share"&ndash;&gt;-->
-<!--&lt;!&ndash;              @click="handleShip(scope.row)"&ndash;&gt;-->
-<!--&lt;!&ndash;            >订单发货</el-button>&ndash;&gt;-->
-<!--&lt;!&ndash;          </div>&ndash;&gt;-->
-<!--        </template>-->
-<!--      </el-table-column>-->
+      <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
+        <template slot-scope="scope">
+          <el-button style="padding-right: 6px;padding-left: 6px"
+            size="mini"
+            type="text"
+            icon="el-icon-view"
+            @click="handleDetail(scope.row)"
+          >详情</el-button>
+          <el-button v-if="scope.row.orderStatus===1"
+            size="mini" style="padding-right: 6px;padding-left: 6px"
+            type="text"
+            icon="el-icon-delete"
+            @click="handleCancel(scope.row)"
+          >取消订单</el-button>
+
+        </template>
+      </el-table-column>
     </el-table>
 
     <pagination
@@ -296,8 +319,8 @@
                   placeholder="请选择订单创建时间">
                 </el-date-picker> -->
               </el-descriptions-item>
-              <el-descriptions-item label="支付时间"> {{ form.payTime }}</el-descriptions-item>
-              <el-descriptions-item label="最后更新时间"> {{ form.updateTime }}</el-descriptions-item>
+              <el-descriptions-item label="支付时间"> {{ parseTime(form.payTime) }}</el-descriptions-item>
+              <el-descriptions-item label="最后更新时间"> {{ parseTime(form.updateTime) }}</el-descriptions-item>
 
               <el-descriptions-item label="订单状态">
                 <el-tag v-if="form.orderStatus === 1" style="margin-bottom: 6px;">待发货</el-tag>
@@ -348,9 +371,13 @@
               </template>
             </el-table-column>
             <el-table-column label="商品标题" prop="goodsTitle" ></el-table-column>
-            <el-table-column label="SKU" prop="goodsSpec" width="150"></el-table-column>
+            <el-table-column label="规格" prop="goodsSpec" width="150">
+              <template slot-scope="scope">
+                {{ getSkuValues(scope.row.goodsSpec)}}
+              </template>
+            </el-table-column>
             <el-table-column label="sku编码" prop="skuNum"></el-table-column>
-            <el-table-column label="外部ERP Sku编码" prop="outerErpSkuId"></el-table-column>
+            <el-table-column label="商品库SKUID" prop="goodsSkuId"></el-table-column>
             <el-table-column label="单价" prop="goodsPrice"></el-table-column>
             <el-table-column label="子订单金额" prop="itemAmount"></el-table-column>
             <el-table-column label="实付金额" prop="payment"></el-table-column>
@@ -387,12 +414,26 @@
         </el-tab-pane>
       </el-tabs>
     </el-dialog>
+
+    <!-- 取消订单 -->
+    <el-dialog :title="title" :visible.sync="open" width="500px" append-to-body :close-on-click-modal="false">
+      <el-form ref="form" :model="form" :rules="rules" label-width="80px" >
+        <el-form-item label="取消理由" prop="cancelReason" >
+          <el-input v-model="form.cancelReason" type="textarea" placeholder="请输入内容" style="width:300px"/>
+        </el-form-item>
+      </el-form>
+      <div slot="footer" class="dialog-footer">
+        <el-button type="primary" @click="submitCancelForm">确 定</el-button>
+        <el-button @click="cancel">取 消</el-button>
+      </div>
+    </el-dialog>
   </div>
 </template>
 
 <script>
-import {listOrder, getOrder, delOrder, addOrder, updateOrder, pushErp} from "@/api/order/order";
+import {listOrder, getOrder, delOrder, addOrder, updateOrder, pushErp,cancelOrder} from "@/api/order/order";
 import { listShop } from "@/api/shop/shop";
+import Clipboard from "clipboard";
 
 export default {
   name: "Order",
@@ -420,7 +461,9 @@ export default {
       shopList:[],
       // 弹出层标题
       detailTitle:'订单详情',
+      title:'',
       detailOpen:false,
+      open:false,
       isAudit:false,
       activeName: 'orderDetail',
       orderTime: null,
@@ -439,7 +482,7 @@ export default {
       form: {},
       // 表单校验
       rules: {
-
+        cancelReason:[{ required: true, message: '不能为空' }],
       }
     };
   },
@@ -450,6 +493,33 @@ export default {
     this.getList();
   },
   methods: {
+    copyActiveCode(event,queryParams) {
+      console.log(queryParams)
+      const clipboard = new Clipboard(".tag-copy")
+      clipboard.on('success', e => {
+        this.$message({ type: 'success', message: '复制成功' })
+        // 释放内存
+        clipboard.destroy()
+      })
+      clipboard.on('error', e => {
+        // 不支持复制
+        this.$message({ type: 'waning', message: '该浏览器不支持自动复制' })
+        // 释放内存
+        clipboard.destroy()
+      })
+    },
+
+    getSkuValues(spec){
+      try {
+        // 解析 JSON，返回一个数组
+        const parsedSpec = JSON.parse(spec) || [];
+
+        // 使用 map 提取所有 value，使用 join() 用逗号连接
+        return parsedSpec.map(item => item.attr_value || item.value).join(', ') || '';
+      } catch (error) {
+        return spec; // 如果 JSON 解析出错，返回空字符串
+      }
+    },
     amountFormatter(row, column, cellValue, index) {
       return '￥' + parseFloat(cellValue).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
     },
@@ -491,7 +561,10 @@ export default {
       this.single = selection.length!==1
       this.multiple = !selection.length
     },
-
+    cancel(){
+      this.open = false
+      this.detailOpen = false
+    },
     reset(){
 
     },
@@ -507,6 +580,25 @@ export default {
     },
     handleShip(row){
 
+    },
+    //取消订单
+    handleCancel(row){
+      this.form.id = row.id
+      this.form.remark=''
+      this.open = true;
+      this.title = "取消订单";
+    },
+    /** 提交按钮 */
+    submitCancelForm() {
+      this.$refs["form"].validate(valid => {
+        if (valid) {
+          cancelOrder(this.form).then(response => {
+            this.$modal.msgSuccess("订单取消成功");
+            this.open = false;
+            this.getList();
+          });
+        }
+      });
     },
     /** 详情按钮操作 */
     handleDetail(row) {

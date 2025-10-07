@@ -17,19 +17,29 @@
             :label="item.name"
             :value="item.id">
             <span style="float: left">{{ item.name }}</span>
-            <span style="float: right; color: #8492a6; font-size: 13px"  v-if="item.type === 3">拼多多</span>
-            <span style="float: right; color: #8492a6; font-size: 13px"  v-if="item.type === 5">微信小店</span>
-            <span style="float: right; color: #8492a6; font-size: 13px"  v-if="item.type === 9">其他渠道</span>
+            <span style="float: right; color: #8492a6; font-size: 13px"  v-if="item.type === 500">微信小店</span>
+            <span style="float: right; color: #8492a6; font-size: 13px"  v-if="item.type === 200">京东POP</span>
+            <span style="float: right; color: #8492a6; font-size: 13px"  v-if="item.type === 280">京东自营</span>
+            <span style="float: right; color: #8492a6; font-size: 13px"  v-if="item.type === 100">淘宝天猫</span>
+            <span style="float: right; color: #8492a6; font-size: 13px"  v-if="item.type === 300">拼多多</span>
+            <span style="float: right; color: #8492a6; font-size: 13px"  v-if="item.type === 400">抖店</span>
+            <span style="float: right; color: #8492a6; font-size: 13px"  v-if="item.type === 999">线下渠道</span>
           </el-option>
         </el-select>
       </el-form-item>
-      <el-form-item>
-        <el-button type="primary" icon="el-icon-search" size="mini" @click="handleQuery">搜索</el-button>
-        <el-button icon="el-icon-refresh" size="mini" @click="resetQuery">重置</el-button>
-      </el-form-item>
+<!--      <el-form-item>-->
+<!--        <el-button type="primary" icon="el-icon-search" size="mini" @click="handleQuery">搜索</el-button>-->
+<!--        <el-button icon="el-icon-refresh" size="mini" @click="resetQuery">重置</el-button>-->
+<!--      </el-form-item>-->
     </el-form>
 
     <el-row :gutter="10" class="mb8">
+      <el-col :span="1.5">
+        <el-button type="primary" icon="el-icon-search" size="mini" @click="handleQuery">搜索</el-button>
+      </el-col>
+      <el-col :span="1.5">
+        <el-button icon="el-icon-refresh" size="mini" @click="resetQuery">重置</el-button>
+      </el-col>
       <el-col :span="1.5">
         <el-button
           type="primary"
@@ -131,6 +141,22 @@
           <div style="color: #ed5565">{{scope.row.sellerMemo}}</div>
         </template>
       </el-table-column>
+      <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
+        <template slot-scope="scope">
+          <el-button style="padding-right: 6px;padding-left: 6px"
+            size="mini"  plain
+            type="primary"
+            icon="el-icon-view"
+            @click="allocateShipmentToSupplier(scope.row)"
+          >供应商发货</el-button>
+          <el-button style="padding-right: 6px;padding-left: 6px"
+                     size="mini" type="success" plain
+                     icon="el-icon-guide"
+                     @click="handleShip(scope.row)"
+          >手动发货</el-button>
+
+        </template>
+      </el-table-column>
     </el-table>
 
     <pagination
@@ -195,16 +221,16 @@
           <!-- <el-table-column type="selection" width="50" align="center" /> -->
           <el-table-column label="序号" align="center" type="index" width="50"/>
 
-          <el-table-column label="商品图片" prop="goodsImg" width="80">
+          <el-table-column label="图片" prop="goodsImg" width="60">
             <template slot-scope="scope">
-              <el-image style="width: 70px; height: 70px" :src="scope.row.goodsImg"></el-image>
+              <el-image style="width: 40px; height: 40px" :src="scope.row.goodsImg"></el-image>
             </template>
           </el-table-column>
-          <el-table-column label="商品标题" prop="goodsTitle" ></el-table-column>
-          <el-table-column label="SKU" prop="goodsSpec" width="150"></el-table-column>
-          <el-table-column label="sku编码" prop="skuNum"></el-table-column>
+          <el-table-column label="标题" prop="goodsTitle" ></el-table-column>
+          <el-table-column label="规格" prop="goodsSpec"></el-table-column>
+          <el-table-column label="sku编码" prop="skuNum"  width="180"></el-table-column>
           <!--          <el-table-column label="单价" prop="goodsPrice"></el-table-column>-->
-          <el-table-column label="数量" prop="quantity"></el-table-column>
+          <el-table-column label="数量" prop="quantity" width="50"></el-table-column>
           <!-- <el-table-column label="商品金额" prop="itemAmount"></el-table-column> -->
         </el-table>
         <el-form-item label="包裹尺寸" prop="height">
@@ -279,16 +305,16 @@
           <!-- <el-table-column type="selection" width="50" align="center" /> -->
           <el-table-column label="序号" align="center" type="index" width="50"/>
 
-          <el-table-column label="商品图片" prop="goodsImg" width="80">
+          <el-table-column label="图片" prop="goodsImg" width="60">
             <template slot-scope="scope">
-              <el-image style="width: 70px; height: 70px" :src="scope.row.goodsImg"></el-image>
+              <el-image style="width: 40px; height: 40px" :src="scope.row.goodsImg"></el-image>
             </template>
           </el-table-column>
-          <el-table-column label="商品标题" prop="goodsTitle" ></el-table-column>
-          <el-table-column label="SKU" prop="goodsSpec" width="150"></el-table-column>
-          <el-table-column label="sku编码" prop="skuNum"></el-table-column>
+          <el-table-column label="标题" prop="goodsTitle" ></el-table-column>
+          <el-table-column label="规格" prop="goodsSpec"></el-table-column>
+          <el-table-column label="sku编码" prop="skuNum"  width="180"></el-table-column>
           <!--          <el-table-column label="单价" prop="goodsPrice"></el-table-column>-->
-          <el-table-column label="数量" prop="quantity"></el-table-column>
+          <el-table-column label="数量" prop="quantity" width="50"></el-table-column>
           <!-- <el-table-column label="商品金额" prop="itemAmount"></el-table-column> -->
         </el-table>
         <el-form-item label="收件人" prop="receiverName">
@@ -325,7 +351,8 @@ import {
   waitSelfShipmentList
 } from "@/api/order/order";
 
-import {listShop,listLogisticsStatus} from "@/api/shop/shop";
+import {listShop} from "@/api/shop/shop";
+import {listLogisticsStatus} from "@/api/shipping/logistics";
 import {amountFormatter, parseTime} from "@/utils/zhijian";
 import {getDicts} from "@/api/system/dict/data";
 
