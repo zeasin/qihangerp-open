@@ -28,7 +28,7 @@
             <result property="refundCount" column="refund_count" jdbcType="INTEGER"/>
             <result property="refundStatus" column="refund_status" jdbcType="INTEGER"/>
             <result property="orderStatus" column="order_status" jdbcType="INTEGER"/>
-            <result property="shipper" column="shipper" jdbcType="INTEGER"/>
+            <result property="shipper" column="shipper" jdbcType="BIGINT"/>
             <result property="shipType" column="ship_type" jdbcType="INTEGER"/>
             <result property="shipStatus" column="ship_status" jdbcType="INTEGER"/>
             <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>

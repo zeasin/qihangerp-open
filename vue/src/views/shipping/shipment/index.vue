@@ -8,7 +8,7 @@
         <shipment-shipped></shipment-shipped>
       </el-tab-pane>
       <el-tab-pane label="已分配供应商发货" name="assigned" lazy>
-        <shipment-assigned></shipment-assigned>
+        <SupplierShippedList></SupplierShippedList>
       </el-tab-pane>
 
 
@@ -20,11 +20,11 @@
 <script>
 import ShipmentWait  from "@/views/shipping/shipment/wait_ship.vue";
 import ShipmentShipped  from "@/views/shipping/shipment/shipped_list.vue";
-import ShipmentAssigned  from "@/views/shipping/shipment/assigned_list.vue";
+import SupplierShippedList  from "@/views/shipping/shipment/supplier_shipped_list.vue";
 
 export default {
   name: "Shipment",
-  components:{ShipmentWait,ShipmentShipped,ShipmentAssigned},
+  components:{ShipmentWait,ShipmentShipped,ShipmentAssigned: SupplierShippedList},
   data() {
     return {
       activeName: 'waitShip'

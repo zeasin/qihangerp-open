@@ -305,9 +305,9 @@ public class OOrderServiceImpl extends ServiceImpl<OOrderMapper, OOrder>
      * @param createBy
      * @return
      */
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     @Override
-    public ResultVo<Integer> manualShipmentOrder(OrderShipRequest shipBo,String createBy) {
+    public ResultVo<Integer> manualShipmentOrder(OrderShipRequest shipBo, String createBy) {
         if (org.springframework.util.StringUtils.isEmpty(shipBo.getId()) || shipBo.getId().equals("0"))
             return ResultVo.error(ResultVoEnum.ParamsError, "缺少参数：id");
 
@@ -337,9 +337,9 @@ public class OOrderServiceImpl extends ServiceImpl<OOrderMapper, OOrder>
         OOrderShipList shipList = new OOrderShipList();
         shipList.setShopId(erpOrder.getShopId());
         shipList.setShopType(erpOrder.getShopType());
-        shipList.setShipper(0);
+        shipList.setShipper(0L);
         shipList.setShipSupplierId(0L);
-        shipList.setShipSupplier("自由仓库发货");
+        shipList.setShipSupplier("仓库发货");
         shipList.setOrderId(Long.parseLong(erpOrder.getId()));
         shipList.setOrderNum(erpOrder.getOrderNum());
         shipList.setStatus(0);
@@ -437,9 +437,9 @@ public class OOrderServiceImpl extends ServiceImpl<OOrderMapper, OOrder>
             orderItemUpdate.setId( orderItem.getId());
             orderItemUpdate.setUpdateBy("手动发货");
             orderItemUpdate.setUpdateTime(new Date());
-            orderItemUpdate.setShipper(0);
+            orderItemUpdate.setShipper(0L);
             orderItemUpdate.setShipStatus(2);//发货状态 0 待发货 1 已分配供应商发货 2全部发货
-            orderItemUpdate.setShipType(2);//发货方式1电子面单发货2手动发货
+            orderItemUpdate.setShipType(0);//发货方式2供应商代发0仓库发货
             orderItemMapper.updateById(orderItemUpdate);
         }
 
@@ -447,11 +447,12 @@ public class OOrderServiceImpl extends ServiceImpl<OOrderMapper, OOrder>
         // 更新状态、发货方式
         OOrder update = new OOrder();
         update.setId(erpOrder.getId());
-        update.setShipper(0);
+        update.setShipper(0L);
         update.setShipStatus(2);//发货状态 0 待发货 1 已分配供应商发货 2全部发货
         update.setOrderStatus(2);
-        update.setShipType(2);//发货方式1电子面单发货2手动发货
-
+        update.setShipType(0);//发货方式2供应商代发0仓库发货
+        update.setShipCompany(erpLogisticsCompany.getName());
+        update.setShipCode(shipBo.getShippingNumber());
         update.setUpdateTime(new Date());
         update.setUpdateBy("手动发货");
         orderMapper.updateById(update);
@@ -480,204 +481,125 @@ public class OOrderServiceImpl extends ServiceImpl<OOrderMapper, OOrder>
             return ResultVo.error("订单发货已处理，不允许分配发货");
         }
 
-        List<OOrderItem> oOrderItems = orderItemMapper.selectList(new LambdaQueryWrapper<OOrderItem>()
+        List<OOrderItem> orderItemList = orderItemMapper.selectList(new LambdaQueryWrapper<OOrderItem>()
                 .eq(OOrderItem::getOrderId, erpOrder.getId()));
-        if(oOrderItems==null) return ResultVo.error("订单 item 数据错误，无法发货！");
+        if(orderItemList==null) return ResultVo.error("订单 item 数据错误，无法发货！");
 
-        long skuIdZeroCount = oOrderItems.stream().filter(x -> x.getGoodsSkuId() == 0).count();
-        if(skuIdZeroCount>0) return ResultVo.error("订单 item 数据中有skuId错误的数据，请补充！");
+        OGoodsSupplier oGoodsSupplier = supplierMapper.selectById(shipBo.getSupplierId());
+        if(oGoodsSupplier==null){
+            return ResultVo.error("供应商不存在");
+        }
+
+//        long skuIdZeroCount = oOrderItems.stream().filter(x -> x.getGoodsSkuId() == 0).count();
+//        if(skuIdZeroCount>0) return ResultVo.error("订单 item 数据中有skuId错误的数据，请补充！");
 
         // 按 订单明细找出同供应商 分组
-        Map<Long,List<OOrderItem>> supplierOrderItemList = new TreeMap<>();
-        Map<Long, OGoodsSupplier> supplierList = new TreeMap<>();
-        for(OOrderItem orderItem:oOrderItems){
-            OGoodsSku erpGoodsSku = goodsSkuMapper.selectById(orderItem.getGoodsSkuId());
-            if(erpGoodsSku==null) {
-                return ResultVo.error("订单明细找不到商品sku信息");
-            }
-            OGoods erpGoods = goodsMapper.selectById(erpGoodsSku.getGoodsId());
-            if(erpGoods==null){
-                return ResultVo.error("订单明细找不到商品信息");
-            }
-            OGoodsSupplier erpSupplier = supplierMapper.selectById(erpGoods.getSupplierId());
-            if(erpSupplier==null){
-                return ResultVo.error("订单明细商品找不到供应商信息");
-            }
-            // 组合供应商
-            boolean isExist = supplierOrderItemList.containsKey(erpSupplier.getId());
-            if(isExist){
-                supplierOrderItemList.get(erpSupplier.getId()).add(orderItem);
-            }else{
-                List<OOrderItem> orderItemList = new ArrayList<>();
-                orderItemList.add(orderItem);
-                supplierOrderItemList.put(Long.parseLong(erpSupplier.getId()),orderItemList);
-            }
-            supplierList.put(Long.parseLong(erpSupplier.getId()),erpSupplier);
-        }
+//        Map<Long,List<OOrderItem>> supplierOrderItemList = new TreeMap<>();
+//        Map<Long, OGoodsSupplier> supplierList = new TreeMap<>();
+//        for(OOrderItem orderItem:oOrderItems){
+//            OGoodsSku erpGoodsSku = oGoodsSkuMapper.selectById(orderItem.getGoodsSkuId());
+//            if(erpGoodsSku==null) {
+//                return ResultVo.error("订单明细找不到商品sku信息");
+//            }
+//            OGoods erpGoods = oGoodsMapper.selectById(erpGoodsSku.getGoodsId());
+//            if(erpGoods==null){
+//                return ResultVo.error("订单明细找不到商品信息");
+//            }
+//            OGoodsSupplier erpSupplier = supplierMapper.selectById(erpGoods.getSupplierId());
+//            if(erpSupplier==null){
+//                return ResultVo.error("订单明细商品找不到供应商信息");
+//            }
+//            // 组合供应商
+//            boolean isExist = supplierOrderItemList.containsKey(erpSupplier.getId());
+//            if(isExist){
+//                supplierOrderItemList.get(erpSupplier.getId()).add(orderItem);
+//            }else{
+//                List<OOrderItem> orderItemList = new ArrayList<>();
+//                orderItemList.add(orderItem);
+//                supplierOrderItemList.put(Long.parseLong(erpSupplier.getId()),orderItemList);
+//            }
+//            supplierList.put(Long.parseLong(erpSupplier.getId()),erpSupplier);
+//        }
 
         // 开始组装分配数据
         // 遍历 Map
-        for (Map.Entry<Long, List<OOrderItem>> entry : supplierOrderItemList.entrySet()) {
-            Long supplierId = entry.getKey();  // 获取键（Long）
-            List<OOrderItem> orderItemList = entry.getValue();  // 获取值（List<ErpOrderItem>）
+//        for (Map.Entry<Long, List<OOrderItem>> entry : supplierOrderItemList.entrySet()) {
+//            Long supplierId = entry.getKey();  // 获取键（Long）
+//            List<OOrderItem> orderItemList = entry.getValue();  // 获取值（List<ErpOrderItem>）
 
-            // 添加分配发货
-//            ErpShipment erpShipment = new ErpShipment();
-//            erpShipment.setShipper(1);//发货方 0 仓库发货 1 供应商发货】
-//            erpShipment.setSupplierId(supplierId);
-//            erpShipment.setSupplier(supplierList.get(supplierId)!=null?supplierList.get(supplierId).getName():"");
-//            erpShipment.setTenantId(erpOrder.getTenantId());
-//            erpShipment.setShopId(erpOrder.getShopId());
-//            erpShipment.setShopType(erpOrder.getShopType());
-//            erpShipment.setOrderId(erpOrder.getId());
-//            erpShipment.setOrderNum(erpOrder.getOrderNum());
-//            erpShipment.setOrderTime(erpOrder.getOrderTime());
-//            erpShipment.setShipType(1);//发货类型（1订单发货2商品补发3商品换货）
-//            erpShipment.setShipCompany("");
-//            erpShipment.setShipCompanyCode("");
-//            erpShipment.setShipCode("");
-//            erpShipment.setShipFee(BigDecimal.ZERO);
-//            erpShipment.setShipStatus(0);//物流状态（0 待发货1已发货2已完成）
-//
-//            erpShipment.setPackageHeight(0.0);
-//            erpShipment.setPackageWeight(0.0);
-//            erpShipment.setPackageLength(0.0);
-//            erpShipment.setPackageWidth(0.0);
-//            erpShipment.setPacksgeOperator("");
-////        erpShipment.setPackages(JSONObject.toJSONString(oOrderItems));
-//            erpShipment.setRemark("");
-//            erpShipment.setCreateBy(createBy);
-//            erpShipment.setCreateTime(new Date());
-//
-//            shipmentMapper.insert(erpShipment);
+        // 添加分配发货
+        OOrderShipList shipList = new OOrderShipList();
+        shipList.setShopId(erpOrder.getShopId());
+        shipList.setShopType(erpOrder.getShopType());
+        shipList.setShipper(1L);
+        shipList.setShipSupplierId(shipBo.getSupplierId());
+        shipList.setShipSupplier(oGoodsSupplier.getName());
+        shipList.setOrderId(Long.parseLong(erpOrder.getId()));
+        shipList.setOrderNum(erpOrder.getOrderNum());
+        shipList.setStatus(0);
+        shipList.setShipLogisticsCompany("");
+        shipList.setShipLogisticsCompanyCode("");
+        shipList.setShipLogisticsCode("");
+        shipList.setShipStatus(1);
+        shipList.setReceiverName(shipBo.getReceiverName());
+        shipList.setReceiverMobile(shipBo.getReceiverMobile());
+        shipList.setProvince(erpOrder.getProvince());
+        shipList.setCity(erpOrder.getCity());
+        shipList.setTown(erpOrder.getTown());
+        shipList.setAddress(shipBo.getAddress());
 
-            // 添加分配发货
-            OOrderShipList shipList = new OOrderShipList();
-            shipList.setShopId(erpOrder.getShopId());
-            shipList.setShopType(erpOrder.getShopType());
-            shipList.setShipper(1);
-            shipList.setShipSupplierId(supplierId);
-            shipList.setShipSupplier(supplierList.get(supplierId)!=null?supplierList.get(supplierId).getName():"");
-            shipList.setOrderId(Long.parseLong(erpOrder.getId()));
-            shipList.setOrderNum(erpOrder.getOrderNum());
-            shipList.setStatus(0);
-            shipList.setShipLogisticsCompany("");
-            shipList.setShipLogisticsCompanyCode("");
-            shipList.setShipLogisticsCode("");
-            shipList.setShipStatus(1);
-            shipList.setReceiverName(shipBo.getReceiverName());
-            shipList.setReceiverMobile(shipBo.getReceiverMobile());
-            shipList.setProvince(erpOrder.getProvince());
-            shipList.setCity(erpOrder.getCity());
-            shipList.setTown(erpOrder.getTown());
-            shipList.setAddress(shipBo.getAddress());
+        shipList.setRemark(erpOrder.getRemark());
+        shipList.setSellerMemo(shipBo.getSellerMemo());
+        shipList.setBuyerMemo(shipBo.getBuyerMemo());
+        shipList.setCreateTime(new Date());
+        shipList.setCreateBy("分配供应商发货");
+        orderShipListMapper.insert(shipList);
 
-            shipList.setRemark(erpOrder.getRemark());
-            shipList.setSellerMemo(shipBo.getSellerMemo());
-            shipList.setBuyerMemo(shipBo.getBuyerMemo());
-            shipList.setCreateTime(new Date());
-            shipList.setCreateBy("分配供应商发货");
-            orderShipListMapper.insert(shipList);
+        // 遍历 List<ErpOrderItem>
+        for (OOrderItem item : orderItemList) {
+            // 添加备货清单item
+            OOrderShipListItem listItem=new OOrderShipListItem();
+            listItem.setShopId(erpOrder.getShopId());
+            listItem.setShopType(erpOrder.getShopType());
+            listItem.setListId(shipList.getId());
+            listItem.setShipper(shipList.getShipper());
+            listItem.setShipSupplier(shipList.getShipSupplier());
+            listItem.setShipSupplierId(shipList.getShipSupplierId());
+            listItem.setOrderId(Long.parseLong(item.getOrderId()));
+            listItem.setOrderItemId(Long.parseLong(item.getId()));
+            listItem.setOrderNum(item.getOrderNum());
+            listItem.setOriginalSkuId(item.getSkuId());
+            listItem.setGoodsId(item.getGoodsId());
+            listItem.setSkuId(item.getGoodsSkuId());
+            listItem.setGoodsTitle(item.getGoodsTitle());
+            listItem.setGoodsImg(item.getGoodsImg());
+            listItem.setGoodsNum(item.getGoodsNum());
+            listItem.setSkuName(item.getGoodsSpec());
+            listItem.setSkuNum(item.getSkuNum());
+            listItem.setQuantity(item.getQuantity());
+            listItem.setStatus(0);//状态0待备货1备货中2备货完成3已发货
+            listItem.setCreateBy("分配供应商发货");
+            listItem.setCreateTime(new Date());
+            orderShipListItemMapper.insert(listItem);
 
-            // 遍历 List<ErpOrderItem>
-            for (OOrderItem item : orderItemList) {
-                // 打印 List 中的每个 ErpOrderItem 对象
-//                ErpShipmentItem erpShipmentItem = new ErpShipmentItem();
-//                erpShipmentItem.setSupplierId(erpShipment.getSupplierId());
-//                erpShipmentItem.setSupplier(erpShipment.getSupplier());
-//                erpShipmentItem.setShipper(erpShipment.getShipper());
-//                erpShipmentItem.setTenantId(erpShipment.getTenantId());
-//                erpShipmentItem.setShopId(erpShipment.getShopId());
-//                erpShipmentItem.setShopType(erpShipment.getShopType());
-//                erpShipmentItem.setShipmentId(erpShipment.getId());
-//                erpShipmentItem.setOrderId(erpShipment.getOrderId());
-//                erpShipmentItem.setOrderNum(erpShipment.getOrderNum());
-//                erpShipmentItem.setOrderTime(erpShipment.getOrderTime());
-//                erpShipmentItem.setOrderItemId(item.getId());
-//                erpShipmentItem.setErpGoodsId(item.getErpGoodsId());
-//                erpShipmentItem.setErpSkuId(item.getErpSkuId());
-//                erpShipmentItem.setGoodsTitle(item.getGoodsTitle());
-//                erpShipmentItem.setGoodsNum(item.getGoodsNum());
-//                erpShipmentItem.setGoodsImg(item.getGoodsImg());
-//                erpShipmentItem.setGoodsSpec(item.getGoodsSpec());
-//                erpShipmentItem.setSkuNum(item.getSkuNum());
-//                erpShipmentItem.setQuantity(item.getQuantity());
-//                erpShipmentItem.setRemark(item.getRemark());
-//                erpShipmentItem.setStockStatus(0);
-//                erpShipmentItem.setCreateBy(createBy);
-//                erpShipmentItem.setCreateTime(new Date());
-//                shipmentItemMapper.insert(erpShipmentItem);
-                // 添加备货清单item
-                OOrderShipListItem listItem=new OOrderShipListItem();
-                listItem.setShopId(erpOrder.getShopId());
-                listItem.setShopType(erpOrder.getShopType());
-                listItem.setListId(shipList.getId());
-                listItem.setShipper(shipList.getShipper());
-                listItem.setShipSupplier(shipList.getShipSupplier());
-                listItem.setShipSupplierId(shipList.getShipSupplierId());
-                listItem.setOrderId(Long.parseLong(item.getOrderId()));
-                listItem.setOrderItemId(Long.parseLong(item.getId()));
-                listItem.setOrderNum(item.getOrderNum());
-                listItem.setOriginalSkuId(item.getSkuId());
-                listItem.setGoodsId(item.getGoodsId());
-                listItem.setSkuId(item.getGoodsSkuId());
-                listItem.setGoodsTitle(item.getGoodsTitle());
-                listItem.setGoodsImg(item.getGoodsImg());
-                listItem.setGoodsNum(item.getGoodsNum());
-                listItem.setSkuName(item.getGoodsSpec());
-                listItem.setSkuNum(item.getSkuNum());
-                listItem.setQuantity(item.getQuantity());
-                listItem.setStatus(0);//状态0待备货1备货中2备货完成3已发货
-                listItem.setCreateBy("分配供应商发货");
-                listItem.setCreateTime(new Date());
-                orderShipListItemMapper.insert(listItem);
-
-                // 更新订单item发货状态
-                OOrderItem orderItemUpdate = new OOrderItem();
-                orderItemUpdate.setId( item.getId());
-                orderItemUpdate.setUpdateBy("分配供应商发货");
-                orderItemUpdate.setUpdateTime(new Date());
-                orderItemUpdate.setShipStatus(1);//发货状态 0 待发货 1 已分配供应商发货 2全部发货
-                orderItemUpdate.setShipper(2);//发货方式 0 自己发货1联合发货2供应商发货
-                orderItemMapper.updateById(orderItemUpdate);
-            }
+            // 更新订单item发货状态
+            OOrderItem orderItemUpdate = new OOrderItem();
+            orderItemUpdate.setId( item.getId());
+            orderItemUpdate.setUpdateBy("分配供应商发货");
+            orderItemUpdate.setUpdateTime(new Date());
+            orderItemUpdate.setShipType(2);//发货方式2供应商代发0仓库发货
+            orderItemUpdate.setShipStatus(1);//发货状态 0 待发货 1 已分配供应商发货 2全部发货
+            orderItemUpdate.setShipper(shipBo.getSupplierId());//发货人
+            orderItemMapper.updateById(orderItemUpdate);
         }
-
-//        return ResultVo.error("还没有想好怎么实现！");
-
-//
-//        for(ErpOrderItem orderItem:oOrderItems){
-//            ErpShipmentItem erpShipmentItem = new ErpShipmentItem();
-//            erpShipmentItem.setShipper(erpShipment.getShipper());
-//            erpShipmentItem.setTenantId(erpShipment.getTenantId());
-//            erpShipmentItem.setShopId(erpShipment.getShopId());
-//            erpShipmentItem.setShopType(erpShipment.getShopType());
-//            erpShipmentItem.setShipmentId(erpShipment.getId());
-//            erpShipmentItem.setOrderId(erpShipment.getOrderId());
-//            erpShipmentItem.setOrderNum(erpShipment.getOrderNum());
-//            erpShipmentItem.setOrderTime(erpShipment.getOrderTime());
-//            erpShipmentItem.setOrderItemId(orderItem.getId());
-//            erpShipmentItem.setErpGoodsId(orderItem.getErpGoodsId());
-//            erpShipmentItem.setErpSkuId(orderItem.getErpSkuId());
-//            erpShipmentItem.setGoodsTitle(orderItem.getGoodsTitle());
-//            erpShipmentItem.setGoodsNum(orderItem.getGoodsNum());
-//            erpShipmentItem.setGoodsImg(orderItem.getGoodsImg());
-//            erpShipmentItem.setGoodsSpec(orderItem.getGoodsSpec());
-//            erpShipmentItem.setSkuNum(orderItem.getSkuNum());
-//            erpShipmentItem.setQuantity(orderItem.getQuantity());
-//            erpShipmentItem.setRemark(orderItem.getRemark());
-//            erpShipmentItem.setStockStatus(0);
-//            erpShipmentItem.setCreateBy(createBy);
-//            erpShipmentItem.setCreateTime(new Date());
-//            shipmentItemMapper.insert(erpShipmentItem);
 //        }
-//
-//
+
         // 更新状态、发货方式
         OOrder update = new OOrder();
         update.setId(erpOrder.getId());
+        update.setShipType(2);//发货方式2供应商代发0仓库发货
         update.setShipStatus(1);//发货状态 0 待发货 1 已分配供应商发货 2全部发货
-        update.setShipper(2);//发发货方式 0 自己发货1联合发货2供应商发货
+        update.setShipper(shipBo.getSupplierId());//发货人
         update.setUpdateTime(new Date());
         update.setUpdateBy("分配供应商发货");
         orderMapper.updateById(update);

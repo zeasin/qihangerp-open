@@ -8,7 +8,7 @@
             <id property="id" column="id" jdbcType="BIGINT"/>
             <result property="shopId" column="shop_id" jdbcType="BIGINT"/>
             <result property="shopType" column="shop_type" jdbcType="INTEGER"/>
-            <result property="shipper" column="shipper" jdbcType="INTEGER"/>
+            <result property="shipper" column="shipper" jdbcType="BIGINT"/>
             <result property="shipSupplierId" column="ship_supplier_id" jdbcType="BIGINT"/>
             <result property="shipSupplier" column="ship_supplier" jdbcType="VARCHAR"/>
             <result property="orderId" column="order_id" jdbcType="BIGINT"/>

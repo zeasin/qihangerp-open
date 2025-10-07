@@ -32,9 +32,9 @@ public class OOrderShipList implements Serializable {
     private Integer shopType;
 
     /**
-     * 发货方 0 仓库发货 1 供应商发货
+     * 发货方
      */
-    private Integer shipper;
+    private Long shipper;
 
     /**
      * 发货供应商ID（0自己发货）

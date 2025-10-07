@@ -89,7 +89,7 @@
       <right-toolbar :showSearch.sync="showSearch" @queryTable="getList"></right-toolbar>
     </el-row>
     <el-table v-loading="loading" :data="shippingList" @selection-change="handleSelectionChange"  >
-       <el-table-column type="selection" width="55" v-if="queryParams.status==='0'" align="center" />
+       <el-table-column type="selection" width="55" align="center" />
       <!-- <el-table-column label="主键" align="center" prop="id" /> -->
       <el-table-column label="订单编号" align="left" prop="orderNum" width="150"/>
        <el-table-column label="店铺" align="left" prop="shopId" width="200">

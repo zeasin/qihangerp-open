@@ -136,8 +136,8 @@ public class OOrder implements Serializable {
      */
     private Date orderTime;
 
-    //发货方式 0 自己发货1联合发货2供应商发货
-    private Integer shipper;
+    //发货方
+    private Long shipper;
     private Integer shipType;//发货方式1电子面单发货2手动发货
 
     /**

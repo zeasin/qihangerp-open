@@ -28,7 +28,7 @@
             <result property="city" column="city" jdbcType="VARCHAR"/>
             <result property="town" column="town" jdbcType="VARCHAR"/>
             <result property="orderTime" column="order_time" jdbcType="TIMESTAMP"/>
-            <result property="shipper" column="shipper" jdbcType="INTEGER"/>
+            <result property="shipper" column="shipper" jdbcType="BIGINT"/>
             <result property="shipType" column="ship_type" jdbcType="INTEGER"/>
             <result property="shipStatus" column="ship_status" jdbcType="INTEGER"/>
             <result property="shipCompany" column="ship_company" jdbcType="VARCHAR"/>
