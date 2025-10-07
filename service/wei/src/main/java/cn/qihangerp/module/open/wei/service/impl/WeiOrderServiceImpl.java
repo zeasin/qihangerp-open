@@ -156,7 +156,7 @@ public class WeiOrderServiceImpl extends ServiceImpl<WeiOrderMapper, WeiOrder>
             return weiOrders.get(0);
         }else return null;
     }
-
+    @Transactional(rollbackFor = Exception.class)
     @Override
     public ResultVo<Long> confirmOrder(WeiOrderConfirmBo confirmBo) {
         WeiOrder pddOrder = mapper.selectById(confirmBo.getOrderId());

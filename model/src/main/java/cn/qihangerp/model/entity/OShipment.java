@@ -15,9 +15,9 @@ import lombok.Data;
  * 发货记录表
  * @TableName erp_shipment
  */
-@TableName(value ="erp_shipment")
+@TableName(value ="o_shipment")
 @Data
-public class ErpShipment implements Serializable {
+public class OShipment implements Serializable {
     /**
      * 
      */
@@ -164,7 +164,7 @@ public class ErpShipment implements Serializable {
      */
     private String updateBy;
     @TableField(exist = false)
-    private List<ErpShipmentItem> itemList;
+    private List<OShipmentItem> itemList;
     @TableField(exist = false)
     private static final long serialVersionUID = 1L;
 }

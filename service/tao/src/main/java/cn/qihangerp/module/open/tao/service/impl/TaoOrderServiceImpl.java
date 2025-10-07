@@ -113,7 +113,7 @@ public class TaoOrderServiceImpl extends ServiceImpl<TaoOrderMapper, TaoOrder>
         }
     }
 
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     @Override
     public ResultVo<Long> saveOrder(Long shopId, TaoOrder order) {
         if(order == null ) return ResultVo.error(ResultVoEnum.SystemException);
@@ -207,7 +207,7 @@ public class TaoOrderServiceImpl extends ServiceImpl<TaoOrderMapper, TaoOrder>
         }
     }
 
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     @Override
     public ResultVo<Integer> updateOrder(TaoOrder order) {
         if(order == null ) return ResultVo.error(ResultVoEnum.SystemException);
@@ -232,6 +232,7 @@ public class TaoOrderServiceImpl extends ServiceImpl<TaoOrderMapper, TaoOrder>
         }
     }
 
+    @Transactional(rollbackFor = Exception.class)
     @Override
     public ResultVo<Long> confirmOrder(TaoOrderConfirmBo confirmBo) {
         TaoOrder pddOrder = mapper.selectById(confirmBo.getOrderId());

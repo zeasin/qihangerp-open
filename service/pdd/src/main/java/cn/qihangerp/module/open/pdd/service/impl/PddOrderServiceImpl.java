@@ -226,7 +226,7 @@ public class PddOrderServiceImpl extends ServiceImpl<PddOrderMapper, PddOrder>
             return ResultVo.error(ResultVoEnum.SystemException, "系统异常：" + e.getMessage());
         }
     }
-
+    @Transactional(rollbackFor = Exception.class)
     @Override
     public ResultVo<Long> confirmOrder(PddOrderConfirmBo confirmBo) {
         PddOrder pddOrder = mapper.selectById(confirmBo.getOrderId());

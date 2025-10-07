@@ -1,9 +1,9 @@
 package cn.qihangerp.module.order.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import cn.qihangerp.model.entity.ErpShipmentItem;
+import cn.qihangerp.model.entity.OShipmentItem;
 import cn.qihangerp.module.order.service.ErpShipmentItemService;
-import cn.qihangerp.module.order.mapper.ErpShipmentItemMapper;
+import cn.qihangerp.module.order.mapper.OShipmentItemMapper;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
 */
 @AllArgsConstructor
 @Service
-public class ErpShipmentItemServiceImpl extends ServiceImpl<ErpShipmentItemMapper, ErpShipmentItem>
+public class ErpShipmentItemServiceImpl extends ServiceImpl<OShipmentItemMapper, OShipmentItem>
     implements ErpShipmentItemService{
 
 }

@@ -2,9 +2,9 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="cn.qihangerp.module.order.mapper.ErpShipmentMapper">
+<mapper namespace="cn.qihangerp.module.order.mapper.OShipmentMapper">
 
-    <resultMap id="BaseResultMap" type="cn.qihangerp.model.entity.ErpShipment">
+    <resultMap id="BaseResultMap" type="cn.qihangerp.model.entity.OShipment">
             <id property="id" column="id" jdbcType="BIGINT"/>
             <result property="shopId" column="shop_id" jdbcType="BIGINT"/>
             <result property="shopType" column="shop_type" jdbcType="INTEGER"/>

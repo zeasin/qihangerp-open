@@ -3,7 +3,7 @@ package cn.qihangerp.api.order.controller;
 import cn.qihangerp.common.AjaxResult;
 import cn.qihangerp.common.PageQuery;
 import cn.qihangerp.common.TableDataInfo;
-import cn.qihangerp.model.entity.ErpShipment;
+import cn.qihangerp.model.entity.OShipment;
 import cn.qihangerp.module.order.service.ErpShipmentService;
 import cn.qihangerp.module.order.service.OOrderService;
 import cn.qihangerp.security.common.BaseController;
@@ -18,7 +18,7 @@ public class ShipmentController extends BaseController {
 
     private final OOrderService orderService;
     @GetMapping("/list")
-    public TableDataInfo list(ErpShipment shipping, PageQuery pageQuery)
+    public TableDataInfo list(OShipment shipping, PageQuery pageQuery)
     {
         return getDataTable(shippingService.queryPageList(shipping,pageQuery));
     }
