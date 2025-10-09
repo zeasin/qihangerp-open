@@ -268,7 +268,7 @@
             <artifactId>open-sdk</artifactId>
             <version>1.0</version>
             <scope>system</scope>
-            <systemPath>${project.basedir}/libs/open-sdk-1.10.4.jar</systemPath>
+            <systemPath>${project.basedir}/libs/open-sdk-1.10.9.3.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>org.codehaus.jackson</groupId>

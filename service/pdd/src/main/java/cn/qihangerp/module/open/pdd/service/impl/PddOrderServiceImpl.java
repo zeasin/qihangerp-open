@@ -183,7 +183,7 @@ public class PddOrderServiceImpl extends ServiceImpl<PddOrderMapper, PddOrder>
                 update.setOrderChangeAmount(order.getOrderChangeAmount());
                 update.setRiskControlStatus(order.getRiskControlStatus());
                 update.setUrgeShippingTime(order.getUrgeShippingTime());
-                update.setAuditStatus(0);
+//                update.setAuditStatus(0);
                 update.setUpdateTime(new Date());
 
                 mapper.updateById(update);
