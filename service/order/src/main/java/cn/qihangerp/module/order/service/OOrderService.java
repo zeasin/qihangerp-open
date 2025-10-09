@@ -32,27 +32,8 @@ public interface OOrderService extends IService<OOrder> {
      */
     PageResult<OOrder> queryWaitShipmentPageList(OrderSearchRequest bo, PageQuery pageQuery);
 
-    /**
-     * 获取已分配发货的list
-     * @param bo
-     * @param pageQuery
-     * @return
-     */
-    PageResult<OOrder> queryAssignedShipmentList(OrderSearchRequest bo, PageQuery pageQuery);
-
-
-    /**
-     * 已经发货的list
-     * @param bo
-     * @param pageQuery
-     * @return
-     */
-    PageResult<OOrder> queryShippedPageList(OrderSearchRequest bo, PageQuery pageQuery);
 
     OOrder queryDetailById(Long id);
-
-    List<OOrder> searchOrderConsignee(String consignee);
-    List<OOrderItem> searchOrderItemByReceiverMobile(String receiverMobile);
 
     /**
      * 手动添加订单

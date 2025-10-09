@@ -133,7 +133,10 @@ public class OOrderItem implements Serializable {
 
     //发货方
     private Long shipper;
-    private Integer shipType;//发货方式1电子面单发货2手动发货
+    /**
+     * 发货方式 0 自己发货或待处理2供应商发货
+     */
+    private Integer shipType;
 
     /**
      * 发货状态 0 待发货 1 已发货

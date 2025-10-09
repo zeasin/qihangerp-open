@@ -11,7 +11,7 @@
  Target Server Version : 80043 (8.0.43)
  File Encoding         : 65001
 
- Date: 07/10/2025 17:25:46
+ Date: 09/10/2025 10:52:19
 */
 
 SET NAMES utf8mb4;
@@ -1214,7 +1214,7 @@ CREATE TABLE `o_shop`  (
 -- ----------------------------
 -- Records of o_shop
 -- ----------------------------
-INSERT INTO `o_shop` VALUES (1007, '抖店测试', 400, NULL, 9, 1, NULL, '4463798', NULL, NULL, '', NULL, NULL, '070t45roa51h7zl69zjws9900002noae-12', NULL, NULL, NULL, NULL, NULL, 0, 1759307372, 1759307261);
+INSERT INTO `o_shop` VALUES (1007, '抖店测试', 400, NULL, 9, 1, NULL, '4463798', NULL, NULL, 'c3tzx2q5p41h7zl69zjws9900002noae-11', NULL, NULL, '070t45roa51h7zl69zjws9900002noae-12', NULL, NULL, NULL, NULL, NULL, 0, 1759307372, 1759307261);
 INSERT INTO `o_shop` VALUES (1010, '淘宝测试店铺', 100, NULL, 9, 1, NULL, '0', NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 1759365108, 1759365108);
 INSERT INTO `o_shop` VALUES (1011, '爱顾家的小店', 300, NULL, 9, 1, NULL, '0', NULL, NULL, '223c18d1d3c4445a979af58d7c034127e68e9a9a', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 1759371874, 1759371874);
 INSERT INTO `o_shop` VALUES (1012, '微信小店测试', 500, NULL, 9, 1, NULL, '0', 'wx82dd65f284dd6ee3', 'a6054ccf2694e8dc51d2616e634cad39', '96_KI-x2ByMfcE_X37Orem1O7qW03jVdUdiQU8QtGbZWjWS1LqOn9lXaxArEhlnCAL-AFNhia6IGIN1gHyvCa2gkMK_KcofMs7AnKGqj_ssy3L6vKP9vVklqvNBIUgEGDgAGANPM', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 1759373401, 1759373401);
@@ -3242,7 +3242,7 @@ INSERT INTO `sys_menu` VALUES (2091, '部门管理', 5, 3, 'dept', 'system/dept/
 INSERT INTO `sys_menu` VALUES (2092, '售后处理记录', 2, 5, 'processing', 'afterSale/index', NULL, 1, 0, 'C', '0', '0', '', 'documentation', 'admin', '2024-04-06 17:27:03', 'admin', '2024-07-28 18:59:41', '');
 INSERT INTO `sys_menu` VALUES (2093, '发货订单商品', 1, 2, 'order_item_list', 'order/item_list', NULL, 1, 0, 'C', '1', '0', '', 'chart', 'admin', '2024-04-06 18:58:06', 'admin', '2025-10-01 08:36:11', '');
 INSERT INTO `sys_menu` VALUES (2094, '打单发货', 6, 1, 'print', 'shipping/ewaybillPrint/index', NULL, 1, 0, 'C', '0', '0', '', 'edit', 'admin', '2024-07-20 11:04:54', 'admin', '2025-10-07 00:33:14', '');
-INSERT INTO `sys_menu` VALUES (2096, '备货单', 6, 2, 'stockup', 'shipping/stockup', NULL, 1, 0, 'C', '0', '0', '', 'email', 'admin', '2024-07-20 11:53:24', 'admin', '2025-06-02 09:10:24', '');
+INSERT INTO `sys_menu` VALUES (2096, '备货出库', 6, 2, 'stockup', 'shipping/stockup', NULL, 1, 0, 'C', '0', '0', '', 'email', 'admin', '2024-07-20 11:53:24', 'admin', '2025-10-09 02:37:28', '');
 INSERT INTO `sys_menu` VALUES (2097, '物流跟踪', 6, 5, 'logistics', 'shipping/stocking/index', NULL, 1, 0, 'C', '0', '1', '', 'list', 'admin', '2024-07-20 11:54:18', 'admin', '2025-05-25 14:32:27', '');
 INSERT INTO `sys_menu` VALUES (2099, '私域订单管理', 1, 10, 'offline_order_list', 'order/private/index', NULL, 1, 0, 'C', '0', '1', '', 'checkbox', 'admin', '2024-07-27 17:33:03', 'admin', '2025-05-24 13:10:53', '');
 INSERT INTO `sys_menu` VALUES (2100, '私域售后管理', 2, 3, 'offline_aftersale', 'refund/private/index', NULL, 1, 0, 'C', '0', '1', '', 'code', 'admin', '2024-07-27 17:33:33', 'admin', '2025-05-25 14:59:03', '');
@@ -3253,7 +3253,7 @@ INSERT INTO `sys_menu` VALUES (2115, '商品库存管理', 7, 0, 'goods_inventor
 INSERT INTO `sys_menu` VALUES (2116, '商品出库管理', 7, 20, 'stock_out', 'stock/stockOut/index', NULL, 1, 0, 'C', '0', '0', '', 'guide', 'admin', '2024-09-21 20:44:46', 'admin', '2025-03-24 13:46:42', '');
 INSERT INTO `sys_menu` VALUES (2117, '仓位管理', 7, 91, 'position', 'stock/warehouse/position', NULL, 1, 0, 'C', '1', '0', '', '404', 'admin', '2024-09-22 11:52:18', 'admin', '2025-03-24 13:47:04', '');
 INSERT INTO `sys_menu` VALUES (2118, '新建商品入库单', 7, 11, 'stock_in/create', 'stock/stockIn/create.vue', NULL, 1, 0, 'C', '1', '0', '', '404', 'admin', '2024-09-22 14:49:40', 'admin', '2025-03-24 13:35:30', '');
-INSERT INTO `sys_menu` VALUES (2129, '订单发货', 6, 0, 'ship_order', 'shipping/shipment/index', NULL, 1, 0, 'C', '0', '0', '', 'checkbox', 'admin', '2025-06-01 13:36:57', 'admin', '2025-10-07 00:36:17', '');
+INSERT INTO `sys_menu` VALUES (2129, '订单发货', 6, 0, 'ship_order', 'shipping/wait_ship.vue', NULL, 1, 0, 'C', '0', '0', '', 'checkbox', 'admin', '2025-06-01 13:36:57', 'admin', '2025-10-09 02:43:33', '');
 
 -- ----------------------------
 -- Table structure for sys_menu2
@@ -3573,7 +3573,7 @@ CREATE TABLE `sys_user`  (
 -- ----------------------------
 -- Records of sys_user
 -- ----------------------------
-INSERT INTO `sys_user` VALUES (1, NULL, 'admin', '启航老齐A', '00', '280645618@qq.com', '18123879144', '1', '', '$2a$10$7JB720yubVSZvUI0rEqK/.VqGOZTH.ulu33dHOiBE8ByOhJIrdAu2', '0', '0', '127.0.0.1', '2025-10-07 15:56:53', 'admin', '2023-08-07 19:31:37', '', '2025-10-07 07:56:53', '管理员');
+INSERT INTO `sys_user` VALUES (1, NULL, 'admin', '启航老齐A', '00', '280645618@qq.com', '18123879144', '1', '', '$2a$10$7JB720yubVSZvUI0rEqK/.VqGOZTH.ulu33dHOiBE8ByOhJIrdAu2', '0', '0', '127.0.0.1', '2025-10-09 10:36:15', 'admin', '2023-08-07 19:31:37', '', '2025-10-09 02:36:14', '管理员');
 INSERT INTO `sys_user` VALUES (2, NULL, 'openapi', 'openApi接口专用', '00', '2806456181@qq.com', '15818590000', '0', '', '$2a$10$fHkhoqbMiyracAsTzl38H.55bu.M.of1FXk2EK7RQBjfic3tLU0Ue', '0', '0', '127.0.0.1', '2024-06-24 10:23:35', 'admin', '2024-03-17 14:55:22', 'admin', '2024-06-24 10:23:35', NULL);
 INSERT INTO `sys_user` VALUES (101, 101, '15818590119', 'aaa123', '00', '', '', '0', '', '$2a$10$pXcT6cHaObMeKuYd9vZb5uEb8PyUdF2AcqqRN1cBqiA9rV4qYQW7G', '0', '2', '', NULL, 'admin', '2024-08-15 13:45:25', '', NULL, NULL);
 INSERT INTO `sys_user` VALUES (102, 101, '15818590119', '老齐', '00', '', '', '0', '', '$2a$10$ysk.zgJ8wh25c7vOjKyZ8uarM2hkG0S51j8GYdJSo2kZmc3f8HdKe', '0', '0', '', NULL, 'admin', '2024-08-15 13:49:59', 'admin', '2025-02-10 16:26:20', NULL);

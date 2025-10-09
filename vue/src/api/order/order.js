@@ -9,29 +9,14 @@ export function listOrder(query) {
   })
 }
 // 查询待自己发货的订单列表（待发货的）
-export function waitSelfShipmentList(query) {
+export function waitShipList(query) {
   return request({
     url: '/order/waitShipmentList',
     method: 'get',
     params: query
   })
 }
-// 查询已分配给供应商发货的订单
-export function assignedShipmentList(query) {
-  return request({
-    url: '/order/assignedShipmentList',
-    method: 'get',
-    params: query
-  })
-}
-// 查询己发货的订单列表(已发货的)
-export function selfShippedList(query) {
-  return request({
-    url: '/order/shippedList',
-    method: 'get',
-    params: query
-  })
-}
+
 // 手动发货
 export function manualShipmentOrder(data) {
   return request({

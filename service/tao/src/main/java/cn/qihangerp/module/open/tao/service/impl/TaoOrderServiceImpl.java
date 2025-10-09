@@ -280,7 +280,7 @@ public class TaoOrderServiceImpl extends ServiceImpl<TaoOrderMapper, TaoOrder>
         order.setCity(confirmBo.getCity());
         order.setTown(confirmBo.getTown());
         order.setOrderTime(StringUtils.hasText(pddOrder.getCreated())? DateUtils.dateTime("yyyy-MM-dd HH:mm:ss",pddOrder.getCreated()):new Date());
-        order.setShipper(-1);
+        order.setShipper(0L);
         order.setShipStatus(0);
         order.setCreateTime(new Date());
         order.setCreateBy("手动确认订单");
@@ -309,7 +309,7 @@ public class TaoOrderServiceImpl extends ServiceImpl<TaoOrderMapper, TaoOrder>
 
             oOrderItem.setRefundCount(0);
             oOrderItem.setRefundStatus(1);
-            oOrderItem.setShipper(-1);
+            oOrderItem.setShipper(0L);
             oOrderItem.setShipType(order.getShipType());
             oOrderItem.setShipStatus(0);
             oOrderItem.setCreateTime(new Date());

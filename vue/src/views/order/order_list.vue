@@ -431,7 +431,7 @@
 </template>
 
 <script>
-import {listOrder, getOrder, delOrder, addOrder, updateOrder, pushErp,cancelOrder} from "@/api/order/order";
+import {listOrder, getOrder, pushErp,cancelOrder} from "@/api/order/order";
 import { listShop } from "@/api/shop/shop";
 import Clipboard from "clipboard";
 
@@ -578,9 +578,7 @@ export default {
         this.getList()
       });
     },
-    handleShip(row){
 
-    },
     //取消订单
     handleCancel(row){
       this.form.id = row.id
