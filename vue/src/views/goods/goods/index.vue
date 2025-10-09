@@ -2,11 +2,11 @@
   <div class="app-container">
     <el-tabs v-model="activeName" @tab-click="handleClick">
 
-      <el-tab-pane label="商品库" name="ProductList" >
+      <el-tab-pane label="商品管理" name="ProductList" >
         <product-list></product-list>
       </el-tab-pane>
 
-      <el-tab-pane label="商品库SKU明细" name="ProductSkuList" lazy>
+      <el-tab-pane label="商品Sku" name="ProductSkuList" lazy>
         <product-sku-list></product-sku-list>
       </el-tab-pane>
 
