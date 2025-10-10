@@ -6,6 +6,8 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
+
 import lombok.Data;
 
 /**
@@ -145,6 +147,9 @@ public class OOrderShipList implements Serializable {
      * 更新人
      */
     private String updateBy;
+
+    @TableField(exist = false)
+    private List<OOrderShipListItem> items;
 
     @TableField(exist = false)
     private static final long serialVersionUID = 1L;

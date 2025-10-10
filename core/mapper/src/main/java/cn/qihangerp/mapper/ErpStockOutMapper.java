@@ -1,4 +1,4 @@
-package cn.qihangerp.module.stock.mapper;
+package cn.qihangerp.mapper;
 
 
 import cn.qihangerp.model.entity.ErpStockOut;

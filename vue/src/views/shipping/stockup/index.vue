@@ -1,37 +1,28 @@
 <template>
   <div class="app-container">
     <el-tabs v-model="activeName" @tab-click="handleClick">
+      <el-tab-pane label="仓库发货订单" name="stockShip">
+        <warehouse-shipment></warehouse-shipment>
+      </el-tab-pane>
 
-      <el-tab-pane label="备货订单" name="stockupOrder">
-        <ship-stockup-order></ship-stockup-order>
+      <el-tab-pane label="供应商发货订单" name="supplierShip" lazy>
+        <supplier-shipment></supplier-shipment>
       </el-tab-pane>
-      <el-tab-pane label="备货商品明细" name="stockupOrderItem" lazy>
-        <ship-stockup-order-item></ship-stockup-order-item>
-      </el-tab-pane>
-<!--      <el-tab-pane label="京东自营" name="jdvcOrder" lazy>-->
-<!--        <order-jd-vc></order-jd-vc>-->
-<!--      </el-tab-pane>-->
-<!--      <el-tab-pane label="抖店" name="douOrder" lazy>-->
-<!--        <order-dou></order-dou>-->
-<!--      </el-tab-pane>-->
-<!--      <el-tab-pane label="拼多多" name="pddOrder" lazy>-->
-<!--        <order-pdd></order-pdd>-->
-<!--      </el-tab-pane>-->
     </el-tabs>
 
   </div>
 </template>
 
 <script>
-import ShipStockupOrder  from "@/views/shipping/stockup/order_list.vue";
-import ShipStockupOrderItem  from "@/views/shipping/stockup/order_item_list.vue";
+import warehouseShipment  from "@/views/shipping/stockup/warehouse/index.vue";
+import supplierShipment  from "@/views/shipping/stockup/supplier/index.vue";
 
 export default {
-  name: "stockup",
-  components:{ShipStockupOrder,ShipStockupOrderItem},
+  name: "stocking",
+  components:{warehouseShipment,supplierShipment},
   data() {
     return {
-      activeName: 'stockupOrder'
+      activeName: 'stockShip'
     };
   },
   created() {
