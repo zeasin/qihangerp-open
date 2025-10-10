@@ -11,7 +11,7 @@
  Target Server Version : 80043 (8.0.43)
  File Encoding         : 65001
 
- Date: 09/10/2025 14:59:38
+ Date: 10/10/2025 08:45:53
 */
 
 SET NAMES utf8mb4;
@@ -296,7 +296,7 @@ CREATE TABLE `erp_stock_out`  (
 -- Records of erp_stock_out
 -- ----------------------------
 INSERT INTO `erp_stock_out` VALUES (5, 'DDCK-20251009144849', '251002-171237742200640', 5, 1, 1, 1, 1, 0, '备货单生成出库单', 0, 0, NULL, NULL, NULL, 0, '', '2025-10-09 14:48:49', '备货单生成出库单', '2025-10-09 06:48:49', NULL);
-INSERT INTO `erp_stock_out` VALUES (6, 'DDCK-20251009145209', '251002-171237742200640', 5, 1, 1, 1, 1, 0, '备货单生成出库单', 0, 0, NULL, NULL, NULL, 0, '', '2025-10-09 14:52:09', '备货单生成出库单', '2025-10-09 06:52:09', NULL);
+INSERT INTO `erp_stock_out` VALUES (6, 'DDCK-20251009145209', '251002-171237742200640', 5, 1, 1, 1, 1, 0, '备货单生成出库单', 0, 1, '2025-10-09 23:16:41', NULL, NULL, 0, '', '2025-10-09 14:52:09', '备货单生成出库单', '2025-10-09 15:16:41', NULL);
 
 -- ----------------------------
 -- Table structure for erp_stock_out_item
@@ -2440,7 +2440,7 @@ CREATE TABLE `oms_tao_goods`  (
   `create_time` datetime NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 76 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '淘宝商品表' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '淘宝商品表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of oms_tao_goods
@@ -2474,7 +2474,7 @@ CREATE TABLE `oms_tao_goods_sku`  (
   `shop_id` bigint NOT NULL COMMENT '店铺id',
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `sku_id_index`(`sku_id` ASC) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1484 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '淘宝商品SKU表' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '淘宝商品SKU表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of oms_tao_goods_sku
@@ -2570,7 +2570,7 @@ CREATE TABLE `oms_tao_order`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `index_tid`(`tid` ASC) USING BTREE,
   INDEX `shop_id_index`(`shop_id` ASC) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 35 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '淘宝订单表' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '淘宝订单表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of oms_tao_order
@@ -2625,7 +2625,7 @@ CREATE TABLE `oms_tao_order_item`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `tid_index`(`tid` ASC) USING BTREE,
   INDEX `oid_index`(`oid` ASC) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 49 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '淘宝订单明细表' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '淘宝订单明细表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of oms_tao_order_item
@@ -2706,7 +2706,7 @@ CREATE TABLE `oms_tao_refund`  (
   `o_goods_sku_id` bigint NULL DEFAULT NULL COMMENT '商品skuid(o_goods_sku外键)',
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `refund_id_index`(`refund_id` ASC) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '淘宝退款表' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '淘宝退款表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of oms_tao_refund
@@ -3186,14 +3186,13 @@ INSERT INTO `sys_menu` VALUES (832, '采购入库管理', 8, 10, 'stock_in', 'pu
 INSERT INTO `sys_menu` VALUES (833, '采购承运商', 8, 20, 'shipper', 'purchase/shipper/index', NULL, 1, 0, 'C', '0', '0', NULL, 'online', 'admin', '2025-09-08 19:40:43', '', NULL, '');
 INSERT INTO `sys_menu` VALUES (2079, '字典管理', 5, 9, 'dict', 'system/dict/index', NULL, 1, 0, 'C', '0', '0', '', 'dict', 'admin', '2024-03-18 08:43:55', 'admin', '2024-03-18 08:44:08', '');
 INSERT INTO `sys_menu` VALUES (2088, '发货设置', 6, 9, 'ship_set', 'shipping/logistics/index', NULL, 1, 0, 'C', '0', '0', '', 'checkbox', 'admin', '2024-03-30 17:37:01', 'admin', '2025-06-01 15:02:10', '');
-INSERT INTO `sys_menu` VALUES (2089, '发货记录', 6, 3, 'record', 'shipping/record/index', NULL, 1, 0, 'C', '0', '0', '', 'guide', 'admin', '2024-03-30 17:37:42', 'admin', '2025-06-02 09:45:44', '');
+INSERT INTO `sys_menu` VALUES (2089, '发货记录', 6, 3, 'record', 'shipping/record/index', NULL, 1, 0, 'C', '0', '0', '', 'list', 'admin', '2024-03-30 17:37:42', 'admin', '2025-10-10 00:44:48', '');
 INSERT INTO `sys_menu` VALUES (2090, '角色管理', 5, 2, 'role', 'system/role/index', NULL, 1, 0, 'C', '0', '0', NULL, 'peoples', 'admin', '2024-03-31 12:40:50', '', NULL, '');
 INSERT INTO `sys_menu` VALUES (2091, '部门管理', 5, 3, 'dept', 'system/dept/index', NULL, 1, 0, 'C', '0', '0', NULL, 'tree', 'admin', '2024-03-31 12:42:57', '', NULL, '');
 INSERT INTO `sys_menu` VALUES (2092, '售后处理记录', 2, 5, 'processing', 'afterSale/index', NULL, 1, 0, 'C', '0', '0', '', 'documentation', 'admin', '2024-04-06 17:27:03', 'admin', '2024-07-28 18:59:41', '');
 INSERT INTO `sys_menu` VALUES (2093, '发货订单商品', 1, 2, 'order_item_list', 'order/item_list', NULL, 1, 0, 'C', '1', '0', '', 'chart', 'admin', '2024-04-06 18:58:06', 'admin', '2025-10-01 08:36:11', '');
 INSERT INTO `sys_menu` VALUES (2094, '打单发货', 6, 1, 'print', 'shipping/ewaybillPrint/index', NULL, 1, 0, 'C', '0', '0', '', 'edit', 'admin', '2024-07-20 11:04:54', 'admin', '2025-10-07 00:33:14', '');
 INSERT INTO `sys_menu` VALUES (2096, '备货出库', 6, 2, 'stockup', 'shipping/stockup', NULL, 1, 0, 'C', '0', '0', '', 'email', 'admin', '2024-07-20 11:53:24', 'admin', '2025-10-09 02:37:28', '');
-INSERT INTO `sys_menu` VALUES (2097, '物流跟踪', 6, 5, 'logistics', 'shipping/stocking/index', NULL, 1, 0, 'C', '0', '1', '', 'list', 'admin', '2024-07-20 11:54:18', 'admin', '2025-05-25 14:32:27', '');
 INSERT INTO `sys_menu` VALUES (2099, '私域订单管理', 1, 10, 'offline_order_list', 'order/private/index', NULL, 1, 0, 'C', '0', '1', '', 'checkbox', 'admin', '2024-07-27 17:33:03', 'admin', '2025-05-24 13:10:53', '');
 INSERT INTO `sys_menu` VALUES (2100, '私域售后管理', 2, 3, 'offline_aftersale', 'refund/private/index', NULL, 1, 0, 'C', '0', '1', '', 'code', 'admin', '2024-07-27 17:33:33', 'admin', '2025-05-25 14:59:03', '');
 INSERT INTO `sys_menu` VALUES (2103, '手动创建私域订单', 1, 49, 'offline_order_create', 'order/private/create', NULL, 1, 0, 'C', '1', '0', '', 'date', 'admin', '2024-07-27 20:30:07', 'admin', '2025-03-24 11:46:51', '');
@@ -3387,7 +3386,7 @@ CREATE TABLE `sys_role`  (
 -- Records of sys_role
 -- ----------------------------
 INSERT INTO `sys_role` VALUES (1, '超级管理员', 'admin', 1, '1', 1, 1, '0', '0', 'admin', '2023-08-07 19:31:37', '', NULL, '超级管理员');
-INSERT INTO `sys_role` VALUES (2, '普通角色', 'common', 2, '2', 1, 1, '0', '0', 'admin', '2023-08-07 19:31:37', 'admin', '2025-09-08 19:14:34', '普通角色');
+INSERT INTO `sys_role` VALUES (2, '普通角色', 'common', 2, '2', 1, 1, '0', '0', 'admin', '2023-08-07 19:31:37', 'admin', '2025-10-10 00:45:06', '普通角色');
 
 -- ----------------------------
 -- Table structure for sys_role_menu
@@ -3406,6 +3405,8 @@ INSERT INTO `sys_role_menu` VALUES (2, 1);
 INSERT INTO `sys_role_menu` VALUES (2, 2);
 INSERT INTO `sys_role_menu` VALUES (2, 3);
 INSERT INTO `sys_role_menu` VALUES (2, 4);
+INSERT INTO `sys_role_menu` VALUES (2, 7);
+INSERT INTO `sys_role_menu` VALUES (2, 8);
 INSERT INTO `sys_role_menu` VALUES (2, 100);
 INSERT INTO `sys_role_menu` VALUES (2, 101);
 INSERT INTO `sys_role_menu` VALUES (2, 102);
@@ -3414,34 +3415,21 @@ INSERT INTO `sys_role_menu` VALUES (2, 105);
 INSERT INTO `sys_role_menu` VALUES (2, 106);
 INSERT INTO `sys_role_menu` VALUES (2, 108);
 INSERT INTO `sys_role_menu` VALUES (2, 110);
-INSERT INTO `sys_role_menu` VALUES (2, 2077);
-INSERT INTO `sys_role_menu` VALUES (2, 2078);
-INSERT INTO `sys_role_menu` VALUES (2, 2087);
-INSERT INTO `sys_role_menu` VALUES (2, 2088);
-INSERT INTO `sys_role_menu` VALUES (2, 2089);
+INSERT INTO `sys_role_menu` VALUES (2, 808);
+INSERT INTO `sys_role_menu` VALUES (2, 831);
+INSERT INTO `sys_role_menu` VALUES (2, 832);
+INSERT INTO `sys_role_menu` VALUES (2, 833);
 INSERT INTO `sys_role_menu` VALUES (2, 2092);
 INSERT INTO `sys_role_menu` VALUES (2, 2093);
-INSERT INTO `sys_role_menu` VALUES (2, 2094);
-INSERT INTO `sys_role_menu` VALUES (2, 2096);
-INSERT INTO `sys_role_menu` VALUES (2, 2097);
 INSERT INTO `sys_role_menu` VALUES (2, 2099);
 INSERT INTO `sys_role_menu` VALUES (2, 2100);
-INSERT INTO `sys_role_menu` VALUES (2, 2101);
 INSERT INTO `sys_role_menu` VALUES (2, 2103);
-INSERT INTO `sys_role_menu` VALUES (2, 2104);
-INSERT INTO `sys_role_menu` VALUES (2, 2105);
 INSERT INTO `sys_role_menu` VALUES (2, 2106);
-INSERT INTO `sys_role_menu` VALUES (2, 2108);
-INSERT INTO `sys_role_menu` VALUES (2, 2109);
-INSERT INTO `sys_role_menu` VALUES (2, 2110);
-INSERT INTO `sys_role_menu` VALUES (2, 2111);
-INSERT INTO `sys_role_menu` VALUES (2, 2112);
 INSERT INTO `sys_role_menu` VALUES (2, 2114);
 INSERT INTO `sys_role_menu` VALUES (2, 2115);
 INSERT INTO `sys_role_menu` VALUES (2, 2116);
 INSERT INTO `sys_role_menu` VALUES (2, 2117);
 INSERT INTO `sys_role_menu` VALUES (2, 2118);
-INSERT INTO `sys_role_menu` VALUES (2, 2129);
 
 -- ----------------------------
 -- Table structure for sys_task
