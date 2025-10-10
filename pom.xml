@@ -14,7 +14,7 @@
     <module>api</module>
     <module>service</module>
     <module>microservices</module>
-    <module>model</module>
+
 
   </modules>
 
