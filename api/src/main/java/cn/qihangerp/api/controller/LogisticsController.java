@@ -4,16 +4,14 @@ import cn.qihangerp.common.AjaxResult;
 import cn.qihangerp.common.PageQuery;
 import cn.qihangerp.common.PageResult;
 import cn.qihangerp.common.TableDataInfo;
-import cn.qihangerp.interfaces.OLogisticsCompanyService;
-import cn.qihangerp.interfaces.OShopPlatformService;
-import cn.qihangerp.interfaces.OShopService;
+import cn.qihangerp.module.service.OLogisticsCompanyService;
+import cn.qihangerp.module.service.OShopPlatformService;
+import cn.qihangerp.module.service.OShopService;
 import cn.qihangerp.model.entity.OLogisticsCompany;
 
 import cn.qihangerp.security.common.BaseController;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.Arrays;
 
 /**
  * 店铺Controller

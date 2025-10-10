@@ -1,6 +1,6 @@
 package cn.qihangerp.module.service.impl;
 
-import cn.qihangerp.interfaces.SysTaskService;
+import cn.qihangerp.module.service.SysTaskService;
 import cn.qihangerp.model.entity.SysTask;
 import cn.qihangerp.module.mapper.SysTaskMapper;
 

@@ -31,7 +31,7 @@
         <dependency>
             <groupId>cn.qihangerp.service</groupId>
             <artifactId>interfaces</artifactId>
-            <version>2.0.1</version>
+            <version>2.0.0</version>
         </dependency>
         <dependency>
             <groupId>com.baomidou</groupId>

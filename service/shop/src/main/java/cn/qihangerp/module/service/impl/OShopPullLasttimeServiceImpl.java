@@ -1,6 +1,6 @@
 package cn.qihangerp.module.service.impl;
 
-import cn.qihangerp.interfaces.OShopPullLasttimeService;
+import cn.qihangerp.module.service.OShopPullLasttimeService;
 import cn.qihangerp.model.entity.OShopPullLasttime;
 import cn.qihangerp.module.mapper.OShopPullLasttimeMapper;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;

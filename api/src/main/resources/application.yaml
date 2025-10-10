@@ -6,7 +6,7 @@ spring:
     # 国际化资源文件路径
     basename: i18n/messages
   application:
-    name: qihangerp-v2
+    name: qihangerp-open
   data:
     # redis 配置
     redis:

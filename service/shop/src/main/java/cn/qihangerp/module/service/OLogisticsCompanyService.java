@@ -1,4 +1,4 @@
-package cn.qihangerp.interfaces;
+package cn.qihangerp.module.service;
 
 import cn.qihangerp.common.PageQuery;
 import cn.qihangerp.common.PageResult;

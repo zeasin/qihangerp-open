@@ -1,4 +1,4 @@
-package cn.qihangerp.interfaces;
+package cn.qihangerp.module.service;
 
 import cn.qihangerp.common.enums.EnumShopType;
 import cn.qihangerp.model.entity.OShop;

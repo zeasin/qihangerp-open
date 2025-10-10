@@ -1,6 +1,6 @@
 package cn.qihangerp.module.service.impl;
 
-import cn.qihangerp.interfaces.OShopPlatformService;
+import cn.qihangerp.module.service.OShopPlatformService;
 import cn.qihangerp.model.entity.OShopPlatform;
 import cn.qihangerp.module.mapper.OShopPlatformMapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;

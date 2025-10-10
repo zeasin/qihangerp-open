@@ -1,4 +1,4 @@
-package cn.qihangerp.interfaces;
+package cn.qihangerp.module.service;
 
 import cn.qihangerp.model.entity.OShopPlatform;
 import com.baomidou.mybatisplus.extension.service.IService;
